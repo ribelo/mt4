@@ -1,0 +1,1456 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"Norm",
+				"NormalizeDouble	double"
+			],
+			[
+				"MathR",
+				"MathRound	double"
+			],
+			[
+				"MathM",
+				"MathMax	double"
+			],
+			[
+				"GSL_MAX",
+				"GSL_MAX_INT(a, b)	macro"
+			],
+			[
+				"sis",
+				"ssize_t	typedef"
+			],
+			[
+				"get_prio",
+				"get_prior_low_fractal(ohlc *candle, size_t i, size_t n, size_t l)	int"
+			],
+			[
+				"fractal",
+				"fractal_low(ohlc *candle, size_t i, size_t n, size_t l)	int"
+			],
+			[
+				"frac",
+				"fractal(ohlc *candle, size_t i, size_t n, size_t l)	int"
+			],
+			[
+				"point",
+				"point_side(line l, point p)	double"
+			],
+			[
+				"highe",
+				"highest_point(ohlc *candle, size_t start, size_t stop)	point"
+			],
+			[
+				"gls_pow",
+				"gsl_pow_3(const double x)	double"
+			],
+			[
+				"bull",
+				"bull_apaor"
+			],
+			[
+				"line",
+				"line_color"
+			],
+			[
+				"leng",
+				"fractal_length"
+			],
+			[
+				"s_",
+				"s_pA	double"
+			],
+			[
+				"GSL",
+				"GSL_MIN	macro"
+			],
+			[
+				"FTL",
+				"FLT_EPSILON	macro"
+			],
+			[
+				"FLT",
+				"FLT_EPSILON	macro"
+			],
+			[
+				"FL",
+				"FLT_EPSILON	macro"
+			],
+			[
+				"gsl_co",
+				"gsl_fcmp(const double x1, const double x2, const double epsilon)	int"
+			],
+			[
+				"open",
+				"open_line_name"
+			],
+			[
+				"Object",
+				"ObjectDelete	bool"
+			],
+			[
+				"Send",
+				"SendNotification	bool"
+			],
+			[
+				"send",
+				"send_notyfication"
+			],
+			[
+				"body",
+				"body_size"
+			],
+			[
+				"any",
+				"any_wrb_hg_bull(ohlc *candle, int start, int stop, int n)	int"
+			],
+			[
+				"wrb",
+				"wrb(ohlc *candle, int i)	body"
+			],
+			[
+				"lowest",
+				"lowest_low(ohlc *candle, size_t start, size_t stop)	double"
+			],
+			[
+				"lowesrt",
+				"lowest_low(ohlc *candle, size_t start, size_t stop)	double"
+			],
+			[
+				"bigg",
+				"biggest_body(ohlc *candle, size_t start, size_t stop)	double"
+			],
+			[
+				"shadow",
+				"shadow_bottom(ohlc *candle, int i)	double"
+			],
+			[
+				"sh",
+				"shadow_bottom(ohlc *candle, int i)	double"
+			],
+			[
+				"shado",
+				"shadow_bottom(ohlc *candle, int i)	double"
+			],
+			[
+				"zone",
+				"zone_size(zone *z)	int"
+			],
+			[
+				"hamer",
+				"hammer_line_bear(ohlc *candle, size_t i)	int"
+			],
+			[
+				"high",
+				"highest_high(ohlc *candle, size_t start, size_t stop)	double"
+			],
+			[
+				"hamme",
+				"hammer_line_bear(ohlc *candle, size_t i)	int"
+			],
+			[
+				"big",
+				"big_body_bull(ohlc *candle, size_t i)	int"
+			],
+			[
+				"lowes",
+				"lowest_low(ohlc *candle, size_t start, size_t stop)	double"
+			],
+			[
+				"bod",
+				"body_mid_point(ohlc *candle, int i)	double"
+			],
+			[
+				"deep",
+				"deep_shadow_bottom(ohlc *candle, size_t i, size_t n)	int"
+			],
+			[
+				"iBars",
+				"iBars	int"
+			],
+			[
+				"end",
+				"end_bar"
+			],
+			[
+				"contra",
+				"contraction_body_size_break(ohlc *candle, size_t c1, size_t c2)	int"
+			],
+			[
+				"wrn",
+				"wrb_hg(ohlc *candle, int i)	int"
+			],
+			[
+				"hig",
+				"highest_low(ohlc *candle, size_t start, size_t stop)	double"
+			],
+			[
+				"bigge",
+				"biggest_shadow_bottom(ohlc *candle, size_t start, size_t stop)	double"
+			],
+			[
+				"sha",
+				"shadow_upper(ohlc *candle, int i)	double"
+			],
+			[
+				"lowe",
+				"lowest_high(ohlc *candle, size_t start, size_t stop)	double"
+			],
+			[
+				"sist",
+				"sister_bars	size_t"
+			],
+			[
+				"main",
+				"main_bars	size_t"
+			],
+			[
+				"lowers",
+				"lowest_close(ohlc *candle, size_t start, size_t stop)	double"
+			],
+			[
+				"lowesr",
+				"lowest_close(ohlc *candle, size_t start, size_t stop)	double"
+			],
+			[
+				"size",
+				"size_t c1	ohlc *"
+			],
+			[
+				"wrb_",
+				"wrb_zone(ohlc *candle, size_t i, size_t n, size_t contraction)	zone"
+			],
+			[
+				"contrac",
+				"contraction_body_open"
+			],
+			[
+				"swing",
+				"swing_point_1"
+			],
+			[
+				"low",
+				"lowest_low(ohlc *candle, size_t start, size_t stop)	double"
+			],
+			[
+				"cont",
+				"contraction_body_size_break(ohlc *candle, size_t v1, size_t v2)	int"
+			],
+			[
+				"con",
+				"contraction_share"
+			],
+			[
+				"swin",
+				"swing_point"
+			],
+			[
+				"len",
+				"lenght_weak"
+			],
+			[
+				"s",
+				"size_t"
+			],
+			[
+				"fra",
+				"fractal"
+			],
+			[
+				"isWr",
+				"isWrbHG"
+			],
+			[
+				"C",
+				"CFLAGS"
+			],
+			[
+				"total",
+				"total_size"
+			],
+			[
+				"tota",
+				"total_size"
+			],
+			[
+				"totla",
+				"total_price"
+			],
+			[
+				"Draw",
+				"DrawHiddenStopLoss"
+			],
+			[
+				"hid",
+				"hidden_pips"
+			],
+			[
+				"old",
+				"old_take"
+			],
+			[
+				"OrderSe",
+				"OrderSelect	bool"
+			],
+			[
+				"tp",
+				"tp_line_name"
+			],
+			[
+				"from",
+				"from_date	statement"
+			],
+			[
+				"look",
+				"look_back"
+			],
+			[
+				"prior",
+				"prior_wrb"
+			],
+			[
+				"pr",
+				"precision"
+			],
+			[
+				"bounce",
+				"bounce_bear"
+			],
+			[
+				"boun",
+				"bounce_bull"
+			],
+			[
+				"clo",
+				"close_c1"
+			],
+			[
+				"clos",
+				"close_zone"
+			],
+			[
+				"close",
+				"close_c1"
+			],
+			[
+				"op",
+				"open_zone"
+			],
+			[
+				"body_mid",
+				"body_mid_point"
+			],
+			[
+				"last",
+				"last_high"
+			],
+			[
+				"las",
+				"last_high"
+			],
+			[
+				"rae",
+				"reaction_high"
+			],
+			[
+				"shad",
+				"shadow_upper"
+			],
+			[
+				"st",
+				"stop"
+			],
+			[
+				"bo",
+				"body_mid_point"
+			],
+			[
+				"fill",
+				"filled_by"
+			],
+			[
+				"prio",
+				"prior_wrb"
+			],
+			[
+				"pa",
+				"path	import"
+			],
+			[
+				"ex",
+				"extensions	statement"
+			],
+			[
+				"apply",
+				"apply_async	function"
+			],
+			[
+				"re",
+				"result	forflow"
+			],
+			[
+				"app",
+				"append"
+			],
+			[
+				"map",
+				"map_async	function"
+			],
+			[
+				"time",
+				"timeframe	param"
+			],
+			[
+				"sym",
+				"SYMBOLS	statement"
+			],
+			[
+				"quotes",
+				"quotes_save"
+			],
+			[
+				"HDF",
+				"HDF_STORE"
+			],
+			[
+				"cun",
+				"concurrent"
+			],
+			[
+				"int",
+				"int8"
+			],
+			[
+				"in",
+				"int8"
+			],
+			[
+				"exe",
+				"executor	statement"
+			],
+			[
+				"fo",
+				"forever"
+			],
+			[
+				"INDICA",
+				"indicator_list"
+			],
+			[
+				"fir",
+				"first_run"
+			],
+			[
+				"cu",
+				"currencies"
+			],
+			[
+				"th",
+				"threading  (module)"
+			],
+			[
+				"get",
+				"get_info"
+			],
+			[
+				"json",
+				"jsonify	statement"
+			],
+			[
+				"j",
+				"json"
+			],
+			[
+				"c",
+				"config	(attribute, instance)"
+			],
+			[
+				"va",
+				"validate"
+			],
+			[
+				"su",
+				"summary_render"
+			],
+			[
+				"to",
+				"token"
+			],
+			[
+				"Bad",
+				"BadSignature	(global, class)"
+			],
+			[
+				"B",
+				"BadSignature	(global, class)"
+			],
+			[
+				"clas",
+				"classmethod	(builtin, class)"
+			],
+			[
+				"loads",
+				"loads(s, max_age, return_timestamp, salt)	(attribute, function)"
+			],
+			[
+				"but",
+				"btn-group	BootstrapClass"
+			],
+			[
+				"login",
+				"login_required	(imported, instance)"
+			],
+			[
+				"lo",
+				"login_manager	(imported, instance)"
+			],
+			[
+				"login_",
+				"login_view"
+			],
+			[
+				"bl",
+				"Blueprint	(imported, class)"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"contents": "//+-------------------------------------------------------------------+\n//|                  Just A Rather Very Intelligent System by Huxley  |\n//|                                         Copyright © 2013, Huxley  |\n//+-------------------------------------------------------------------+\n#property copyright \"Copyright © 2014, Huxley\"\n#include <wrb_analysis.mqh>\n#include <gsl_math.mqh>\n#include <LibGMT.mqh>\n#include <LibOrderReliable4.mqh>\n\n\nextern string  gen = \"----general inputs----\";\nextern bool    use_sd = true;\nextern bool    use_sas = true;\nextern int     timer_interval = 250;\n\nextern double  max_dd = 0.3;\nextern double  max_risk = 0.05;\nextern int     slippage = 3;\n\nextern int     magic_number = 0;\nextern string  trade_comment = \"\";\nextern bool    criminal_is_ecn = true;\nextern double  max_spreed = 5;\nextern int     hidden_pips = 3;\nextern double  buffer_size = 1.0;\nextern double  pending_pips = 5;\n\nextern string  tmm = \"----Trade management module----\";\nextern bool    use_trailing_stop = true;\n\nextern string  amc = \"----Available Margin checks----\";\nextern bool    use_margin_check = true;\nextern int     minimum_margin_percen = 1500;\n\nextern string  cls = \"----Misc----\";\nextern color   supply_color = C'177,83,103';\nextern color   demand_color = C'251,167,71';\nextern color   pointless_color = White;\nextern int     fibo_width = 1;\nextern bool    show_info = true;\n\nextern string  lab = \"----Label---\";\nextern bool    use_label_box = true;\nextern bool    show_statistic = true;\nextern color   label_box = C'188,182,167';\n//extern color   label_border = Black;\nextern color   text_color = C'100,77,82';\nextern string  font_type = \"Verdana\";\nextern int     font_size = 8;\nextern int     data_disp_offset = 14;\nextern int     data_disp_gap_size = 30;\n\nextern int     info_text_size = 10;\n\n\n//Margin variables\nbool           enough_margin;\nstring         margin_message;\n//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////\n\n//Calculate result variables\ndouble         entry_risk_reward = 1;\ndouble         piramide_risk_reward = 1;\ndouble         entry_cash_profit, entry_pips_profit, entry_average_profit, entry_pips_loss, entry_average_loss, day_cash_profit, day_pip_profit;\ndouble         piramide_cash_profit, piramide_pips_profit, piramide_average_profit, piramide_pips_loss, piramide_average_loss;\nint            entry_win_trades, piramide_win_trades, today_win_trades, entry_loss_trades, piramide_loss_trades, today_loss_trades;\n\n//Piramide varbiales\nint            first_atr_timeframe, first_atr_period, next_atr_timeframe, next_atr_period, entry, magic_piramide;\n\n//Auto tf wariables\nint            up_tf, dn_tf;\ndouble         upper_fractal, bottom_fractal;\n\n//Trading variables\nint            open_trades, last_order;\nbool           buy_open, sell_open;\nint            retry_count = 10;//Will make this number of attempts to get around the trade context busy error.\nint            first_order = 0;\ndouble         orders[][5]; //first array is order number array, second array =\n//0 - ticket_no\n//1 - entry_price\n//2 - sl\n//3 - tp\n//4 - lot\ndouble         first_order_distance, next_order_distance;\n//Misc\nint            pip_mult_tab[] = {1, 10, 1, 10, 1, 10, 100, 1000};\nstring         symbol;\nint            tf, digits, multiplier, spread;\ndouble         tickvalue, point;\nstring         pip_description = \" pips\";\nbool           force_trade_closure;\n\n//+------------------------------------------------------------------+\n//| expert initialization function                                   |\n//+------------------------------------------------------------------+\nint init() {\n    //----\n    symbol = Symbol();\n    tf = Period();\n    digits = MarketInfo(symbol, MODE_DIGITS);\n    multiplier = pip_mult_tab[digits];\n    point = MarketInfo(symbol, MODE_POINT) * multiplier;\n    spread = MarketInfo(symbol, MODE_SPREAD) * multiplier;\n    tickvalue = MarketInfo(symbol, MODE_TICKVALUE) * multiplier;\n    if (multiplier > 1) {\n        pip_description = \" points\";\n    }\n    max_stop *= multiplier;\n    max_spreed *= multiplier;\n    slippage *= multiplier;\n    hidden_pips *= multiplier;\n    pending_pips *= multiplier;\n    entry = magic_number;\n    magic_piramide = magic_number + 100;\n    if (trade_comment == \"\") {\n        trade_comment = \" \";\n    }\n    if (criminal_is_ecn) {\n        O_R_Config_use2step(true);\n    }\n    GetFibo();\n    CalculateResult();\n    DisplayUserFeedback();\n    if (!IsTesting()) {\n        timer();\n    }\n    //----\n    return (0);\n}\n//+------------------------------------------------------------------+\n//| expert deinitialization function                                 |\n//+------------------------------------------------------------------+\nint deinit() {\n    //----\n    Comment(\"\");\n    string prefix = sd;\n    if (ObjectsTotal() > 0) {\n        for (int i = ObjectsTotal() - 1; i >= 0; i--) {\n            string name = ObjectName(i);\n            if (StringSubstr(name, 0, 4) == prefix || StringSubstr(name, 1, 4) == prefix) {\n                ObjectDelete(name);\n            }\n        }\n    }\n    //----\n    return (0);\n}\n\n\nvoid timer() {\n    while (true) {\n        Sleep(timer_interval);\n        if (IsStopped() || !IsExpertEnabled()) {\n            return;\n        }\n        RefreshRates();\n        start();\n    }\n}\n\n////////////////////////////////////////////////////////////////////////////////////////////////\n//TRADE MANAGEMENT MODULE\n\nvoid DragDropLine() {\n    double old_stop, new_stop, old_take, new_take;\n    for (int i = open_trades - 1; i >= 0; i--) {\n        int ticket = orders[i][0];\n        if (OrderSelect(ticket, SELECT_BY_TICKET, MODE_TRADES)) {\n            if (OrderSymbol() == symbol) {\n                if (OrderMagicNumber() == magic_number) {\n                    old_stop = _roundp(OrderStopLoss(), digits);\n                    old_take = _roundp(OrderTakeProfit(), digits);\n                    if (OrderType() == OP_BUY) {\n                        if (ObjectFind(ticket + sl_line_name) != -1) {\n                            new_stop = _roundp(ObjectGet(ticket + sl_line_name, OBJPROP_PRICE1) + hidden_pips * point, digits);\n                            if (_fcmp(old_stop, new_stop) != 0) {\n                                Print(\"Order \" + ticket + \" sl trigger has been moved so i move sl line\");\n                                OrderModifyReliable(ticket, OrderOpenPrice(), new_stop, OrderTakeProfit(), 0, CLR_NONE);\n                            }\n                        } else {\n                            Print(\"Order \" + ticket + \" sl does not exist, so I create a new one\");\n                            DrawHiddenStopLoss(ticket, old_stop + hidden_pips * point);\n                        }\n                        if (ObjectFind(ticket + tp_line_name) != -1) {\n                            new_take = _roundp(ObjectGet(ticket + tp_line_name, OBJPROP_PRICE1) - hidden_pips * point, digits);\n                            if (_fcmp(old_take, new_take) != 0) {\n                                Print(\"Order \" + ticket + \" tp trigger has been moved so i move tp line\");\n                            }\n                            OrderModifyReliable(ticket, OrderOpenPrice(), OrderStopLoss(), new_take, 0, CLR_NONE);\n                        }\n                    } else {\n                        Print(\"Order \" + ticket + \" tp does not exist, so I create a new one\");\n                        DrawHiddenTakeProfit(ticket, old_take - hidden_pips * Point);\n                    }\n                } else if (OrderType() == OP_SELL) {\n                    if (ObjectFind(ticket + sl_line_name) != -1) {\n                        new_stop = _roundp(ObjectGet(ticket + sl_line_name, OBJPROP_PRICE1) - hidden_pips * point, digits);\n                        if (_fcmp(old_stop, new_stop) != 0) {\n                            Print(\"Order \" + ticket + \" sl trigger has been moved so i move sl line\");\n                            OrderModifyReliable(ticket, OrderOpenPrice(), new_stop, OrderTakeProfit(), 0, CLR_NONE);\n                        }\n                    } else {\n                        Print(\"Order \" + ticket + \" sl does not exist, so I create a new one\");\n                        DrawHiddenStopLoss(ticket, old_stop - hidden_pips * point);\n                    }\n                    if (ObjectFind(ticket + tp_line_name) != -1) {\n                        new_take = _roundp(ObjectGet(ticket + tp_line_name, OBJPROP_PRICE1) + hidden_pips * point, digits);\n                        if (_fcmp(old_take, new_take) != 0) {\n                            Print(\"Order \" + ticket + \" tp trigger has been moved so i move tp line\");\n                        }\n                        OrderModifyReliable(ticket, OrderOpenPrice(), OrderStopLoss(), new_take, 0, CLR_NONE);\n                    }\n                } else {\n                    Print(\"Order \" + ticket + \" tp does not exist, so I create a new one\");\n                    DrawHiddenTakeProfit(ticket, old_take + hidden_pips * Point);\n                }\n            }\n        }\n    }\n}\n}\n}\n\nvoid TrailingStop() {\n\n}\n\n//END TRADE MANAGEMENT MODULE\n////////////////////////////////////////////////////////////////////////////////////////////////\n\nbool IsTradingAllowed() {\n    if (MarketInfo(symbol, MODE_SPREAD) > max_spreed) {\n        return (false);\n    }\n    return (true);\n}\n\ndouble CalculateDynamicDeltaSwansonLot(double open_price, double stop_price) {\n    int local_multiplier;\n    int orders_history_total = OrdersHistoryTotal()\n    double dd, loss_pip, stop_pip;\n    double min_lot_size = MarketInfo(symbol, MODE_MINLOT);\n    double high_eq, curr_balance;\n    double account_balance[];\n\n    stop_pip = _roundp(_abs(open_price - stop_price) / point, digits);\n\n    if (orders_history_total > 0) {\n        int count = _imax(orders_history_total, 5);\n        ArrayResize(account_balance, orders_history_total);\n        for (int i = 0; i < orders_history_total; i++) {\n            if (OrderSelect(i, SELECT_BY_POS, MODE_HISTORY)) {\n                curr_balance += OrderProfit();\n                account_balance[i] = curr_balance;\n            }\n        }\n        ArraySetAsSeries(account_balance, true);\n        for (i = 0; i < count; i++) {\n            high_eq = MathMax(high_eq, account_balance[i]);\n        }\n        for (i = orders_history_total - count; i < orders_history_total; i++) {\n            if (OrderSelect(i, SELECT_BY_POS, MODE_HISTORY)) {\n                if (OrderType() == 6 || OrderType() == 7) {\n                    count++;\n                    continue;\n                }\n                if (OrderProfit() < 0) {\n                    dd += MathAbs(OrderOpenPrice() - OrderClosePrice()) / MarketInfo(OrderSymbol(), MODE_POINT) / local_multiplier;\n                }\n            }\n        }\n    } else {\n        curr_balance = AccountBalance();\n        high_eq = AccountBalance();\n    }\n    double average_risk_reward = CalculateResult();\n    if (dd > stop_pip) {\n        double delta = dd / 5;\n    } else {\n        delta = stop_pip / 5;\n    }\n    if (delta > 0) {\n        double step1 = max_dd * curr_balance / delta / 100;\n        double step2 = MathMax((curr_balance - high_eq) / delta / 100, 0);\n        double step3 = MathMax((high_eq - curr_balance) / (average_risk_reward * delta) / 100, 0);\n        double lot_size1 = (max_dd * curr_balance / delta / 100 + MathMax((curr_balance - high_eq) / delta / 100, 0) - MathMax((high_eq - curr_balance) / (average_risk_reward * delta) / 100, 0));\n        double lot_size2 = MathMin(curr_balance / 1000, curr_balance * max_risk / stop_pip / 10);\n        double lot_size3 = leverage * curr_balance / (400000 + (20 * stop_pip * leverage));\n        double lot_size = MathMin(MathMax(max_dd * curr_balance / delta / 100 + MathMax((curr_balance - high_eq) / delta / 100, 0) - MathMax((high_eq - curr_balance) / (average_risk_reward * delta) / 100, 0) , min_lot_size), MathMin(curr_balance / 1000, curr_balance * max_risk / stop_pip / 10));\n        lot_size = MathMin(lot_size - 0.005, leverage * curr_balance / (400000 + (20 * stop_pip * leverage)));\n        lot_size /= tick_value;\n    }\n    //Print(\"delta \",delta);\n    //Print(\"curr_balance \",curr_balance,\" max_eq \",high_eq);\n    //Print(\"step \",step1,\"   \",step2,\"   \",step3);\n    //Print(\"lot \",lot_size1,\"   \",lot_size2,\"   \",lot_size3);\n    //Print(\"lot_size \",lot_size);\n    return (lot_size);\n}\n\nvoid GetFibo() {\n    static datetime new_bar1, new_bar2;\n    static double fibo_var[][4];\n    double entry_price, stop_price, label_price, temp_pending_pips, temp_break_even;\n    datetime start_time, end_time, label_time;\n    string label_name, text_color, zone_size, lot_val, move_val, profit_margin;\n    bool draw_info;\n    if (ObjectsTotal() == 0) {\n        return;\n    } else {\n        if (ObjectsTotal(OBJ_FIBO) > 0) {\n            ArrayResize(fibo_var, ObjectsTotal(OBJ_FIBO));\n            for (int i = ObjectsTotal() - 1; i >= 0; i--) {\n                string name = ObjectName(i);\n                if (ObjectType(name) == OBJ_FIBO) {\n                    if (ObjectGet(name, OBJPROP_COLOR) != pointless_color) {\n                        entry_price = _roundp(ObjectGet(name, OBJPROP_PRICE1), digits);\n                        stop_price = _roundp(ObjectGet(name, OBJPROP_PRICE2), digits);\n                        start_time = ObjectGet(name, OBJPROP_TIME1);\n                        end_time = ObjectGet(name, OBJPROP_TIME2);\n                        draw_info = false;\n                        if (MathAbs(entry_price - stop_price) > max_stop * Point && max_stop != 0) {\n                            Print(\"Zone > max_stop\");\n                            return;\n                        }\n                        if (fibo_var[i][0] != entry_price || fibo_var[i][1] != stop_price || fibo_var[i][2] != start_time) {\n                            draw_info = true;\n                            fibo_var[i][0] = entry_price;\n                            fibo_var[i][1] = stop_price;\n                            fibo_var[i][2] = start_time;\n                            fibo_var[i][3] = end_time;\n                        }\n                        if (entry_price > stop_price) {\n                            if (pending_pips_rr == 0) {\n                                temp_pending_pips = pending_pips * Point;\n                            } else {\n                                temp_pending_pips = (entry_price - stop_price);\n                                temp_pending_pips *= pending_pips_rr;\n                            }\n                            if (ObjectGet(name, OBJPROP_COLOR) != demand_color) {\n                                ObjectSet(name, OBJPROP_COLOR, demand_color);\n                            }\n                            if (ObjectGet(name, OBJPROP_LEVELCOLOR) != demand_color) {\n                                ObjectSet(name, OBJPROP_LEVELCOLOR, demand_color);\n                            }\n                            if (ObjectGet(name, OBJPROP_LEVELWIDTH) != fibo_width) {\n                                ObjectSet(name, OBJPROP_LEVELWIDTH, fibo_width);\n                            }\n                            if (ObjectGet(name, OBJPROP_FIBOLEVELS) != 3) {\n                                ObjectSet(name, OBJPROP_FIBOLEVELS, 3);\n                            }\n                            if (ObjectGetFiboDescription(name, 0) != \"Sl = %$\") {\n                                ObjectSetFiboDescription(name, 0, \"Sl = %$\");\n                            }\n                            if (ObjectGetFiboDescription(name, 1) != \"Entry = %$\") {\n                                ObjectSetFiboDescription(name, 1, \"Entry = %$\");\n                            }\n                            if (ObjectGetFiboDescription(name, 2) != \"TP = %$\") {\n                                ObjectSetFiboDescription(name, 2, \"TP = %$\");\n                            }\n                            if (show_info) {\n                                label_time = Time[0];\n                                if (draw_info) {\n                                    label_name = StringConcatenate(name, \".label\");\n                                    text_color = \"demand\";\n                                    label_price = stop_price - (entry_price - stop_price) * 0.25;\n                                    zone_size = DoubleToStr(MathAbs(entry_price - stop_price) / Point / multiplier, 0);\n                                    text_color = StringConcatenate(text_color, \" | zone_size: \", zone_size, \"pips\");\n                                    if (ObjectFind(label_name) == -1) {\n                                        ObjectCreate(label_name, OBJ_TEXT, 0, label_time, label_price);\n                                    }\n                                    ObjectSetText(label_name, text_color, info_text_size, \"Verdana Bold\", demand_color);\n                                    ObjectSet(label_name, OBJPROP_PRICE1, label_price);\n                                    ObjectSet(label_name, OBJPROP_TIME1, label_time);\n                                }\n                            }\n                        }\n                        if (entry_price < stop_price) {\n                            if (pending_pips_rr == 0) {\n                                temp_pending_pips = pending_pips * Point;\n                            } else {\n                                temp_pending_pips = (stop_price - entry_price);\n                                temp_pending_pips *= pending_pips_rr;\n                            }\n                            if (ObjectGet(name, OBJPROP_COLOR) != supply_color) {\n                                ObjectSet(name, OBJPROP_COLOR, supply_color);\n                            }\n                            if (ObjectGet(name, OBJPROP_LEVELCOLOR) != supply_color) {\n                                ObjectSet(name, OBJPROP_LEVELCOLOR, supply_color);\n                            }\n                            if (ObjectGet(name, OBJPROP_LEVELWIDTH) != fibo_width) {\n                                ObjectSet(name, OBJPROP_LEVELWIDTH, fibo_width);\n                            }\n                            if (ObjectGet(name, OBJPROP_FIBOLEVELS) != 3) {\n                                ObjectSet(name, OBJPROP_FIBOLEVELS, 3);\n                            }\n                            if (ObjectGetFiboDescription(name, 0) != \"Sl = %$\") {\n                                ObjectSetFiboDescription(name, 0, \"Sl = %$\");\n                            }\n                            if (ObjectGetFiboDescription(name, 1) != \"Entry = %$\") {\n                                ObjectSetFiboDescription(name, 1, \"Entry = %$\");\n                            }\n                            if (ObjectGetFiboDescription(name, 2) != \"TP = %$\") {\n                                ObjectSetFiboDescription(name, 2, \"TP = %$\");\n                            }\n                            if (show_info) {\n                                label_time = Time[0];\n                                if (draw_info) {\n                                    label_name = StringConcatenate(name, \".label\");\n                                    text_color = \"supply\";\n                                    label_price = stop_price - (entry_price - stop_price) * 0.5;\n                                    zone_size = DoubleToStr(MathAbs(entry_price - stop_price) / Point / multiplier, 0);\n                                    text_color = StringConcatenate(text_color, \" | zone_size: \", zone_size, \"pips\");\n                                    if (ObjectFind(label_name) == -1) {\n                                        ObjectCreate(label_name, OBJ_TEXT, 0, label_time, label_price);\n                                    }\n                                    ObjectSetText(label_name, text_color, info_text_size, \"Verdana Bold\", supply_color);\n                                    ObjectSet(label_name, OBJPROP_PRICE1, label_price);\n                                    ObjectSet(label_name, OBJPROP_TIME1, label_time);\n                                }\n                            }\n                        }\n                    }\n                }\n            }\n        }\n        if (ObjectsTotal(OBJ_TEXT) > 0) {\n            for (int y = ObjectsTotal() - 1; y >= 0; y--) {\n                name = ObjectName(y);\n                if (ObjectType(name) == OBJ_TEXT) {\n                    int name_len = StringLen(name);\n                    //int label_len = StringLen(\".label\");\n                    string short_name = StringSubstr(name, 0, name_len - 6);\n                    if (StringSubstr(name, 0, 4) == \"Fibo\") {\n                        if (ObjectFind(short_name) == -1) {\n                            if (ObjectDelete(name)) {\n                                y++;\n                            }\n                        } else if (ObjectGet(short_name, OBJPROP_COLOR) == pointless_color) {\n                            if (ObjectDelete(name)) {\n                                y++;\n                            }\n                        }\n                    }\n                }\n            }\n        }\n    }\n}\n\ndouble GetSupply(int type) {\n    static double supply_var[][5], sl_price, tp_price;\n    string supply_name;\n    double temp_pending_pips;\n    if (type == go_short) {\n        ArrayResize(supply_var, ObjectsTotal());\n        if (ObjectsTotal(OBJ_FIBO) > 0) {\n            for (int i = ObjectsTotal() - 1; i >= 0; i--) {\n                supply_name = ObjectName(i);\n                if (ObjectType(supply_name) == OBJ_FIBO) {\n                    if (ObjectGet(supply_name, OBJPROP_COLOR) == supply_color) {\n                        supply_var[i][0] = ObjectGet(supply_name, OBJPROP_PRICE1);\n                        supply_var[i][1] = ObjectGet(supply_name, OBJPROP_PRICE2);\n                        supply_var[i][2] = ObjectGet(supply_name, OBJPROP_FIRSTLEVEL + 2);\n                        if (supply_var[i][3] != supply_var[i][1] - supply_var[i][0]) {\n                            supply_var[i][3] = supply_var[i][1] - supply_var[i][0];\n                            supply_var[i][4] = 0;\n                        }\n                        if (pending_pips_rr == 0) {\n                            temp_pending_pips = pending_pips * Point;\n                        } else {\n                            temp_pending_pips = supply_var[i][3] * pending_pips_rr;\n                        }\n                        if (supply_var[i][0] != 0 && supply_var[i][1] != 0 && supply_var[i][2] != 0 && supply_var[i][3] != 0) {\n                            if (Bid >= supply_var[i][0] && Ask <= supply_var[i][1] && supply_var[i][4] == 0) {\n                                supply_var[i][4] = 1;\n                            }\n                            if (supply_var[i][4] == 1) {\n                                if (Bid >= _roundp(supply_var[i][1] + supply_var[i][3] * buffer_size , digits)) {\n                                    ObjectSet(supply_name, OBJPROP_COLOR, pointless_color);\n                                    ObjectSet(supply_name, OBJPROP_LEVELCOLOR, pointless_color);\n                                    ObjectSet(supply_name, OBJPROP_LEVELWIDTH, 2);\n                                    ObjectSet(supply_name, OBJPROP_FIBOLEVELS, 2);\n                                    supply_var[i][0] = 0;\n                                    supply_var[i][1] = 0;\n                                    supply_var[i][2] = 0;\n                                    supply_var[i][3] = 0;\n                                    supply_var[i][4] = 0;\n                                    sl_price = 0;\n                                    tp_price = 0;\n                                    continue;\n                                }\n                                if (Bid <= supply_var[i][0] - temp_pending_pips) {\n                                    sl_price = supply_var[i][1];\n                                    tp_price = _roundp(supply_var[i][0] - (supply_var[i][2] - 1) * supply_var[i][3], digits) ;\n                                    supply_var[i][0] = 0;\n                                    supply_var[i][1] = 0;\n                                    supply_var[i][2] = 0;\n                                    supply_var[i][3] = 0;\n                                    supply_var[i][4] = 0;\n                                    ObjectSet(supply_name, OBJPROP_COLOR, pointless_color);\n                                    ObjectSet(supply_name, OBJPROP_LEVELCOLOR, pointless_color);\n                                    ObjectSet(supply_name, OBJPROP_LEVELWIDTH, 2);\n                                    ObjectSet(supply_name, OBJPROP_FIBOLEVELS, 2);\n                                    return (true);\n                                }\n                            }\n                        }\n                    }\n                }\n            }\n        } else {\n            return (false);\n        }\n    }\n    if (type == 2 && sl_price > 0) {\n        return (sl_price);\n    }\n    if (type == 3 && tp_price > 0) {\n        return (tp_price);\n    }\n}\n\ndouble GetDemand(int type) {\n    static double demand_var[][5], sl_price, tp_price;\n    string demand_name;\n    double temp_pending_pips;\n    if (type == go_long) {\n        ArrayResize(demand_var, ObjectsTotal());\n        if (ObjectsTotal(OBJ_FIBO) > 0) {\n            for (int i = ObjectsTotal() - 1; i >= 0; i--) {\n                demand_name = ObjectName(i);\n                if (ObjectType(demand_name) == OBJ_FIBO) {\n                    if (ObjectGet(demand_name, OBJPROP_COLOR) == demand_color) {\n                        demand_var[i][0] = ObjectGet(demand_name, OBJPROP_PRICE1);\n                        demand_var[i][1] = ObjectGet(demand_name, OBJPROP_PRICE2);\n                        demand_var[i][2] = ObjectGet(demand_name, OBJPROP_FIRSTLEVEL + 2);\n                        if (demand_var[i][3] != demand_var[i][0] - demand_var[i][1]) {\n                            demand_var[i][3] = demand_var[i][0] - demand_var[i][1];\n                            demand_var[i][4] = 0;\n                        }\n                        if (pending_pips_rr == 0) {\n                            temp_pending_pips = pending_pips * Point;\n                        } else {\n                            temp_pending_pips = demand_var[i][3] * pending_pips_rr;\n                        }\n                        if (demand_var[i][0] != 0 && demand_var[i][1] != 0 && demand_var[i][2] != 0 && demand_var[i][3] != 0) {\n                            if (Ask <= demand_var[i][0] && Bid >= demand_var[i][1] && demand_var[i][4] == 0) {\n                                demand_var[i][4] = 1;\n                            }\n                            if (demand_var[i][4] == 1) {\n                                if (Ask <= _roundp(demand_var[i][1] - demand_var[i][3] * buffer_size , digits)) {\n                                    ObjectSet(demand_name, OBJPROP_COLOR, pointless_color);\n                                    ObjectSet(demand_name, OBJPROP_LEVELCOLOR, pointless_color);\n                                    ObjectSet(demand_name, OBJPROP_LEVELWIDTH, 2);\n                                    ObjectSet(demand_name, OBJPROP_FIBOLEVELS, 2);\n                                    demand_var[i][0] = 0;\n                                    demand_var[i][1] = 0;\n                                    demand_var[i][2] = 0;\n                                    demand_var[i][3] = 0;\n                                    demand_var[i][4] = 0;\n                                    sl_price = 0;\n                                    tp_price = 0;\n                                    continue;\n                                }\n                                if (Ask >= demand_var[i][0] + temp_pending_pips) {\n                                    sl_price = demand_var[i][1];\n                                    tp_price = _roundp(demand_var[i][0] + (demand_var[i][2] - 1) * demand_var[i][3], digits) ;\n                                    demand_var[i][0] = 0;\n                                    demand_var[i][1] = 0;\n                                    demand_var[i][2] = 0;\n                                    demand_var[i][3] = 0;\n                                    demand_var[i][4] = 0;\n                                    ObjectSet(demand_name, OBJPROP_COLOR, pointless_color);\n                                    ObjectSet(demand_name, OBJPROP_LEVELCOLOR, pointless_color);\n                                    ObjectSet(demand_name, OBJPROP_LEVELWIDTH, 2);\n                                    ObjectSet(demand_name, OBJPROP_FIBOLEVELS, 2);\n                                    return (true);\n                                }\n                            }\n                        }\n                    }\n                }\n            }\n        } else {\n            return (false);\n        }\n    }\n    if (type == get_sl_price && sl_price > 0) {\n        return (sl_price);\n    }\n    if (type == get_tp_price && tp_price > 0) {\n        return (tp_price);\n    }\n}\n\n\nvoid SupplyDemandTrading() {\n    double take, stop, price, send_lot, temp_send_lot, ticket;\n    int type, temp_magic_number;\n    bool send_trade;\n    RefreshRates();\n    if (!IsTradingAllowed()) {\n        return;\n    }\n    if (GetDemand(go_long) == true) {\n        if (sell_open) {\n            force_trade_closure = true;\n            while (force_trade_closure) {\n                CloseAllTrades();\n                Sleep(100);\n            }\n        }\n        type = OP_BUY;\n        price = Ask;\n        stop = _roundp(GetDemand(get_sl_price) - hidden_pips * Point, digits);\n        take = _roundp(GetDemand(get_tp_price) + hidden_pips * Point, digits);\n        temp_send_lot = CalculateDynamicDeltaSwansonLot(price, stop + hidden_pips * Point);\n        send_trade = true;\n    } else if (GetSupply(go_short) == true) {\n        if (buy_open) {\n            force_trade_closure = true;\n            while (force_trade_closure) {\n                CloseAllTrades();\n                Sleep(100);\n            }\n        }\n        type = OP_SELL;\n        price = Bid;\n        stop = _roundp(GetSupply(get_sl_price) + hidden_pips * Point, digits);\n        take = _roundp(GetSupply(get_tp_price) - hidden_pips * Point, digits);\n        temp_send_lot = CalculateDynamicDeltaSwansonLot(price, stop - hidden_pips * Point);\n        send_trade = true;\n    }\n    if (send_trade) {\n        if (open_trades == 0) {\n            temp_magic_number = entry;\n        } else {\n            temp_magic_number = magic_piramide;\n        }\n        while (temp_send_lot > 0) {\n            if (temp_send_lot > MarketInfo(symbol, MODE_MAXLOT)) {\n                send_lot = MarketInfo(symbol, MODE_MAXLOT);\n                temp_send_lot -= MarketInfo(symbol, MODE_MAXLOT);\n            } else {\n                send_lot = temp_send_lot;\n                temp_send_lot = 0;\n            }\n            if (ticket == 0) {\n                ticket = OrderSendReliable(symbol, type, send_lot, price, slippage, stop, take, trade_comment, temp_magic_number, 0, CLR_NONE);\n            }\n            if (ticket != 0) {\n                if (type == OP_SELL) {\n                    stop -= hidden_pips * Point;\n                    take += hidden_pips * Point;\n                    DrawHiddenTakeProfit(ticket, take);\n                    DrawHiddenStopLoss(ticket, stop);\n                }\n                if (type == OP_BUY) {\n                    stop += hidden_pips * Point;\n                    take -= hidden_pips * Point;\n                    DrawHiddenTakeProfit(ticket, take);\n                    DrawHiddenStopLoss(ticket, stop);\n                }\n            }\n        }\n    }\n}\n\nvoid SasTrading() {\n    if (!IsTradingAllowed()) {\n        return;\n    }\n    if (ObjectsTotal(OBJ_HLINE) > 0) {\n        for (int i = ObjectsTotal() - 1; i >= 0; i--) {\n            int type, ticket, temp_magic_number;\n            double price, stop, take, send_lot, temp_send_lot;\n            string name = ObjectName(i);\n            if (StringSubstr(name, 0, 15) == \"Horizontal Line\") {\n                Print(\"I found !sas trigger\");\n                double trigger = ObjectGet(name, OBJPROP_PRICE1);\n                if (open_trades == 0) {\n                    temp_magic_number = entry;\n                } else {\n                    temp_magic_number = magic_piramide;\n                }\n                if (trigger > Ask) {\n                    Print(\"Trigger is sell signal\");\n                    if (trigger - Ask > max_stop * point && max_stop > 0) {\n                        ObjectDelete(name);\n                        Print(\"Error: stop \" + (trigger - Ask) + \" > \" + (max_stop * point) + \" max_stop \");\n                        Print(max_stop);\n                        Print(point);\n                        Print(trigger - Ask > max_stop * point);\n                        return;\n                    }\n                    type = OP_SELL;\n                    price = Bid;\n                    stop = trigger + hidden_pips * point;\n                    take = price - (trigger - price) * 3 - hidden_pips * point;\n                    temp_send_lot = CalculateDynamicDeltaSwansonLot(price, trigger);\n                    while (ticket == 0) {\n                        while (temp_send_lot > 0) {\n                            if (temp_send_lot > MarketInfo(symbol, MODE_MAXLOT)) {\n                                send_lot = MarketInfo(symbol, MODE_MAXLOT);\n                                temp_send_lot -= MarketInfo(symbol, MODE_MAXLOT);\n                            } else {\n                                send_lot = temp_send_lot;\n                                temp_send_lot = 0;\n                            }\n                            if (ticket == 0) {\n                                ticket = OrderSendReliable(symbol, type, send_lot, price, slippage, stop, take, trade_comment, temp_magic_number, 0, CLR_NONE);\n                            }\n                        }\n                    }\n                    if (ticket != 0) {\n                        ObjectDelete(name);\n                        stop = trigger;\n                        take -= hidden_pips * point;\n                        DrawHiddenTakeProfit(ticket, take);\n                        DrawHiddenStopLoss(ticket, stop);\n                    }\n                }\n                if (trigger < Bid) {\n                    Print(\"Trigger is buy signal\");\n                    Print(Bid, \" \", trigger, \" \", max_stop, \" \", point, \" \", multiplier);\n                    if (Bid - trigger > max_stop * point) {\n                        ObjectDelete(name);\n                        Print(\"Error: stop \" + (trigger - Ask) + \" > \" + (max_stop * point) + \" max_stop \");\n                        return;\n                    }\n                    type = OP_BUY;\n                    price = Ask;\n                    stop = trigger - hidden_pips * point;\n                    take = price + (price - trigger) * 3 +  hidden_pips * point;\n                    Print(\"blablabla0\");\n                    temp_send_lot = CalculateDynamicDeltaSwansonLot(price, trigger);\n                    Print(\"blablabla1\");\n                    while (ticket == 0) {\n                        while (temp_send_lot > 0) {\n                            if (temp_send_lot > MarketInfo(symbol, MODE_MAXLOT)) {\n                                send_lot = MarketInfo(symbol, MODE_MAXLOT);\n                                temp_send_lot -= MarketInfo(symbol, MODE_MAXLOT);\n                            } else {\n                                send_lot = temp_send_lot;\n                                temp_send_lot = 0;\n                            }\n                            if (ticket == 0) {\n                                ticket = OrderSendReliable(symbol, type, send_lot, price, slippage, stop, take, trade_comment, temp_magic_number, 0, CLR_NONE);\n                            }\n                        }\n                    }\n                    if (ticket != 0) {\n                        ObjectDelete(name);\n                        stop = trigger;\n                        take += hidden_pips * Point;\n                        DrawHiddenTakeProfit(ticket, take);\n                        DrawHiddenStopLoss(ticket, stop);\n                    }\n                }\n            }\n        }\n    }\n}\n\n\nvoid LookForTradeClosure(int ticket) {\n    if (!OrderSelect(ticket, SELECT_BY_TICKET)) {\n        return;\n    }\n    if (OrderSelect(ticket, SELECT_BY_TICKET) && OrderCloseTime() > 0) {\n        return;\n    }\n    bool CloseThisTrade;\n    double take = ObjectGet(tp_line_name, OBJPROP_PRICE1);\n    double stop = ObjectGet(sl_line_name, OBJPROP_PRICE1);\n    if (OrderType() == OP_BUY) {\n        if (Ask >= take && take > 0) {\n            CloseThisTrade = true;\n        }\n        if (Bid <= stop && stop > 0) {\n            CloseThisTrade = true;\n        }\n    }\n    if (OrderType() == OP_SELL) {\n        if (Bid <= take && take > 0) {\n            CloseThisTrade = true;\n        }\n        if (Ask >= stop && stop > 0) {\n            CloseThisTrade = true;\n        }\n    }\n    if (CloseThisTrade) {\n        bool result = OrderCloseReliable(ticket, OrderLots(), OrderClosePrice(), 1000, CLR_NONE);\n    }\n    if (result) {\n        open_trades--;\n        DeletePendingPriceLines(ticket);\n    }\n}\n\nvoid CloseAllTrades() {\n    force_trade_closure = false;\n    if (OrdersTotal() == 0) {\n        return;\n    }\n    for (int cc = OrdersTotal() - 1; cc >= 0; cc--) {\n        if (OrderSelect(cc, SELECT_BY_POS)) {\n            if (OrderMagicNumber() == magic_number || OrderMagicNumber() == magic_piramide) {\n                if (OrderSymbol() == symbol) {\n                    if (OrderType() == OP_BUY || OrderType() == OP_SELL) {\n                        bool result = OrderCloseReliable(OrderTicket(), OrderLots(), OrderClosePrice(), 1000, CLR_NONE);\n                    }\n                    if (result) {\n                        cc++;\n                    }\n                    if (!result) {\n                        force_trade_closure = true;\n                    }\n                }\n            }\n        }\n    }\n    if (!force_trade_closure) {\n        open_trades = 0;\n        buy_open = false;\n        sell_open = false;\n    }\n}\n\nvoid CountOpenTrades() {\n    open_trades = 0;\n    buy_open = false;\n    sell_open = false;\n    ArrayResize(orders, 0);\n    if (OrdersTotal() > 0) {\n        ArrayResize(orders, OrdersTotal());\n        for (int i = OrdersTotal() - 1; i >= 0; i--) {\n            if (OrderSelect(i, SELECT_BY_POS)) {\n                if (OrderSymbol() == symbol && (OrderMagicNumber() == magic_number || OrderMagicNumber() == magic_piramide) && (OrderType() == OP_BUY || OrderType() == OP_SELL)) {\n                    open_trades++;\n                    int ticket_no = OrderTicket();\n                    orders[i][0] = OrderTicket();\n                    orders[i][1] = _roundp(OrderOpenPrice(), digits);\n                    orders[i][2] = _roundp(OrderStopLoss(), digits);\n                    orders[i][3] = _roundp(OrderTakeProfit(), digits);\n                    orders[i][4] = OrderLots();\n                    if (OrderType() == OP_BUY) {\n                        buy_open = true;\n                    }\n                    if (OrderType() == OP_SELL) {\n                        sell_open = true;\n                    }\n                    LookForTradeClosure(ticket_no);\n                }\n            }\n        }\n    } else {\n        ArrayResize(orders, 0);\n    }\n    ArrayResize(orders, open_trades);\n    last_order = open_trades - 1;\n}\n\n////////////////////////////////////////////////////////////////////////////////////////////////\n//Indicator module\n\ndouble GetAtr(int tf, int period, double multiplier) {\n    double atr = iATR(NULL, tf, period, 0);\n    atr *= multiplier;\n    return (atr);\n}\n\ndouble GetFractal(int type, int mode, int timeframe) {\n    for (int i = 1; i < Bars; i++) {\n        double last_fractal = iFractals(symbol, timeframe, type, i);\n        if (last_fractal != 0) {\n            if (type == MODE_UPPER) {\n                if (mode == 0) {\n                    if (last_fractal > iHigh(symbol, timeframe, iHighest(symbol, timeframe, MODE_CLOSE, i - 1, 1))) {\n                        return (last_fractal);\n                    }\n                }\n                if (mode == 1) {\n                    return (last_fractal);\n                }\n            }\n            if (type == MODE_LOWER) {\n                if (mode == 0) {\n                    if (last_fractal <  iLow(symbol, timeframe, iLowest(symbol, timeframe, MODE_CLOSE, i - 1, 1))) {\n                        return (last_fractal);\n                    }\n                }\n                if (mode == 1) {\n                    return (last_fractal);\n                }\n            }\n        }\n    }\n}\n\nvoid CalculateResult() {\n    static int old_history_total;\n    static datetime day_bar;\n    double local_multiplier, pips;\n    if (old_history_total != OrdersHistoryTotal() || day_bar != iTime(symbol, 1440, 0)) {\n        old_history_total = OrdersHistoryTotal();\n        day_bar = iTime(symbol, 1440, 0);\n        entry_cash_profit = 0;\n        entry_win_trades = 0;\n        entry_pips_profit = 0;\n        entry_loss_trades = 0;\n        entry_pips_loss = 0;\n        piramide_cash_profit = 0;\n        piramide_win_trades = 0;\n        piramide_pips_profit = 0;\n        piramide_loss_trades = 0;\n        piramide_pips_loss = 0;\n        today_loss_trades = 0;\n        today_win_trades = 0;\n        day_cash_profit = 0;\n        day_pip_profit = 0;\n        int total_history = OrdersHistoryTotal();\n        if (total_history == 0) {\n            return;\n        }\n        for (int cc = total_history; cc >= 0; cc--) {\n            if (OrderSelect(cc, SELECT_BY_POS, MODE_HISTORY)) {\n                if (OrderType() != 6 && OrderType() != 7) {\n                    if (MarketInfo(OrderSymbol(), MODE_DIGITS) == 1 || MarketInfo(OrderSymbol(), MODE_DIGITS) == 3 || MarketInfo(OrderSymbol(), MODE_DIGITS) == 5 || MarketInfo(OrderSymbol(), MODE_MARGINCALCMODE) != 0) {\n                        local_multiplier = 10;\n                    } else {\n                        local_multiplier = 1;\n                    }\n                    if (OrderMagicNumber() == entry) {\n                        entry_cash_profit += (OrderProfit() + OrderSwap() + OrderCommission());\n                        if (OrderProfit() > 0) {\n                            entry_win_trades++;\n                            entry_pips_profit += MathAbs((OrderClosePrice() - OrderOpenPrice()) / MarketInfo(OrderSymbol(), MODE_POINT) / local_multiplier);\n                        } else if (OrderProfit() < 0) {\n                            entry_loss_trades++;\n                            entry_pips_loss += MathAbs((OrderClosePrice() - OrderOpenPrice()) / MarketInfo(OrderSymbol(), MODE_POINT) / local_multiplier);\n                        }\n                    } else if (OrderMagicNumber() == magic_piramide) {\n                        piramide_cash_profit += (OrderProfit() + OrderSwap() + OrderCommission());\n                        if (OrderProfit() > 0) {\n                            piramide_win_trades++;\n                            piramide_pips_profit += MathAbs((OrderClosePrice() - OrderOpenPrice()) / MarketInfo(OrderSymbol(), MODE_POINT) / local_multiplier);\n                        } else if (OrderProfit() < 0) {\n                            piramide_loss_trades++;\n                            piramide_pips_loss += MathAbs((OrderClosePrice() - OrderOpenPrice()) / MarketInfo(OrderSymbol(), MODE_POINT) / local_multiplier);\n                        }\n                    }\n                    if (TimeDayOfYear(GMTseconds() + (3600 * broker_time_shift)) == TimeDayOfYear(OrderCloseTime())) {\n                        day_cash_profit += (OrderProfit() + OrderSwap() + OrderCommission());\n                        if (OrderType() == OP_BUY) {\n                            day_pip_profit += (OrderClosePrice() - OrderOpenPrice()) / MarketInfo(OrderSymbol(), MODE_POINT) / local_multiplier;\n                        }\n                        if (OrderType() == OP_SELL) {\n                            day_pip_profit += (OrderOpenPrice() - OrderClosePrice()) / MarketInfo(OrderSymbol(), MODE_POINT) / local_multiplier;\n                        }\n                        if (OrderProfit() > 0) {\n                            today_win_trades++;\n                        }\n                        if (OrderProfit() < 0) {\n                            today_loss_trades++;\n                        }\n                    }\n                }\n            }\n        }\n        if (entry_pips_profit > 0 && entry_win_trades > 0) {\n            entry_average_profit = entry_pips_profit / entry_win_trades;\n        }\n        if (entry_pips_loss > 0 && entry_loss_trades > 0) {\n            entry_average_loss = entry_pips_loss / entry_loss_trades;\n        }\n        if (entry_average_loss > 0 && entry_average_profit > 0) {\n            entry_risk_reward = entry_average_loss / entry_average_profit;\n        }\n        if (piramide_pips_profit > 0 && piramide_win_trades > 0) {\n            piramide_average_profit = piramide_pips_profit / piramide_win_trades;\n        }\n        if (piramide_pips_loss > 0 && piramide_loss_trades > 0) {\n            piramide_average_loss = piramide_pips_loss / piramide_loss_trades;\n        }\n        if (piramide_average_loss > 0 && piramide_average_profit > 0) {\n            piramide_risk_reward = piramide_average_loss / piramide_average_profit;\n        }\n        entry_pips_loss *= -1;\n        piramide_pips_loss *= -1;\n    }\n}\n\ndouble GetLotDistance() {\n    double lot_distance;\n    for (int i = last_order; i >= 0; i--) {\n        if (OrderSelect(orders[i][0], SELECT_BY_TICKET, MODE_TRADES)) {\n            if (OrderSymbol() == symbol) {\n                if (OrderType() == OP_BUY) {\n                    double distance = (Bid - orders[i][1]) / Point;\n                    lot_distance += distance * OrderLots();\n                }\n                if (OrderType() == OP_SELL) {\n                    distance = (orders[i][1] - Ask) / Point;\n                    lot_distance += distance * OrderLots();\n                }\n            }\n        }\n    }\n    return (lot_distance);\n}\n\ndouble CheckLotDistance(double percent) {\n    double actual_lot_distance = GetLotDistance();\n    double required_lot_distance = actual_lot_distance * (100 - percent) * 0.01;\n    double difrence_lot_distance = actual_lot_distance - required_lot_distance;\n    double total_size;\n    for (int i = last_order; i >= 0; i--) {\n        if (OrderSelect(orders[i][0], SELECT_BY_TICKET, MODE_TRADES)) {\n            if (OrderSymbol() == symbol) {\n                total_size += OrderLots();\n            }\n        }\n    }\n    return (difrence_lot_distance / total_size);\n}\n\n//End Indicator module\n////////////////////////////////////////////////////////////////////////////////////////////////\n\n///////////////////////////////////////////////////////////////////////////////////////////////////////\n//Pending trade price lines module.\nvoid DrawHiddenStopLoss(int ticket, double price) {\n    string sl_name = StringConcatenate(ticket, sl_line_name);\n    if (ObjectFind(sl_name) == -1) {\n        ObjectCreate(sl_name, OBJ_HLINE, 0, Time[0], price);\n        ObjectSet(sl_name, OBJPROP_COLOR, supply_color);\n        ObjectSet(sl_name, OBJPROP_WIDTH, 1);\n        ObjectSet(sl_name, OBJPROP_STYLE, STYLE_SOLID);\n    }\n}\n\n\nvoid DrawHiddenTakeProfit(int ticket, double price) {\n    string tp_name = StringConcatenate(ticket, tp_line_name);\n    if (ObjectFind(tp_name) == -1) {\n        ObjectCreate(tp_name, OBJ_HLINE, 0, Time[0], price);\n        ObjectSet(tp_name, OBJPROP_COLOR, demand_color);\n        ObjectSet(tp_name, OBJPROP_WIDTH, 1);\n        ObjectSet(tp_name, OBJPROP_STYLE, STYLE_SOLID);\n    }\n}\n\n\nvoid DeletePendingPriceLines(int ticket) {\n    string tp_name = StringConcatenate(ticket, tp_line_name);\n    string sl_name = StringConcatenate(ticket, sl_line_name);\n    if (ObjectFind(sl_line_name) != -1) {\n        ObjectDelete(sl_line_name);\n    }\n    if (ObjectFind(tp_line_name) != -1) {\n        ObjectDelete(tp_line_name);\n    }\n}\n\nvoid DeleteOrphanPriceLines() {\n    for (int i = ObjectsTotal(OBJ_HLINE) - 1; i >= 0; i--) {\n        string line_name = ObjectName(i);\n        Print(\"found \" + line_name);\n        int tp_index = StringFind(line_name, tp_line_name, 0);\n        int sl_index = StringFind(line_name, sl_line_name, 0);\n        if (tp_index != -1) {\n            string ticket = StringSubstr(line_name, 0, tp_index);\n            Print(\"Delete Ticket: \" + ticket);\n            if (!OrderSelect(ticket, SELECT_BY_TICKET, MODE_TRADES)) {\n                ObjectDelete(line_name);\n            }\n        }\n    }\n}\n\nbool CheckMarginLevel() {\n    if (use_margin_check && AccountMargin() > 0) {\n        double ml = _roundp(AccountEquity() / AccountMargin() * 100, 2);\n        if (ml < minimum_margin_percen) {\n            //string screen_message = StringConcatenate ( \"There is insufficient margin percent to allow trading. \", DoubleToStr ( ml, 2 ), \"%\" );\n            //ObjectMakeLabel ( StringConcatenate ( sd, \"margin_level_message\" ), screen_message, font_size, font_type, Red, 30, 30, 0, 1 );\n            DisplayUserFeedback();\n            return (false);\n        } else {\n            ObjectDelete(StringConcatenate(sd, \"margin_level_message\"));\n        }\n    }\n    return (true);\n}\n\n//+------------------------------------------------------------------+\n//| expert start function                                            |\n//+------------------------------------------------------------------+\nint start() {\n    //----\n    DragDropLine();\n    if (use_sd) {\n        GetFibo();\n    }\n    if (force_trade_closure) {\n        CloseAllTrades();\n        return;\n    }\n    CountOpenTrades();\n    CalculateResult();\n    TradeManagementModule();\n    if (CheckMarginLevel()) {\n        if (!stop_trading) {\n            if (use_sd) {\n                SupplyDemandTrading();\n            }\n            if (use_sas) {\n                SasTrading();\n            }\n        }\n    }\n    DeleteOrphanPriceLines();\n    DisplayUserFeedback();\n    //----\n    return (0);\n}\n//+------------------------------------------------------------------+\n\nint ObjectMakeLabel(string name, string text, int font_size, string font, color font_color, int x, int y, int window, int corner) {\n    if (ObjectFind(name) == -1) {\n        ObjectCreate(name, OBJ_LABEL, window, 0, 0);\n    }\n    ObjectSet(name, OBJPROP_CORNER, corner);\n    ObjectSet(name, OBJPROP_XDISTANCE, x);\n    ObjectSet(name, OBJPROP_YDISTANCE, y);\n    ObjectSet(name, OBJPROP_BACK, false);\n    ObjectSetText(name, text, font_size, font, font_color);\n    return (0);\n}\n\nvoid DisplayUserFeedback() {\n    int temp_offset = 20;\n    if (IsTesting() && !IsVisualMode()) {\n        return;\n    }\n    temp_offset = 30;\n    string screen_message = StringConcatenate(\"Supply&Demand semi-auto trading robot by Ribelo on \", symbol);\n    ObjectMakeLabel(StringConcatenate(sd, \"ea_name\"), screen_message, font_size * 1.2, \"ArialBlack\", supply_color, data_disp_gap_size, temp_offset, 0, 0);\n    temp_offset += 2 * data_disp_offset;\n    double i;\n    int m, s, k;\n    m = Time[0] + Period() * 60 - CurTime();\n    i = m / 60.0;\n    s = m % 60;\n    m = (m - m % 60) / 60;\n    if (magic_number != 0) {\n        screen_message = StringConcatenate(\"Magic number: \", magic_number);\n        ObjectMakeLabel(StringConcatenate(sd, \"magic_number_message\"), screen_message, font_size, font_type, text_color, data_disp_gap_size, temp_offset, 0, 0);\n        temp_offset += data_disp_offset;\n    }\n    if (trade_comment != \" \") {\n        screen_message = StringConcatenate(\"Trade comment: \", trade_comment);\n        ObjectMakeLabel(StringConcatenate(sd, \"trade_comment_message\"), screen_message, font_size, font_type, text_color, data_disp_gap_size, temp_offset, 0, 0);\n        temp_offset += data_disp_offset;\n    }\n    screen_message = StringConcatenate(\"Max spreed = \", max_spreed, \": Spread = \", MarketInfo(symbol, MODE_SPREAD));\n    ObjectMakeLabel(StringConcatenate(sd, \"spreed_message\"), screen_message, font_size, font_type, text_color, data_disp_gap_size, temp_offset, 0, 0);\n    temp_offset += data_disp_offset * 2;\n    if (automate_build_piramide) {\n        screen_message = \"Automate build piramide\";\n        ObjectMakeLabel(StringConcatenate(sd, \"piramide_type\"), screen_message, font_size, font_type, text_color, data_disp_gap_size, temp_offset, 0, 0);\n        temp_offset += data_disp_offset;\n        screen_message = StringConcatenate(\"First piramide order distance: \", first_order_distance);\n        ObjectMakeLabel(StringConcatenate(sd, \"first_order_distance\"), screen_message, font_size, font_type, text_color, data_disp_gap_size, temp_offset, 0, 0);\n        temp_offset += data_disp_offset;\n        screen_message = StringConcatenate(\"Next piramide order distance: \", next_order_distance);\n        ObjectMakeLabel(StringConcatenate(sd, \"next_order_distance\"), screen_message, font_size, font_type, text_color, data_disp_gap_size, temp_offset, 0, 0);\n        temp_offset += data_disp_offset;\n        if (use_trailing_stop) {\n            temp_offset += data_disp_offset;\n            screen_message = \"Trailing stop:\";\n            ObjectMakeLabel(StringConcatenate(sd, \"trailing_stop\"), screen_message, font_size, font_type, text_color, data_disp_gap_size, temp_offset, 0, 0);\n            temp_offset += data_disp_offset;\n            screen_message = StringConcatenate(\"Strart from \", start_tp_percent, \"% TP\");\n            ObjectMakeLabel(StringConcatenate(sd, \"strart_trailing\"), screen_message, font_size, font_type, text_color, data_disp_gap_size, temp_offset, 0, 0);\n            temp_offset += data_disp_offset;\n            screen_message = StringConcatenate(\"End on \", stop_tp_percent, \"% TP\");\n            ObjectMakeLabel(StringConcatenate(sd, \"stop_trailing\"), screen_message, font_size, font_type, text_color, data_disp_gap_size, temp_offset, 0, 0);\n            temp_offset += data_disp_offset;\n        }\n    } else {\n        if (use_trailing_stop && trailing_first_trade) {\n            temp_offset += data_disp_offset;\n            screen_message = \"Trailing stop\";\n            ObjectMakeLabel(StringConcatenate(sd, \"trailing_stop\"), screen_message, font_size, font_type, text_color, data_disp_gap_size, temp_offset, 0, 0);\n            temp_offset += data_disp_offset;\n            screen_message = StringConcatenate(\"Strart from \", start_tp_percent, \"%\");\n            ObjectMakeLabel(StringConcatenate(sd, \"strart_stop\"), screen_message, font_size, font_type, text_color, data_disp_gap_size, temp_offset, 0, 0);\n            temp_offset += data_disp_offset;\n            screen_message = StringConcatenate(\"End on \", stop_tp_percent, \"%\");\n            ObjectMakeLabel(StringConcatenate(sd, \"stop_stop\"), screen_message, font_size, font_type, text_color, data_disp_gap_size, temp_offset, 0, 0);\n            temp_offset += data_disp_offset;\n        }\n    }\n    //Running total of trades\n    if (show_statistic) {\n        temp_offset += data_disp_offset;\n        screen_message = StringConcatenate(\"Today results. Wins: \", today_win_trades, \" Losses: \", today_loss_trades, \" Cash: \", DoubleToStr(day_cash_profit, 2), \"$ Pip: \", DoubleToStr(day_pip_profit, 2));\n        ObjectMakeLabel(StringConcatenate(sd, \"results_today_message\"), screen_message, font_size, font_type, text_color, data_disp_gap_size, temp_offset, 0, 0);\n        temp_offset += data_disp_offset;\n        screen_message = StringConcatenate(\"Total entry results. Wins: \", entry_win_trades, \" Losses: \", entry_loss_trades, \" Cash: \", DoubleToStr(entry_cash_profit, 2), \"$\");\n        ObjectMakeLabel(StringConcatenate(sd, \"results_entry_message\"), screen_message, font_size, font_type, text_color, data_disp_gap_size, temp_offset, 0, 0);\n        temp_offset += data_disp_offset;\n        screen_message = StringConcatenate(\"Total piramide results. Wins: \", piramide_win_trades, \" Losses: \", piramide_loss_trades, \" Cash: \", DoubleToStr(piramide_cash_profit, 2), \"$\");\n        ObjectMakeLabel(StringConcatenate(sd, \"results_piramide_message\"), screen_message, font_size, font_type, text_color, data_disp_gap_size, temp_offset, 0, 0);\n        temp_offset += data_disp_offset;\n        screen_message = StringConcatenate(\"Entry risk reward\", DoubleToStr(entry_risk_reward, 2));\n        ObjectMakeLabel(StringConcatenate(sd, \"entry_risk_reward_message\"), screen_message, font_size, font_type, text_color, data_disp_gap_size, temp_offset, 0, 0);\n        temp_offset += data_disp_offset;\n        screen_message = StringConcatenate(\"Piramide risk reward\", DoubleToStr(piramide_risk_reward, 2));\n        ObjectMakeLabel(StringConcatenate(sd, \"piramide_piramide_message\"), screen_message, font_size, font_type, text_color, data_disp_gap_size, temp_offset, 0, 0);\n        temp_offset += data_disp_offset;\n    }\n    if (use_label_box) {\n        //if ( ObjectFind ( \"[[LabelBorder]]\" ) == -1 ) {\n        //ObjectMakeLabel( \"[[LabelBorder]]\", \"c\", 210, \"Webdings\", label_border, 10, 15, 0 );\n        //}\n        int count = temp_offset / data_disp_offset / 3;\n        temp_offset = 20;\n        for (int cc = count - 1; cc >= 0; cc--) {\n            string name = StringConcatenate(\"[\", sd, \"label_box\", cc, \"]\");\n            if (ObjectFind(name) == -1) {\n                ObjectMakeLabel(name, \"ggggggggg\", 34, \"Webdings\", label_box, data_disp_gap_size - (data_disp_gap_size / 2), temp_offset, 0, 0);\n            }\n            temp_offset += 45;\n        }\n    }\n}//void DisplayUserFeedback()\n",
+			"file": "/home/huxley/Dropbox/code/mql/experts/j.a.r.v.i.s.mq4",
+			"file_size": 58679,
+			"file_write_time": 130354225283096416,
+			"settings":
+			{
+				"buffer_size": 57391,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/home/huxley/Dropbox/code/mql/experts/include/hanover --- extensible functions (np).mqh",
+			"settings":
+			{
+				"buffer_size": 117034,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/home/huxley/Dropbox/trading/MetaTrader Admiral Markets AS/experts/indicators/Ribelo DDSM.mq4",
+			"settings":
+			{
+				"buffer_size": 9480,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/home/huxley/Dropbox/code/Dashboard/client/app/lib/mm.py",
+			"settings":
+			{
+				"buffer_size": 1839,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/huxley/Dropbox/code/mql/src/candle.h",
+			"settings":
+			{
+				"buffer_size": 7400,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/huxley/Dropbox/code/mql/src/deepthroat.h",
+			"settings":
+			{
+				"buffer_size": 926,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 309.0,
+		"selected_items":
+		[
+			[
+				"make",
+				"SnippetMaker: Make Snippet"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"clang",
+				"Preferences: SublimeClang Settings – Default"
+			],
+			[
+				"resur",
+				"PackageResourceViewer: Open Resource"
+			],
+			[
+				"edit",
+				"SnippetMaker: Edit Snippet"
+			],
+			[
+				"Snippet: ",
+				"Snippet: candle_c"
+			],
+			[
+				"makesi",
+				"SnippetMaker: Make Snippet"
+			],
+			[
+				"list",
+				"Package Control: List Packages"
+			],
+			[
+				"reid",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"compi",
+				"Compile mql4"
+			],
+			[
+				"astyle",
+				"SublimeAStyleFormatter: Format Current File"
+			],
+			[
+				"install ",
+				"Package Control: Install Package"
+			],
+			[
+				"reide",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"reident",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"linter",
+				"SublimeLint: Show All Errors"
+			],
+			[
+				"mql",
+				"Compile mql4"
+			],
+			[
+				"comp",
+				"Compile mql4"
+			],
+			[
+				"reiden",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"coff",
+				"Coffee: Compile File"
+			],
+			[
+				"coffe",
+				"Coffee: Toggle Watch Mode"
+			],
+			[
+				"remov",
+				"Package Control: Remove Package"
+			],
+			[
+				"Coffee",
+				"FindKeyConflicts: All Key Maps to Buffer"
+			],
+			[
+				"control",
+				"Package Control: List Packages"
+			],
+			[
+				"ind",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"rei",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"indent",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"auto",
+				"User: Python PEP8 Autoformat"
+			],
+			[
+				"githu",
+				"Github: Open File"
+			],
+			[
+				"json",
+				"Pretty JSON: Reformat (Pretty Print) JSON"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"remo",
+				"Package Control: Remove Package"
+			]
+		],
+		"width": 568.0
+	},
+	"console":
+	{
+		"height": 347.0,
+		"history":
+		[
+			"os.getcwd()",
+			"import os",
+			"os",
+			"ls",
+			"import builtins",
+			"ls"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/home/huxley/Dropbox/code/mql/experts/indicators/gsl_test.mq4",
+		"/home/huxley/Dropbox/code/mql/makefile",
+		"/home/huxley/Dropbox/code/mql/experts/include/hxl_utils.mqh",
+		"/home/huxley/Dropbox/code/mql/experts/include/hxl_math.mqh",
+		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_ajctr.mq4",
+		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_apaor.mq4",
+		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_body.mq4",
+		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_confirmation.mq4",
+		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_dcm.mq4",
+		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_fractal_break.mq4",
+		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_fractals.mq4",
+		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_fvb.mq4",
+		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_vtr.mq4",
+		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_zone.mq4",
+		"/home/huxley/Dropbox/code/mql/experts/libraries/LibOrderReliable4.mq4",
+		"/home/huxley/Dropbox/code/mql/gsl_math.def",
+		"/home/huxley/Dropbox/code/mql/src/wrb_zone.c",
+		"/home/huxley/Dropbox/code/mql/experts/include/gsl_math.mqh",
+		"/home/huxley/Dropbox/code/mql/src/gsl_math.c",
+		"/home/huxley/Dropbox/code/mql/src/wrb_apaor.c",
+		"/home/huxley/Dropbox/code/mql/experts/indicators/mql.sublime-project",
+		"/home/huxley/Dropbox/code/mql/console.log",
+		"/home/huxley/Dropbox/code/mql/experts/include/LibGMT.mqh",
+		"/home/huxley/Dropbox/code/mql/wrb_analysis.sublime-project",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/experts/include/gsl.mqh",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/makefile",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/src/wrb_apaor.h",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/src/wrb_apaor.c",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/src/wrb_export.c",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/experts/indicators/wrb_analysis_zone.mq4",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/src/wrb_toolbox.h",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/experts/indicators/wrb_analysis_apaor.mq4",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/experts/include/wrb_analysis.mqh",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/wrb_analysis.def",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/experts/indicators/wrb_analysis_fractals.mq4",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/experts/indicators/wrb_analysis_fvb.mq4",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/experts/indicators/wrb_analysis_vtr.mq4",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/experts/indicators/wrb_analysis_ajctr.mq4",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/experts/indicators/wrb_analysis_body.mq4",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/experts/indicators/wrb_analysis_confirmation.mq4",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/experts/indicators/wrb_analysis_dcm.mq4",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/experts/indicators/wrb_analysis_fractal_break.mq4",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/experts/indicators/wrb_analysis_divergence.mq4",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/src/wrb_divergence.c",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/src/candle.h",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/src/candle.c",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/src/wrb_divergence.h",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/src/wrb_struct.h",
+		"/home/huxley/.config/sublime-text-3/Packages/SublimeClang/SublimeClang.sublime-settings",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/conole.log",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/console.log",
+		"/home/huxley/.config/sublime-text-3/Packages/User/c_candle.sublime-snippet",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/src/wrb_fvb.c",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/src/wrb_ajctr.c",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/src/wrb_zone.c",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/src/wrb_fvb.h",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/src/wrb_vtr.h",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/src/wrb_vtr.c",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/src/wrb_ajctr.h",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/src/wrb_zone.h",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/src/wrb_analysis.c",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/src/wrb_confirmation.h",
+		"/home/huxley/.config/sublime-text-3/Packages/SublimeAStyleFormatter/SublimeAStyleFormatter.sublime-settings",
+		"/home/huxley/.config/sublime-text-3/Packages/User/test.sublime-macro",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/src/wrb_analysis.h",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/src/deepthroat.h",
+		"/home/huxley/.config/sublime-text-3/Packages/SublimeAStyleFormatter/Default (Linux).sublime-keymap",
+		"/usr/x86_64-w64-mingw32/include/gsl/gsl_math.h",
+		"/tmp/candle-4.h",
+		"/tmp/candle-5.h",
+		"/tmp/candle-6.h",
+		"/tmp/candle-7.h",
+		"/tmp/candle-3.h",
+		"/tmp/candle-2.h",
+		"/tmp/candle-1.h",
+		"/tmp/candle.h",
+		"/home/huxley/.cache/.fr-aJnWua/mingw-w64-gsl/PKGBUILD",
+		"/usr/x86_64-w64-mingw32/include/gsl/gsl_sum.h",
+		"/usr/x86_64-w64-mingw32/include/gsl/gsl_inline.h",
+		"/home/huxley/.config/sublime-text-3/Packages/SublimeClang/Default.sublime-keymap",
+		"/home/huxley/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
+		"/home/huxley/.config/sublime-text-3/Packages/Default/Preferences.sublime-settings",
+		"/home/huxley/Dropbox/trading/MetaTrader Admiral Markets AS/experts/indicators/Ribelo_SupDem.mq4",
+		"/home/huxley/Dropbox/trading/MetaTrader Admiral Markets AS/experts/samples/DLLSample/ExpertSample.cpp",
+		"/home/huxley/Dropbox/trading/MetaTrader Admiral Markets AS/experts/indicators/Ribelo_II_SupDem.mq4",
+		"/home/huxley/Dropbox/trading/MetaTrader Admiral Markets AS/experts/indicators/Ribelo FVB.mq4",
+		"/home/huxley/.config/sublime-text-3/Packages/C++/C++.sublime-settings",
+		"/home/huxley/.zsh_history",
+		"/home/huxley/.zdirs",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/console.txt",
+		"/home/huxley/Dropbox/code/heisenbug/heisenbug/wrb/zone.pyx",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/src/wrb_toolbox.c",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/src_back2/wrb_export.c",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/src_back2/candle.c",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/src_back2/candle.h",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/src_back2/wrb_confirmation.h",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/src_back2/wrb_fvb.h",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/src_back2/wrb_toolbox.h",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/src_back2/wrb_zone.h",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/src/wrb_confirmation.c",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/src_back2/wrb_analysis.c",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/src_back2/wrb_analysis.h",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/src_back2/wrb_vtr.h",
+		"/home/huxley/Dropbox/code/heisenbug/heisenbug/wrb/ajctr.pyx",
+		"/home/huxley/Dropbox/code/heisenbug/heisenbug/__init__.py",
+		"/home/huxley/Dropbox/code/heisenbug/heisenbug/wrb/analysis.pyx",
+		"/home/huxley/Dropbox/code/heisenbug/heisenbug/wrb/confirmation.pyx",
+		"/home/huxley/Dropbox/code/heisenbug/heisenbug/wrb/toolbox.pxd",
+		"/home/huxley/Dropbox/code/heisenbug/heisenbug/wrb/analysis.c",
+		"/home/huxley/Dropbox/code/heisenbug/heisenbug/wrb/analysis.html",
+		"/home/huxley/Dropbox/code/heisenbug/heisenbug/wrb/confirmation.c",
+		"/home/huxley/Dropbox/code/heisenbug/heisenbug/wrb/confirmation.html",
+		"/home/huxley/Dropbox/code/heisenbug/heisenbug/wrb/zone.c",
+		"/home/huxley/Dropbox/code/heisenbug/heisenbug/wrb/zone.html",
+		"/home/huxley/Dropbox/code/heisenbug/setup.py",
+		"/home/huxley/Dropbox/code/heisenbug/build/lib.linux-x86_64-3.3/heisenbug/__init__.py",
+		"/home/huxley/Dropbox/code/heisenbug/build/lib.linux-x86_64-3.3/heisenbug/wrb/toolbox.pxd",
+		"/home/huxley/Dropbox/code/heisenbug/heisenbug/wrb/ajctr.c",
+		"/home/huxley/Dropbox/code/heisenbug/heisenbug/wrb/ajctr.html",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/experts/indicators/wrb_analysis_test.mq4",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/experts/indicators/wrb_analysis_wrb_zone.mq4",
+		"/home/huxley/Dropbox/trading/MetaTrader Admiral Markets AS/experts/scripts/Get WRB.mq4",
+		"/home/huxley/Dropbox/code/heisenbug/heisenbug/pa/toolbox.pxd",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/experts/indicators/wrb_analysis_wrb_body.mq4",
+		"/home/huxley/.config/sublime-text-3/Packages/SublimeLinter/Default (Linux).sublime-keymap",
+		"/home/huxley/Dropbox/trading/BReTRADER ECN/experts/indicators/Ribelo FVB.mq4",
+		"/home/huxley/Dropbox/trading/MetaTrader Admiral Markets AS/experts/include/riblib.mqh",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/experts/include/hanover --- function header (np).mqh"
+	],
+	"find":
+	{
+		"height": 38.0
+	},
+	"find_in_files":
+	{
+		"height": 106.0,
+		"where_history":
+		[
+			"/home/huxley/Dropbox/code/mql/experts/",
+			"/home/huxley/Dropbox/code/mql/experts/indicators",
+			"/home/huxley/Dropbox/code/c_wrb_analysis",
+			"/home/huxley/Dropbox/code/heisenbug/heisenbug",
+			"/home/huxley/Dropbox/code/c_wrb_analysis",
+			"<open folders>",
+			"/home/huxley/Dropbox/code/heisenbug/heisenbug,/home/huxley/Dropbox/code/deepthroat/deepthroat",
+			"/home/huxley/Dropbox/code/heisenbug/heisenbug",
+			"<open folders>"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"cc",
+			"if (orders_history_total > 0) {\n        int count = _imax(orders_history_total, 5);\n        ArrayResize(account_balance, orders_history_total);\n        for (int cc = 0; cc < orders_history_total; cc++) {\n            if (OrderSelect(cc, SELECT_BY_POS, MODE_HISTORY)) {\n                curr_balance += OrderProfit();\n                account_balance[cc] = curr_balance;\n            }\n        }\n        ArraySetAsSeries(account_balance, true);\n        for (cc = 0; cc < count; cc++) {\n            high_eq = MathMax(high_eq, account_balance[cc]);\n        }\n        for (cc = orders_history_total - count; cc < orders_history_total; cc++) {\n            if (OrderSelect(cc, SELECT_BY_POS, MODE_HISTORY)) {\n                if (OrderType() == 6 || OrderType() == 7) {\n                    count++;\n                    continue;\n                }\n                if (OrderProfit() < 0) {\n                    dd += MathAbs(OrderOpenPrice() - OrderClosePrice()) / MarketInfo(OrderSymbol(), MODE_POINT) / local_multiplier;\n                }\n            }\n        }\n    } else {\n        curr_balance = AccountBalance();\n        high_eq = AccountBalance();\n    }",
+			"cc",
+			"OrdersHistoryTotal()",
+			"OrdersHistoryTotal",
+			"local_multiplier",
+			"dd.5",
+			"[a-z]\\.[a-z]",
+			"OrdersHistoryTotal()",
+			"NormalizeDouble",
+			"dd.5",
+			"lot.digits",
+			"lot_digits",
+			"Digits",
+			"dd.5",
+			"IsTradingAllowed",
+			"DisplayUserFeedback",
+			"DeleteOrphanPriceLines",
+			"CheckMarginLevel",
+			"ObjectMakeLabel",
+			"SasTrading",
+			"IsTradingAllowed",
+			"TrailingStop",
+			"stop",
+			"if (old_take != new_take) {",
+			"old_stop != new_stop",
+			"huxley_functions",
+			"is_new_bar",
+			"gls",
+			"hxl_functions",
+			"eps",
+			"epsilon",
+			".o.o",
+			".o.c",
+			"wrb_vtr",
+			"wrb_fvb",
+			"wrb_apaor",
+			"wrb_ajctr",
+			"wrb_zone",
+			"ohlc",
+			"arr[2] = r.dir;",
+			"= r.dir;",
+			"r.c2.nr = m_pb.x;",
+			"m_",
+			"%d",
+			"!broke_line(sister, s_apaor_line, s_pb.x + 1, s_pb.x, -1) &&",
+			"!broke_line(main, m_apaor_line, m_pb.x + 1, m_pb.x, 1) &&",
+			"s_str_line",
+			"wrb_divergence",
+			"fractal(sister, i",
+			"sister, i",
+			"m_pc",
+			"m_pc.y",
+			"get_line(m_pb, m_pc)",
+			"s_pc",
+			"s_pc.y",
+			"m_pc.x",
+			"s_pc.x",
+			"s_pc.x = i;",
+			"s_pc.x = i - 1;",
+			"m_pc.x = i;",
+			"h(main, i, n, pb_l)) {\n            ",
+			"get_prior_high_fractal(main, i, n, pb_l);",
+			"get_prior_high_fractal(sister, i, n, pb_l);",
+			"get_prior_low_fractal(sister, i, n, pb_l);",
+			"pc_l",
+			"m_pc.x = i;\n            m_pc.y = main[m_pc.x].low;\n            m_pb.x = get_prior_low_fractal(main, i, n, pb_l);",
+			"divergence",
+			"Divergence",
+			"int",
+			"bull_apaor",
+			"apaor",
+			"r.c1.nr = m_pc.x;",
+			"} else if (!brok",
+			"main",
+			"s_pc.y = main[s",
+			"s_pc.y = main[s_pc",
+			"s_pa.y = main[m_pa",
+			"s_pa.y = main[m_pc",
+			"s_pc.y = main[m_pc",
+			"s_pa.x = get_prior_high_fractal(main",
+			"s_pb.x = get_prior_high_fractal(main",
+			"s_pa.x = get_prior_low_fractal(main",
+			"s_pb.x = get_prior_low_fractal",
+			"m_",
+			"pc",
+			"s_pc.y = main[s_pc.x].high;\n                s_pb.x = get_prior_high_fractal(main, i, n, pb_l);\n                s_pb.y = main[s_pb.x].high;\n                s_pc.x = get_prior_high_fractal(main, s_pb.x, n, pc_l);\n                s_pc.y = main[s_pc.x].high;",
+			"s_pc.x = i;\n                s_pc.y = main[s_pc.x].high;\n                s_pb.x = get_prior_high_fractal(main, i, n, pb_l);\n                s_pb.y = main[s_pb.x].high;\n                s_pc.x = get_prior_high_fractal(main, s_pb.x, n, pc_l);\n                s_pc.y = main[s_pc.x].high;",
+			"pc",
+			"s_pc.y = main[s_pc.x].high;\n                s_pb.x = get_prior_high_fractal(main, i, n, pb_l);\n                s_pb.y = main[s_pb.x].high;\n                s_pc.x = get_prior_high_fractal(main, s_pb.x, n, pc_l);\n                s_pc.y = main[s_pc.x].low;",
+			"s_pc.y = main[s_pc.x].high;\n                s_pb.x = get_prior_high_fractal(main, i, n, pb_l);\n                s_pb.y = main[s_pb.x].high;\n                s_pa.x = get_prior_high_fractal(main, s_pb.x, n, pa_l);\n                s_pa.y = main[s_pa.x].high;",
+			"pc",
+			"s_pc.y = main[s_pc.x].low;\n                s_pb.x = get_prior_low_fractal(main, i, n, pb_l);\n                s_pb.y = main[s_pb.x].low;\n                s_pc.x = get_prior_low_fractal(main, s_pb.x, n, pc_l);\n                s_pc.y = main[s_pc.x].low;",
+			"pc",
+			"if (fractal_low(sister, i - 1, n, pb_l)) {",
+			"m_pc.y, m_pb.y, FLT_EPSILON",
+			"m_pc.y, m_pa.y, FLT_EPSILON",
+			"r.c1.nr = m_pc.x;",
+			"m_str_line = get_line(m_pa, m_pc);\n            s_str_line = get_line(s_pa, s_pc);",
+			"m",
+			"x",
+			"s_line",
+			"m_line",
+			"apaor",
+			"high",
+			"low",
+			"_low",
+			"m_",
+			"cabdke",
+			"pb",
+			"pc",
+			"_length",
+			"length",
+			"pa",
+			"pb",
+			"pA",
+			"pB",
+			"s_pB",
+			"m_pA",
+			"m_pB",
+			"s_lP",
+			"s_hP",
+			"m_lP",
+			"bear",
+			"s_lP",
+			"bull",
+			"m_hP",
+			"m_lP"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"hxl_utils",
+			"_new_bar",
+			"wrb_vtr.o",
+			"wrb_fvb.o",
+			"wrb_apaor.o",
+			"wrb_ajctr.o",
+			"wrb_zone.o",
+			"candle",
+			"APAOR",
+			"send_notification",
+			"zone r = {};",
+			"zone z = {};",
+			"signal r = {};",
+			"body r = {.dir = 0, .open = 0, .close = 0, .nr = -1};",
+			"nr",
+			"_vtr",
+			"_fvb",
+			"body_size",
+			"candle_size",
+			"wrb",
+			"is_wrb_hg",
+			"wrb",
+			"is_wrb",
+			"c2",
+			"c1",
+			"wrb_analysis.mqh",
+			"\"Copyright © 2014",
+			"Huxley",
+			"huxley.source@gmail",
+			"go_short",
+			"go_long",
+			"math.fmax",
+			"int[:]",
+			"int32",
+			"int i",
+			"int size",
+			"int",
+			"np.ndarray[np.float64_t] r ",
+			"np.ndarray[np.int64_t] r ",
+			"char[:] reaction",
+			"np.ndarray[np.int8_t] r",
+			"char",
+			"double[:]",
+			"float[:]",
+			"char[:]",
+			"long[:]",
+			"char[:]",
+			"np.ndarray[np.int8_t]",
+			"np.ndarray[np.int64_t]",
+			"np.ndarray[np.float64_t]",
+			"np.ndarray[np.int32_t]",
+			"np.ndarray[np.int64_t]",
+			"np.ndarray[np.ing64_t]",
+			"np.ndarray[np.float64_t]",
+			"strong_expand_left",
+			"strong_expand_right",
+			"expand_left",
+			"expand_right",
+			"week_expand_left",
+			"week_expand_right",
+			"i",
+			"np.ndarray[np.float64_t] r = ",
+			"np.ndarray[np.int64_t] r = ",
+			"np.ndarray[np.int8_t] r = ",
+			"long[:]",
+			"char[:]",
+			"double[:]",
+			"char[:]",
+			"double[:]",
+			"long[:]",
+			"double[:]",
+			"k",
+			"_args",
+			"symbol",
+			"TIMEFRAMES",
+			"CURRENCY_PAIRS",
+			").min()",
+			").max()",
+			"from app.tool import deepthroat as dt",
+			"app.config",
+			"config",
+			"server",
+			"config",
+			"QUANTUM_LOOK_BACK",
+			"QUANTUM_CONTRACTION",
+			"CONTRACTION",
+			"from server.tool import deepthroat as dt",
+			"'",
+			"low[i] + (high[i] - low[i])*.8",
+			"low[i] + (high[i] - low[i])*.2",
+			"low[i] + (high[i] - low[i])*.1",
+			"low[i] + (high[i] - low[i])*.9",
+			" low[i] + (high[i] - low[i])*.1",
+			"(high[i] - low[i])*.3 + low[i]",
+			"(high[i] - low[i])*.1 + low[i]",
+			"(high[i] - low[i])*.8 + low[i]",
+			"(high[i] - low[i])*.2 + low[i]",
+			"(high[i] - low[i])*.9 + low[i]",
+			"):",
+			"bar_mid_point[i]",
+			"wrb[i]",
+			"[i-2]",
+			"[i-1]",
+			"volume_average[i]",
+			"volume[i]",
+			"volume",
+			"bar_size[i]",
+			"",
+			"bar_size[i]",
+			"",
+			"bar_size[i]",
+			"volume[i]",
+			"[i+1]",
+			"[i+2]",
+			"[i+3]",
+			"[i-3]",
+			"[i-2]",
+			"[i-1]",
+			"open[i]",
+			"close[i]",
+			"low[i]",
+			"high[i]",
+			"close[i] < close[i-1]",
+			"close[i] == high[i]",
+			"low[i] <= low[i+1]",
+			"close[i] < close[i+1]",
+			"high[i] <= high[i-1]",
+			"low[i] < low[i-1]"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "/home/huxley/Dropbox/code/mql/experts/j.a.r.v.i.s.mq4",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 57391,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								9954,
+								9954
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/MetaQuotes (MQL4) Language Package/Syntaxes/MQL4.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 3593.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/home/huxley/Dropbox/code/mql/experts/include/hanover --- extensible functions (np).mqh",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 117034,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								93603,
+								93612
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 35168.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/home/huxley/Dropbox/trading/MetaTrader Admiral Markets AS/experts/indicators/Ribelo DDSM.mq4",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 9480,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								6649,
+								6649
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/MetaQuotes (MQL4) Language Package/Syntaxes/MQL4.tmLanguage",
+							"tab_size": 3,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 839.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 3,
+					"file": "/home/huxley/Dropbox/code/Dashboard/client/app/lib/mm.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1839,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "/home/huxley/Dropbox/code/mql/src/candle.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7400,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								106,
+								106
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C Improved/C Improved.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "/home/huxley/Dropbox/code/mql/src/deepthroat.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 926,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								169,
+								169
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C Improved/C Improved.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 24.0
+	},
+	"input":
+	{
+		"height": 40.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			0.505427408412,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.clang":
+	{
+		"height": 89.0
+	},
+	"output.exec":
+	{
+		"height": 108.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.mql4log":
+	{
+		"height": 190.0
+	},
+	"project": "mql.sublime-project",
+	"replace":
+	{
+		"height": 72.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"_wrb_fvb",
+				"c_wrb_analysis/src/wrb_fvb.c"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+			[
+				"",
+				"~/Dropbox/code/Dashboard/server/app/server.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 206.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

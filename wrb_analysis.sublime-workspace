@@ -1,0 +1,1223 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"sis",
+				"ssize_t	typedef"
+			],
+			[
+				"get_prio",
+				"get_prior_low_fractal(ohlc *candle, size_t i, size_t n, size_t l)	int"
+			],
+			[
+				"fractal",
+				"fractal_low(ohlc *candle, size_t i, size_t n, size_t l)	int"
+			],
+			[
+				"frac",
+				"fractal(ohlc *candle, size_t i, size_t n, size_t l)	int"
+			],
+			[
+				"point",
+				"point_side(line l, point p)	double"
+			],
+			[
+				"highe",
+				"highest_point(ohlc *candle, size_t start, size_t stop)	point"
+			],
+			[
+				"gls_pow",
+				"gsl_pow_3(const double x)	double"
+			],
+			[
+				"bull",
+				"bull_apaor"
+			],
+			[
+				"line",
+				"line_color"
+			],
+			[
+				"leng",
+				"fractal_length"
+			],
+			[
+				"s_",
+				"s_pA	double"
+			],
+			[
+				"GSL",
+				"GSL_MIN	macro"
+			],
+			[
+				"FTL",
+				"FLT_EPSILON	macro"
+			],
+			[
+				"FLT",
+				"FLT_EPSILON	macro"
+			],
+			[
+				"FL",
+				"FLT_EPSILON	macro"
+			],
+			[
+				"gsl_co",
+				"gsl_fcmp(const double x1, const double x2, const double epsilon)	int"
+			],
+			[
+				"open",
+				"open_line_name"
+			],
+			[
+				"Object",
+				"ObjectDelete	bool"
+			],
+			[
+				"Send",
+				"SendNotification	bool"
+			],
+			[
+				"send",
+				"send_notyfication"
+			],
+			[
+				"body",
+				"body_size"
+			],
+			[
+				"any",
+				"any_wrb_hg_bull(ohlc *candle, int start, int stop, int n)	int"
+			],
+			[
+				"wrb",
+				"wrb(ohlc *candle, int i)	body"
+			],
+			[
+				"lowest",
+				"lowest_low(ohlc *candle, size_t start, size_t stop)	double"
+			],
+			[
+				"lowesrt",
+				"lowest_low(ohlc *candle, size_t start, size_t stop)	double"
+			],
+			[
+				"bigg",
+				"biggest_body(ohlc *candle, size_t start, size_t stop)	double"
+			],
+			[
+				"shadow",
+				"shadow_bottom(ohlc *candle, int i)	double"
+			],
+			[
+				"sh",
+				"shadow_bottom(ohlc *candle, int i)	double"
+			],
+			[
+				"shado",
+				"shadow_bottom(ohlc *candle, int i)	double"
+			],
+			[
+				"zone",
+				"zone_size(zone *z)	int"
+			],
+			[
+				"hamer",
+				"hammer_line_bear(ohlc *candle, size_t i)	int"
+			],
+			[
+				"high",
+				"highest_high(ohlc *candle, size_t start, size_t stop)	double"
+			],
+			[
+				"hamme",
+				"hammer_line_bear(ohlc *candle, size_t i)	int"
+			],
+			[
+				"big",
+				"big_body_bull(ohlc *candle, size_t i)	int"
+			],
+			[
+				"lowes",
+				"lowest_low(ohlc *candle, size_t start, size_t stop)	double"
+			],
+			[
+				"bod",
+				"body_mid_point(ohlc *candle, int i)	double"
+			],
+			[
+				"deep",
+				"deep_shadow_bottom(ohlc *candle, size_t i, size_t n)	int"
+			],
+			[
+				"iBars",
+				"iBars	int"
+			],
+			[
+				"end",
+				"end_bar"
+			],
+			[
+				"contra",
+				"contraction_body_size_break(ohlc *candle, size_t c1, size_t c2)	int"
+			],
+			[
+				"wrn",
+				"wrb_hg(ohlc *candle, int i)	int"
+			],
+			[
+				"hig",
+				"highest_low(ohlc *candle, size_t start, size_t stop)	double"
+			],
+			[
+				"bigge",
+				"biggest_shadow_bottom(ohlc *candle, size_t start, size_t stop)	double"
+			],
+			[
+				"sha",
+				"shadow_upper(ohlc *candle, int i)	double"
+			],
+			[
+				"lowe",
+				"lowest_high(ohlc *candle, size_t start, size_t stop)	double"
+			],
+			[
+				"sist",
+				"sister_bars	size_t"
+			],
+			[
+				"main",
+				"main_bars	size_t"
+			],
+			[
+				"lowers",
+				"lowest_close(ohlc *candle, size_t start, size_t stop)	double"
+			],
+			[
+				"lowesr",
+				"lowest_close(ohlc *candle, size_t start, size_t stop)	double"
+			],
+			[
+				"size",
+				"size_t c1	ohlc *"
+			],
+			[
+				"wrb_",
+				"wrb_zone(ohlc *candle, size_t i, size_t n, size_t contraction)	zone"
+			],
+			[
+				"contrac",
+				"contraction_body_open"
+			],
+			[
+				"swing",
+				"swing_point_1"
+			],
+			[
+				"low",
+				"lowest_low(ohlc *candle, size_t start, size_t stop)	double"
+			],
+			[
+				"cont",
+				"contraction_body_size_break(ohlc *candle, size_t v1, size_t v2)	int"
+			],
+			[
+				"con",
+				"contraction_share"
+			],
+			[
+				"swin",
+				"swing_point"
+			],
+			[
+				"len",
+				"lenght_weak"
+			],
+			[
+				"s",
+				"size_t"
+			],
+			[
+				"fra",
+				"fractal"
+			],
+			[
+				"isWr",
+				"isWrbHG"
+			],
+			[
+				"C",
+				"CFLAGS"
+			],
+			[
+				"total",
+				"total_size"
+			],
+			[
+				"tota",
+				"total_size"
+			],
+			[
+				"totla",
+				"total_price"
+			],
+			[
+				"Draw",
+				"DrawHiddenStopLoss"
+			],
+			[
+				"hid",
+				"hidden_pips"
+			],
+			[
+				"old",
+				"old_take"
+			],
+			[
+				"OrderSe",
+				"OrderSelect	bool"
+			],
+			[
+				"tp",
+				"tp_line_name"
+			],
+			[
+				"from",
+				"from_date	statement"
+			],
+			[
+				"look",
+				"look_back"
+			],
+			[
+				"prior",
+				"prior_wrb"
+			],
+			[
+				"pr",
+				"precision"
+			],
+			[
+				"bounce",
+				"bounce_bear"
+			],
+			[
+				"boun",
+				"bounce_bull"
+			],
+			[
+				"clo",
+				"close_c1"
+			],
+			[
+				"clos",
+				"close_zone"
+			],
+			[
+				"close",
+				"close_c1"
+			],
+			[
+				"op",
+				"open_zone"
+			],
+			[
+				"body_mid",
+				"body_mid_point"
+			],
+			[
+				"last",
+				"last_high"
+			],
+			[
+				"las",
+				"last_high"
+			],
+			[
+				"rae",
+				"reaction_high"
+			],
+			[
+				"shad",
+				"shadow_upper"
+			],
+			[
+				"st",
+				"stop"
+			],
+			[
+				"bo",
+				"body_mid_point"
+			],
+			[
+				"fill",
+				"filled_by"
+			],
+			[
+				"prio",
+				"prior_wrb"
+			],
+			[
+				"pa",
+				"path	import"
+			],
+			[
+				"ex",
+				"extensions	statement"
+			],
+			[
+				"apply",
+				"apply_async	function"
+			],
+			[
+				"re",
+				"result	forflow"
+			],
+			[
+				"app",
+				"append"
+			],
+			[
+				"map",
+				"map_async	function"
+			],
+			[
+				"time",
+				"timeframe	param"
+			],
+			[
+				"sym",
+				"SYMBOLS	statement"
+			],
+			[
+				"quotes",
+				"quotes_save"
+			],
+			[
+				"HDF",
+				"HDF_STORE"
+			],
+			[
+				"cun",
+				"concurrent"
+			],
+			[
+				"int",
+				"int8"
+			],
+			[
+				"in",
+				"int8"
+			],
+			[
+				"exe",
+				"executor	statement"
+			],
+			[
+				"fo",
+				"forever"
+			],
+			[
+				"INDICA",
+				"indicator_list"
+			],
+			[
+				"fir",
+				"first_run"
+			],
+			[
+				"cu",
+				"currencies"
+			],
+			[
+				"th",
+				"threading  (module)"
+			],
+			[
+				"get",
+				"get_info"
+			],
+			[
+				"json",
+				"jsonify	statement"
+			],
+			[
+				"j",
+				"json"
+			],
+			[
+				"c",
+				"config	(attribute, instance)"
+			],
+			[
+				"va",
+				"validate"
+			],
+			[
+				"su",
+				"summary_render"
+			],
+			[
+				"to",
+				"token"
+			],
+			[
+				"Bad",
+				"BadSignature	(global, class)"
+			],
+			[
+				"B",
+				"BadSignature	(global, class)"
+			],
+			[
+				"clas",
+				"classmethod	(builtin, class)"
+			],
+			[
+				"loads",
+				"loads(s, max_age, return_timestamp, salt)	(attribute, function)"
+			],
+			[
+				"but",
+				"btn-group	BootstrapClass"
+			],
+			[
+				"login",
+				"login_required	(imported, instance)"
+			],
+			[
+				"lo",
+				"login_manager	(imported, instance)"
+			],
+			[
+				"login_",
+				"login_view"
+			],
+			[
+				"bl",
+				"Blueprint	(imported, class)"
+			],
+			[
+				"URL",
+				"URLSafeTimedSerializer	(global, class)"
+			],
+			[
+				"cla",
+				"classmethod	(builtin, class)"
+			],
+			[
+				"pass",
+				"password	(local, instance)"
+			],
+			[
+				"vali",
+				"ValidationError	(imported, instance)"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 309.0,
+		"selected_items":
+		[
+			[
+				"make",
+				"SnippetMaker: Make Snippet"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"clang",
+				"Preferences: SublimeClang Settings – Default"
+			],
+			[
+				"resur",
+				"PackageResourceViewer: Open Resource"
+			],
+			[
+				"edit",
+				"SnippetMaker: Edit Snippet"
+			],
+			[
+				"Snippet: ",
+				"Snippet: candle_c"
+			],
+			[
+				"makesi",
+				"SnippetMaker: Make Snippet"
+			],
+			[
+				"list",
+				"Package Control: List Packages"
+			],
+			[
+				"reid",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"compi",
+				"Compile mql4"
+			],
+			[
+				"astyle",
+				"SublimeAStyleFormatter: Format Current File"
+			],
+			[
+				"install ",
+				"Package Control: Install Package"
+			],
+			[
+				"reide",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"reident",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"linter",
+				"SublimeLint: Show All Errors"
+			],
+			[
+				"mql",
+				"Compile mql4"
+			],
+			[
+				"comp",
+				"Compile mql4"
+			],
+			[
+				"reiden",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"coff",
+				"Coffee: Compile File"
+			],
+			[
+				"coffe",
+				"Coffee: Toggle Watch Mode"
+			],
+			[
+				"remov",
+				"Package Control: Remove Package"
+			],
+			[
+				"Coffee",
+				"FindKeyConflicts: All Key Maps to Buffer"
+			],
+			[
+				"control",
+				"Package Control: List Packages"
+			],
+			[
+				"ind",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"rei",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"indent",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"auto",
+				"User: Python PEP8 Autoformat"
+			],
+			[
+				"githu",
+				"Github: Open File"
+			],
+			[
+				"json",
+				"Pretty JSON: Reformat (Pretty Print) JSON"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"remo",
+				"Package Control: Remove Package"
+			]
+		],
+		"width": 568.0
+	},
+	"console":
+	{
+		"height": 347.0,
+		"history":
+		[
+			"os.getcwd()",
+			"import os",
+			"os",
+			"ls",
+			"import builtins",
+			"ls"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_confirmation.mq4",
+		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_fractal_break.mq4",
+		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_zone.mq4",
+		"/home/huxley/Dropbox/code/mql/experts/indicators/gsl_test.mq4",
+		"/home/huxley/Dropbox/code/mql/console.log",
+		"/home/huxley/Dropbox/code/mql/experts/include/LibGMT.mqh",
+		"/home/huxley/Dropbox/code/mql/wrb_analysis.sublime-project",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/experts/include/gsl.mqh",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/makefile",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/src/wrb_apaor.h",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/src/wrb_apaor.c",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/src/wrb_export.c",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/experts/indicators/wrb_analysis_zone.mq4",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/src/wrb_toolbox.h",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/experts/indicators/wrb_analysis_apaor.mq4",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/experts/include/wrb_analysis.mqh",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/wrb_analysis.def",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/experts/indicators/wrb_analysis_fractals.mq4",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/experts/indicators/wrb_analysis_fvb.mq4",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/experts/indicators/wrb_analysis_vtr.mq4",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/experts/indicators/wrb_analysis_ajctr.mq4",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/experts/indicators/wrb_analysis_body.mq4",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/experts/indicators/wrb_analysis_confirmation.mq4",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/experts/indicators/wrb_analysis_dcm.mq4",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/experts/indicators/wrb_analysis_fractal_break.mq4",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/experts/indicators/wrb_analysis_divergence.mq4",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/src/wrb_divergence.c",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/src/candle.h",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/src/candle.c",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/src/wrb_divergence.h",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/src/wrb_struct.h",
+		"/home/huxley/.config/sublime-text-3/Packages/SublimeClang/SublimeClang.sublime-settings",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/conole.log",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/console.log",
+		"/home/huxley/.config/sublime-text-3/Packages/User/c_candle.sublime-snippet",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/src/wrb_fvb.c",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/src/wrb_ajctr.c",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/src/wrb_zone.c",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/src/wrb_fvb.h",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/src/wrb_vtr.h",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/src/wrb_vtr.c",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/src/wrb_ajctr.h",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/src/wrb_zone.h",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/src/wrb_analysis.c",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/src/wrb_confirmation.h",
+		"/home/huxley/.config/sublime-text-3/Packages/SublimeAStyleFormatter/SublimeAStyleFormatter.sublime-settings",
+		"/home/huxley/.config/sublime-text-3/Packages/User/test.sublime-macro",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/src/wrb_analysis.h",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/src/deepthroat.h",
+		"/home/huxley/.config/sublime-text-3/Packages/SublimeAStyleFormatter/Default (Linux).sublime-keymap",
+		"/usr/x86_64-w64-mingw32/include/gsl/gsl_math.h",
+		"/tmp/candle-4.h",
+		"/tmp/candle-5.h",
+		"/tmp/candle-6.h",
+		"/tmp/candle-7.h",
+		"/tmp/candle-3.h",
+		"/tmp/candle-2.h",
+		"/tmp/candle-1.h",
+		"/tmp/candle.h",
+		"/home/huxley/.cache/.fr-aJnWua/mingw-w64-gsl/PKGBUILD",
+		"/usr/x86_64-w64-mingw32/include/gsl/gsl_sum.h",
+		"/usr/x86_64-w64-mingw32/include/gsl/gsl_inline.h",
+		"/home/huxley/.config/sublime-text-3/Packages/SublimeClang/Default.sublime-keymap",
+		"/home/huxley/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
+		"/home/huxley/.config/sublime-text-3/Packages/Default/Preferences.sublime-settings",
+		"/home/huxley/Dropbox/trading/MetaTrader Admiral Markets AS/experts/indicators/Ribelo_SupDem.mq4",
+		"/home/huxley/Dropbox/trading/MetaTrader Admiral Markets AS/experts/samples/DLLSample/ExpertSample.cpp",
+		"/home/huxley/Dropbox/trading/MetaTrader Admiral Markets AS/experts/indicators/Ribelo_II_SupDem.mq4",
+		"/home/huxley/Dropbox/trading/MetaTrader Admiral Markets AS/experts/indicators/Ribelo FVB.mq4",
+		"/home/huxley/.config/sublime-text-3/Packages/C++/C++.sublime-settings",
+		"/home/huxley/.zsh_history",
+		"/home/huxley/.zdirs",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/console.txt",
+		"/home/huxley/Dropbox/code/heisenbug/heisenbug/wrb/zone.pyx",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/src/wrb_toolbox.c",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/src_back2/wrb_export.c",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/src_back2/candle.c",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/src_back2/candle.h",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/src_back2/wrb_confirmation.h",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/src_back2/wrb_fvb.h",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/src_back2/wrb_toolbox.h",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/src_back2/wrb_zone.h",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/src/wrb_confirmation.c",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/src_back2/wrb_analysis.c",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/src_back2/wrb_analysis.h",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/src_back2/wrb_vtr.h",
+		"/home/huxley/Dropbox/code/heisenbug/heisenbug/wrb/ajctr.pyx",
+		"/home/huxley/Dropbox/code/heisenbug/heisenbug/__init__.py",
+		"/home/huxley/Dropbox/code/heisenbug/heisenbug/wrb/analysis.pyx",
+		"/home/huxley/Dropbox/code/heisenbug/heisenbug/wrb/confirmation.pyx",
+		"/home/huxley/Dropbox/code/heisenbug/heisenbug/wrb/toolbox.pxd",
+		"/home/huxley/Dropbox/code/heisenbug/heisenbug/wrb/analysis.c",
+		"/home/huxley/Dropbox/code/heisenbug/heisenbug/wrb/analysis.html",
+		"/home/huxley/Dropbox/code/heisenbug/heisenbug/wrb/confirmation.c",
+		"/home/huxley/Dropbox/code/heisenbug/heisenbug/wrb/confirmation.html",
+		"/home/huxley/Dropbox/code/heisenbug/heisenbug/wrb/zone.c",
+		"/home/huxley/Dropbox/code/heisenbug/heisenbug/wrb/zone.html",
+		"/home/huxley/Dropbox/code/heisenbug/setup.py",
+		"/home/huxley/Dropbox/code/heisenbug/build/lib.linux-x86_64-3.3/heisenbug/__init__.py",
+		"/home/huxley/Dropbox/code/heisenbug/build/lib.linux-x86_64-3.3/heisenbug/wrb/toolbox.pxd",
+		"/home/huxley/Dropbox/code/heisenbug/heisenbug/wrb/ajctr.c",
+		"/home/huxley/Dropbox/code/heisenbug/heisenbug/wrb/ajctr.html",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/experts/indicators/wrb_analysis_test.mq4",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/experts/indicators/wrb_analysis_wrb_zone.mq4",
+		"/home/huxley/Dropbox/trading/MetaTrader Admiral Markets AS/experts/scripts/Get WRB.mq4",
+		"/home/huxley/Dropbox/code/heisenbug/heisenbug/pa/toolbox.pxd",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/experts/indicators/wrb_analysis_wrb_body.mq4",
+		"/home/huxley/.config/sublime-text-3/Packages/SublimeLinter/Default (Linux).sublime-keymap",
+		"/home/huxley/Dropbox/trading/BReTRADER ECN/experts/indicators/Ribelo FVB.mq4",
+		"/home/huxley/Dropbox/trading/MetaTrader Admiral Markets AS/experts/include/riblib.mqh",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/experts/include/hanover --- function header (np).mqh",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/experts/include/huxley_functions.mqh",
+		"/home/huxley/Dropbox/code/mql/j.a.r.v.i.s.mq4",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/experts/include/hanover --- extensible functions (np).mqh",
+		"/home/huxley/Dropbox/trading/BReTRADER ECN/experts/samples/DLLSample/ExpertSample.cpp",
+		"/home/huxley/.config/sublime-text-3/Packages/User/candle_c.sublime-snippet",
+		"/home/huxley/.config/sublime-text-3/Packages/User/candle_open.sublime-snippet",
+		"/home/huxley/Dropbox/trading/BReTRADER ECN/console.txt",
+		"/home/huxley/Dropbox/trading/BReTRADER ECN/experts/samples/ExportFunctions.mq4",
+		"/home/huxley/Dropbox/trading/BReTRADER ECN/experts/samples/include/sampledll.mqh",
+		"/home/huxley/.config/sublime-text-3/Packages/User/SublimeLinter.sublime-settings",
+		"/home/huxley/.config/sublime-text-3/Packages/SublimeLinter/SublimeLinter.sublime-settings",
+		"/etc/yaourtrc",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/experts/indicators/wrb_analysis_swing_point_1.mq4",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/experts/include/wrb_total.mqh",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/experts/indicators/Ribelo Fractals.mq4",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/experts/indicators/Ribelo Fractal Break.mq4",
+		"/home/huxley/Dropbox/code/c_wrb_analysis/experts/indicators/Ribelo DCM.mq4"
+	],
+	"find":
+	{
+		"height": 38.0
+	},
+	"find_in_files":
+	{
+		"height": 106.0,
+		"where_history":
+		[
+			"/home/huxley/Dropbox/code/c_wrb_analysis",
+			"/home/huxley/Dropbox/code/heisenbug/heisenbug",
+			"/home/huxley/Dropbox/code/c_wrb_analysis",
+			"<open folders>",
+			"/home/huxley/Dropbox/code/heisenbug/heisenbug,/home/huxley/Dropbox/code/deepthroat/deepthroat",
+			"/home/huxley/Dropbox/code/heisenbug/heisenbug",
+			"<open folders>"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			"arr[2] = r.dir;",
+			"= r.dir;",
+			"r.c2.nr = m_pb.x;",
+			"m_",
+			"%d",
+			"!broke_line(sister, s_apaor_line, s_pb.x + 1, s_pb.x, -1) &&",
+			"!broke_line(main, m_apaor_line, m_pb.x + 1, m_pb.x, 1) &&",
+			"s_str_line",
+			"wrb_divergence",
+			"fractal(sister, i",
+			"sister, i",
+			"m_pc",
+			"m_pc.y",
+			"get_line(m_pb, m_pc)",
+			"s_pc",
+			"s_pc.y",
+			"m_pc.x",
+			"s_pc.x",
+			"s_pc.x = i;",
+			"s_pc.x = i - 1;",
+			"m_pc.x = i;",
+			"h(main, i, n, pb_l)) {\n            ",
+			"get_prior_high_fractal(main, i, n, pb_l);",
+			"get_prior_high_fractal(sister, i, n, pb_l);",
+			"get_prior_low_fractal(sister, i, n, pb_l);",
+			"pc_l",
+			"m_pc.x = i;\n            m_pc.y = main[m_pc.x].low;\n            m_pb.x = get_prior_low_fractal(main, i, n, pb_l);",
+			"divergence",
+			"Divergence",
+			"int",
+			"bull_apaor",
+			"apaor",
+			"r.c1.nr = m_pc.x;",
+			"} else if (!brok",
+			"main",
+			"s_pc.y = main[s",
+			"s_pc.y = main[s_pc",
+			"s_pa.y = main[m_pa",
+			"s_pa.y = main[m_pc",
+			"s_pc.y = main[m_pc",
+			"s_pa.x = get_prior_high_fractal(main",
+			"s_pb.x = get_prior_high_fractal(main",
+			"s_pa.x = get_prior_low_fractal(main",
+			"s_pb.x = get_prior_low_fractal",
+			"m_",
+			"pc",
+			"s_pc.y = main[s_pc.x].high;\n                s_pb.x = get_prior_high_fractal(main, i, n, pb_l);\n                s_pb.y = main[s_pb.x].high;\n                s_pc.x = get_prior_high_fractal(main, s_pb.x, n, pc_l);\n                s_pc.y = main[s_pc.x].high;",
+			"s_pc.x = i;\n                s_pc.y = main[s_pc.x].high;\n                s_pb.x = get_prior_high_fractal(main, i, n, pb_l);\n                s_pb.y = main[s_pb.x].high;\n                s_pc.x = get_prior_high_fractal(main, s_pb.x, n, pc_l);\n                s_pc.y = main[s_pc.x].high;",
+			"pc",
+			"s_pc.y = main[s_pc.x].high;\n                s_pb.x = get_prior_high_fractal(main, i, n, pb_l);\n                s_pb.y = main[s_pb.x].high;\n                s_pc.x = get_prior_high_fractal(main, s_pb.x, n, pc_l);\n                s_pc.y = main[s_pc.x].low;",
+			"s_pc.y = main[s_pc.x].high;\n                s_pb.x = get_prior_high_fractal(main, i, n, pb_l);\n                s_pb.y = main[s_pb.x].high;\n                s_pa.x = get_prior_high_fractal(main, s_pb.x, n, pa_l);\n                s_pa.y = main[s_pa.x].high;",
+			"pc",
+			"s_pc.y = main[s_pc.x].low;\n                s_pb.x = get_prior_low_fractal(main, i, n, pb_l);\n                s_pb.y = main[s_pb.x].low;\n                s_pc.x = get_prior_low_fractal(main, s_pb.x, n, pc_l);\n                s_pc.y = main[s_pc.x].low;",
+			"pc",
+			"if (fractal_low(sister, i - 1, n, pb_l)) {",
+			"m_pc.y, m_pb.y, FLT_EPSILON",
+			"m_pc.y, m_pa.y, FLT_EPSILON",
+			"r.c1.nr = m_pc.x;",
+			"m_str_line = get_line(m_pa, m_pc);\n            s_str_line = get_line(s_pa, s_pc);",
+			"m",
+			"x",
+			"s_line",
+			"m_line",
+			"apaor",
+			"high",
+			"low",
+			"_low",
+			"m_",
+			"cabdke",
+			"pb",
+			"pc",
+			"_length",
+			"length",
+			"pa",
+			"pb",
+			"pA",
+			"pB",
+			"s_pB",
+			"m_pA",
+			"m_pB",
+			"s_lP",
+			"s_hP",
+			"m_lP",
+			"bear",
+			"s_lP",
+			"bull",
+			"m_hP",
+			"m_lP",
+			"lowest_point(main, i - j, i);",
+			"highest_point(sister, i - j, i);",
+			"m_hP = highest_point(main, i - j, i);",
+			"m_hP",
+			"which_side",
+			"bear",
+			"m_",
+			"m_lP",
+			"s_line",
+			"m_line",
+			"%d",
+			"lowest",
+			"if ((gsl_fcmp",
+			"high",
+			"wrb_apaor",
+			"inline double",
+			"double",
+			"m_pB.y",
+			"m_pB.y =",
+			"m_pB = main",
+			"m_pA = main",
+			"gsl_fcmp(s_pB, s_pA",
+			"gsl_fcmp(m_pB",
+			"s_pA =",
+			"s_pB =",
+			"point_b",
+			"point_a",
+			"p1.",
+			"x()",
+			"y()",
+			"p2",
+			"l)",
+			"bool",
+			"i + 1",
+			"r.dir = ",
+			"high",
+			"low",
+			"fractal_low",
+			"low",
+			"fractal_low"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"APAOR",
+			"send_notification",
+			"zone r = {};",
+			"zone z = {};",
+			"signal r = {};",
+			"body r = {.dir = 0, .open = 0, .close = 0, .nr = -1};",
+			"nr",
+			"_vtr",
+			"_fvb",
+			"body_size",
+			"candle_size",
+			"wrb",
+			"is_wrb_hg",
+			"wrb",
+			"is_wrb",
+			"c2",
+			"c1",
+			"wrb_analysis.mqh",
+			"\"Copyright © 2014",
+			"Huxley",
+			"huxley.source@gmail",
+			"go_short",
+			"go_long",
+			"math.fmax",
+			"int[:]",
+			"int32",
+			"int i",
+			"int size",
+			"int",
+			"np.ndarray[np.float64_t] r ",
+			"np.ndarray[np.int64_t] r ",
+			"char[:] reaction",
+			"np.ndarray[np.int8_t] r",
+			"char",
+			"double[:]",
+			"float[:]",
+			"char[:]",
+			"long[:]",
+			"char[:]",
+			"np.ndarray[np.int8_t]",
+			"np.ndarray[np.int64_t]",
+			"np.ndarray[np.float64_t]",
+			"np.ndarray[np.int32_t]",
+			"np.ndarray[np.int64_t]",
+			"np.ndarray[np.ing64_t]",
+			"np.ndarray[np.float64_t]",
+			"strong_expand_left",
+			"strong_expand_right",
+			"expand_left",
+			"expand_right",
+			"week_expand_left",
+			"week_expand_right",
+			"i",
+			"np.ndarray[np.float64_t] r = ",
+			"np.ndarray[np.int64_t] r = ",
+			"np.ndarray[np.int8_t] r = ",
+			"long[:]",
+			"char[:]",
+			"double[:]",
+			"char[:]",
+			"double[:]",
+			"long[:]",
+			"double[:]",
+			"k",
+			"_args",
+			"symbol",
+			"TIMEFRAMES",
+			"CURRENCY_PAIRS",
+			").min()",
+			").max()",
+			"from app.tool import deepthroat as dt",
+			"app.config",
+			"config",
+			"server",
+			"config",
+			"QUANTUM_LOOK_BACK",
+			"QUANTUM_CONTRACTION",
+			"CONTRACTION",
+			"from server.tool import deepthroat as dt",
+			"'",
+			"low[i] + (high[i] - low[i])*.8",
+			"low[i] + (high[i] - low[i])*.2",
+			"low[i] + (high[i] - low[i])*.1",
+			"low[i] + (high[i] - low[i])*.9",
+			" low[i] + (high[i] - low[i])*.1",
+			"(high[i] - low[i])*.3 + low[i]",
+			"(high[i] - low[i])*.1 + low[i]",
+			"(high[i] - low[i])*.8 + low[i]",
+			"(high[i] - low[i])*.2 + low[i]",
+			"(high[i] - low[i])*.9 + low[i]",
+			"):",
+			"bar_mid_point[i]",
+			"wrb[i]",
+			"[i-2]",
+			"[i-1]",
+			"volume_average[i]",
+			"volume[i]",
+			"volume",
+			"bar_size[i]",
+			"",
+			"bar_size[i]",
+			"",
+			"bar_size[i]",
+			"volume[i]",
+			"[i+1]",
+			"[i+2]",
+			"[i+3]",
+			"[i-3]",
+			"[i-2]",
+			"[i-1]",
+			"open[i]",
+			"close[i]",
+			"low[i]",
+			"high[i]",
+			"close[i] < close[i-1]",
+			"close[i] == high[i]",
+			"low[i] <= low[i+1]",
+			"close[i] < close[i+1]",
+			"high[i] <= high[i-1]",
+			"low[i] < low[i-1]",
+			"bar_mid_point",
+			"close[i] == low[i]",
+			"bar_size",
+			"body_mid_point[i]",
+			"[i-1]",
+			"body_size[i]",
+			"[i+1]",
+			"[i+2]"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		},
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 24.0
+	},
+	"input":
+	{
+		"height": 40.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			0.649253731343,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.clang":
+	{
+		"height": 92.0
+	},
+	"output.exec":
+	{
+		"height": 108.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.mql4log":
+	{
+		"height": 190.0
+	},
+	"project": "wrb_analysis.sublime-project",
+	"replace":
+	{
+		"height": 72.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"_wrb_fvb",
+				"c_wrb_analysis/src/wrb_fvb.c"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+			[
+				"",
+				"~/Dropbox/code/Dashboard/server/app/server.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 206.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

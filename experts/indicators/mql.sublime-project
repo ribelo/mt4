@@ -1,0 +1,13 @@
+{
+	"folders":
+	[
+		{
+			"follow_symlinks": true,
+			"path": "/home/huxley/Dropbox/code/mql"
+		},
+		{
+			"follow_symlinks": true,
+			"path": "/home/huxley/Dropbox/trading/BReTRADER ECN/experts/libraries"
+		}
+	]
+}

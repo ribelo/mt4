@@ -1,0 +1,10 @@
+LIBRARY gsl_math
+
+EXPORTS
+	_abs
+	_fmax
+	_fmin
+	_imax
+	_imin
+	_fcmp
+	_roundp
