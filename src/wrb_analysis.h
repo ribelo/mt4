@@ -191,7 +191,7 @@ static inline int fractal_break(ohlc *candle, size_t i,
 
 
 static inline int dcm(ohlc *candle, size_t i, size_t n, size_t look_back) {
-    int j, end_loop = fmin(fmin(i, n - i), look_back);
+    size_t j, end_loop = fmin(fmin(i, n - i), look_back);
     if (wrb_hg(candle, i).dir == 1) {
         for (j = 1; j < end_loop; j++) {
             if (wrb_hg(candle, i - j).dir == -1 &&

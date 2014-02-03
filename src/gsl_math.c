@@ -1,7 +1,4 @@
 #define WIN32_LEAN_AND_MEAN  // Exclude rarely-used stuff from Windows headers
-#include <gsl/gsl_math.h>
-#include <math.h>
-// ---
 #include <windows.h>
 #include <gsl/gsl_math.h>
 //---
@@ -48,3 +45,4 @@ WRBFUNC double __stdcall _imin(double a, double b) {
 WRBFUNC double __stdcall _fcmp(double x1, double x2) {
     return gsl_fcmp(x1, x2, FLT_EPSILON);
 }
+

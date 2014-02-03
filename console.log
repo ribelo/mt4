@@ -65,6 +65,11 @@ Exp file "Z:\home\huxley\Dropbox\trading\BReTRADER ECN\experts\indicators\wrb_an
 MetaQuotes Language 4 compiler build 509 (24 Jun 2013)
 Copyright 2001-2013, MetaQuotes Software Corp.
 
+2;75;Z:\home\huxley\Dropbox\trading\BReTRADER ECN\experts\indicators\wrb_analysis_trailing.mq4;62:23;'body_wrb_close' - variable not defined
+2;75;Z:\home\huxley\Dropbox\trading\BReTRADER ECN\experts\indicators\wrb_analysis_trailing.mq4;65:23;'body_wrb_open' - variable not defined
+MetaQuotes Language 4 compiler build 509 (24 Jun 2013)
+Copyright 2001-2013, MetaQuotes Software Corp.
+
 1;31;Z:\home\huxley\Dropbox\trading\BReTRADER ECN\experts\indicators\wrb_analysis_apaor.mq4;10:1;'hxl_utils.mqh' - file already processed
 1;39;;;Function "make_text" is not referenced and will be removed from exp-file
 1;39;;;Function "make_label" is not referenced and will be removed from exp-file
@@ -82,3 +87,82 @@ MetaQuotes Language 4 compiler build 509 (24 Jun 2013)
 Copyright 2001-2013, MetaQuotes Software Corp.
 
 Library exp file "Z:\home\huxley\Dropbox\trading\BReTRADER ECN\experts\libraries\LibOrderReliable4.ex4" produced - 0 error(s), 0 warning(s)
+MetaQuotes Language 4 compiler build 509 (24 Jun 2013)
+Copyright 2001-2013, MetaQuotes Software Corp.
+
+2;75;Z:\home\huxley\Dropbox\trading\BReTRADER ECN\experts\indicators\wrb_analysis_trailing.mq4;62:23;'body_wrb_close' - variable not defined
+2;75;Z:\home\huxley\Dropbox\trading\BReTRADER ECN\experts\indicators\wrb_analysis_trailing.mq4;65:23;'body_wrb_open' - variable not defined
+MetaQuotes Language 4 compiler build 509 (24 Jun 2013)
+Copyright 2001-2013, MetaQuotes Software Corp.
+
+1;39;;;Function "make_text" is not referenced and will be removed from exp-file
+1;39;;;Function "make_label" is not referenced and will be removed from exp-file
+Exp file "Z:\home\huxley\Dropbox\trading\BReTRADER ECN\experts\indicators\wrb_analysis_trailing.ex4" produced - 0 error(s), 2 warning(s)
+MetaQuotes Language 4 compiler build 509 (24 Jun 2013)
+Copyright 2001-2013, MetaQuotes Software Corp.
+
+1;39;;;Function "make_text" is not referenced and will be removed from exp-file
+1;39;;;Function "make_label" is not referenced and will be removed from exp-file
+Exp file "Z:\home\huxley\Dropbox\trading\BReTRADER ECN\experts\indicators\wrb_analysis_trailing.ex4" produced - 0 error(s), 2 warning(s)
+MetaQuotes Language 4 compiler build 509 (24 Jun 2013)
+Copyright 2001-2013, MetaQuotes Software Corp.
+
+1;39;;;Function "make_text" is not referenced and will be removed from exp-file
+1;39;;;Function "make_label" is not referenced and will be removed from exp-file
+Exp file "Z:\home\huxley\Dropbox\trading\BReTRADER ECN\experts\indicators\wrb_analysis_trailing.ex4" produced - 0 error(s), 2 warning(s)
+MetaQuotes Language 4 compiler build 509 (24 Jun 2013)
+Copyright 2001-2013, MetaQuotes Software Corp.
+
+2;75;Z:\home\huxley\Dropbox\trading\BReTRADER ECN\experts\indicators\wrb_analysis_trailing.mq4;62:23;'body_wrb_close' - variable not defined
+2;75;Z:\home\huxley\Dropbox\trading\BReTRADER ECN\experts\indicators\wrb_analysis_trailing.mq4;65:23;'body_wrb_open' - variable not defined
+MetaQuotes Language 4 compiler build 509 (24 Jun 2013)
+Copyright 2001-2013, MetaQuotes Software Corp.
+
+2;75;Z:\home\huxley\Dropbox\trading\BReTRADER ECN\experts\indicators\wrb_analysis_trailing.mq4;62:23;'body_wrb_close' - variable not defined
+2;75;Z:\home\huxley\Dropbox\trading\BReTRADER ECN\experts\indicators\wrb_analysis_trailing.mq4;65:23;'body_wrb_open' - variable not defined
+MetaQuotes Language 4 compiler build 509 (24 Jun 2013)
+Copyright 2001-2013, MetaQuotes Software Corp.
+
+1;39;;;Function "make_text" is not referenced and will be removed from exp-file
+1;39;;;Function "make_label" is not referenced and will be removed from exp-file
+Exp file "Z:\home\huxley\Dropbox\trading\BReTRADER ECN\experts\indicators\wrb_analysis_trailing.ex4" produced - 0 error(s), 2 warning(s)
+MetaQuotes Language 4 compiler build 509 (24 Jun 2013)
+Copyright 2001-2013, MetaQuotes Software Corp.
+
+1;39;;;Function "make_text" is not referenced and will be removed from exp-file
+1;39;;;Function "make_label" is not referenced and will be removed from exp-file
+Exp file "Z:\home\huxley\Dropbox\trading\BReTRADER ECN\experts\indicators\wrb_analysis_trailing.ex4" produced - 0 error(s), 2 warning(s)
+MetaQuotes Language 4 compiler build 509 (24 Jun 2013)
+Copyright 2001-2013, MetaQuotes Software Corp.
+
+1;39;;;Function "make_text" is not referenced and will be removed from exp-file
+1;39;;;Function "make_label" is not referenced and will be removed from exp-file
+Exp file "Z:\home\huxley\Dropbox\trading\BReTRADER ECN\experts\indicators\wrb_analysis_trailing.ex4" produced - 0 error(s), 2 warning(s)
+MetaQuotes Language 4 compiler build 509 (24 Jun 2013)
+Copyright 2001-2013, MetaQuotes Software Corp.
+
+2;71;Z:\home\huxley\Dropbox\trading\BReTRADER ECN\experts\indicators\wrb_analysis_trailing.mq4;120:62;']' - unexpected square bracket
+2;71;Z:\home\huxley\Dropbox\trading\BReTRADER ECN\experts\indicators\wrb_analysis_trailing.mq4;121:23;']' - unexpected square bracket
+2;71;Z:\home\huxley\Dropbox\trading\BReTRADER ECN\experts\indicators\wrb_analysis_trailing.mq4;123:24;']' - unexpected square bracket
+2;71;Z:\home\huxley\Dropbox\trading\BReTRADER ECN\experts\indicators\wrb_analysis_trailing.mq4;123:63;']' - unexpected square bracket
+2;71;Z:\home\huxley\Dropbox\trading\BReTRADER ECN\experts\indicators\wrb_analysis_trailing.mq4;124:24;']' - unexpected square bracket
+MetaQuotes Language 4 compiler build 509 (24 Jun 2013)
+Copyright 2001-2013, MetaQuotes Software Corp.
+
+2;71;Z:\home\huxley\Dropbox\trading\BReTRADER ECN\experts\indicators\wrb_analysis_trailing.mq4;120:62;']' - unexpected square bracket
+2;71;Z:\home\huxley\Dropbox\trading\BReTRADER ECN\experts\indicators\wrb_analysis_trailing.mq4;121:23;']' - unexpected square bracket
+2;71;Z:\home\huxley\Dropbox\trading\BReTRADER ECN\experts\indicators\wrb_analysis_trailing.mq4;123:24;']' - unexpected square bracket
+2;71;Z:\home\huxley\Dropbox\trading\BReTRADER ECN\experts\indicators\wrb_analysis_trailing.mq4;123:63;']' - unexpected square bracket
+2;71;Z:\home\huxley\Dropbox\trading\BReTRADER ECN\experts\indicators\wrb_analysis_trailing.mq4;124:24;']' - unexpected square bracket
+MetaQuotes Language 4 compiler build 509 (24 Jun 2013)
+Copyright 2001-2013, MetaQuotes Software Corp.
+
+1;39;;;Function "make_text" is not referenced and will be removed from exp-file
+1;39;;;Function "make_label" is not referenced and will be removed from exp-file
+Exp file "Z:\home\huxley\Dropbox\trading\BReTRADER ECN\experts\indicators\wrb_analysis_trailing.ex4" produced - 0 error(s), 2 warning(s)
+MetaQuotes Language 4 compiler build 509 (24 Jun 2013)
+Copyright 2001-2013, MetaQuotes Software Corp.
+
+1;39;;;Function "make_text" is not referenced and will be removed from exp-file
+1;39;;;Function "make_label" is not referenced and will be removed from exp-file
+Exp file "Z:\home\huxley\Dropbox\trading\BReTRADER ECN\experts\indicators\wrb_analysis_trailing.ex4" produced - 0 error(s), 2 warning(s)
