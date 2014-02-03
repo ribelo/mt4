@@ -105,7 +105,7 @@ int start() {
                 last_bear = Open[i];
             }
         }
-        if (use_wrb_hg == true) {
+        if (use_wrb_hg == true && use_wrb == false) {
             wrb_hg = _wrb_hg(candle, i, Bars);
             if (wrb_hg == 1) {
                 line_buy[i] = Open[i];
