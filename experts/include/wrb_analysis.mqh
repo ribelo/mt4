@@ -10,10 +10,13 @@
 	int       _body_size_break(double rates[][6], int, int);
 	int       _bars_broken_by_body(double rates[][6], int, int);
 	int       _filled_by(double rates[][6], int, int);
+	int       _unfilled(double rates[][6], int, int, int);
 	int       _fractal(double rates[][6], int, int, int);
 	int       _fractal_break(double rates[][6], int, int, int, int);
 	int       _wrb(double rates[][6], int, int);
+	int       _wrb_unfilled(double rates[][6], int, int, int);
 	int       _wrb_hg(double rates[][6], int, int);
+	int       _wrb_hg_unfilled(double rates[][6], int, int, int);
 	int       _dcm(double rates[][6], int, int, int);
 	int       _swing_point_1(double rates[][6], int, int, int, int& r[]);
 	int       _swing_point_2(double rates[][6], int, int, int, int& r[]);
