@@ -80,9 +80,9 @@ int deinit() {
 //| Custom indicator iteration function                                                       |
 //+-------------------------------------------------------------------------------------------+
 int start() {
-    int i, limit;
+    int i, j, limit;
     int counted_bars = IndicatorCounted();
-    bool wrb, wrb_hg;
+    int wrb, wrb_hg;
     double last_bull, last_bear;
     if (!_new_bar(symbol, tf)) {
         return (0);
@@ -95,31 +95,33 @@ int start() {
     }
     limit = Bars - counted_bars;
     for (i = limit; i > 0; i--) {
-        if (use_wrb == true) {
-            wrb = _wrb(candle, i, Bars);
-            if (wrb == 1) {
-                line_buy[i] = Open[i];
-                last_bull = Open[i];
-            } else if (wrb == -1) {
-                line_sell[i] = Open[i];
-                last_bear = Open[i];
+        if (use_wrb) {
+            Print("i ", i," last_wrb bull ", _wrb_unfilled(candle, i, 1, Bars));
+            wrb = _wrb_unfilled(candle, i, 1, Bars);
+            if (wrb > 0) {
+                line_buy[i] = Open[wrb];
+            } else {
+                line_buy[i] = 0.0;
             }
-        }
-        if (use_wrb_hg == true && use_wrb == false) {
-            wrb_hg = _wrb_hg(candle, i, Bars);
-            if (wrb_hg == 1) {
-                line_buy[i] = Open[i];
-                last_bull = Open[i];
-            } else if (wrb_hg == -1) {
-                line_sell[i] = Open[i];
-                last_bear = Open[i];
+            wrb = _wrb_unfilled(candle, i, -1, Bars);
+            if (wrb > 0) {
+                line_sell[i] = Open[wrb];
+            } else {
+                line_sell[i] = 0.0;
             }
-        }
-        if (line_buy[i] != Open[i]) {
-            line_buy[i] = last_bull;
-        }
-        if (line_sell[i] != Open[i]) {
-            line_sell[i] = last_bear;
+        } else if (use_wrb_hg) {
+            wrb = _wrb_hg_unfilled(candle, i, 1, Bars);
+            if (wrb > 0) {
+                line_buy[i] = Open[wrb];
+            } else {
+                line_buy[i] = 0.0;
+            }
+            wrb = _wrb_hg_unfilled(candle, i, -1, Bars);
+            if (wrb > 0) {
+                line_sell[i] = Open[wrb];
+            } else {
+                line_sell[i] = 0.0;
+            }
         }
     }
     return (0);
