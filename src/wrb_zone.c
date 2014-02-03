@@ -14,7 +14,8 @@ inline double zone_size(body *body);
 zone swing_point_1(ohlc *candle, size_t i, size_t n,
                                  size_t contraction) {
     zone r = {};
-    size_t j, end_loop = GSL_MIN_INT(i, contraction), prior_wrb, swing_point;
+    size_t j, end_loop = GSL_MIN_INT(i, contraction);
+    int prior_wrb, swing_point;
     if (wrb_hg(candle, i).dir == 1 &&
             volatility_expand(candle, i, 2, 1)) {
         for (j = 4; j < end_loop; j++) {
@@ -156,8 +157,9 @@ zone swing_point_2(ohlc *candle, size_t i, size_t n,
 
 
 zone swing_point_3(ohlc *candle, size_t i, size_t n) {
+
     zone r = {};
-    size_t prior_wrb;
+    int prior_wrb;
     if (gsl_fcmp(shadow_bottom(candle, i), (body_size(candle, i) + shadow_upper(candle, i)), FLT_EPSILON) > 0 &&
             gsl_fcmp(body_size(candle, i), shadow_upper(candle, i), FLT_EPSILON) > 0 &&
             gsl_fcmp(shadow_bottom(candle, i), biggest_shadow_bottom(candle, i - 3, i), FLT_EPSILON) > 0 &&

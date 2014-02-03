@@ -1,0 +1,84 @@
+MetaQuotes Language 4 compiler build 509 (24 Jun 2013)
+Copyright 2001-2013, MetaQuotes Software Corp.
+
+1;39;;;Function "GMTseconds" is not referenced and will be removed from exp-file
+1;39;;;Function "MakeDayHHMM" is not referenced and will be removed from exp-file
+1;39;;;Function "yyyymmdd" is not referenced and will be removed from exp-file
+1;39;;;Function "isNycDaylightSaving" is not referenced and will be removed from exp-file
+1;39;;;Function "isLondonDaylightSaving" is not referenced and will be removed from exp-file
+1;39;;;Function "GetGMTDayHHMM" is not referenced and will be removed from exp-file
+1;39;;;Function "GetLocalDayHHMM" is not referenced and will be removed from exp-file
+1;39;;;Function "GetNewYorkDayHHMM" is not referenced and will be removed from exp-file
+1;39;;;Function "GetLondonDayHHMM" is not referenced and will be removed from exp-file
+1;39;;;Function "GetTokyoDayHHMM" is not referenced and will be removed from exp-file
+1;39;;;Function "TrailingStop" is not referenced and will be removed from exp-file
+Exp file "Z:\home\huxley\Dropbox\trading\BReTRADER ECN\experts\j.a.r.v.i.s.ex4" produced - 0 error(s), 11 warning(s)
+MetaQuotes Language 4 compiler build 509 (24 Jun 2013)
+Copyright 2001-2013, MetaQuotes Software Corp.
+
+1;39;;;Function "make_text" is not referenced and will be removed from exp-file
+1;39;;;Function "make_label" is not referenced and will be removed from exp-file
+Exp file "Z:\home\huxley\Dropbox\trading\BReTRADER ECN\experts\indicators\wrb_analysis_dcm.ex4" produced - 0 error(s), 2 warning(s)
+MetaQuotes Language 4 compiler build 509 (24 Jun 2013)
+Copyright 2001-2013, MetaQuotes Software Corp.
+
+1;39;;;Function "make_label" is not referenced and will be removed from exp-file
+Exp file "Z:\home\huxley\Dropbox\trading\BReTRADER ECN\experts\indicators\wrb_analysis_fvb.ex4" produced - 0 error(s), 1 warning(s)
+MetaQuotes Language 4 compiler build 509 (24 Jun 2013)
+Copyright 2001-2013, MetaQuotes Software Corp.
+
+1;39;;;Function "make_text" is not referenced and will be removed from exp-file
+1;39;;;Function "make_label" is not referenced and will be removed from exp-file
+Exp file "Z:\home\huxley\Dropbox\trading\BReTRADER ECN\experts\indicators\wrb_analysis_body.ex4" produced - 0 error(s), 2 warning(s)
+MetaQuotes Language 4 compiler build 509 (24 Jun 2013)
+Copyright 2001-2013, MetaQuotes Software Corp.
+
+1;39;;;Function "make_label" is not referenced and will be removed from exp-file
+Exp file "Z:\home\huxley\Dropbox\trading\BReTRADER ECN\experts\indicators\wrb_analysis_zone.ex4" produced - 0 error(s), 1 warning(s)
+MetaQuotes Language 4 compiler build 509 (24 Jun 2013)
+Copyright 2001-2013, MetaQuotes Software Corp.
+
+1;39;;;Function "make_label" is not referenced and will be removed from exp-file
+Exp file "Z:\home\huxley\Dropbox\trading\BReTRADER ECN\experts\indicators\wrb_analysis_ajctr.ex4" produced - 0 error(s), 1 warning(s)
+MetaQuotes Language 4 compiler build 509 (24 Jun 2013)
+Copyright 2001-2013, MetaQuotes Software Corp.
+
+1;39;;;Function "make_text" is not referenced and will be removed from exp-file
+1;39;;;Function "make_label" is not referenced and will be removed from exp-file
+Exp file "Z:\home\huxley\Dropbox\trading\BReTRADER ECN\experts\indicators\wrb_analysis_fractals.ex4" produced - 0 error(s), 2 warning(s)
+MetaQuotes Language 4 compiler build 509 (24 Jun 2013)
+Copyright 2001-2013, MetaQuotes Software Corp.
+
+1;39;;;Function "make_label" is not referenced and will be removed from exp-file
+Exp file "Z:\home\huxley\Dropbox\trading\BReTRADER ECN\experts\indicators\wrb_analysis_confirmation.ex4" produced - 0 error(s), 1 warning(s)
+MetaQuotes Language 4 compiler build 509 (24 Jun 2013)
+Copyright 2001-2013, MetaQuotes Software Corp.
+
+1;39;;;Function "make_text" is not referenced and will be removed from exp-file
+1;39;;;Function "make_label" is not referenced and will be removed from exp-file
+Exp file "Z:\home\huxley\Dropbox\trading\BReTRADER ECN\experts\indicators\wrb_analysis_fractal_break.ex4" produced - 0 error(s), 2 warning(s)
+MetaQuotes Language 4 compiler build 509 (24 Jun 2013)
+Copyright 2001-2013, MetaQuotes Software Corp.
+
+1;39;;;Function "make_label" is not referenced and will be removed from exp-file
+Exp file "Z:\home\huxley\Dropbox\trading\BReTRADER ECN\experts\indicators\wrb_analysis_vtr.ex4" produced - 0 error(s), 1 warning(s)
+MetaQuotes Language 4 compiler build 509 (24 Jun 2013)
+Copyright 2001-2013, MetaQuotes Software Corp.
+
+1;31;Z:\home\huxley\Dropbox\trading\BReTRADER ECN\experts\indicators\wrb_analysis_apaor.mq4;10:1;'hxl_utils.mqh' - file already processed
+1;39;;;Function "make_text" is not referenced and will be removed from exp-file
+1;39;;;Function "make_label" is not referenced and will be removed from exp-file
+Exp file "Z:\home\huxley\Dropbox\trading\BReTRADER ECN\experts\indicators\wrb_analysis_apaor.ex4" produced - 0 error(s), 3 warning(s)
+MetaQuotes Language 4 compiler build 509 (24 Jun 2013)
+Copyright 2001-2013, MetaQuotes Software Corp.
+
+2;96;Z:\home\huxley\Dropbox\trading\BReTRADER ECN\experts\indicators\hxl_test.mq4;68:27;'i' - an operator expected
+2;127;Z:\home\huxley\Dropbox\trading\BReTRADER ECN\experts\indicators\hxl_test.mq4;68:28;',' - parameter expected
+
+Errors--2
+See logfile "Z:\home\huxley\Dropbox\trading\BReTRADER ECN\experts\indicators\hxl_test.log"
+
+MetaQuotes Language 4 compiler build 509 (24 Jun 2013)
+Copyright 2001-2013, MetaQuotes Software Corp.
+
+Library exp file "Z:\home\huxley\Dropbox\trading\BReTRADER ECN\experts\libraries\LibOrderReliable4.ex4" produced - 0 error(s), 0 warning(s)

@@ -3,7 +3,7 @@
 //|                                  Huxley WRB Body.mq4                                      |
 //|                                                                                           |
 //+-------------------------------------------------------------------------------------------+
-#property copyright "Copyright © 2014 Huxley"
+#property copyright "Copyright Â© 2014 Huxley"
 #property link      "email:   huxley.source@gmail.com"
 #include <gsl_math.mqh>
 
@@ -58,22 +58,18 @@ int init() {
     if (multiplier > 1) {
         pip_description = " points";
     }
-    int r;
-    double a = 0.01001 + 0.000001;
-    double b = 0.01001 + 0.000002;
-    Print("Round Double");
-    int begin = GetTickCount();
-    for (int i = 0; i < 1000000; i++) {
-      r = _roundp(a + b, digits);
-    }
-    Print("GSL Time: ",GetTickCount() - begin," r: ",r);
 
-    begin = GetTickCount();
-    for (i = 0; i < 1000000; i++) {
-      r = NormalizeDouble(a + b, digits);
+
+    int orders_history_total = OrdersHistoryTotal();
+    if (orders_history_total > 0) {
+        int count = _imax(orders_history_total, 5);
+        for (int i = orders_history_total - 1; i >= 0; i--) {
+            if (OrderSelect(i, SELECT_BY_POS, MODE_HISTORY)) {
+                Print("i: "i," ticket: ", OrderTicket());
+            }
+        }
     }
-    Print("MT4 Time: ",GetTickCount() - begin," r: ",r);
-    Print("Is Identical?: ",_fcmp(_roundp(a + b, digits), NormalizeDouble(a + b, digits)));
+
 
 
     return (0);

@@ -7,4 +7,3 @@ EXPORTS
 	_imax
 	_imin
 	_fcmp
-	_roundp

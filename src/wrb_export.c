@@ -634,7 +634,6 @@ WRBFUNC int __stdcall _vtr(ohlc *main, ohlc *sister, size_t i,
             }
             sister = tmp_arr;
         }
-        printf("vtr n %d\n", n);
         signal r = vtr(main, sister, n - i - 1, n, invert, look_back, h_zone);
         if (r.c1.nr > 0) {
             arr[0] = n - r.c1.nr - 1;;
