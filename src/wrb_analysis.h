@@ -169,7 +169,7 @@ static inline int fractal_break(ohlc *candle, size_t i,
             }
         }
     } else if (dir(candle, i) == -1) {
-        for (j = 1; j < fmin(i - l, look_back) || j > n - i - l; j++) {
+        for (j = 1; j < end_loop; j++) {
             if (gsl_fcmp(candle[i - j].low,
                          candle[i].close,
                          FLT_EPSILON) <= 0) {
