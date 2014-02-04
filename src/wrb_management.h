@@ -1,6 +1,5 @@
 #pragma once
 
-#include "math.h"
 #include "wrb_struct.h"
 #include "candle.h"
 

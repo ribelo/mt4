@@ -16,9 +16,9 @@ EXPORTS
 	_fractal
 	_fractal_break
 	_wrb
-	_wrb_unfilled
 	_wrb_hg
-	_wrb_hg_unfilled
+	_support
+	_resistance
 	_dcm
 	_swing_point_1
 	_swing_point_2

@@ -6,6 +6,7 @@
 #include "wrb_struct.h"
 #include "candle.h"
 #include "wrb_analysis.h"
+#include "wrb_management.h"
 #include "wrb_zone.h"
 #include "wrb_confirmation.h"
 #include "wrb_ajctr.h"
@@ -144,19 +145,6 @@ WRBFUNC int __stdcall _wrb(ohlc *candle, size_t i, size_t n) {
 }
 
 
-WRBFUNC int __stdcall _wrb_unfilled(ohlc *candle, size_t i, int type, size_t n) {
-    if (n > 0 && i > 0 && i < n) {
-        for (size_t j = 1; j < n; j++) {
-            if (wrb(candle, n - i - 1 - j).dir == type &&
-                    unfilled(candle, n - i - 1 - j, j, n)) {
-                return i + j;
-            }
-        }
-    }
-    return -1;
-}
-
-
 WRBFUNC int __stdcall _wrb_hg(ohlc *candle, size_t i, size_t n) {
     if (n > 0 && i > 0 && i < n) {
         return wrb_hg(candle, n - i - 1).dir;
@@ -165,16 +153,21 @@ WRBFUNC int __stdcall _wrb_hg(ohlc *candle, size_t i, size_t n) {
 }
 
 
-WRBFUNC int __stdcall _wrb_hg_unfilled(ohlc *candle, size_t i, int type, size_t n) {
+WRBFUNC double __stdcall _support(ohlc *candle, size_t i, int hg_only,
+                                  int use_fractal, size_t l, size_t n) {
     if (n > 0 && i > 0 && i < n) {
-        for (size_t j = 1; j < n; j++) {
-            if (wrb_hg(candle, n - i - 1 - j).dir == type &&
-                    unfilled(candle, n - i - 1 - j, j, n)) {
-                return i + j;
-            }
-        }
+        return support(candle, n - i - 1, hg_only, use_fractal, l, n);
     }
-    return -1;
+    return 0;
+}
+
+
+WRBFUNC double __stdcall _resistance(ohlc *candle, size_t i, int hg_only,
+                                     int use_fractal, size_t l, size_t n) {
+    if (n > 0 && i > 0 && i < n) {
+        return resistance(candle, n - i - 1, hg_only, use_fractal, l, n);
+    }
+    return 0;
 }
 
 

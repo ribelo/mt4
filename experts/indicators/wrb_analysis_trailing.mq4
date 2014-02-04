@@ -28,8 +28,9 @@
 
 //Global External Inputs
 
-extern bool  use_wrb = false;
-extern bool  use_wrb_hg = true;
+extern bool  hg_only = true;
+extern bool  use_fractal = true;
+extern int   fractal_length = 5;
 extern color buy_stop_loss = C'245,146,86';
 extern color sell_stop_loss = C'126,59,73';
 extern int line_width = 1;
@@ -82,8 +83,6 @@ int deinit() {
 int start() {
     int i, j, limit;
     int counted_bars = IndicatorCounted();
-    int wrb, wrb_hg;
-    double last_bull, last_bear;
     if (!_new_bar(symbol, tf)) {
         return (0);
     }
@@ -94,35 +93,12 @@ int start() {
         counted_bars--;
     }
     limit = Bars - counted_bars;
-    for (i = limit; i > 0; i--) {
-        if (use_wrb) {
-            Print("i ", i," last_wrb bull ", _wrb_unfilled(candle, i, 1, Bars));
-            wrb = _wrb_unfilled(candle, i, 1, Bars);
-            if (wrb > 0) {
-                line_buy[i] = Open[wrb];
-            } else {
-                line_buy[i] = 0.0;
-            }
-            wrb = _wrb_unfilled(candle, i, -1, Bars);
-            if (wrb > 0) {
-                line_sell[i] = Open[wrb];
-            } else {
-                line_sell[i] = 0.0;
-            }
-        } else if (use_wrb_hg) {
-            wrb = _wrb_hg_unfilled(candle, i, 1, Bars);
-            if (wrb > 0) {
-                line_buy[i] = Open[wrb];
-            } else {
-                line_buy[i] = 0.0;
-            }
-            wrb = _wrb_hg_unfilled(candle, i, -1, Bars);
-            if (wrb > 0) {
-                line_sell[i] = Open[wrb];
-            } else {
-                line_sell[i] = 0.0;
-            }
-        }
+    for (i = 512; i > 0; i--) {
+        line_buy[i] = _support(candle, i, hg_only, use_fractal,
+                               fractal_length, Bars);
+        line_sell[i] = _resistance(candle, i, hg_only, use_fractal,
+                                   fractal_length, Bars);
+
     }
     return (0);
 }
