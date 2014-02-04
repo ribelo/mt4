@@ -108,7 +108,7 @@ WRBFUNC int __stdcall _filled_by(ohlc *candle, size_t i, size_t n) {
 
 WRBFUNC int __stdcall _unfilled(ohlc *candle, size_t i, size_t j, size_t n) {
     if (n > 0 && i > 0 && i < n) {
-        return unfilled(candle, n - i - 1, j);
+        return unfilled(candle, n - i - 1, j, n);
     }
     return 0;
 }
@@ -148,7 +148,7 @@ WRBFUNC int __stdcall _wrb_unfilled(ohlc *candle, size_t i, int type, size_t n) 
     if (n > 0 && i > 0 && i < n) {
         for (size_t j = 1; j < n; j++) {
             if (wrb(candle, n - i - 1 - j).dir == type &&
-                    unfilled(candle, n - i - 1 - j, j)) {
+                    unfilled(candle, n - i - 1 - j, j, n)) {
                 return i + j;
             }
         }
@@ -169,7 +169,7 @@ WRBFUNC int __stdcall _wrb_hg_unfilled(ohlc *candle, size_t i, int type, size_t 
     if (n > 0 && i > 0 && i < n) {
         for (size_t j = 1; j < n; j++) {
             if (wrb_hg(candle, n - i - 1 - j).dir == type &&
-                    unfilled(candle, n - i - 1 - j, j)) {
+                    unfilled(candle, n - i - 1 - j, j, n)) {
                 return i + j;
             }
         }

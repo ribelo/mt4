@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"line",
+				"line_buy"
+			],
+			[
+				"last",
+				"last_time"
+			],
+			[
 				"tota",
 				"total_objects"
 			],
@@ -106,10 +114,6 @@
 			[
 				"bull",
 				"bull_apaor"
-			],
-			[
-				"line",
-				"line_color"
 			],
 			[
 				"leng",
@@ -392,10 +396,6 @@
 				"body_mid_point"
 			],
 			[
-				"last",
-				"last_high"
-			],
-			[
 				"las",
 				"last_high"
 			],
@@ -523,71 +523,65 @@
 			"file": "/home/huxley/Dropbox/code/mql/makefile",
 			"settings":
 			{
-				"buffer_size": 1718,
+				"buffer_size": 1770,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "wrb_analysis_vtr.mq4",
+			"file": "wrb_analysis_trailing.mq4",
 			"settings":
 			{
-				"buffer_size": 7174,
+				"buffer_size": 5021,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "/home/huxley/Dropbox/code/mql/src/wrb_apaor.c",
+			"contents": "[SideBarGit@SublimeText] \nwarning: push.default is unset; its implicit value is changing in\nGit 2.0 from 'matching' to 'simple'. To squelch this message\nand maintain the current behavior after the default changes, use:\n\n  git config --global push.default matching\n\nTo squelch this message and adopt the new behavior now, use:\n\n  git config --global push.default simple\n\nSee 'git help config' and search for 'push.default' for further information.\n(the 'simple' mode was introduced in Git 1.7.11. Use the similar mode\n'current' instead of 'simple' if you sometimes use older versions of Git)\n\nTo https://huxley_source@bitbucket.org/huxley_source/mt4.git\n   f3bcf1d..03b5c90  master -> master",
 			"settings":
 			{
-				"buffer_size": 8835,
-				"line_ending": "Unix"
+				"buffer_size": 690,
+				"line_ending": "Unix",
+				"name": "[SideBarGit@SublimeText]",
+				"scratch": true
 			}
 		},
 		{
-			"file": "/home/huxley/Dropbox/code/mql/src/wrb_zone.c",
+			"file": "/home/huxley/Dropbox/code/mql/wrb_analysis.def",
 			"settings":
 			{
-				"buffer_size": 20943,
-				"line_ending": "Unix"
+				"buffer_size": 558,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/home/huxley/Dropbox/code/mql/gsl_math.def",
+			"settings":
+			{
+				"buffer_size": 67,
+				"line_ending": "Windows"
 			}
 		},
 		{
 			"file": "/home/huxley/Dropbox/code/mql/src/wrb_export.c",
 			"settings":
 			{
-				"buffer_size": 17835,
+				"buffer_size": 18730,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "/home/huxley/Dropbox/code/mql/src/wrb_toolbox.h",
+			"file": "/home/huxley/Dropbox/code/mql/experts/include/wrb_analysis.mqh",
 			"settings":
 			{
-				"buffer_size": 11656,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/home/huxley/Dropbox/code/mql/src/wrb_vtr.c",
-			"settings":
-			{
-				"buffer_size": 13158,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/home/huxley/Dropbox/code/mql/src/candle.h",
-			"settings":
-			{
-				"buffer_size": 7452,
-				"line_ending": "Unix"
+				"buffer_size": 2787,
+				"line_ending": "Windows"
 			}
 		},
 		{
 			"file": "/home/huxley/Dropbox/code/mql/console.log",
 			"settings":
 			{
-				"buffer_size": 5565,
+				"buffer_size": 13419,
 				"line_ending": "Windows"
 			}
 		}
@@ -753,18 +747,29 @@
 	},
 	"file_history":
 	[
+		"/home/huxley/Dropbox/code/mql/src/gsl_math.c",
+		"/home/huxley/Dropbox/code/mql/experts/indicators/hxl_test.mq4",
+		"/tmp/gsl_math-1.c",
+		"/home/huxley/Dropbox/code/mql/src/wrb_toolbox.h",
+		"/home/huxley/Dropbox/code/mql/src/wrb_analysis.h",
+		"/home/huxley/Dropbox/code/mql/gsl_math.def",
+		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_dcm.mq4",
+		"/tmp/gsl_math.c",
+		"/home/huxley/Dropbox/code/mql/src/candle.h",
+		"/home/huxley/Dropbox/code/mql/src/wrb_vtr.c",
 		"/home/huxley/Dropbox/code/mql/src/wrb_vtr.c_back",
+		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_vtr.mq4",
+		"/home/huxley/Dropbox/code/mql/src/wrb_zone.c",
+		"/home/huxley/Dropbox/code/mql/src/wrb_export.c",
+		"/home/huxley/Dropbox/code/mql/src/wrb_apaor.c",
 		"/home/huxley/Dropbox/code/Dashboard/client/app/lib/mm.py",
 		"/home/huxley/Dropbox/code/mql/src/deepthroat.h",
-		"/home/huxley/Dropbox/code/mql/src/candle.h",
-		"/home/huxley/Dropbox/code/mql/experts/indicators/hxl_test.mq4",
 		"/home/huxley/Dropbox/code/mql/experts/include/gsl_math.mqh",
 		"/home/huxley/Dropbox/trading/MetaTrader Admiral Markets AS/experts/indicators/Ribelo DDSM.mq4",
 		"/home/huxley/Dropbox/trading/MetaTrader Admiral Markets AS/experts/mini supply&emand semi-auto trading robot by Ribelo.mq4",
 		"/home/huxley/Dropbox/code/mql/experts/j.a.r.v.i.s.mq4",
 		"/home/huxley/.cache/.fr-yeuq07/clojurescript-git/PKGBUILD",
 		"/home/huxley/.cache/.fr-T9Q4Lq/clojurescript-git/clojurescript.sh",
-		"/home/huxley/Dropbox/code/mql/gsl_math.def",
 		"/home/huxley/Dropbox/code/mql/.gitignore",
 		"/home/huxley/Dropbox/code/mql/experts/indicators/gsl_test.mq4",
 		"/home/huxley/Dropbox/code/mql/makefile",
@@ -774,16 +779,11 @@
 		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_apaor.mq4",
 		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_body.mq4",
 		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_confirmation.mq4",
-		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_dcm.mq4",
 		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_fractal_break.mq4",
 		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_fractals.mq4",
 		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_fvb.mq4",
-		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_vtr.mq4",
 		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_zone.mq4",
 		"/home/huxley/Dropbox/code/mql/experts/libraries/LibOrderReliable4.mq4",
-		"/home/huxley/Dropbox/code/mql/src/wrb_zone.c",
-		"/home/huxley/Dropbox/code/mql/src/gsl_math.c",
-		"/home/huxley/Dropbox/code/mql/src/wrb_apaor.c",
 		"/home/huxley/Dropbox/code/mql/experts/indicators/mql.sublime-project",
 		"/home/huxley/Dropbox/code/mql/console.log",
 		"/home/huxley/Dropbox/code/mql/experts/include/LibGMT.mqh",
@@ -874,13 +874,7 @@
 		"/home/huxley/Dropbox/code/heisenbug/heisenbug/wrb/toolbox.pxd",
 		"/home/huxley/Dropbox/code/heisenbug/heisenbug/wrb/analysis.c",
 		"/home/huxley/Dropbox/code/heisenbug/heisenbug/wrb/analysis.html",
-		"/home/huxley/Dropbox/code/heisenbug/heisenbug/wrb/confirmation.c",
-		"/home/huxley/Dropbox/code/heisenbug/heisenbug/wrb/confirmation.html",
-		"/home/huxley/Dropbox/code/heisenbug/heisenbug/wrb/zone.c",
-		"/home/huxley/Dropbox/code/heisenbug/heisenbug/wrb/zone.html",
-		"/home/huxley/Dropbox/code/heisenbug/setup.py",
-		"/home/huxley/Dropbox/code/heisenbug/build/lib.linux-x86_64-3.3/heisenbug/__init__.py",
-		"/home/huxley/Dropbox/code/heisenbug/build/lib.linux-x86_64-3.3/heisenbug/wrb/toolbox.pxd"
+		"/home/huxley/Dropbox/code/heisenbug/heisenbug/wrb/confirmation.c"
 	],
 	"find":
 	{
@@ -908,6 +902,45 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"_wrb_unfilled",
+			"candle, n - (i + j) - 1)",
+			"(candle, n - i - 1 - j)",
+			"for (j = 1",
+			"_wrb_",
+			"last_bear",
+			"last_bull",
+			"_wrb_hg",
+			"wrb",
+			"WRB",
+			"wrb",
+			"WRB",
+			"wrb",
+			"_wrb",
+			"iOpen",
+			"Open",
+			"Bars",
+			"bars",
+			"Bars",
+			"Open[i]",
+			"line_buy",
+			"sell_stop_loss",
+			"last_bull",
+			"buy",
+			"wrb",
+			"bar_width",
+			"DRAW_HISTOGRAM",
+			"bear_wrb_body",
+			"bull_wrb_body",
+			"Body",
+			"precise",
+			"printf",
+			"unfilled",
+			"d",
+			"unfilled(main, i - j, i - 1)) ||",
+			"unfilled(sister, i - j, i - 1))) {",
+			"contraction_body_size_break",
+			"body_size_break",
+			"prior_wrb",
 			"fill_prior_wrb_hg",
 			"main_z",
 			"print",
@@ -996,46 +1029,7 @@
 			"[a-z]\\.[a-z]",
 			"OrdersHistoryTotal()",
 			"NormalizeDouble",
-			"dd.5",
-			"lot.digits",
-			"lot_digits",
-			"Digits",
-			"dd.5",
-			"IsTradingAllowed",
-			"DisplayUserFeedback",
-			"DeleteOrphanPriceLines",
-			"CheckMarginLevel",
-			"ObjectMakeLabel",
-			"SasTrading",
-			"IsTradingAllowed",
-			"TrailingStop",
-			"stop",
-			"if (old_take != new_take) {",
-			"old_stop != new_stop",
-			"huxley_functions",
-			"is_new_bar",
-			"gls",
-			"hxl_functions",
-			"eps",
-			"epsilon",
-			".o.o",
-			".o.c",
-			"wrb_vtr",
-			"wrb_fvb",
-			"wrb_apaor",
-			"wrb_ajctr",
-			"wrb_zone",
-			"ohlc",
-			"arr[2] = r.dir;",
-			"= r.dir;",
-			"r.c2.nr = m_pb.x;",
-			"m_",
-			"%d",
-			"!broke_line(sister, s_apaor_line, s_pb.x + 1, s_pb.x, -1) &&",
-			"!broke_line(main, m_apaor_line, m_pb.x + 1, m_pb.x, 1) &&",
-			"s_str_line",
-			"wrb_divergence",
-			"fractal(sister, i"
+			"dd.5"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1181,7 +1175,7 @@
 	"groups":
 	[
 		{
-			"selected": 5,
+			"selected": 2,
 			"sheets":
 			[
 				{
@@ -1190,15 +1184,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1718,
+						"buffer_size": 1770,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1050,
-								1050
+								742,
+								742
 							]
 						],
 						"settings":
@@ -1209,24 +1203,24 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 8,
+					"stack_index": 7,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "wrb_analysis_vtr.mq4",
+					"file": "wrb_analysis_trailing.mq4",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 7174,
+						"buffer_size": 5021,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2963,
-								2963
+								5021,
+								5021
 							]
 						],
 						"settings":
@@ -1236,154 +1230,62 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 672.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 7,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "/home/huxley/Dropbox/code/mql/src/wrb_apaor.c",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 8835,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								848,
-								848
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C Improved/C Improved.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 2736.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 6,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "/home/huxley/Dropbox/code/mql/src/wrb_zone.c",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 20943,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								8645,
-								8645
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C Improved/C Improved.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 2464.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "/home/huxley/Dropbox/code/mql/src/wrb_export.c",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 17835,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								17452,
-								17452
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C Improved/C Improved.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 9770.0,
+						"translation.y": 1227.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
 					"type": "text"
 				},
 				{
-					"buffer": 5,
-					"file": "/home/huxley/Dropbox/code/mql/src/wrb_toolbox.h",
+					"buffer": 2,
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 11656,
+						"buffer_size": 690,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1628,
-								1628
+								0,
+								0
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/C Improved/C Improved.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
+							"auto_name": "[SideBarGit@SublimeText]",
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"word_wrap": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 576.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
 					"type": "text"
 				},
 				{
-					"buffer": 6,
-					"file": "/home/huxley/Dropbox/code/mql/src/wrb_vtr.c",
+					"buffer": 3,
+					"file": "/home/huxley/Dropbox/code/mql/wrb_analysis.def",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 13158,
+						"buffer_size": 558,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								13135,
-								13135
+								225,
+								225
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/C Improved/C Improved.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -1393,32 +1295,90 @@
 					"type": "text"
 				},
 				{
-					"buffer": 7,
-					"file": "/home/huxley/Dropbox/code/mql/src/candle.h",
-					"semi_transient": false,
+					"buffer": 4,
+					"file": "/home/huxley/Dropbox/code/mql/gsl_math.def",
+					"semi_transient": true,
 					"settings":
 					{
-						"buffer_size": 7452,
+						"buffer_size": 67,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3088,
-								3088
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "/home/huxley/Dropbox/code/mql/src/wrb_export.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 18730,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3842,
+								3842
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/C Improved/C Improved.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2192.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "/home/huxley/Dropbox/code/mql/experts/include/wrb_analysis.mqh",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2787,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								688,
+								688
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1722.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 6,
 					"type": "text"
 				}
 			]
@@ -1428,20 +1388,20 @@
 			"sheets":
 			[
 				{
-					"buffer": 8,
+					"buffer": 7,
 					"file": "/home/huxley/Dropbox/code/mql/console.log",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 5565,
+						"buffer_size": 13419,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								5229,
-								5229
+								1224,
+								1224
 							]
 						],
 						"settings":
@@ -1449,10 +1409,10 @@
 							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 1760.0,
+						"translation.y": 663.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 3,
 					"type": "text"
 				}
 			]
@@ -1486,7 +1446,7 @@
 		"cols":
 		[
 			0.0,
-			0.540705563093,
+			0.71777476255,
 			1.0
 		],
 		"rows":

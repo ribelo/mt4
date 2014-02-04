@@ -38,7 +38,7 @@ static inline double body_mid_point(ohlc *candle, size_t i) {
 
 static inline int broke_body_size(ohlc *candle, size_t i, size_t j) {
 	int k;
-	for (k = j; k > 0; k--) {
+	for (k = GSL_MIN_INT(i, j); k > 0; k--) {
 		if (gsl_fcmp(body_size(candle, i - k), body_size(candle, i), FLT_EPSILON) > 0) {
 			return 0;
 		}
@@ -75,13 +75,13 @@ static inline int broke_bars(ohlc *candle, size_t i, size_t j) {
 	int k;
 	int candle_dir = dir(candle, i);
 	if (candle_dir == 1) {
-		for (k = j; k > 0; k--) {
+		for (k = GSL_MIN_INT(i, j); k > 0; k--) {
 			if (gsl_fcmp(candle[i - k].high, candle[i].close, FLT_EPSILON) > 0) {
 				return 0;
 			}
 		}
 	} else if (candle_dir == -1) {
-		for (k = j; k > 0; k--) {
+		for (k = GSL_MIN_INT(i, j); k > 0; k--) {
 			if (gsl_fcmp(candle[i - k].low, candle[i].close, FLT_EPSILON) < 0) {
 				return 0;
 			}
@@ -125,17 +125,17 @@ static inline double shadow_bottom(ohlc *candle, size_t i) {
 }
 
 
-static inline int unfilled(ohlc *candle, size_t i, size_t j) {
+static inline int unfilled(ohlc *candle, size_t i, size_t j, size_t n) {
 	int k;
 	int candle_dir = dir(candle, i);
 	if (candle_dir == 1) {
-		for (k = j; k > 0; k--) {
+		for (k = GSL_MIN_INT(j, n - i); k > 0; k--) {
 			if (gsl_fcmp(candle[i + k].low, candle[i].open, FLT_EPSILON) < 0) {
 				return 0;
 			}
 		}
 	} else if (candle_dir == -1) {
-		for (k = j; k > 0; k--) {
+		for (k = GSL_MIN_INT(j, n - i); k > 0; k--) {
 			if (gsl_fcmp(candle[i + k].high, candle[i].open, FLT_EPSILON) > 0) {
 				return 0;
 			}

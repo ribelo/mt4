@@ -122,7 +122,7 @@ int start() {
     if (counted_bars > 0) {
         counted_bars--;
     }
-    limit = Bars - counted_bars;
+    limit = Bars - counted_bars - 3;
     for (i = limit; i >= 0; i--) {
         if (hammer == true) {
             if (_hammer(candle, i, Bars, r) != 0) {
