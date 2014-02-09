@@ -7,6 +7,7 @@
 #property link      "email:   huxley.source@gmail.com"
 #include <wrb_analysis.mqh>
 #include <hxl_utils.mqh>
+#include <hanover --- function header (np).mqh>
 
 
 //+-------------------------------------------------------------------------------------------+
@@ -32,7 +33,6 @@ extern int look_back = 512;
 extern string sister_symbol = "";
 extern bool invert_sister = 0;
 extern int look_for_zone = 256;
-extern bool use_conf_h_zone = true;
 extern bool draw_zone = true;
 extern color bull_vtr = C'255,213,98';
 extern color bear_vtr = C'233,65,103';
@@ -49,13 +49,15 @@ extern int bar_width = 1;
 //Misc
 double main[][6], sister[][6];
 int pip_mult_tab[] = {1, 10, 1, 10, 1, 10, 100, 1000};
-string symbol;
+string symbol, global_name;
 int tf, digits, multiplier, spread;
 double tickvalue, point;
 string pip_description = " pips";
 
 double body_vtr_open[], body_vtr_close[];
 double body_zone_open[], body_zone_close[];
+
+double last_vtr;
 //+-------------------------------------------------------------------------------------------+
 //| Custom indicator initialization function                                                  |
 //+-------------------------------------------------------------------------------------------+
@@ -67,6 +69,7 @@ int init() {
     point = MarketInfo(symbol, MODE_POINT) * multiplier;
     spread = MarketInfo(symbol, MODE_SPREAD) * multiplier;
     tickvalue = MarketInfo(symbol, MODE_TICKVALUE) * multiplier;
+    global_name = StringLower(i_name + "_" + ReduceCcy(symbol) + "_" + TFToStr(tf));
     if (multiplier > 1) {
         pip_description = " points";
     }
@@ -86,6 +89,9 @@ int init() {
     SetIndexStyle(3, DRAW_HISTOGRAM, 0, bar_width, bear_zone);
     SetIndexLabel(3, "ZONE");
 
+    if (!GlobalVariableCheck(global_name)) {
+        GlobalVariableSet(global_name, 0);
+    }
     return (0);
 }
 
@@ -123,22 +129,22 @@ int start() {
     if (counted_bars > 0) {
         counted_bars--;
     }
-    limit = MathMin(Bars - counted_bars, look_back);
+    limit = MathMin(iBars(symbol, tf) - counted_bars, look_back);
     for (i = 1; i < limit; i++) {
-        if (_vtr(main, sister, i, iBars(symbol, tf),
-                     iBars(sister_symbol, tf), invert_sister,
-                     look_for_zone, use_conf_h_zone, r) != 0) {
-            body_vtr_open[r[0]] = Open[r[0]];
-            body_vtr_close[r[0]] = Close[r[0]];
-            body_vtr_open[r[1]] = Open[r[1]];
-            body_vtr_close[r[1]] = Close[r[1]];
+        if (_vtr(main, sister, i, invert_sister,
+                     look_for_zone, iBars(symbol, tf),
+                     iBars(sister_symbol, tf), r) != 0) {
+            body_vtr_open[r[0]] = iOpen(symbol, tf, r[0]);
+            body_vtr_close[r[0]] = iClose(symbol, tf, r[0]);
+            body_vtr_open[r[1]] = iOpen(symbol, tf, r[1]);
+            body_vtr_close[r[1]] = iClose(symbol, tf, r[1]);
             if (draw_zone == true) {
-                body_zone_open[r[2]] = Open[r[2]];
-                body_zone_close[r[2]] = Close[r[2]];
+                body_zone_open[r[2]] = iOpen(symbol, tf, r[2]);
+                body_zone_close[r[2]] = iClose(symbol, tf, r[2]);
             }
             if (make_text == true) {
-                time_str = StringConcatenate(TimeToStr(Time[i], TIME_DATE), "_",
-                                             TimeToStr(Time[i], TIME_MINUTES));
+                time_str = StringConcatenate(TimeToStr(iTime(symbol, tf, i), TIME_DATE), "_",
+                                             TimeToStr(iTime(symbol, tf, i), TIME_MINUTES));
                 text_name = StringConcatenate(i_name, "_", time_str);
                 if (r[3] == 1) {
                     text_price = iLow(symbol, tf, iLowest(symbol, tf, MODE_LOW, 1, i)) - ((iHigh(symbol, tf, iHighest(symbol, tf, MODE_HIGH, 1, i)) - iLow(symbol, tf, iLowest(symbol, tf, MODE_LOW, 1, i))) / 2) * label_offset_percent;
@@ -149,11 +155,12 @@ int start() {
                 }
             }
             if (send_notification == true) {
-                if (i == 1) {
+                if (iTime(symbol, tf, r[0]) > GlobalVariableGet(global_name)) {
+                    GlobalVariableSet(global_name, iTime(symbol, tf, r[0]));
                     if (r[3] == 1) {
-                        SendNotification("vtr bull at " + TimeToStr(Time[i]));
+                        SendNotification(ReduceCcy(symbol)  + " " + TFToStr(tf) + " Bull VTR at " + TimeToStr(iTime(symbol, tf, i)));
                     } else if (r[3] == -1) {
-                        SendNotification("vtr bear at " + TimeToStr(Time[i]));
+                        SendNotification(ReduceCcy(symbol)  + " " + TFToStr(tf) + " Bear VTR at " + TimeToStr(iTime(symbol, tf, i)));
                     }
                 }
             }

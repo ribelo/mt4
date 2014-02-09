@@ -1,5 +1,13 @@
-#property copyright "Copyright © 2014 Huxley"
+#property copyright "Copyright Â© 2014 Huxley"
 #property link      "email:   huxley_source@gmail_com"
+
+double _ask(string symbol) {
+	return (NormalizeDouble(MarketInfo(symbol, MODE_ASK), MarketInfo(symbol, MODE_DIGITS)));
+}
+
+double _bid(string symbol) {
+	return (NormalizeDouble(MarketInfo(symbol, MODE_BID), MarketInfo(symbol, MODE_DIGITS)));
+}
 
 
 bool _new_bar(string symbol, int timeframe) {

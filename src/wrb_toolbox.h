@@ -18,7 +18,7 @@ static inline int contraction_share(ohlc *candle, size_t c1, size_t c2) {
 
 static inline int prior_bull_wrb(ohlc *candle, size_t i, size_t n) {
     for (int j = 3; j < fmin(i, 256 + 3); j++) {
-        if (wrb(candle, i - j).dir == 1 &&
+        if (wrb(candle, i - j, n).dir == 1 &&
                 unfilled(candle, i - j, j, n)) {
             return i - j;
         }
@@ -29,7 +29,7 @@ static inline int prior_bull_wrb(ohlc *candle, size_t i, size_t n) {
 
 static inline int prior_bull_wrb_hg(ohlc *candle, size_t i, size_t n) {
     for (int j = 3; j < fmin(i, 256 + 3); j++) {
-        if (wrb_hg(candle, i - j).dir == 1 &&
+        if (wrb_hg(candle, i - j, n).dir == 1 &&
                 unfilled(candle, i - j, j, n)) {
             return i - j;
         }
@@ -40,7 +40,7 @@ static inline int prior_bull_wrb_hg(ohlc *candle, size_t i, size_t n) {
 
 static inline int prior_bear_wrb(ohlc *candle, size_t i, size_t n) {
     for (int j = 3; j < fmin(i, 256 + 3); j++) {
-        if (wrb(candle, i - j).dir == -1 &&
+        if (wrb(candle, i - j, n).dir == -1 &&
                 unfilled(candle, i - j, j, n)) {
             return i - j;
         }
@@ -51,7 +51,7 @@ static inline int prior_bear_wrb(ohlc *candle, size_t i, size_t n) {
 
 static inline int prior_bear_wrb_hg(ohlc *candle, size_t i, size_t n) {
     for (int j = 3; j < fmin(i, 256 + 3); j++) {
-        if (wrb_hg(candle, i - j).dir == -1 &&
+        if (wrb_hg(candle, i - j, n).dir == -1 &&
                 unfilled(candle, i - j, j, n)) {
             return i - j;
         }

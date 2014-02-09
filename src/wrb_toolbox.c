@@ -21,6 +21,4 @@ inline int volatility_expand(ohlc *candle, size_t i, int strength, int side);
 
 inline int contraction_retrace(ohlc *candle, size_t c1, size_t c2, size_t n);
 
-inline int zone_bounce(ohlc *candle, size_t i, zone z);
-
-inline int zone_bounce1(ohlc *candle, size_t i, size_t zone);
+inline int zone_bounce(ohlc *candle, size_t i, zone *z);

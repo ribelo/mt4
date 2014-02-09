@@ -4,22 +4,16 @@
 //+-------------------------------------------------------------------+
 #property copyright "Copyright 2014, Huxley"
 #include <wrb_analysis.mqh>
+#include <hxl_utils.mqh>
+#include <hxl_money_management.mqh>
 #include <gsl_math.mqh>
 #include <LibGMT.mqh>
 #include <LibOrderReliable4.mqh>
-#define PREFIX "j.a.r.v.i.s"
+#define _name "j.a.r.v.i.s"
 
 
 extern string  gen = "----general inputs----";
-extern bool    use_sd = true;
-extern bool    use_sas = true;
-extern int     timer_interval = 250;
-
-extern double  max_stop = 30.0;
-extern double  max_dd = 0.3;
-extern double  max_risk = 0.05;
-extern int     slippage = 3;
-
+extern int     main_timeframe = 60;
 extern int     magic_number = 0;
 extern string  trade_comment = "";
 extern bool    criminal_is_ecn = true;
@@ -29,6 +23,10 @@ extern double  buffer_size = 1.0;
 extern double  pending_pips = 5;
 
 extern string  tmm = "----Trade management module----";
+extern double  max_stop = 30.0;
+extern double  max_dd = 0.3;
+extern double  max_risk = 0.05;
+extern int     slippage = 3;
 extern bool    use_trailing_stop = true;
 extern bool    hg_only = true;
 extern bool    use_fractal = true;
@@ -47,11 +45,10 @@ extern bool    show_info = true;
 
 extern string  lab = "----Label---";
 extern bool    use_label_box = true;
-extern bool    show_statistic = true;
 extern color   label_box = C'188,182,167';
-//extern color   label_border = Black;
+extern color   label_border = Black;
 extern color   text_color = C'100,77,82';
-extern string  font_type = "Verdana";
+extern string  font_type = "Cantarell";
 extern int     font_size = 8;
 extern int     data_disp_offset = 14;
 extern int     data_disp_gap_size = 30;
@@ -76,11 +73,14 @@ double         orders[][5]; //first array is order number array, second array =
 //Misc
 int            pip_mult_tab[] = {1, 10, 1, 10, 1, 10, 100, 1000};
 string         symbol;
-int            tf, digits, multiplier, spread;
+int            tf, digits, multiplier;
 double         tickvalue, point;
 string         pip_description = " pips";
 bool           force_trade_closure;
 
+
+//Money Managemet
+double balance_array[];
 
 double candle[][6];
 //+------------------------------------------------------------------+
@@ -89,11 +89,14 @@ double candle[][6];
 int init() {
     //----
     symbol = Symbol();
-    tf = Period();
+    if (main_timeframe == 0) {
+        tf = Period();
+    } else {
+        tf = main_timeframe;
+    }
     digits = MarketInfo(symbol, MODE_DIGITS);
     multiplier = pip_mult_tab[digits];
     point = MarketInfo(symbol, MODE_POINT);
-    spread = MarketInfo(symbol, MODE_SPREAD) * multiplier;
     tickvalue = MarketInfo(symbol, MODE_TICKVALUE) * multiplier;
     if (multiplier > 1) {
         pip_description = " points";
@@ -110,8 +113,11 @@ int init() {
     if (criminal_is_ecn) {
         O_R_Config_use2step(true);
     }
+    CountOpenTrades();
+    InitTrades();
     PendingToFibo();
     GetFibo();
+    UpdateBalanceArray(balance_array);
     DisplayUserFeedback();
     if (!IsTesting()) {
         timer();
@@ -129,11 +135,12 @@ int deinit() {
     if (ObjectsTotal() > 0) {
         for (int i = ObjectsTotal() - 1; i >= 0; i--) {
             string name = ObjectName(i);
-            if (StringSubstr(name, 0, 4) == PREFIX || StringSubstr(name, 1, 4) == PREFIX) {
+            if (StringSubstr(name, 0, 4) == _name || StringSubstr(name, 1, 4) == _name) {
                 ObjectDelete(name);
             }
         }
     }
+    DeinitTrades();
     //----
     return (0);
 }
@@ -141,7 +148,7 @@ int deinit() {
 
 void timer() {
     while (true) {
-        Sleep(timer_interval);
+        Sleep(250);
         if (IsStopped() || !IsExpertEnabled()) {
             return;
         }
@@ -152,6 +159,55 @@ void timer() {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 //TRADE MANAGEMENT MODULE
+
+
+void InitTrades() {
+    double old_stop, new_stop, old_take, new_take;
+    for (int i = open_trades - 1; i >= 0; i--) {
+        int ticket = orders[i][0];
+        if (OrderSelect(ticket, SELECT_BY_TICKET, MODE_TRADES)) {
+            if (OrderSymbol() == symbol) {
+                if (OrderMagicNumber() == magic_number) {
+                    old_stop = NormalizeDouble(OrderStopLoss(), digits);
+                    old_take = NormalizeDouble(OrderTakeProfit(), digits);
+                    if (OrderType() == OP_BUY) {
+                        new_stop = NormalizeDouble(old_stop - hidden_pips * point, digits);
+                        new_take = NormalizeDouble(old_take + hidden_pips * point, digits);
+                    } else if (OrderType() == OP_SELL) {
+                        new_stop = NormalizeDouble(old_stop + hidden_pips * point, digits);
+                        new_take = NormalizeDouble(old_take - hidden_pips * point, digits);
+                    }
+                    OrderModifyReliable(ticket, OrderOpenPrice(), new_stop, new_take, 0, CLR_NONE);
+                }
+            }
+        }
+    }
+}
+
+
+void DeinitTrades() {
+    double old_stop, new_stop, old_take, new_take;
+    for (int i = open_trades - 1; i >= 0; i--) {
+        int ticket = orders[i][0];
+        if (OrderSelect(ticket, SELECT_BY_TICKET, MODE_TRADES)) {
+            if (OrderSymbol() == symbol) {
+                if (OrderMagicNumber() == magic_number) {
+                    old_stop = NormalizeDouble(OrderStopLoss(), digits);
+                    old_take = NormalizeDouble(OrderTakeProfit(), digits);
+                    if (OrderType() == OP_BUY) {
+                        new_stop = NormalizeDouble(old_stop + hidden_pips * point, digits);
+                        new_take = NormalizeDouble(old_take - hidden_pips * point, digits);
+                    } else if (OrderType() == OP_SELL) {
+                        new_stop = NormalizeDouble(old_stop - hidden_pips * point, digits);
+                        new_take = NormalizeDouble(old_take + hidden_pips * point, digits);
+                    }
+                    OrderModifyReliable(ticket, OrderOpenPrice(), new_stop, new_take, 0, CLR_NONE);
+                }
+            }
+        }
+    }
+}
+
 
 void DragDropLine() {
     double old_stop, new_stop, old_take, new_take;
@@ -223,7 +279,6 @@ void FiboToPending() {
     if (total_objects > 0) {
         for (int i = 0; i < total_objects; i++) {
             string name = ObjectName(i);
-
             if (ObjectType(name) == OBJ_FIBO) {
                 if (ObjectGet(name, OBJPROP_COLOR) == demand_color) {
                     entry_price = ObjectGet(name, OBJPROP_PRICE1);
@@ -231,10 +286,10 @@ void FiboToPending() {
                     desire_rr = ObjectGet(name, OBJPROP_FIRSTLEVEL + 2);
                     zone_size = entry_price - exit_price;
                     desire_price = entry_price + (desire_rr - 1) * zone_size;
-                    send_lot = CalculateDynamicDeltaSwansonLot(entry_price, exit_price);
-                    if (_fcmp(Ask, entry_price) > 0) {
+                    send_lot = CalculateDynamicDeltaLot(entry_price, exit_price);
+                    if (_fcmp(_ask(symbol), entry_price) > 0) {
                         type = OP_BUYLIMIT;
-                    } else if (_fcmp(Ask, entry_price) < 0) {
+                    } else if (_fcmp(_ask(symbol), entry_price) < 0) {
                         type = OP_BUYSTOP;
                     }
                     ticket = OrderSendReliable(symbol, type, send_lot, entry_price,
@@ -249,10 +304,10 @@ void FiboToPending() {
                     desire_rr = ObjectGet(name, OBJPROP_FIRSTLEVEL + 2);
                     zone_size = exit_price - entry_price;
                     desire_price = entry_price - (desire_rr - 1) * zone_size;
-                    send_lot = CalculateDynamicDeltaSwansonLot(entry_price, exit_price);
-                    if (_fcmp(Bid, entry_price) < 0) {
+                    send_lot = CalculateDynamicDeltaLot(entry_price, exit_price);
+                    if (_fcmp(_bid(symbol), entry_price) < 0) {
                         type = OP_SELLLIMIT;
-                    } else if (_fcmp(Bid, entry_price) > 0) {
+                    } else if (_fcmp(_bid(symbol), entry_price) > 0) {
                         type = OP_SELLSTOP;
                     }
                     ticket = OrderSendReliable(symbol, type, send_lot, entry_price,
@@ -308,29 +363,41 @@ void PendingToFibo() {
 }
 
 
-void TrailingStop() {
+double Support() {
+    static int last_time;
     static double support;
-    static double resistance;
-    static int last_time = 0;
     if (last_time != iTime(symbol, tf, 0)) {
         last_time = iTime(symbol, tf, 0);
         support = _support(candle, 1, true, 1, 5, iBars(symbol, tf));
+    }
+    return (support);
+}
+
+double Resistance() {
+    static int last_time;
+    static double resistance;
+    if (last_time != iTime(symbol, tf, 0)) {
+        last_time = iTime(symbol, tf, 0);
         resistance = _resistance(candle, 1, true, 1, 5, iBars(symbol, tf));
     }
+    return (resistance);
+}
+
+void TrailingStop() {
     for (int i = open_trades - 1; i >= 0; i--) {
         int ticket = orders[i][0];
         if (OrderSelect(ticket, SELECT_BY_TICKET, MODE_TRADES)) {
             if (OrderSymbol() == symbol) {
                 if (OrderMagicNumber() == magic_number) {
                     if (OrderType() == OP_BUY) {
-                        if (_fcmp(OrderStopLoss(), support) < 0 && support != 0.0) {
-                            ObjectMove(ticket + "_sl_line", 0, iTime(symbol, tf, 0), support);
-                            Print("Order " + ticket + " trailing stop move sl line to ", support);
+                        if (_fcmp(OrderStopLoss(), Support()) < 0 && Support() != 0.0) {
+                            ObjectMove(ticket + "_sl_line", 0, iTime(symbol, tf, 0), Support());
+                            Print("Order " + ticket + " trailing stop move sl line to ", Support());
                         }
                     } else if (OrderType() == OP_SELL) {
-                        if (_fcmp(OrderStopLoss(), resistance) > 0 && resistance != 0.0) {
-                            ObjectMove(ticket + "_sl_line", 0, iTime(symbol, tf, 0), support);
-                            Print("Order " + ticket + " trailing stop move sl line to ", support);
+                        if (_fcmp(OrderStopLoss(), Resistance()) > 0 && Resistance() != 0.0) {
+                            ObjectMove(ticket + "_sl_line", 0, iTime(symbol, tf, 0), Resistance());
+                            Print("Order " + ticket + " trailing stop move sl line to ", Resistance());
                         }
                     }
                 }
@@ -348,18 +415,18 @@ void LookForTradeClosure() {
                     double take = NormalizeDouble(ObjectGet(ticket + "_tp_line", OBJPROP_PRICE1), digits);
                     double stop = NormalizeDouble(ObjectGet(ticket + "_sl_line", OBJPROP_PRICE1), digits);
                     if (OrderType() == OP_BUY) {
-                        if (Ask >= take && take > 0) {
+                        if (_ask(symbol) >= take && take > 0) {
                             OrderCloseReliable(ticket, OrderLots(), OrderClosePrice(), 1000, CLR_NONE);
                         }
-                        if (Bid <= stop && stop > 0) {
+                        if (_bid(symbol) <= stop && stop > 0) {
                             OrderCloseReliable(ticket, OrderLots(), OrderClosePrice(), 1000, CLR_NONE);
                         }
                     }
                     if (OrderType() == OP_SELL) {
-                        if (Bid <= take && take > 0) {
+                        if (_bid(symbol) <= take && take > 0) {
                             OrderCloseReliable(ticket, OrderLots(), OrderClosePrice(), 1000, CLR_NONE);
                         }
-                        if (Ask >= stop && stop > 0) {
+                        if (_ask(symbol) >= stop && stop > 0) {
                             OrderCloseReliable(ticket, OrderLots(), OrderClosePrice(), 1000, CLR_NONE);
                         }
                     }
@@ -368,39 +435,18 @@ void LookForTradeClosure() {
         }
     }
 }
-
-void CloseAllTrades() {
-    force_trade_closure = false;
-    if (OrdersTotal() == 0) {
-        return;
-    }
-    for (int i = 0; i < OrdersTotal(); i++) {
-        if (OrderSelect(i, SELECT_BY_POS)) {
-            if (OrderMagicNumber() == magic_number) {
-                if (OrderSymbol() == symbol) {
-                    if (OrderType() == OP_BUY || OrderType() == OP_SELL) {
-                        bool result = OrderCloseReliable(OrderTicket(), OrderLots(), OrderClosePrice(), 1000, CLR_NONE);
-                    }
-                    if (!result) {
-                        force_trade_closure = true;
-                    }
-                }
-            }
-        }
-    }
-}
-
-//END TRADE MANAGEMENT MODULE
-////////////////////////////////////////////////////////////////////////////////////////////////
 
 bool IsTradingAllowed() {
     if (MarketInfo(symbol, MODE_SPREAD) > max_spreed) {
         return (false);
     }
+    if (!CheckMarginLevel()) {
+        return (false);
+    }
     return (true);
 }
 
-double CalculateDynamicDeltaSwansonLot(double open_price, double stop_price) {
+double CalculateDynamicDeltaLot(double open_price, double stop_price) {
     int local_multiplier, local_digits;
     int total_history = OrdersHistoryTotal();
     double dd, loss_pip, stop_pip;
@@ -464,7 +510,9 @@ double CalculateDynamicDeltaSwansonLot(double open_price, double stop_price) {
         Print("lot_risk ", lot_risk);
         double lot_max = AccountFreeMargin() / stop_pip / tickvalue;
         Print("lot_max ", lot_max);
-        double lot_size = MathMin(MathMin(lot_delta, lot_risk), lot_max);
+        double lot_size = MathMin(MathMin(MathMin(lot_delta, lot_risk), lot_max), MarketInfo(symbol, MODE_MAXLOT));
+        lot_size = MathFloor(lot_size / MarketInfo(symbol, MODE_LOTSTEP)) * MarketInfo(symbol, MODE_LOTSTEP);
+        lot_size = MathMax(lot_size, MarketInfo(symbol, MODE_MINLOT));
         Print("lot_size ", lot_size);
     }
     return (lot_size);
@@ -505,11 +553,11 @@ void GetFibo() {
                             zone_size = DoubleToStr(MathAbs(entry_price - stop_price) / point / multiplier, 1);
                             decsript = StringConcatenate("demand | zone_size: ", zone_size, " pips");
                             if (ObjectFind(label_name) == -1) {
-                                ObjectCreate(label_name, OBJ_TEXT, 0, Time[0], label_price);
+                                ObjectCreate(label_name, OBJ_TEXT, 0, iTime(symbol, tf, 0), label_price);
                             }
-                            ObjectSetText(label_name, text_color, info_text_size, "Tahoma", demand_color);
+                            ObjectSetText(label_name, text_color, info_text_size, font_type, demand_color);
                             ObjectSet(label_name, OBJPROP_PRICE1, label_price);
-                            ObjectSet(label_name, OBJPROP_TIME1, Time[0]);
+                            ObjectSet(label_name, OBJPROP_TIME1, iTime(symbol, tf, 0));
                         }
                     }
                     if (_fcmp(entry_price, stop_price) < 0) {
@@ -526,11 +574,11 @@ void GetFibo() {
                             zone_size = DoubleToStr(MathAbs(entry_price - stop_price) / point / multiplier, 1);
                             text_color = StringConcatenate("supply | zone_size: ", zone_size, " pips");
                             if (ObjectFind(label_name) == -1) {
-                                ObjectCreate(label_name, OBJ_TEXT, 0, Time[0], label_price);
+                                ObjectCreate(label_name, OBJ_TEXT, 0, iTime(symbol, tf, 0), label_price);
                             }
-                            ObjectSetText(label_name, text_color, info_text_size, "Tahoma", supply_color);
+                            ObjectSetText(label_name, text_color, info_text_size, font_type, supply_color);
                             ObjectSet(label_name, OBJPROP_PRICE1, label_price);
-                            ObjectSet(label_name, OBJPROP_TIME1, Time[0]);
+                            ObjectSet(label_name, OBJPROP_TIME1, iTime(symbol, tf, 0));
                         }
                     }
                 }
@@ -551,13 +599,12 @@ void GetFibo() {
 
 
 void SupplyDemandTrading() {
-    double entry_price[], exit_price[], desire_rr[], zone_size[];
-    bool freeze[];
-    double price, stpo_price, take_price, temp_send_lot, send_lot;
+    static double entry_price[], exit_price[], desire_rr[], zone_size[];
+    static bool freeze[];
+    static int total_objects;
+    double price, stpo_price, take_price, lot_size;
     string name;
     int type, ticket;
-    bool send_trade = false;
-    int total_objects;
     if (total_objects != ObjectsTotal()) {
         ArrayResize(entry_price, 0);
         ArrayResize(exit_price, 0);
@@ -585,27 +632,30 @@ void SupplyDemandTrading() {
                         freeze[i] = 0;
                     }
                     if (entry_price[i] != 0 && exit_price[i] != 0 && desire_rr[i] != 0 && zone_size[i] != 0) {
-                        if (_fcmp(Ask, entry_price[i]) <= 0 && _fcmp(Bid, exit_price[i]) >= 0) {
+                        if (_fcmp(_ask(symbol), entry_price[i]) <= 0 &&
+                                _fcmp(_bid(symbol), exit_price[i]) >= 0 &&
+                                freeze[i] == 0) {
                             freeze[i] = 1;
                         }
-                        if (_fcmp(Bid, exit_price[i]) <= 0 && freeze[i] == 1) {
+                        if (_fcmp(_bid(symbol), exit_price[i]) <= 0 && freeze[i] == 1) {
                             ObjectSet(name, OBJPROP_COLOR, pointless_color);
                             ObjectSet(name, OBJPROP_LEVELCOLOR, pointless_color);
                             ObjectSet(name, OBJPROP_LEVELWIDTH, 2);
                             ObjectSet(name, OBJPROP_FIBOLEVELS, 2);
                             continue;
                         }
-                        if (_fcmp(Ask, entry_price[i] + pending_pips * point) >= 0 && freeze[i] == 1) {
-                            ObjectSet(name, OBJPROP_COLOR, pointless_color);
-                            ObjectSet(name, OBJPROP_LEVELCOLOR, pointless_color);
-                            ObjectSet(name, OBJPROP_LEVELWIDTH, 2);
-                            ObjectSet(name, OBJPROP_FIBOLEVELS, 2);
-                            type = OP_BUY;
-                            price = Ask;
-                            stpo_price = exit_price[i] - hidden_pips * point;
-                            take_price = entry_price[i] + (desire_rr[i] - 1) * zone_size[i] + hidden_pips * point;
-                            temp_send_lot = CalculateDynamicDeltaSwansonLot(price, exit_price[i]);
-                            send_trade = true;
+                        if (_fcmp(_ask(symbol), entry_price[i] + pending_pips * point) >= 0 && freeze[i] == 1) {
+                            if (ObjectSet(name, OBJPROP_COLOR, pointless_color)) {
+                                ObjectSet(name, OBJPROP_LEVELCOLOR, pointless_color);
+                                ObjectSet(name, OBJPROP_LEVELWIDTH, 2);
+                                ObjectSet(name, OBJPROP_FIBOLEVELS, 2);
+                                type = OP_BUY;
+                                price = NormalizeDouble(MarketInfo(symbol, MODE_ASK), MarketInfo(symbol, MODE_DIGITS));
+                                stpo_price = exit_price[i] - hidden_pips * point;
+                                take_price = entry_price[i] + (desire_rr[i] - 1) * zone_size[i] + hidden_pips * point;
+                                lot_size = CalculateDynamicDeltaLot(price, exit_price[i]);
+                                ticket = OrderSendReliableMKT(symbol, type, lot_size, price, slippage, stpo_price, take_price, trade_comment, magic_number, 0, CLR_NONE);
+                            }
                             break;
                         }
                     }
@@ -620,27 +670,30 @@ void SupplyDemandTrading() {
                     }
                     if (entry_price[i] != 0 && exit_price[i] != 0 && desire_rr[i] != 0 && zone_size[i] != 0) {
 
-                        if (_fcmp(Ask, entry_price[i]) <= 0 && _fcmp(Bid, exit_price[i]) >= 0) {
+                        if (_fcmp(_ask(symbol), entry_price[i]) <= 0 &&
+                                _fcmp(_bid(symbol), exit_price[i]) >= 0 &&
+                                freeze[i] == 0) {
                             freeze[i] = 1;
                         }
-                        if (_fcmp(Ask, exit_price[i]) >= 0 && freeze[i] == 1) {
+                        if (_fcmp(_ask(symbol), exit_price[i]) >= 0 && freeze[i] == 1) {
                             ObjectSet(name, OBJPROP_COLOR, pointless_color);
                             ObjectSet(name, OBJPROP_LEVELCOLOR, pointless_color);
                             ObjectSet(name, OBJPROP_LEVELWIDTH, 2);
                             ObjectSet(name, OBJPROP_FIBOLEVELS, 2);
                             continue;
                         }
-                        if (_fcmp(Bid, entry_price[i] - pending_pips * point) <= 0 && freeze[i] == 1) {
-                            ObjectSet(name, OBJPROP_COLOR, pointless_color);
-                            ObjectSet(name, OBJPROP_LEVELCOLOR, pointless_color);
-                            ObjectSet(name, OBJPROP_LEVELWIDTH, 2);
-                            ObjectSet(name, OBJPROP_FIBOLEVELS, 2);
-                            type = OP_SELL;
-                            price = Bid;
-                            stpo_price = exit_price[i] + hidden_pips * point;
-                            take_price = entry_price[i] - (desire_rr[i] - 1) * zone_size[i] - hidden_pips * point;
-                            temp_send_lot = CalculateDynamicDeltaSwansonLot(price, exit_price[i]);
-                            send_trade = true;
+                        if (_fcmp(_bid(symbol), entry_price[i] - pending_pips * point) <= 0 && freeze[i] == 1) {
+                            if (ObjectSet(name, OBJPROP_COLOR, pointless_color)) {
+                                ObjectSet(name, OBJPROP_LEVELCOLOR, pointless_color);
+                                ObjectSet(name, OBJPROP_LEVELWIDTH, 2);
+                                ObjectSet(name, OBJPROP_FIBOLEVELS, 2);
+                                type = OP_SELL;
+                                price = _bid(symbol);
+                                stpo_price = exit_price[i] + hidden_pips * point;
+                                take_price = entry_price[i] - (desire_rr[i] - 1) * zone_size[i] - hidden_pips * point;
+                                lot_size = CalculateDynamicDeltaLot(price, exit_price[i]);
+                                ticket = OrderSendReliableMKT(symbol, type, lot_size, price, slippage, stpo_price, take_price, trade_comment, magic_number, 0, CLR_NONE);
+                            }
                             break;
                         }
                     }
@@ -648,35 +701,8 @@ void SupplyDemandTrading() {
             }
         }
     }
-    if (send_trade) {
-        while (temp_send_lot > 0) {
-            if (temp_send_lot > MarketInfo(symbol, MODE_MAXLOT)) {
-                send_lot = MarketInfo(symbol, MODE_MAXLOT);
-                temp_send_lot -= MarketInfo(symbol, MODE_MAXLOT);
-            } else {
-                send_lot = temp_send_lot;
-                temp_send_lot = 0;
-            }
-            if (ticket == 0) {
-                ticket = OrderSendReliable(symbol, type, send_lot, price, slippage, stpo_price, take_price, trade_comment, magic_number, 0, CLR_NONE);
-            }
-            if (ticket != 0) {
-                if (type == OP_SELL) {
-                    stpo_price -= hidden_pips * Point;
-                    take_price += hidden_pips * Point;
-                    DrawHiddenTakeProfit(ticket, take_price);
-                    DrawHiddenStopLoss(ticket, stpo_price);
-                }
-                if (type == OP_BUY) {
-                    stpo_price += hidden_pips * Point;
-                    take_price -= hidden_pips * Point;
-                    DrawHiddenTakeProfit(ticket, take_price);
-                    DrawHiddenStopLoss(ticket, stpo_price);
-                }
-            }
-        }
-    }
 }
+
 
 void SasTrading() {
     if (!IsTradingAllowed()) {
@@ -690,21 +716,21 @@ void SasTrading() {
             if (StringSubstr(name, 0, 15) == "Horizontal Line") {
                 Print("I found !sas trigger");
                 double trigger = ObjectGet(name, OBJPROP_PRICE1);
-                if (trigger > Ask) {
+                if (trigger > _ask(symbol)) {
                     Print("Trigger is sell signal");
-                    if (trigger - Ask > max_stop * point && max_stop > 0) {
+                    if (trigger - _ask(symbol) > max_stop * point && max_stop > 0) {
                         ObjectDelete(name);
-                        Print("Error: stop " + (trigger - Ask) + " > " + (max_stop * point) + " max_stop ");
+                        Print("Error: stop " + (trigger - _ask(symbol)) + " > " + (max_stop * point) + " max_stop ");
                         Print(max_stop);
                         Print(point);
-                        Print(trigger - Ask > max_stop * point);
+                        Print(trigger - _ask(symbol) > max_stop * point);
                         return;
                     }
                     type = OP_SELL;
-                    price = Bid;
+                    price = _bid(symbol);
                     stop = trigger + hidden_pips * point;
                     take = price - (trigger - price) * 3 - hidden_pips * point;
-                    temp_send_lot = CalculateDynamicDeltaSwansonLot(price, trigger);
+                    temp_send_lot = CalculateDynamicDeltaLot(price, trigger);
                     Print("Sell price ", price, " trigger ", trigger, " stop ", stop, " take ", take);
                     while (ticket == 0) {
                         while (temp_send_lot > 0) {
@@ -716,7 +742,7 @@ void SasTrading() {
                                 temp_send_lot = 0;
                             }
                             if (ticket == 0) {
-                                ticket = OrderSendReliable(symbol, type, send_lot, price, slippage, stop, take, trade_comment, temp_magic_number, 0, CLR_NONE);
+                                ticket = OrderSendReliableMKT(symbol, type, send_lot, price, slippage, stop, take, trade_comment, temp_magic_number, 0, CLR_NONE);
                             }
                         }
                     }
@@ -726,18 +752,18 @@ void SasTrading() {
                         DrawHiddenStopLoss(ticket, trigger);
                     }
                 }
-                if (trigger < Bid) {
+                if (trigger < _bid(symbol)) {
                     Print("Trigger is buy signal");
-                    if (Bid - trigger > max_stop * point) {
+                    if (_bid(symbol) - trigger > max_stop * point) {
                         ObjectDelete(name);
-                        Print("Error: stop " + (trigger - Ask) + " > " + (max_stop * point) + " max_stop ");
+                        Print("Error: stop " + (trigger - _ask(symbol)) + " > " + (max_stop * point) + " max_stop ");
                         return;
                     }
                     type = OP_BUY;
-                    price = Ask;
+                    price = _ask(symbol);
                     stop = trigger - hidden_pips * point;
                     take = price + (price - trigger) * 3 +  hidden_pips * point;
-                    temp_send_lot = CalculateDynamicDeltaSwansonLot(price, trigger);
+                    temp_send_lot = CalculateDynamicDeltaLot(price, trigger);
                     Print("Buy price ", price, " trigger ", trigger, " stop ", stop, " take ", take);
                     while (ticket == 0) {
                         while (temp_send_lot > 0) {
@@ -749,7 +775,7 @@ void SasTrading() {
                                 temp_send_lot = 0;
                             }
                             if (ticket == 0) {
-                                ticket = OrderSendReliable(symbol, type, send_lot, price, slippage, stop, take, trade_comment, temp_magic_number, 0, CLR_NONE);
+                                ticket = OrderSendReliableMKT(symbol, type, send_lot, price, slippage, stop, take, trade_comment, temp_magic_number, 0, CLR_NONE);
                             }
                         }
                     }
@@ -842,7 +868,7 @@ double CalculateRR() {
 void DrawHiddenStopLoss(int ticket, double price) {
     string sl_name = StringConcatenate(ticket, "_sl_line");
     if (ObjectFind(sl_name) == -1) {
-        ObjectCreate(sl_name, OBJ_HLINE, 0, Time[0], price);
+        ObjectCreate(sl_name, OBJ_HLINE, 0, iTime(symbol, tf, 0), price);
         ObjectSet(sl_name, OBJPROP_COLOR, supply_color);
         ObjectSet(sl_name, OBJPROP_WIDTH, 1);
         ObjectSet(sl_name, OBJPROP_STYLE, STYLE_SOLID);
@@ -853,7 +879,7 @@ void DrawHiddenStopLoss(int ticket, double price) {
 void DrawHiddenTakeProfit(int ticket, double price) {
     string tp_name = StringConcatenate(ticket, "_tp_line");
     if (ObjectFind(tp_name) == -1) {
-        ObjectCreate(tp_name, OBJ_HLINE, 0, Time[0], price);
+        ObjectCreate(tp_name, OBJ_HLINE, 0, iTime(symbol, tf, 0), price);
         ObjectSet(tp_name, OBJPROP_COLOR, demand_color);
         ObjectSet(tp_name, OBJPROP_WIDTH, 1);
         ObjectSet(tp_name, OBJPROP_STYLE, STYLE_SOLID);
@@ -914,42 +940,11 @@ bool CheckMarginLevel() {
             DisplayUserFeedback();
             return (false);
         } else {
-            ObjectDelete(StringConcatenate(PREFIX, "_margin_level_message"));
+            ObjectDelete(StringConcatenate(_name, "_margin_level_message"));
         }
     }
     return (true);
 }
-
-//+------------------------------------------------------------------+
-//| expert start function                                            |
-//+------------------------------------------------------------------+
-int start() {
-    //----
-    LookForTradeClosure();
-    TrailingStop();
-    DragDropLine();
-    if (use_sd) {
-        GetFibo();
-    }
-    if (force_trade_closure) {
-        CloseAllTrades();
-        return (0);
-    }
-    CountOpenTrades();
-    if (CheckMarginLevel()) {
-        if (use_sd) {
-            SupplyDemandTrading();
-        }
-        if (use_sas) {
-            SasTrading();
-        }
-    }
-    DeleteOrphanPriceLines();
-    DisplayUserFeedback();
-    //----
-    return (0);
-}
-//+------------------------------------------------------------------+
 
 int ObjectMakeLabel(string name, string text, int font_size, string font, color font_color, int x, int y, int window, int corner) {
     if (ObjectFind(name) == -1) {
@@ -970,39 +965,48 @@ void DisplayUserFeedback() {
     }
     temp_offset = 30;
     string screen_message = StringConcatenate("Supply&Demand semi-auto trading robot by Huxley on ", symbol);
-    ObjectMakeLabel(StringConcatenate(PREFIX, "ea_name"), screen_message, font_size * 1.2, "ArialBlack", supply_color, data_disp_gap_size, temp_offset, 0, 0);
+    ObjectMakeLabel(StringConcatenate(_name, "ea_name"), screen_message, font_size * 1.2, "Cantarell Bold", supply_color, data_disp_gap_size, temp_offset, 0, 0);
     temp_offset += 2 * data_disp_offset;
     double i;
     int m, s, k;
-    m = Time[0] + Period() * 60 - CurTime();
+    m = iTime(symbol, tf, 0) + Period() * 60 - CurTime();
     i = m / 60.0;
     s = m % 60;
     m = (m - m % 60) / 60;
     if (magic_number != 0) {
         screen_message = StringConcatenate("Magic number: ", magic_number);
-        ObjectMakeLabel(StringConcatenate(PREFIX, "magic_number_message"), screen_message, font_size, font_type, text_color, data_disp_gap_size, temp_offset, 0, 0);
+        ObjectMakeLabel(StringConcatenate(_name, "_magic_number_message"), screen_message, font_size, font_type, text_color, data_disp_gap_size, temp_offset, 0, 0);
         temp_offset += data_disp_offset;
     }
     if (trade_comment != " ") {
         screen_message = StringConcatenate("Trade comment: ", trade_comment);
-        ObjectMakeLabel(StringConcatenate(PREFIX, "trade_comment_message"), screen_message, font_size, font_type, text_color, data_disp_gap_size, temp_offset, 0, 0);
+        ObjectMakeLabel(StringConcatenate(_name, "_trade_comment_message"), screen_message, font_size, font_type, text_color, data_disp_gap_size, temp_offset, 0, 0);
         temp_offset += data_disp_offset;
     }
     screen_message = StringConcatenate("Max spreed = ", max_spreed, ": Spread = ", MarketInfo(symbol, MODE_SPREAD));
-    ObjectMakeLabel(StringConcatenate(PREFIX, "spreed_message"), screen_message, font_size, font_type, text_color, data_disp_gap_size, temp_offset, 0, 0);
+    ObjectMakeLabel(StringConcatenate(_name, "_spreed_message"), screen_message, font_size, font_type, text_color, data_disp_gap_size, temp_offset, 0, 0);
     temp_offset += data_disp_offset * 2;
-    //if (use_trailing_stop) {
-    //    temp_offset += data_disp_offset;
-    //    screen_message = "Trailing stop";
-    //    ObjectMakeLabel(StringConcatenate(PREFIX, "trailing_stop"), screen_message, font_size, font_type, text_color, data_disp_gap_size, temp_offset, 0, 0);
-    //    temp_offset += data_disp_offset;
-    //    screen_message = StringConcatenate("Strart from ", start_tp_percent, "%");
-    //    ObjectMakeLabel(StringConcatenate(PREFIX, "strart_stop"), screen_message, font_size, font_type, text_color, data_disp_gap_size, temp_offset, 0, 0);
-    //    temp_offset += data_disp_offset;
-    //    screen_message = StringConcatenate("End on ", stop_tp_percent, "%");
-    //    ObjectMakeLabel(StringConcatenate(PREFIX, "stop_stop"), screen_message, font_size, font_type, text_color, data_disp_gap_size, temp_offset, 0, 0);
-    //    temp_offset += data_disp_offset;
-    //}
+    screen_message = "Money Management:";
+    ObjectMakeLabel(StringConcatenate(_name, "_money_management"), screen_message, font_size, font_type, text_color, data_disp_gap_size, temp_offset, 0, 0);
+    temp_offset += data_disp_offset;
+    screen_message = StringConcatenate("    Highest EQ: ", DoubleToStr(CalculateHighestEq(balance_array), 0));
+    ObjectMakeLabel(StringConcatenate(_name, "_highest_eq"), screen_message, font_size, font_type, text_color, data_disp_gap_size, temp_offset, 0, 0);
+    temp_offset += data_disp_offset;
+    screen_message = StringConcatenate("    Drown Down: ", DoubleToStr(CalculateDrownDownPercent(balance_array) * 100, 2),"%");
+    ObjectMakeLabel(StringConcatenate(_name, "_drown_down"), screen_message, font_size, font_type, text_color, data_disp_gap_size, temp_offset, 0, 0);
+    temp_offset += data_disp_offset;
+
+    if (use_trailing_stop) {
+        screen_message = "Trailing Stop:";
+        ObjectMakeLabel(StringConcatenate(_name, "_trailing_stop_message"), screen_message, font_size, font_type, text_color, data_disp_gap_size, temp_offset, 0, 0);
+        temp_offset += data_disp_offset;
+        screen_message = StringConcatenate("    Support: ", DoubleToStr(Support(), digits));
+        ObjectMakeLabel(StringConcatenate(_name, "_trailing_support_message"), screen_message, font_size, font_type, text_color, data_disp_gap_size, temp_offset, 0, 0);
+        temp_offset += data_disp_offset;
+        screen_message = StringConcatenate("    Resistance: ", DoubleToStr(Resistance(), digits));
+        ObjectMakeLabel(StringConcatenate(_name, "_trailing_resistance_message"), screen_message, font_size, font_type, text_color, data_disp_gap_size, temp_offset, 0, 0);
+        temp_offset += data_disp_offset;
+    }
     //Running total of trades
     if (use_label_box) {
         //if ( ObjectFind ( "[[LabelBorder]]" ) == -1 ) {
@@ -1011,11 +1015,29 @@ void DisplayUserFeedback() {
         int count = temp_offset / data_disp_offset / 3;
         temp_offset = 20;
         for (int cc = count - 1; cc >= 0; cc--) {
-            string name = StringConcatenate("[", PREFIX, "label_box", cc, "]");
+            string name = StringConcatenate("[", _name, "label_box", cc, "]");
             if (ObjectFind(name) == -1) {
                 ObjectMakeLabel(name, "ggggggggg", 34, "Webdings", label_box, data_disp_gap_size - (data_disp_gap_size / 2), temp_offset, 0, 0);
             }
             temp_offset += 45;
         }
     }
+}
+
+int start() {
+    //----
+    UpdateBalanceArray(balance_array);
+    CountOpenTrades();
+    LookForTradeClosure();
+    TrailingStop();
+    DragDropLine();
+    GetFibo();
+    if (IsTradeAllowed()) {
+        SupplyDemandTrading();
+        SasTrading();
+    }
+    DeleteOrphanPriceLines();
+    DisplayUserFeedback();
+    //----
+    return (0);
 }

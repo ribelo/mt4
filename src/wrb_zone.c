@@ -8,18 +8,14 @@
 #include "wrb_confirmation.h"
 
 
-inline double zone_size(body *body);
-
-
-zone swing_point_1(ohlc *candle, size_t i, size_t n,
-                                 size_t contraction) {
+zone swing_point_1(ohlc *candle, size_t i, size_t contraction, size_t n) {
     zone r = {};
     size_t j, end_loop = GSL_MIN_INT(i, contraction);
     int prior_wrb, swing_point;
-    if (wrb_hg(candle, i).dir == 1 &&
+    if (wrb_hg(candle, i, n).dir == 1 &&
             volatility_expand(candle, i, 2, 1)) {
         for (j = 4; j < end_loop; j++) {
-            if (wrb(candle, i - j).dir != 0 &&
+            if (wrb(candle, i - j, n).dir != 0 &&
                     contraction_share(candle, i, i - j) &&
                     broke_bars(candle, i, j) &&
                     contraction_body_size_break(candle, i, i - j)) {
@@ -61,10 +57,10 @@ zone swing_point_1(ohlc *candle, size_t i, size_t n,
                 }
             }
         }
-    } else if (wrb_hg(candle, i).dir == -1 &&
+    } else if (wrb_hg(candle, i, n).dir == -1 &&
                volatility_expand(candle, i, -2, 1)) {
         for (j = 4; j < end_loop; j++) {
-            if (wrb(candle, i - j).dir != 0 &&
+            if (wrb(candle, i - j, n).dir != 0 &&
                     contraction_share(candle, i, i - j) &&
                     broke_bars(candle, i, j) &&
                     contraction_body_size_break(candle, i, i - j)) {
@@ -111,14 +107,13 @@ zone swing_point_1(ohlc *candle, size_t i, size_t n,
 }
 
 
-zone swing_point_2(ohlc *candle, size_t i, size_t n,
-                                 size_t contraction) {
+zone swing_point_2(ohlc *candle, size_t i, size_t contraction, size_t n) {
     zone r = {};
     size_t j, end_loop = GSL_MIN_INT(i, contraction);
-    if (wrb_hg(candle, i).dir == 1 &&
+    if (wrb_hg(candle, i, n).dir == 1 &&
             volatility_expand(candle, i, 3, 1)) {
         for (j = 4; j < end_loop; j++) {
-            if (wrb(candle, i - j).dir == -1 &&
+            if (wrb(candle, i - j, n).dir == -1 &&
                     contraction_share(candle, i, i - j) &&
                     broke_bars(candle, i, j) &&
                     contraction_body_size_break(candle, i, i - j)) {
@@ -133,10 +128,10 @@ zone swing_point_2(ohlc *candle, size_t i, size_t n,
                 break;
             }
         }
-    } else if (wrb_hg(candle, i).dir == -1 &&
+    } else if (wrb_hg(candle, i, n).dir == -1 &&
                volatility_expand(candle, i, -3, 1)) {
         for (j = 4; j < end_loop; j++) {
-            if (wrb(candle, i - j).dir == 1 &&
+            if (wrb(candle, i - j, n).dir == 1 &&
                     contraction_share(candle, i, i - j) &&
                     broke_bars(candle, i, j) &&
                     contraction_body_size_break(candle, i, i - j)) {
@@ -201,17 +196,16 @@ zone swing_point_3(ohlc *candle, size_t i, size_t n) {
 }
 
 
-zone strong_continuation_1(ohlc *candle, size_t i, size_t n,
-        size_t contraction) {
+zone strong_continuation_1(ohlc *candle, size_t i, size_t contraction, size_t n) {
     zone r = {};
     size_t j, end_loop = GSL_MIN_INT(i, contraction);
-    if (wrb_hg(candle, i).dir == 1) {
+    if (wrb_hg(candle, i, n).dir == 1) {
         for (j = 4; j < end_loop; j++) {
-            if (wrb(candle, i - j).dir == 1 &&
+            if (wrb(candle, i - j, n).dir == 1 &&
                     contraction_share(candle, i, i - j) &&
                     broke_bars(candle, i, j) &&
                     contraction_body_size_break(candle, i, i - j)) {
-                if (fractal_break(candle, i, n, 5, 256) > 0) {
+                if (fractal_break(candle, i, 5, 256, n) > 0) {
                     r.v1.dir = 1;
                     r.v1.open = candle[i].open;
                     r.v1.close = candle[i].close;
@@ -221,7 +215,7 @@ zone strong_continuation_1(ohlc *candle, size_t i, size_t n,
                     r.v2.close = candle[i - j].close;
                     r.v2.nr = i - j;
                     break;
-                } else if (fractal_break(candle, i - j, n, 5, 256) > 0) {
+                } else if (fractal_break(candle, i - j, 5, 256, n) > 0) {
                     r.v1.dir = 1;
                     r.v1.open = candle[i - j].open;
                     r.v1.close = candle[i - j].close;
@@ -234,13 +228,13 @@ zone strong_continuation_1(ohlc *candle, size_t i, size_t n,
                 }
             }
         }
-    } else if (wrb_hg(candle, i).dir == -1) {
+    } else if (wrb_hg(candle, i, n).dir == -1) {
         for (j = 4; j < end_loop; j++) {
-            if (wrb(candle, i - j).dir == -1 &&
+            if (wrb(candle, i - j, n).dir == -1 &&
                     contraction_share(candle, i, i - j) &&
                     broke_bars(candle, i, j) &&
                     contraction_body_size_break(candle, i, i - j)) {
-                if (fractal_break(candle, i, n, 5, 256) > 0) {
+                if (fractal_break(candle, i, 5, 256, n) > 0) {
                     r.v1.dir = -1;
                     r.v1.open = candle[i].open;
                     r.v1.close = candle[i].close;
@@ -250,7 +244,7 @@ zone strong_continuation_1(ohlc *candle, size_t i, size_t n,
                     r.v2.close = candle[i - j].close;
                     r.v2.nr = i - j;
                     break;
-                } else if (fractal_break(candle, i - j, n, 5, 256) > 0) {
+                } else if (fractal_break(candle, i - j, 5, 256, n) > 0) {
                     r.v1.dir = -1;
                     r.v1.open = candle[i - j].open;
                     r.v1.close = candle[i - j].close;
@@ -268,15 +262,14 @@ zone strong_continuation_1(ohlc *candle, size_t i, size_t n,
 }
 
 
-zone strong_continuation_2(ohlc *candle, size_t i, size_t n,
-        size_t contraction) {
+zone strong_continuation_2(ohlc *candle, size_t i, size_t contraction, size_t n) {
     zone r = {};
     size_t j, end_loop = GSL_MIN_INT(i, contraction);
-    if (wrb_hg(candle, i).dir == 1 &&
+    if (wrb_hg(candle, i, n).dir == 1 &&
             volatility_expand(candle, i, 1, 1) &&
             volatility_expand(candle, i, 1, -1)) {
         for (j = 4; j < end_loop; j++) {
-            if (wrb(candle, i - j).dir == 1 &&
+            if (wrb(candle, i - j, n).dir == 1 &&
                     gsl_fcmp(lowest_low(candle, i - j - 3, i - j),
                              lowest_low(candle, i - j, i), FLT_EPSILON) < 0 &&
                     contraction_share(candle, i, i - j) &&
@@ -293,11 +286,11 @@ zone strong_continuation_2(ohlc *candle, size_t i, size_t n,
                 break;
             }
         }
-    } else if (wrb_hg(candle, i).dir == -1 &&
+    } else if (wrb_hg(candle, i, n).dir == -1 &&
                volatility_expand(candle, i, -1, 1) &&
                volatility_expand(candle, i, -1, -1)) {
         for (j = 4; j < end_loop; j++) {
-            if (wrb(candle, i - j).dir == -1 &&
+            if (wrb(candle, i - j, n).dir == -1 &&
                     gsl_fcmp(highest_high(candle, i - j - 3, i - j),
                              highest_high(candle, i - j, i), FLT_EPSILON) > 0 &&
                     contraction_share(candle, i, i - j) &&
@@ -319,13 +312,12 @@ zone strong_continuation_2(ohlc *candle, size_t i, size_t n,
 }
 
 
-zone strong_continuation_3(ohlc *candle, size_t i, size_t n,
-        size_t contraction) {
+zone strong_continuation_3(ohlc *candle, size_t i, size_t contraction, size_t n) {
     zone r = {};
     size_t j, end_loop = GSL_MIN_INT(i, contraction);
-    if (wrb_hg(candle, i).dir == 1) {
+    if (wrb_hg(candle, i, n).dir == 1) {
         for (j = 4; j < end_loop; j++) {
-            if (wrb(candle, i - j).dir == 1 &&
+            if (wrb(candle, i - j, n).dir == 1 &&
                     gsl_fcmp(body_mid_point(candle, i - j),
                              highest_close(candle, i - j - 3, i - j),
                              FLT_EPSILON) > 0 &&
@@ -343,9 +335,9 @@ zone strong_continuation_3(ohlc *candle, size_t i, size_t n,
                 break;
             }
         }
-    } else if (wrb_hg(candle, i).dir == -1) {
+    } else if (wrb_hg(candle, i, n).dir == -1) {
         for (j = 4; j < end_loop; j++) {
-            if (wrb(candle, i - j).dir == -1 &&
+            if (wrb(candle, i - j, n).dir == -1 &&
                     gsl_fcmp(body_mid_point(candle, i - j),
                              lowest_close(candle, i - j - 3, i - j),
                              FLT_EPSILON) < 0 &&
@@ -368,13 +360,12 @@ zone strong_continuation_3(ohlc *candle, size_t i, size_t n,
 }
 
 
-zone strong_continuation_4(ohlc *candle, size_t i, size_t n,
-        size_t contraction) {
+zone strong_continuation_4(ohlc *candle, size_t i, size_t contraction, size_t n) {
     zone r = {};
     size_t j, end_loop = GSL_MIN_INT(i, contraction);
-    if (wrb_hg(candle, i).dir == 1) {
+    if (wrb_hg(candle, i, n).dir == 1) {
         for (j = 4; j < end_loop; j++) {
-            if (wrb(candle, i - j).dir == 1 &&
+            if (wrb(candle, i - j, n).dir == 1 &&
                     gsl_fcmp(body_size(candle, i),
                              body_size(candle, i - j),
                              FLT_EPSILON) > 0 &&
@@ -398,9 +389,9 @@ zone strong_continuation_4(ohlc *candle, size_t i, size_t n,
                 break;
             }
         }
-    } else if (wrb_hg(candle, i).dir == -1) {
+    } else if (wrb_hg(candle, i, n).dir == -1) {
         for (j = 4; j < end_loop; j++) {
-            if (wrb(candle, i - j).dir == -1 &&
+            if (wrb(candle, i - j, n).dir == -1 &&
                     gsl_fcmp(body_size(candle, i),
                              body_size(candle, i - j),
                              FLT_EPSILON) > 0 &&
@@ -430,11 +421,10 @@ zone strong_continuation_4(ohlc *candle, size_t i, size_t n,
 
 
 
-zone reaction_zone(ohlc *candle, size_t i, size_t n,
-                                 size_t look_forward) {
+zone reaction_zone(ohlc *candle, size_t i, size_t look_forward, size_t n) {
     zone r = {};
     size_t j, end_loop = GSL_MIN_INT(i, look_forward);
-    if (wrb_hg(candle, i).dir == 1) {
+    if (wrb_hg(candle, i, n).dir == 1) {
         for (j = 5; j < end_loop; j++) {
             if (gsl_fcmp(candle[i + j].low, candle[i].open, FLT_EPSILON) <= 0) {
                 break;
@@ -448,7 +438,7 @@ zone reaction_zone(ohlc *candle, size_t i, size_t n,
                     gsl_fcmp(candle[i + 1].low,
                              candle[i + j].low,
                              FLT_EPSILON) > 0 &&
-                    fractal_low(candle, i + j, n, 5)) {
+                    fractal_low(candle, i + j, 5, n)) {
                 r.v1.dir = 1;
                 r.v1.open = candle[i].open;
                 r.v1.close = candle[i].close;
@@ -456,7 +446,7 @@ zone reaction_zone(ohlc *candle, size_t i, size_t n,
                 break;
             }
         }
-    } else if (wrb_hg(candle, i).dir == -1) {
+    } else if (wrb_hg(candle, i, n).dir == -1) {
         for (j = 5; j < end_loop; j++) {
             if (gsl_fcmp(candle[i + j].high, candle[i].open, FLT_EPSILON) >= 0) {
                 break;
@@ -468,7 +458,7 @@ zone reaction_zone(ohlc *candle, size_t i, size_t n,
                              FLT_EPSILON) > 0 &&
                     gsl_fcmp(candle[i + 1].high, candle[i + j].high,
                              FLT_EPSILON) < 0 &&
-                    fractal_high(candle, i + j, n, 5)) {
+                    fractal_high(candle, i + j, 5, n)) {
                 r.v1.dir = -1;
                 r.v1.open = candle[i].open;
                 r.v1.close = candle[i].close;
@@ -481,55 +471,42 @@ zone reaction_zone(ohlc *candle, size_t i, size_t n,
 }
 
 
-
-zone wrb_zone(ohlc *candle, size_t i, size_t n,
-                            size_t contraction, int h_zone) {
+zone wrb_zone(ohlc *candle, size_t i, size_t contraction, size_t n) {
     zone r = {};
-    r = swing_point_1(candle, i, n, contraction);
-    if (r.v1.dir != 0) {
-        return r;
+    if (!r.v1.dir) {
+        r = swing_point_1(candle, i, contraction, n);
     }
-    r = swing_point_2(candle, i, n, contraction);
-    if (r.v1.dir != 0) {
-        return r;
+    if (!r.v1.dir) {
+        r = swing_point_2(candle, i, contraction, n);
     }
-    r = swing_point_3(candle, i, n);
-    if (r.v1.dir != 0) {
-        return r;
+    if (!r.v1.dir) {
+        r = swing_point_3(candle, i, n);
     }
-    r = strong_continuation_1(candle, i, n, contraction);
-    if (r.v1.dir != 0) {
-        return r;
+    if (!r.v1.dir) {
+        r = strong_continuation_1(candle, i, contraction, n);
     }
-    r = strong_continuation_2(candle, i, n, contraction);
-    if (r.v1.dir != 0) {
-        return r;
+    if (!r.v1.dir) {
+        r = strong_continuation_2(candle, i, contraction, n);
     }
-    r = strong_continuation_3(candle, i, n, contraction);
-    if (r.v1.dir != 0) {
-        return r;
+    if (!r.v1.dir) {
+        r = strong_continuation_3(candle, i, contraction, n);
     }
-    r = strong_continuation_4(candle, i, n, contraction);
-    if (r.v1.dir != 0) {
-        return r;
+    if (!r.v1.dir) {
+        r = strong_continuation_4(candle, i, contraction, n);
     }
-    r = reaction_zone(candle, i, n, contraction);
-    if (r.v1.dir != 0) {
-        return r;
+    if (!r.v1.dir) {
+        r = reaction_zone(candle, i, contraction, n);
     }
-    if (h_zone == 1) {
-        signal c;
-        c = conf_h(candle, i, n, contraction);
-        if (c.dir != 0) {
-            r.v1.dir = c.c1.dir;
-            r.v1.open = c.c1.open;
-            r.v1.close = c.c1.close;
-            r.v1.nr = c.c1.nr;
-            r.v2.dir = c.c1.dir;
-            r.v2.open = c.c2.open;
-            r.v2.close = c.c2.close;
-            r.v2.nr = c.c2.nr;
-        }
+    signal c = conf_h(candle, i, contraction, n);
+    if (c.dir != 0) {
+        r.v1.dir = c.c1.dir;
+        r.v1.open = c.c1.open;
+        r.v1.close = c.c1.close;
+        r.v1.nr = c.c1.nr;
+        r.v2.dir = c.c1.dir;
+        r.v2.open = c.c2.open;
+        r.v2.close = c.c2.close;
+        r.v2.nr = c.c2.nr;
     }
     return r;
 }

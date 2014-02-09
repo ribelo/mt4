@@ -47,9 +47,9 @@ static inline double point_side(line l, point p) {
 // }
 
 
-static inline int get_prior_low_fractal(ohlc *candle, size_t i, size_t n, size_t l) {
+static inline int get_prior_low_fractal(ohlc *candle, size_t i, size_t l, size_t n) {
     for (size_t j = l; j < i; j++) {
-        if (fractal_low(candle, i - j, n, l)) {
+        if (fractal_low(candle, i - j, l, n)) {
             return i - j;
         }
     }
@@ -57,9 +57,9 @@ static inline int get_prior_low_fractal(ohlc *candle, size_t i, size_t n, size_t
 }
 
 
-static inline int get_prior_high_fractal(ohlc *candle, size_t i, size_t n, size_t l) {
+static inline int get_prior_high_fractal(ohlc *candle, size_t i, size_t l, size_t n) {
     for (size_t j = l; j < i; j++) {
-        if (fractal_high(candle, i - j, n, l)) {
+        if (fractal_high(candle, i - j, l, n)) {
             return i - j;
         }
     }
@@ -91,31 +91,31 @@ static inline int broke_line(ohlc *candle, line l, size_t start,
 }
 
 
-signal apaor(ohlc *main, ohlc *sister, size_t i, size_t n, size_t pa_l,
-                  size_t pb_l, int invert, size_t look_back) {
+signal apaor(ohlc *main, ohlc *sister, size_t i, size_t pa_l,
+                  size_t pb_l, int invert, size_t look_back, size_t n) {
     signal r = {};
     point m_pb, m_pa, s_pb, s_pa;
     line m_apaor_line, s_apaor_line;
     if (!invert) {
-        if (fractal_low(main, i, n, pb_l)) {
+        if (fractal_low(main, i, pb_l, n)) {
             m_pb.x = i;
             m_pb.y = main[m_pb.x].low;
-            m_pa.x = get_prior_low_fractal(main, m_pb.x, n, pa_l);
+            m_pa.x = get_prior_low_fractal(main, m_pb.x, pa_l, n);
             m_pa.y = main[m_pa.x].low;
-            if (fractal_low(sister, i - 1, n, pb_l)) {
+            if (fractal_low(sister, i - 1, pb_l, n)) {
                 s_pb.x = i - 1;
                 s_pb.y = sister[s_pb.x].low;
-                s_pa.x = get_prior_low_fractal(sister, s_pb.x, n, pa_l);
+                s_pa.x = get_prior_low_fractal(sister, s_pb.x, pa_l, n);
                 s_pa.y = sister[s_pa.x].low;
-            } else if (fractal_low(sister, i, n, pb_l)) {
+            } else if (fractal_low(sister, i, pb_l, n)) {
                 s_pb.x = i;
                 s_pb.y = sister[s_pb.x].low;
-                s_pa.x = get_prior_low_fractal(sister, s_pb.x, n, pa_l);
+                s_pa.x = get_prior_low_fractal(sister, s_pb.x, pa_l, n);
                 s_pa.y = sister[s_pa.x].low;
-            } else if (fractal_low(sister, i + 1, n, pb_l)) {
+            } else if (fractal_low(sister, i + 1, pb_l, n)) {
                 s_pb.x = i + 1;
                 s_pb.y = sister[s_pb.x].low;
-                s_pa.x = get_prior_low_fractal(sister, s_pb.x, n, pa_l);
+                s_pa.x = get_prior_low_fractal(sister, s_pb.x, pa_l, n);
                 s_pa.y = sister[s_pa.x].low;
             } else {
                 return r;
@@ -132,25 +132,25 @@ signal apaor(ohlc *main, ohlc *sister, size_t i, size_t n, size_t pa_l,
                 r.c2.nr = m_pa.x;
                 r.dir = 1;
             }
-        } else if (fractal_high(main, i, n, pb_l)) {
+        } else if (fractal_high(main, i, pb_l, n)) {
             m_pb.x = i;
             m_pb.y = main[m_pb.x].high;
-            m_pa.x = get_prior_high_fractal(main, i, n, pa_l);
+            m_pa.x = get_prior_high_fractal(main, i, pa_l, n);
             m_pa.y = main[m_pa.x].high;
-            if (fractal_high(sister, i - 1, n, pb_l)) {
+            if (fractal_high(sister, i - 1, pb_l, n)) {
                 s_pb.x = i - 1;
                 s_pb.y = sister[s_pb.x].high;
-                s_pa.x = get_prior_high_fractal(sister, s_pb.x, n, pa_l);
+                s_pa.x = get_prior_high_fractal(sister, s_pb.x, pa_l, n);
                 s_pa.y = sister[s_pa.x].high;
-            } else if (fractal_high(sister, i, n, pb_l)) {
+            } else if (fractal_high(sister, i, pb_l, n)) {
                 s_pb.x = i;
                 s_pb.y = sister[s_pb.x].high;
-                s_pa.x = get_prior_high_fractal(sister, s_pb.x, n, pa_l);
+                s_pa.x = get_prior_high_fractal(sister, s_pb.x, pa_l, n);
                 s_pa.y = sister[s_pa.x].high;
-            } else if (fractal_high(sister, i + 1, n, pb_l)) {
+            } else if (fractal_high(sister, i + 1, pb_l, n)) {
                 s_pb.x = i + 1;
                 s_pb.y = sister[s_pb.x].high;
-                s_pa.x = get_prior_high_fractal(sister, s_pb.x, n, pa_l);
+                s_pa.x = get_prior_high_fractal(sister, s_pb.x, pa_l, n);
                 s_pa.y = sister[s_pa.x].high;
             } else {
                 return r;
@@ -169,25 +169,25 @@ signal apaor(ohlc *main, ohlc *sister, size_t i, size_t n, size_t pa_l,
             }
         }
     } else {
-        if (fractal_low(main, i, n, pb_l)) {
+        if (fractal_low(main, i, pb_l, n)) {
             m_pb.x = i;
             m_pb.y = main[m_pb.x].low;
-            m_pa.x = get_prior_low_fractal(main, i, n, pa_l);
+            m_pa.x = get_prior_low_fractal(main, i, pa_l, n);
             m_pa.y = main[m_pa.x].low;
-            if (fractal_high(sister, i - 1, n, pb_l)) {
+            if (fractal_high(sister, i - 1, pb_l, n)) {
                 s_pb.x = i - 1;
                 s_pb.y = sister[s_pb.x].high;
-                s_pa.x = get_prior_high_fractal(sister, s_pb.x, n, pa_l);
+                s_pa.x = get_prior_high_fractal(sister, s_pb.x, pa_l, n);
                 s_pa.y = sister[s_pa.x].high;
-            } else if (fractal_high(sister, i, n, pb_l)) {
+            } else if (fractal_high(sister, i, pb_l, n)) {
                 s_pb.x = i;
                 s_pb.y = sister[s_pb.x].high;
-                s_pa.x = get_prior_high_fractal(sister, s_pb.x, n, pa_l);
+                s_pa.x = get_prior_high_fractal(sister, s_pb.x, pa_l, n);
                 s_pa.y = sister[s_pa.x].high;
-            } else if (fractal_high(sister, i + 1, n, pb_l)) {
+            } else if (fractal_high(sister, i + 1, pb_l, n)) {
                 s_pb.x = i + 1;
                 s_pb.y = sister[s_pb.x].high;
-                s_pa.x = get_prior_high_fractal(sister, s_pb.x, n, pa_l);
+                s_pa.x = get_prior_high_fractal(sister, s_pb.x, pa_l, n);
                 s_pa.y = sister[s_pa.x].high;
             } else {
                 return r;
@@ -204,25 +204,25 @@ signal apaor(ohlc *main, ohlc *sister, size_t i, size_t n, size_t pa_l,
                 r.c2.nr = m_pa.x;
                 r.dir = 1;
             }
-        } else if (fractal_high(main, i, n, pb_l)) {
+        } else if (fractal_high(main, i, pb_l, n)) {
             m_pb.x = i;
             m_pb.y = main[m_pb.x].high;
-            m_pa.x = get_prior_high_fractal(main, i, n, pa_l);
+            m_pa.x = get_prior_high_fractal(main, i, pa_l, n);
             m_pa.y = main[m_pa.x].high;
-            if (fractal_low(sister, i - 1, n, pb_l)) {
+            if (fractal_low(sister, i - 1, pb_l, n)) {
                 s_pb.x = i - 1;
                 s_pb.y = sister[s_pb.x].low;
-                s_pa.x = get_prior_low_fractal(sister, s_pb.x, n, pa_l);
+                s_pa.x = get_prior_low_fractal(sister, s_pb.x, pa_l, n);
                 s_pa.y = sister[s_pa.x].low;
-            } else if (fractal_low(sister, i, n, pb_l)) {
+            } else if (fractal_low(sister, i, pb_l, n)) {
                 s_pb.x = i;
                 s_pb.y = sister[s_pb.x].low;
-                s_pa.x = get_prior_low_fractal(sister, s_pb.x, n, pa_l);
+                s_pa.x = get_prior_low_fractal(sister, s_pb.x, pa_l, n);
                 s_pa.y = sister[s_pa.x].low;
-            } else if (fractal_low(sister, i + 1, n, pb_l)) {
+            } else if (fractal_low(sister, i + 1, pb_l, n)) {
                 s_pb.x = i + 1;
                 s_pb.y = sister[s_pb.x].low;
-                s_pa.x = get_prior_low_fractal(sister, s_pb.x, n, pa_l);
+                s_pa.x = get_prior_low_fractal(sister, s_pb.x, pa_l, n);
                 s_pa.y = sister[s_pa.x].low;
             } else {
                 return r;

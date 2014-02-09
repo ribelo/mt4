@@ -5,9 +5,9 @@
 #include "wrb_toolbox.h"
 
 
-static inline signal conf_a(ohlc *candle, size_t i) {
+static inline signal conf_a(ohlc *candle, size_t i, size_t n) {
     signal r = {};
-    if (wrb(candle, i - 2).dir == -1 &&
+    if (wrb(candle, i - 2, n).dir == -1 &&
             ((dir(candle, i - 1) == -1 &&
               gsl_fcmp(candle[i - 1].close,
                        candle[i - 2].close,
@@ -27,7 +27,7 @@ static inline signal conf_a(ohlc *candle, size_t i) {
         r.c1.dir = 1;
         r.c2.nr = i - 2;
         r.dir = 1;
-    } else if (wrb(candle, i - 2).dir == 1 &&
+    } else if (wrb(candle, i - 2, n).dir == 1 &&
                ((dir(candle, i - 1) == 1 &&
                  gsl_fcmp(candle[i - 1].close,
                           candle[i - 2].close,
@@ -53,10 +53,10 @@ static inline signal conf_a(ohlc *candle, size_t i) {
 }
 
 
-static inline signal conf_b(ohlc *candle, size_t i) {
+static inline signal conf_b(ohlc *candle, size_t i, size_t n) {
     signal r = {};
     if (dir(candle, i - 2) == -1 &&
-            wrb(candle, i - 1).dir == -1 &&
+            wrb(candle, i - 1, n).dir == -1 &&
             dir(candle, i) == 1 &&
             gsl_fcmp(candle[i].low,
                      candle[i - 1].close,
@@ -75,7 +75,7 @@ static inline signal conf_b(ohlc *candle, size_t i) {
         r.c2.nr = i - 2;
         r.dir = 1;
     } else if (dir(candle, i - 2) == 1 &&
-               wrb(candle, i - 1).dir == 1 &&
+               wrb(candle, i - 1, n).dir == 1 &&
                dir(candle, i) == -1 &&
                gsl_fcmp(candle[i].high,
                         candle[i - 1].close,
@@ -99,9 +99,9 @@ static inline signal conf_b(ohlc *candle, size_t i) {
 }
 
 
-static inline signal conf_c(ohlc *candle, size_t i) {
+static inline signal conf_c(ohlc *candle, size_t i, size_t n) {
     signal r = {};
-    if (wrb(candle, i - 2).dir == -1 &&
+    if (wrb(candle, i - 2, n).dir == -1 &&
             dir(candle, i - 1) == 1 &&
             dir(candle, i) == 1 &&
             gsl_fcmp(candle[i].close,
@@ -138,7 +138,7 @@ static inline signal conf_c(ohlc *candle, size_t i) {
         r.c1.dir = 1;
         r.c2.nr = i - 2;
         r.dir = 1;
-    } else if (wrb(candle, i - 2).dir == 1 &&
+    } else if (wrb(candle, i - 2, n).dir == 1 &&
                dir(candle, i - 1) == -1 &&
                dir(candle, i) == -1 &&
                gsl_fcmp(candle[i].close,
@@ -181,7 +181,7 @@ static inline signal conf_c(ohlc *candle, size_t i) {
 }
 
 
-static inline signal conf_d(ohlc *candle, size_t i) {
+static inline signal conf_d(ohlc *candle, size_t i, size_t n) {
     signal r = {};
     if (dir(candle, i - 2) == -1 &&
             dir(candle, i - 1) != 0 &&
@@ -255,7 +255,7 @@ static inline signal conf_d(ohlc *candle, size_t i) {
 }
 
 
-static inline signal conf_e(ohlc *candle, size_t i) {
+static inline signal conf_e(ohlc *candle, size_t i, size_t n) {
     signal r = {};
     if (dir(candle, i - 3) == -1 &&
             dir(candle, i - 2) == -1 &&
@@ -351,12 +351,12 @@ static inline signal conf_e(ohlc *candle, size_t i) {
 // }
 
 
-static inline signal conf_h1(ohlc *candle, size_t i, size_t n, size_t contraction) {
+static inline signal conf_h1(ohlc *candle, size_t i, size_t contraction, size_t n) {
     signal r = {};
     size_t j, end_loop = fmin(i - 3, contraction + 4);
-    if (wrb_hg(candle, i).dir == 1) {
+    if (wrb_hg(candle, i, n).dir == 1) {
         for (j = 4; j < end_loop; j++) {
-            if (wrb(candle, i - j).dir == 1 &&
+            if (wrb(candle, i - j, n).dir == 1 &&
                     broke_bars(candle, i, j) &&
                     contraction_share(candle, i, i - j) &&
                     contraction_body_size_break(candle, i, i - j) &&
@@ -367,9 +367,9 @@ static inline signal conf_h1(ohlc *candle, size_t i, size_t n, size_t contractio
                 r.dir = 1;
             }
         }
-    } else if (wrb_hg(candle, i).dir == -1) {
+    } else if (wrb_hg(candle, i, n).dir == -1) {
         for (j = 4; j < end_loop; j++) {
-            if (wrb(candle, i - j).dir == -1 &&
+            if (wrb(candle, i - j, n).dir == -1 &&
                     broke_bars(candle, i, j) &&
                     contraction_share(candle, i, i - j) &&
                     contraction_body_size_break(candle, i, i - j) &&
@@ -386,12 +386,12 @@ static inline signal conf_h1(ohlc *candle, size_t i, size_t n, size_t contractio
 }
 
 
-static inline signal conf_h2(ohlc *candle, size_t i, size_t n, size_t contraction) {
+static inline signal conf_h2(ohlc *candle, size_t i, size_t contraction, size_t n) {
     signal r = {};
     size_t j, end_loop = fmin(i - 3, contraction + 4);
-    if (wrb_hg(candle, i).dir == 1) {
+    if (wrb_hg(candle, i, n).dir == 1) {
         for (j = 4; j < end_loop; j++) {
-            if (wrb(candle, i - j).dir == -1 &&
+            if (wrb(candle, i - j, n).dir == -1 &&
                     broke_bars(candle, i, j) &&
                     contraction_share(candle, i, i - j) &&
                     contraction_body_size_break(candle, i, i - j) &&
@@ -402,76 +402,9 @@ static inline signal conf_h2(ohlc *candle, size_t i, size_t n, size_t contractio
                 r.dir = 1;
             }
         }
-    } else if (wrb_hg(candle, i).dir == -1) {
+    } else if (wrb_hg(candle, i, n).dir == -1) {
         for (j = 4; j < end_loop; j++) {
-            if (wrb(candle, i - j).dir == 1 &&
-                    broke_bars(candle, i, j) &&
-                    contraction_share(candle, i, i - j) &&
-                    contraction_body_size_break(candle, i, i - j) &&
-                    volatility_expand(candle, i, -1, -1)) {
-                r.c1.nr = i;
-                r.c1.dir = -1;
-                r.c2.nr = i - j;
-                r.c2.dir = -1;
-                r.dir = -1;
-            }
-        }
-    }
-    return r;
-}
-
-
-static inline signal conf_h3(ohlc *candle, size_t i, size_t n, size_t contraction) {
-    signal r = {};
-    size_t j, end_loop = fmin(i - 3, contraction + 4);
-    if (wrb_hg(candle, i).dir == 1) {
-        for (j = 4; j < end_loop; j++) {
-            if (wrb(candle, i - j).dir == 1 &&
-                    contraction_share(candle, i, i - j) &&
-                    contraction_body_size_break(candle, i, i - j) &&
-                    volatility_expand(candle, i, 1, -1)) {
-                r.c1.nr = i;
-                r.c1.dir = 1;
-                r.c2.nr = i - j;
-                r.dir = 1;
-            }
-        }
-    } else if (wrb_hg(candle, i).dir == -1) {
-        for (j = 4; j < end_loop; j++) {
-            if (wrb(candle, i - j).dir == -1 &&
-                    contraction_share(candle, i, i - j) &&
-                    contraction_body_size_break(candle, i, i - j) &&
-                    volatility_expand(candle, i, -1, -1)) {
-                r.c1.nr = i;
-                r.c1.dir = -1;
-                r.c2.nr = i - j;
-                r.c2.dir = -1;
-                r.dir = -1;
-            }
-        }
-    }
-    return r;
-}
-
-
-static inline signal conf_h4(ohlc *candle, size_t i, size_t n, size_t contraction) {
-    signal r = {};
-    size_t j, end_loop = fmin(i - 3, contraction + 4);
-    if (wrb_hg(candle, i).dir == 1) {
-        for (j = 4; j < end_loop; j++) {
-            if (wrb(candle, i - j).dir == -1 &&
-                    contraction_share(candle, i, i - j) &&
-                    contraction_body_size_break(candle, i, i - j) &&
-                    volatility_expand(candle, i, 1, -1)) {
-                r.c1.nr = i;
-                r.c1.dir = 1;
-                r.c2.nr = i - j;
-                r.dir = 1;
-            }
-        }
-    } else if (wrb_hg(candle, i).dir == -1) {
-        for (j = 4; j < end_loop; j++) {
-            if (wrb(candle, i - j).dir == 1 &&
+            if (wrb(candle, i - j, n).dir == 1 &&
                     broke_bars(candle, i, j) &&
                     contraction_share(candle, i, i - j) &&
                     contraction_body_size_break(candle, i, i - j) &&
@@ -488,21 +421,88 @@ static inline signal conf_h4(ohlc *candle, size_t i, size_t n, size_t contractio
 }
 
 
-static inline signal conf_h(ohlc *candle, size_t i, size_t n, size_t contraction) {
+static inline signal conf_h3(ohlc *candle, size_t i, size_t contraction, size_t n) {
     signal r = {};
-    r = conf_h1(candle, i, n, contraction);
+    size_t j, end_loop = fmin(i - 3, contraction + 4);
+    if (wrb_hg(candle, i, n).dir == 1) {
+        for (j = 4; j < end_loop; j++) {
+            if (wrb(candle, i - j, n).dir == 1 &&
+                    contraction_share(candle, i, i - j) &&
+                    contraction_body_size_break(candle, i, i - j) &&
+                    volatility_expand(candle, i, 1, -1)) {
+                r.c1.nr = i;
+                r.c1.dir = 1;
+                r.c2.nr = i - j;
+                r.dir = 1;
+            }
+        }
+    } else if (wrb_hg(candle, i, n).dir == -1) {
+        for (j = 4; j < end_loop; j++) {
+            if (wrb(candle, i - j, n).dir == -1 &&
+                    contraction_share(candle, i, i - j) &&
+                    contraction_body_size_break(candle, i, i - j) &&
+                    volatility_expand(candle, i, -1, -1)) {
+                r.c1.nr = i;
+                r.c1.dir = -1;
+                r.c2.nr = i - j;
+                r.c2.dir = -1;
+                r.dir = -1;
+            }
+        }
+    }
+    return r;
+}
+
+
+static inline signal conf_h4(ohlc *candle, size_t i, size_t contraction, size_t n) {
+    signal r = {};
+    size_t j, end_loop = fmin(i - 3, contraction + 4);
+    if (wrb_hg(candle, i, n).dir == 1) {
+        for (j = 4; j < end_loop; j++) {
+            if (wrb(candle, i - j, n).dir == -1 &&
+                    contraction_share(candle, i, i - j) &&
+                    contraction_body_size_break(candle, i, i - j) &&
+                    volatility_expand(candle, i, 1, -1)) {
+                r.c1.nr = i;
+                r.c1.dir = 1;
+                r.c2.nr = i - j;
+                r.dir = 1;
+            }
+        }
+    } else if (wrb_hg(candle, i, n).dir == -1) {
+        for (j = 4; j < end_loop; j++) {
+            if (wrb(candle, i - j, n).dir == 1 &&
+                    broke_bars(candle, i, j) &&
+                    contraction_share(candle, i, i - j) &&
+                    contraction_body_size_break(candle, i, i - j) &&
+                    volatility_expand(candle, i, -1, -1)) {
+                r.c1.nr = i;
+                r.c1.dir = -1;
+                r.c2.nr = i - j;
+                r.c2.dir = -1;
+                r.dir = -1;
+            }
+        }
+    }
+    return r;
+}
+
+
+static inline signal conf_h(ohlc *candle, size_t i, size_t contraction, size_t n) {
+    signal r = {};
+    r = conf_h1(candle, i, contraction, n);
     if (r.dir != 0) {
         return r;
     }
-    r = conf_h2(candle, i, n, contraction);
+    r = conf_h2(candle, i, contraction, n);
     if (r.dir != 0) {
         return r;
     }
-    r = conf_h3(candle, i, n, contraction);
+    r = conf_h3(candle, i, contraction, n);
     if (r.dir != 0) {
         return r;
     }
-    r = conf_h4(candle, i, n, contraction);
+    r = conf_h4(candle, i, contraction, n);
     if (r.dir != 0) {
         return r;
     }

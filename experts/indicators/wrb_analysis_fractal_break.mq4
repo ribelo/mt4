@@ -7,6 +7,7 @@
 #property link      "email:   huxley.source@gmail.com"
 #include <wrb_analysis.mqh>
 #include <hxl_utils.mqh>
+#include <hanover --- function header (np).mqh>
 
 
 //+-------------------------------------------------------------------------------------------+
@@ -88,11 +89,11 @@ int start() {
     if (counted_bars > 0) {
         counted_bars--;
     }
-    limit = Bars - counted_bars - lenght;
+    limit = iBars(symbol, tf) - counted_bars - lenght;
     for(i = lenght; i < limit; i++) {
-        if(_fractal_break(candle, i, Bars, lenght, look_back) != 0) {
-            body_open[i] = Open[i];
-            body_close[i] = Close[i];
+        if(_fractal_break(candle, i, iBars(symbol, tf), lenght, look_back) != 0) {
+            body_open[i] = iOpen(symbol, tf, i);
+            body_close[i] = iClose(symbol, tf, i);
         }
     }
     return (0);

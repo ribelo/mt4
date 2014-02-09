@@ -23,7 +23,7 @@ inline double shadow_upper(ohlc *candle, size_t i);
 
 inline double shadow_bottom(ohlc *candle, size_t i);
 
-inline int unfilled(ohlc *candle, size_t i, size_t);
+inline int unfilled(ohlc *candle, size_t i, size_t n);
 
 inline int filled_by(ohlc *candle, size_t i, int n);
 

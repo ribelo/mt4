@@ -380,14 +380,15 @@
 */
 //===========================================================================
 
-#property copyright "Copyright © 2006, Matt Kennel, Derk Wehler, 2010 Matt Kennel"
+#property copyright "Copyright © 2006, Matt Kennel, Derk Wehler, 2010 Matt Kennel, 2014 Huxley Source"
 #property link      "mbkennelfx@gmail.com"
 #property library
 
 #include <stdlib.mqh>
 #include <stderror.mqh>
+#include <gls_math.mqh>
 
-string 	OrderReliableVersion = "v4.1";
+string 	OrderReliableVersion = "v4.2";
 string 	OrderReliable_Fname = "OrderReliable fname unset";
 
 int 	O_R_Setting_max_retries 	= 10;
@@ -573,26 +574,28 @@ int OrderSendReliable1Step(string symbol, int cmd, double volume, double price,
                      if (fixed_invalid_price) {
                         if (cmd == OP_BUYSTOP) {
                            price += point;
-                           if (stoploss > 0) {
+                           if (_fcmp(stoploss, 0.0) > 0) {
                               stoploss += point;
                            }
-                           if (takeprofit > 0) {
+                           if (_fcmp(takeprofit, 0.0) > 0) {
                               takeprofit += point;
                            }
                            OrderReliablePrint("Pending BuyStop Order still has ERR_INVALID_STOPS, adding 1 pip; new price = " + DoubleToStr(price, digits));
-                           if (stoploss > 0  ||  takeprofit > 0) {
+                           if (_fcmp(stoploss, 0.0) > 0  ||
+                           	      _fcmp(takeprofit, 0.0) > 0) {
                               OrderReliablePrint("NOTE: SL (now " + DoubleToStr(stoploss, digits) + ") & TP (now " + DoubleToStr(takeprofit, digits) + ") were adjusted proportionately");
                            }
                         } else if (cmd == OP_BUYLIMIT) {
                            price -= point;
-                           if (stoploss > 0) {
+                           if (_fcmp(stoploss, 0.0) > 0) {
                               stoploss -= point;
                            }
-                           if (takeprofit > 0) {
+                           if (_fcmp(takeprofit, 0.0) > 0) {
                               takeprofit -= point;
                            }
                            OrderReliablePrint("Pending BuyLimit Order still has ERR_INVALID_STOPS, subtracting 1 pip; new price = " + DoubleToStr(price, digits));
-                           if (stoploss > 0  ||  takeprofit > 0) {
+                           if (_fcmp(stoploss, 0.0) > 0  ||
+                           	      _fcmp(takeprofit, 0.0) > 0) {
                               OrderReliablePrint("NOTE: SL (now " + DoubleToStr(stoploss, digits) + ") & TP (now " + DoubleToStr(takeprofit, digits) + ") were adjusted proportionately");
                            }
                         }
@@ -600,27 +603,29 @@ int OrderSendReliable1Step(string symbol, int cmd, double volume, double price,
                         if (cmd == OP_BUYLIMIT) {
                            old_price = price;
                            price = ask - servers_min_stop;
-                           if (stoploss > 0) {
+                           if (_fcmp(stoploss, 0.0) > 0) {
                               stoploss += (price - old_price);
                            }
-                           if (takeprofit > 0) {
+                           if (_fcmp(takeprofit, 0.0) > 0) {
                               takeprofit += (price - old_price);
                            }
                            OrderReliablePrint("Pending BuyLimit has ERR_INVALID_STOPS; new price = " + DoubleToStr(price, digits));
-                           if (stoploss > 0  ||  takeprofit > 0) {
+                           if (_fcmp(stoploss, 0.0) > 0  ||
+                           	      _fcmp(takeprofit, 0.0) > 0) {
                               OrderReliablePrint("NOTE: SL (now " + DoubleToStr(stoploss, digits) + ") & TP (now " + DoubleToStr(takeprofit, digits) + ") were adjusted proportionately");
                            }
                         } else if (cmd == OP_BUYSTOP) {
                            old_price = price;
                            price = ask + servers_min_stop;
-                           if (stoploss > 0) {
+                           if (_fcmp(stoploss, 0.0) > 0) {
                               stoploss += (price - old_price);
                            }
-                           if (takeprofit > 0) {
+                           if (_fcmp(takeprofit, 0.0) > 0) {
                               takeprofit += (price - old_price);
                            }
                            OrderReliablePrint("Pending BuyStop has ERR_INVALID_STOPS; new price = " + DoubleToStr(price, digits));
-                           if (stoploss > 0  ||  takeprofit > 0) {
+                           if (_fcmp(stoploss, 0.0) > 0  ||
+                           	      _fcmp(takeprofit, 0.0) > 0) {
                               OrderReliablePrint("NOTE: SL (now " + DoubleToStr(stoploss, digits) + ") & TP (now " + DoubleToStr(takeprofit, digits) + ") were adjusted proportionately");
                            }
                         }
@@ -631,7 +636,7 @@ int OrderSendReliable1Step(string symbol, int cmd, double volume, double price,
                }
             } else if (cmd == OP_SELLSTOP || cmd == OP_SELLLIMIT) {
                // If we are too close to put in a limit/stop order so go to market.
-               if (MathAbs(bid - price) <= servers_min_stop) {
+               if (_fcmp(MathAbs(bid - price), servers_min_stop) <= 0 ) {
                   if (O_R_Setting_limit2market) {
                      limit_to_market = true;
                      exit_loop = true;
@@ -639,26 +644,28 @@ int OrderSendReliable1Step(string symbol, int cmd, double volume, double price,
                      if (fixed_invalid_price) {
                         if (cmd == OP_SELLSTOP) {
                            price -= point;
-                           if (stoploss > 0) {
+                           if (_fcmp(stoploss, 0.0) > 0) {
                               stoploss -= point;
                            }
-                           if (takeprofit > 0) {
+                           if (_fcmp(takeprofit, 0.0) > 0) {
                               takeprofit -= point;
                            }
                            OrderReliablePrint("Pending SellStop Order still has ERR_INVALID_STOPS, subtracting 1 pip; new price = " + DoubleToStr(price, digits));
-                           if (stoploss > 0  ||  takeprofit > 0) {
+                           if (_fcmp(stoploss, 0.0) > 0  ||
+                           	      _fcmp(takeprofit, 0.0) > 0) {
                               OrderReliablePrint("NOTE: SL (now " + DoubleToStr(stoploss, digits) + ") & TP (now " + DoubleToStr(takeprofit, digits) + ") were adjusted proportionately");
                            }
                         } else if (cmd == OP_SELLLIMIT) {
                            price += point;
-                           if (stoploss > 0) {
+                           if (_fcmp(stoploss, 0.0) > 0) {
                               stoploss += point;
                            }
-                           if (takeprofit > 0) {
+                           if (_fcmp(takeprofit, 0.0) > 0) {
                               takeprofit += point;
                            }
                            OrderReliablePrint("Pending SellLimit Order still has ERR_INVALID_STOPS, adding 1 pip; new price = " + DoubleToStr(price, digits));
-                           if (stoploss > 0  ||  takeprofit > 0) {
+                           if (_fcmp(stoploss, 0.0) > 0  ||
+                           	      _fcmp(takeprofit, 0.0) > 0) {
                               OrderReliablePrint("NOTE: SL (now " + DoubleToStr(stoploss, digits) + ") & TP (now " + DoubleToStr(takeprofit, digits) + ") were adjusted proportionately");
                            }
                         }
@@ -666,27 +673,29 @@ int OrderSendReliable1Step(string symbol, int cmd, double volume, double price,
                         if (cmd == OP_SELLSTOP) {
                            old_price = price;
                            price = bid - servers_min_stop;
-                           if (stoploss > 0) {
+                           if (_fcmp(stoploss, 0.0) > 0) {
                               stoploss -= (old_price - price);
                            }
-                           if (takeprofit > 0) {
+                           if (_fcmp(takeprofit, 0.0) > 0) {
                               takeprofit -= (old_price - price);
                            }
                            OrderReliablePrint("Pending SellStop has ERR_INVALID_STOPS; new price = " + DoubleToStr(price, digits));
-                           if (stoploss > 0  ||  takeprofit > 0) {
+                           if (_fcmp(stoploss, 0.0) > 0  ||
+                           	      _fcmp(takeprofit, 0.0) > 0) {
                               OrderReliablePrint("NOTE: SL (now " + DoubleToStr(stoploss, digits) + ") & TP (now " + DoubleToStr(takeprofit, digits) + ") were adjusted proportionately");
                            }
                         } else if (cmd == OP_SELLLIMIT) {
                            old_price = price;
                            price = bid + servers_min_stop;
-                           if (stoploss > 0) {
+                           if (_fcmp(stoploss, 0.0) > 0) {
                               stoploss -= (old_price - price);
                            }
-                           if (takeprofit > 0) {
+                           if (_fcmp(takeprofit, 0.0) > 0) {
                               takeprofit -= (old_price - price);
                            }
                            OrderReliablePrint("Pending SellLimit has ERR_INVALID_STOPS; new price = " + DoubleToStr(price, digits));
-                           if (stoploss > 0  ||  takeprofit > 0) {
+                           if (_fcmp(stoploss, 0.0) > 0  ||
+                           	      _fcmp(takeprofit, 0.0) > 0) {
                               OrderReliablePrint("NOTE: SL (now " + DoubleToStr(stoploss, digits) + ") & TP (now " + DoubleToStr(takeprofit, digits) + ") were adjusted proportionately");
                            }
                         }
@@ -930,21 +939,21 @@ int OrderSendReliableMKT1Step(string symbol, int cmd, double volume, double pric
          if (cmd == OP_BUY) {
             // modification by Paul Hampton-Smith to replace RefreshRates()
             pnow = NormalizeDouble(MarketInfo(symbol, MODE_ASK), MarketInfo(symbol, MODE_DIGITS)); // we are buying at Ask
-            if (pnow > price) {
+            if (_fcmp(pnow, price) > 0) {
                slippagenow = slippage - (pnow - price) / point;
             }
          } else if (cmd == OP_SELL) {
             // modification by Paul Hampton-Smith to replace RefreshRates()
             pnow = NormalizeDouble(MarketInfo(symbol, MODE_BID), MarketInfo(symbol, MODE_DIGITS)); // we are buying at Ask
-            if (pnow < price) {
+            if (_fcmp(pnow, price) < 0) {
                // moved in an unfavorable direction
                slippagenow = slippage - (price - pnow) / point;
             }
          }
-         if (slippagenow > slippage) {
+         if (_fcmp(slippagenow, slippage) > 0) {
             slippagenow = slippage;
          }
-         if (slippagenow >= 0) {
+         if (_fcmp(slippagenow, 0.0) >= 0) {
 
             ticket = OrderSend(symbol, cmd, volume, pnow, slippagenow,
                                stoploss, takeprofit, comment, magic,
@@ -1563,13 +1572,13 @@ bool OrderCloseReliableMKT(int ticket, double volume, double price,
    while (!exit_loop) {
       if (type == OP_BUY) {
          pnow = NormalizeDouble(MarketInfo(symbol, MODE_ASK), MarketInfo(symbol, MODE_DIGITS)); // we are buying at Ask
-         if (pnow > price) {
+         if (_fcmp(pnow, price) > 0) {
             // Do not allow slippage to go negative; will cause error
             slippagenow = MathMax(0, slippage - (pnow - price) / point);
          }
       } else if (type == OP_SELL) {
          pnow = NormalizeDouble(MarketInfo(symbol, MODE_BID), MarketInfo(symbol, MODE_DIGITS)); // we are buying at Ask
-         if (pnow < price) {
+         if (_fcmp(pnow, price) < 0) {
             // Do not allow slippage to go negative; will cause error
             slippagenow = MathMax(0, slippage - (price - pnow) / point);
          }

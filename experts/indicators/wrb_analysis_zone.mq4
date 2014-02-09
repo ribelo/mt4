@@ -7,6 +7,7 @@
 #property link      "email:   huxley.source@gmail.com"
 #include <wrb_analysis.mqh>
 #include <hxl_utils.mqh>
+#include <hanover --- function header (np).mqh>
 
 
 //+-------------------------------------------------------------------------------------------+
@@ -61,13 +62,15 @@ extern int line_width = 1;
 //Misc
 double candle[][6];
 int pip_mult_tab[] = {1, 10, 1, 10, 1, 10, 100, 1000};
-string symbol;
+string symbol, global_name;
 int tf, digits, multiplier, spread;
 double tickvalue, point;
 string pip_description = " pips";
 
 double v1_body_open[], v1_body_close[], v2_body_open[], v2_body_close[];
 double contraction_body_open[], contraction_body_close[];
+
+int last_sp1, last_sp2, last_sp3, last_sc1, last_sc2, last_sc3, last_sc4, last_rz;
 //+-------------------------------------------------------------------------------------------+
 //| Custom indicator initialization function                                                  |
 //+-------------------------------------------------------------------------------------------+
@@ -79,6 +82,7 @@ int init() {
     point = MarketInfo(symbol, MODE_POINT) * multiplier;
     spread = MarketInfo(symbol, MODE_SPREAD) * multiplier;
     tickvalue = MarketInfo(symbol, MODE_TICKVALUE) * multiplier;
+    global_name = StringLower(i_name + "_" + ReduceCcy(symbol) + "_" + TFToStr(tf));
     if (multiplier > 1) {
         pip_description = " points";
     }
@@ -103,6 +107,9 @@ int init() {
     SetIndexStyle(5, DRAW_HISTOGRAM, 0, bar_width, zone_bear_body);
     SetIndexLabel(5, "WRB Zone V1");
 
+    if (!GlobalVariableCheck(global_name)) {
+        GlobalVariableSet(global_name, 0);
+    }
     return (0);
 }
 
@@ -142,19 +149,19 @@ int start() {
         contraction_body_open[i] = 0.0;
         contraction_body_close[i] = 0.0;
         if (swing_point_1 == true) {
-            if (_swing_point_1(candle, i, iBars(symbol, tf),
-                               contraction_size, r) != 0) {
-                v1_body_open[r[0]] = Open[r[0]];
-                v1_body_close[r[0]] = Close[r[0]];
-                v2_body_open[r[1]] = Open[r[1]];
-                v2_body_close[r[1]] = Close[r[1]];
+            if (_swing_point_1(candle, i, contraction_size,
+                               iBars(symbol, tf), r) != 0) {
+                v1_body_open[r[0]] = iOpen(symbol, tf, r[0]);
+                v1_body_close[r[0]] = iClose(symbol, tf, r[0]);
+                v2_body_open[r[1]] = iOpen(symbol, tf, r[1]);
+                v2_body_close[r[1]] = iClose(symbol, tf, r[1]);
                 for (j = 1; j < r[1] - r[0]; j++) {
-                    contraction_body_open[r[0] + j] = Open[r[0] + j];
-                    contraction_body_close[r[0] + j] = Close[r[0] + j];
+                    contraction_body_open[r[0] + j] = iOpen(symbol, tf, r[0] + j);
+                    contraction_body_close[r[0] + j] = iClose(symbol, tf, r[0] + j);
                 }
                 if (make_text == true) {
-                    time_str = StringConcatenate(TimeToStr(Time[i], TIME_DATE), "_",
-                                                 TimeToStr(Time[i], TIME_MINUTES));
+                    time_str = StringConcatenate(TimeToStr(iTime(symbol, tf, i), TIME_DATE), "_",
+                                                 TimeToStr(iTime(symbol, tf, i), TIME_MINUTES));
                     text_name = StringConcatenate(i_name, "_sp1_", time_str);
                     if (r[3] == 1) {
                         text_price = iLow(symbol, tf, iLowest(symbol, tf, MODE_LOW, r[1] - r[0], i)) - ((iHigh(symbol, tf, iHighest(symbol, tf, MODE_HIGH, r[1] - r[0], i)) - iLow(symbol, tf, iLowest(symbol, tf, MODE_LOW, r[1] - r[0], i))) / 2) * label_offset_percent;
@@ -164,11 +171,12 @@ int start() {
                     make_text(text_name, "SP1", Time[r[0] + 1], text_price,  font_size, text_color);
                 }
                 if (send_notification == true) {
-                    if (i == 1) {
+                    if (iTime(symbol, tf, r[0]) > GlobalVariableGet(global_name)) {
+                        GlobalVariableSet(global_name, iTime(symbol, tf, r[0]));
                         if (r[3] == 1) {
-                            SendNotification("zone bull sp1 at " + TimeToStr(Time[i]));
+                            SendNotification(ReduceCcy(symbol)  + " " + TFToStr(tf) + " Bull Swing Point 1 at " + TimeToStr(iTime(symbol, tf, i)));
                         } else if (r[3] == -1) {
-                            SendNotification("zone bear sp1 at " + TimeToStr(Time[i]));
+                            SendNotification(ReduceCcy(symbol)  + " " + TFToStr(tf) + " Bear Swing Point 1 at " + TimeToStr(iTime(symbol, tf, i)));
                         }
                     }
                 }
@@ -176,19 +184,19 @@ int start() {
             }
         }
         if (swing_point_2 == true) {
-            if (_swing_point_2(candle, i, iBars(symbol, tf),
-                               contraction_size, r) != 0) {
-                v1_body_open[r[0]] = Open[r[0]];
-                v1_body_close[r[0]] = Close[r[0]];
-                v2_body_open[r[1]] = Open[r[1]];
-                v2_body_close[r[1]] = Close[r[1]];
+            if (_swing_point_2(candle, i, contraction_size,
+                               iBars(symbol, tf), r) != 0) {
+                v1_body_open[r[0]] = iOpen(symbol, tf, r[0]);
+                v1_body_close[r[0]] = iClose(symbol, tf, r[0]);
+                v2_body_open[r[1]] = iOpen(symbol, tf, r[1]);
+                v2_body_close[r[1]] = iClose(symbol, tf, r[1]);
                 for (j = 1; j < r[1] - r[0]; j++) {
-                    contraction_body_open[r[0] + j] = Open[r[0] + j];
-                    contraction_body_close[r[0] + j] = Close[r[0] + j];
+                    contraction_body_open[r[0] + j] = iOpen(symbol, tf, r[0] + j);
+                    contraction_body_close[r[0] + j] = iClose(symbol, tf, r[0] + j);
                 }
                 if (make_text == true) {
-                    time_str = StringConcatenate(TimeToStr(Time[i], TIME_DATE), "_",
-                                                 TimeToStr(Time[i], TIME_MINUTES));
+                    time_str = StringConcatenate(TimeToStr(iTime(symbol, tf, i), TIME_DATE), "_",
+                                                 TimeToStr(iTime(symbol, tf, i), TIME_MINUTES));
                     text_name = StringConcatenate(i_name, "_sp2_", time_str);
                     if (r[3] == 1) {
                         text_price = iLow(symbol, tf, iLowest(symbol, tf, MODE_LOW, r[1] - r[0], i)) - ((iHigh(symbol, tf, iHighest(symbol, tf, MODE_HIGH, r[1] - r[0], i)) - iLow(symbol, tf, iLowest(symbol, tf, MODE_LOW, r[1] - r[0], i))) / 2) * label_offset_percent;
@@ -198,11 +206,12 @@ int start() {
                     make_text(text_name, "SP2", Time[r[0] + 1], text_price,  font_size, text_color);
                 }
                 if (send_notification == true) {
-                    if (i == 1) {
+                    if (iTime(symbol, tf, r[0]) > last_sp2) {
+                        last_sp2 = iTime(symbol, tf, r[0]);
                         if (r[3] == 1) {
-                            SendNotification("zone bull sp2 at " + TimeToStr(Time[i]));
+                            SendNotification(ReduceCcy(symbol)  + " " + TFToStr(tf) + " Bull Swing Point 2 at " + TimeToStr(iTime(symbol, tf, i)));
                         } else if (r[3] == -1) {
-                            SendNotification("zone bear sp2 at " + TimeToStr(Time[i]));
+                            SendNotification(ReduceCcy(symbol)  + " " + TFToStr(tf) + " Bear Swing Point 2 at " + TimeToStr(iTime(symbol, tf, i)));
                         }
                     }
                 }
@@ -213,14 +222,14 @@ int start() {
             if (_swing_point_3(candle, i, iBars(symbol, tf), r) != 0) {
                 if (r[3] == 1) {
                     v1_body_open[r[0]] = Low[r[0]];
-                    v1_body_close[r[0]] = MathMin(Close[r[0]], Open[r[0]]);
+                    v1_body_close[r[0]] = MathMin(iClose(symbol, tf, r[0]), iOpen(symbol, tf, r[0]));
                 } else if (r[3] == -1) {
                     v1_body_open[r[0]] = High[r[0]];
-                    v1_body_close[r[0]] = MathMax(Close[r[0]], Open[r[0]]);
+                    v1_body_close[r[0]] = MathMax(iClose(symbol, tf, r[0]), iOpen(symbol, tf, r[0]));
                 }
                 if (make_text == true) {
-                    time_str = StringConcatenate(TimeToStr(Time[i], TIME_DATE), "_",
-                                                 TimeToStr(Time[i], TIME_MINUTES));
+                    time_str = StringConcatenate(TimeToStr(iTime(symbol, tf, i), TIME_DATE), "_",
+                                                 TimeToStr(iTime(symbol, tf, i), TIME_MINUTES));
                     text_name = StringConcatenate(i_name, "_sp3_", time_str);
                     if (r[3] == 1) {
                         text_price = iLow(symbol, tf, r[0]) - ((iHigh(symbol, tf, r[0]) - iLow(symbol, tf, r[0])) / 2) * label_offset_percent;
@@ -230,11 +239,12 @@ int start() {
                     make_text(text_name, "SP3", Time[r[0]], text_price, font_size, text_color);
                 }
                 if (send_notification == true) {
-                    if (i == 1) {
+                    if (iTime(symbol, tf, r[0]) > last_sp3) {
+                        last_sp3 = iTime(symbol, tf, r[0]);
                         if (r[3] == 1) {
-                            SendNotification("zone bull sp3 at " + TimeToStr(Time[i]));
+                            SendNotification(ReduceCcy(symbol)  + " " + TFToStr(tf) + " Bull Swing Point 3 at " + TimeToStr(iTime(symbol, tf, i)));
                         } else if (r[3] == -1) {
-                            SendNotification("zone bear sp3 at " + TimeToStr(Time[i]));
+                            SendNotification(ReduceCcy(symbol)  + " " + TFToStr(tf) + " Bear Swing Point 3 at " + TimeToStr(iTime(symbol, tf, i)));
                         }
                     }
                 }
@@ -242,20 +252,20 @@ int start() {
             }
         }
         if (strong_continuation_1 == true) {
-            if (_strong_continuation_1(candle, i, iBars(symbol, tf),
-                                       contraction_size, r) != 0) {
-                v1_body_open[r[0]] = Open[r[0]];
-                v1_body_close[r[0]] = Close[r[0]];
-                v2_body_open[r[1]] = Open[r[1]];
-                v2_body_close[r[1]] = Close[r[1]];
-                int start = MathRound(MathMin(r[0], r[1]));
+            if (_strong_continuation_1(candle, i, contraction_size,
+                                       iBars(symbol, tf), r) != 0) {
+                v1_body_open[r[0]] = iOpen(symbol, tf, r[0]);
+                v1_body_close[r[0]] = iClose(symbol, tf, r[0]);
+                v2_body_open[r[1]] = iOpen(symbol, tf, r[1]);
+                v2_body_close[r[1]] = iClose(symbol, tf, r[1]);
+                int v1 = MathRound(MathMin(r[0], r[1]));
                 for (j = 1; j < MathAbs(r[1] - r[0]); j++) {
-                    contraction_body_open[start + j] = Open[start + j];
-                    contraction_body_close[start + j] = Close[start + j];
+                    contraction_body_open[v1 + j] = Open[v1 + j];
+                    contraction_body_close[v1 + j] = Close[v1 + j];
                 }
                 if (make_text == true) {
-                    time_str = StringConcatenate(TimeToStr(Time[i], TIME_DATE), "_",
-                                                 TimeToStr(Time[i], TIME_MINUTES));
+                    time_str = StringConcatenate(TimeToStr(iTime(symbol, tf, i), TIME_DATE), "_",
+                                                 TimeToStr(iTime(symbol, tf, i), TIME_MINUTES));
                     text_name = StringConcatenate(i_name, "_sc1_", time_str);
                     if (r[3] == 1) {
                         text_price = iLow(symbol, tf, iLowest(symbol, tf, MODE_LOW, r[1] - r[0], i)) - ((iHigh(symbol, tf, iHighest(symbol, tf, MODE_HIGH, r[1] - r[0], i)) - iLow(symbol, tf, iLowest(symbol, tf, MODE_LOW, r[1] - r[0], i))) / 2) * label_offset_percent;
@@ -265,11 +275,12 @@ int start() {
                     make_text(text_name, "SC1", Time[r[0] + 1], text_price,  font_size, text_color);
                 }
                 if (send_notification == true) {
-                    if (i == 1) {
+                    if (iTime(symbol, tf, r[0]) > last_sc1) {
+                        last_sc1 = iTime(symbol, tf, r[0]);
                         if (r[3] == 1) {
-                            SendNotification("zone bull sc1 at " + TimeToStr(Time[i]));
+                            SendNotification(ReduceCcy(symbol)  + " " + TFToStr(tf) + " Bull Strong Continuation 1 at " + TimeToStr(iTime(symbol, tf, i)));
                         } else if (r[3] == -1) {
-                            SendNotification("zone bear sc1 at " + TimeToStr(Time[i]));
+                            SendNotification(ReduceCcy(symbol)  + " " + TFToStr(tf) + " Bear Strong Continuation 1 at " + TimeToStr(iTime(symbol, tf, i)));
                         }
                     }
                 }
@@ -277,19 +288,19 @@ int start() {
             }
         }
         if (strong_continuation_2 == true) {
-            if (_strong_continuation_2(candle, i, iBars(symbol, tf),
-                                       contraction_size, r) != 0) {
-                v1_body_open[r[0]] = Open[r[0]];
-                v1_body_close[r[0]] = Close[r[0]];
-                v2_body_open[r[1]] = Open[r[1]];
-                v2_body_close[r[1]] = Close[r[1]];
+            if (_strong_continuation_2(candle, i, contraction_size,
+                                       iBars(symbol, tf), r) != 0) {
+                v1_body_open[r[0]] = iOpen(symbol, tf, r[0]);
+                v1_body_close[r[0]] = iClose(symbol, tf, r[0]);
+                v2_body_open[r[1]] = iOpen(symbol, tf, r[1]);
+                v2_body_close[r[1]] = iClose(symbol, tf, r[1]);
                 for (j = 1; j < r[1] - r[0]; j++) {
-                    contraction_body_open[r[0] + j] = Open[r[0] + j];
-                    contraction_body_close[r[0] + j] = Close[r[0] + j];
+                    contraction_body_open[r[0] + j] = iOpen(symbol, tf, r[0] + j);
+                    contraction_body_close[r[0] + j] = iClose(symbol, tf, r[0] + j);
                 }
                 if (make_text == true) {
-                    time_str = StringConcatenate(TimeToStr(Time[i], TIME_DATE), "_",
-                                                 TimeToStr(Time[i], TIME_MINUTES));
+                    time_str = StringConcatenate(TimeToStr(iTime(symbol, tf, i), TIME_DATE), "_",
+                                                 TimeToStr(iTime(symbol, tf, i), TIME_MINUTES));
                     text_name = StringConcatenate(i_name, "_sc2_", time_str);
                     if (r[3] == 1) {
                         text_price = iLow(symbol, tf, iLowest(symbol, tf, MODE_LOW, r[1] - r[0], i)) - ((iHigh(symbol, tf, iHighest(symbol, tf, MODE_HIGH, r[1] - r[0], i)) - iLow(symbol, tf, iLowest(symbol, tf, MODE_LOW, r[1] - r[0], i))) / 2) * label_offset_percent;
@@ -299,11 +310,12 @@ int start() {
                     make_text(text_name, "SC2", Time[r[0] + 1], text_price,  font_size, text_color);
                 }
                 if (send_notification == true) {
-                    if (i == 1) {
+                    if (iTime(symbol, tf, r[0]) > last_sc2) {
+                        last_sc2 = iTime(symbol, tf, r[0]);
                         if (r[3] == 1) {
-                            SendNotification("zone bull sc2 at " + TimeToStr(Time[i]));
+                            SendNotification(ReduceCcy(symbol)  + " " + TFToStr(tf) + " Bull Strong Continuation 2 at " + TimeToStr(iTime(symbol, tf, i)));
                         } else if (r[3] == -1) {
-                            SendNotification("zone bear sc2 at " + TimeToStr(Time[i]));
+                            SendNotification(ReduceCcy(symbol)  + " " + TFToStr(tf) + " Bear Strong Continuation 2 at " + TimeToStr(iTime(symbol, tf, i)));
                         }
                     }
                 }
@@ -311,19 +323,19 @@ int start() {
             }
         }
         if (strong_continuation_3 == true) {
-            if (_strong_continuation_3(candle, i, iBars(symbol, tf),
-                                       contraction_size, r) != 0) {
-                v1_body_open[r[0]] = Open[r[0]];
-                v1_body_close[r[0]] = Close[r[0]];
-                v2_body_open[r[1]] = Open[r[1]];
-                v2_body_close[r[1]] = Close[r[1]];
+            if (_strong_continuation_3(candle, i, contraction_size,
+                                       iBars(symbol, tf), r) != 0) {
+                v1_body_open[r[0]] = iOpen(symbol, tf, r[0]);
+                v1_body_close[r[0]] = iClose(symbol, tf, r[0]);
+                v2_body_open[r[1]] = iOpen(symbol, tf, r[1]);
+                v2_body_close[r[1]] = iClose(symbol, tf, r[1]);
                 for (j = 1; j < r[1] - r[0]; j++) {
-                    contraction_body_open[r[0] + j] = Open[r[0] + j];
-                    contraction_body_close[r[0] + j] = Close[r[0] + j];
+                    contraction_body_open[r[0] + j] = iOpen(symbol, tf, r[0] + j);
+                    contraction_body_close[r[0] + j] = iClose(symbol, tf, r[0] + j);
                 }
                 if (make_text == true) {
-                    time_str = StringConcatenate(TimeToStr(Time[i], TIME_DATE), "_",
-                                                 TimeToStr(Time[i], TIME_MINUTES));
+                    time_str = StringConcatenate(TimeToStr(iTime(symbol, tf, i), TIME_DATE), "_",
+                                                 TimeToStr(iTime(symbol, tf, i), TIME_MINUTES));
                     text_name = StringConcatenate(i_name, "_sc3_", time_str);
                     if (r[3] == 1) {
                         text_price = iLow(symbol, tf, iLowest(symbol, tf, MODE_LOW, r[1] - r[0], i)) - ((iHigh(symbol, tf, iHighest(symbol, tf, MODE_HIGH, r[1] - r[0], i)) - iLow(symbol, tf, iLowest(symbol, tf, MODE_LOW, r[1] - r[0], i))) / 2) * label_offset_percent;
@@ -333,11 +345,12 @@ int start() {
                     make_text(text_name, "SC3", Time[r[0] + 1], text_price,  font_size, text_color);
                 }
                 if (send_notification == true) {
-                    if (i == 1) {
+                    if (iTime(symbol, tf, r[0]) > last_sc3) {
+                        last_sc3 = iTime(symbol, tf, r[0]);
                         if (r[3] == 1) {
-                            SendNotification("zone bull sc3 at " + TimeToStr(Time[i]));
+                            SendNotification(ReduceCcy(symbol)  + " " + TFToStr(tf) + " Bull Strong Continuation 3 at " + TimeToStr(iTime(symbol, tf, i)));
                         } else if (r[3] == -1) {
-                            SendNotification("zone bear sc3 at " + TimeToStr(Time[i]));
+                            SendNotification(ReduceCcy(symbol)  + " " + TFToStr(tf) + " Bear Strong Continuation 3 at " + TimeToStr(iTime(symbol, tf, i)));
                         }
                     }
                 }
@@ -345,19 +358,19 @@ int start() {
             }
         }
         if (strong_continuation_4 == true) {
-            if (_strong_continuation_4(candle, i, iBars(symbol, tf),
-                                       contraction_size, r) != 0) {
-                v1_body_open[r[0]] = Open[r[0]];
-                v1_body_close[r[0]] = Close[r[0]];
-                v2_body_open[r[1]] = Open[r[1]];
-                v2_body_close[r[1]] = Close[r[1]];
+            if (_strong_continuation_4(candle, i, contraction_size,
+                                       iBars(symbol, tf), r) != 0) {
+                v1_body_open[r[0]] = iOpen(symbol, tf, r[0]);
+                v1_body_close[r[0]] = iClose(symbol, tf, r[0]);
+                v2_body_open[r[1]] = iOpen(symbol, tf, r[1]);
+                v2_body_close[r[1]] = iClose(symbol, tf, r[1]);
                 for (j = 1; j < r[1] - r[0]; j++) {
-                    contraction_body_open[r[0] + j] = Open[r[0] + j];
-                    contraction_body_close[r[0] + j] = Close[r[0] + j];
+                    contraction_body_open[r[0] + j] = iOpen(symbol, tf, r[0] + j);
+                    contraction_body_close[r[0] + j] = iClose(symbol, tf, r[0] + j);
                 }
                 if (make_text == true) {
-                    time_str = StringConcatenate(TimeToStr(Time[i], TIME_DATE), "_",
-                                                 TimeToStr(Time[i], TIME_MINUTES));
+                    time_str = StringConcatenate(TimeToStr(iTime(symbol, tf, i), TIME_DATE), "_",
+                                                 TimeToStr(iTime(symbol, tf, i), TIME_MINUTES));
                     text_name = StringConcatenate(i_name, "_sc4_", time_str);
                     if (r[3] == 1) {
                         text_price = iLow(symbol, tf, iLowest(symbol, tf, MODE_LOW, r[1] - r[0], i)) - ((iHigh(symbol, tf, iHighest(symbol, tf, MODE_HIGH, r[1] - r[0], i)) - iLow(symbol, tf, iLowest(symbol, tf, MODE_LOW, r[1] - r[0], i))) / 2) * label_offset_percent;
@@ -367,11 +380,12 @@ int start() {
                     make_text(text_name, "SC4", Time[r[0] + 1], text_price,  font_size, text_color);
                 }
                 if (send_notification == true) {
-                    if (i == 1) {
+                    if (iTime(symbol, tf, r[0]) > last_sc4) {
+                        last_sc4 = iTime(symbol, tf, r[0]);
                         if (r[3] == 1) {
-                            SendNotification("zone bull sc4 at " + TimeToStr(Time[i]));
+                            SendNotification(ReduceCcy(symbol)  + " " + TFToStr(tf) + " Bull Strong Continuation 4 at " + TimeToStr(iTime(symbol, tf, i)));
                         } else if (r[3] == -1) {
-                            SendNotification("zone bear sc4 at " + TimeToStr(Time[i]));
+                            SendNotification(ReduceCcy(symbol)  + " " + TFToStr(tf) + " Bear Strong Continuation 4 at " + TimeToStr(iTime(symbol, tf, i)));
                         }
                     }
                 }
@@ -379,13 +393,13 @@ int start() {
             }
         }
         if (reaction_zone == true) {
-            if (_reaction_zone(candle, i, iBars(symbol, tf),
-                               contraction_size, r) != 0) {
-                v1_body_open[r[0]] = Open[r[0]];
-                v1_body_close[r[0]] = Close[r[0]];
+            if (_reaction_zone(candle, i, contraction_size,
+                               iBars(symbol, tf), r) != 0) {
+                v1_body_open[r[0]] = iOpen(symbol, tf, r[0]);
+                v1_body_close[r[0]] = iClose(symbol, tf, r[0]);
                 if (make_text == true) {
-                    time_str = StringConcatenate(TimeToStr(Time[i], TIME_DATE), "_",
-                                                 TimeToStr(Time[i], TIME_MINUTES));
+                    time_str = StringConcatenate(TimeToStr(iTime(symbol, tf, i), TIME_DATE), "_",
+                                                 TimeToStr(iTime(symbol, tf, i), TIME_MINUTES));
                     text_name = StringConcatenate(i_name, "_", time_str);
                     if (r[3] == 1) {
                         text_price = iLow(symbol, tf, iLowest(symbol, tf, MODE_LOW, r[1] - r[0], i)) - ((iHigh(symbol, tf, iHighest(symbol, tf, MODE_HIGH, r[1] - r[0], i)) - iLow(symbol, tf, iLowest(symbol, tf, MODE_LOW, r[1] - r[0], i))) / 2) * label_offset_percent;
@@ -395,11 +409,12 @@ int start() {
                     make_text(text_name, "RZ", Time[r[0] + 1], text_price,  font_size, text_color);
                 }
                 if (send_notification == true) {
-                    if (i == 1) {
+                    if (iTime(symbol, tf, r[0]) > last_rz) {
+                        last_rz = iTime(symbol, tf, r[0]);
                         if (r[3] == 1) {
-                            SendNotification("zone bull rz at " + TimeToStr(Time[i]));
+                            SendNotification(ReduceCcy(symbol)  + " " + TFToStr(tf) + " Bull Reaction Zone at " + TimeToStr(iTime(symbol, tf, i)));
                         } else if (r[3] == -1) {
-                            SendNotification("zone bear rz at " + TimeToStr(Time[i]));
+                            SendNotification(ReduceCcy(symbol)  + " " + TFToStr(tf) + " Bear Reaction Zone at " + TimeToStr(iTime(symbol, tf, i)));
                         }
                     }
                 }

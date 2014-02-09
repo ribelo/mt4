@@ -7,6 +7,7 @@
 #property link      "email:   huxley.source@gmail.com"
 #include <wrb_analysis.mqh>
 #include <hxl_utils.mqh>
+#include <hanover --- function header (np).mqh>
 
 
 //+-------------------------------------------------------------------------------------------+
@@ -92,12 +93,12 @@ int start() {
     if (counted_bars > 0) {
         counted_bars--;
     }
-    limit = Bars - counted_bars;
+    limit = iBars(symbol, tf) - counted_bars;
     for (i = 512; i > 0; i--) {
         line_buy[i] = _support(candle, i, hg_only, use_fractal,
-                               fractal_length, Bars);
+                               fractal_length, iBars(symbol, tf));
         line_sell[i] = _resistance(candle, i, hg_only, use_fractal,
-                                   fractal_length, Bars);
+                                   fractal_length, iBars(symbol, tf));
 
     }
     return (0);

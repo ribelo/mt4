@@ -26,7 +26,7 @@
 	int       _strong_continuation_3(double rates[][6], int, int, int, int& r[]);
 	int       _strong_continuation_4(double rates[][6], int, int, int, int& r[]);
 	int       _reaction_zone(double rates[][6], int, int, int, int& r[]);
-	int       _wrb_zone(double rates[][6], int, int, int, int, int& arr[]);
+	int       _wrb_zone(double rates[][6], int, int, int, int& arr[]);
 	int		  _conf_a(double rates[][6], int, int, int& r[]);
 	int		  _conf_b(double rates[][6], int, int, int& r[]);
 	int		  _conf_c(double rates[][6], int, int, int& r[]);
@@ -42,6 +42,6 @@
 	int		  _engulfing(double rates[][6], int, int, int& r[]);
 	int		  _soldiers(double rates[][6], int, int, int& r[]);
 	int       _apaor(double main[][6], double sister[][6], int, int, int, int, int, int, int, int& arr[]);
-	int       _fvb(double rates[][6], int, int, int, int, int& arr[]);
-	int       _vtr(double main[][6], double sister[][6], int, int, int, int, int, int, int& arr[]);
+	int       _fvb(double rates[][6], int, int, int, int& arr[]);
+	int       _vtr(double main[][6], double sister[][6], int, int, int, int, int, int& arr[]);
 #import

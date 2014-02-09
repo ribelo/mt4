@@ -26,6 +26,28 @@ static inline int consecutive_dir(ohlc *candle, size_t i) {
 }
 
 
+static inline int count_rising(ohlc *candle, size_t start, size_t stop) {
+	int count = 0;
+	for (size_t i = start; i < stop; i++) {
+		if (dir(candle, i) == 1) {
+			count++;
+		}
+	}
+	return count;
+}
+
+
+static inline int count_falling(ohlc *candle, size_t start, size_t stop) {
+	int count = 0;
+	for (size_t i = start; i < stop; i++) {
+		if (dir(candle, i) == -1) {
+			count++;
+		}
+	}
+	return count;
+}
+
+
 static inline double body_size(ohlc *candle, size_t i) {
 	return fabs(roundp(candle[i].close - candle[i].open, 5));
 }

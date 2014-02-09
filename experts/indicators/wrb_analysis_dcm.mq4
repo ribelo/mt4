@@ -7,6 +7,7 @@
 #property link      "email:   huxley.source@gmail.com"
 #include <wrb_analysis.mqh>
 #include <hxl_utils.mqh>
+#include <hanover --- function header (np).mqh>
 
 
 //+-------------------------------------------------------------------------------------------+
@@ -39,6 +40,8 @@ double tickvalue, point;
 string pip_description = " pips";
 
 double dcm_bull[], dcm_bear[];
+
+int last_dcm;
 //+-------------------------------------------------------------------------------------------+
 //| Custom indicator initialization function                                                  |
 //+-------------------------------------------------------------------------------------------+
@@ -87,9 +90,9 @@ int start() {
     if (counted_bars > 0) {
         counted_bars--;
     }
-    limit = Bars - counted_bars;
-    for(i = Bars; i >= 0; i--) {
-        dcm = _dcm(candle, i, Bars, contraction_size);
+    limit = iBars(symbol, tf) - counted_bars;
+    for(i = iBars(symbol, tf); i >= 4; i--) {
+        dcm = _dcm(candle, i, contraction_size, iBars(symbol, tf));
         if(last_dcm == 1) {
             dcm_bull[i] = 1;
         } else if(last_dcm == -1) {

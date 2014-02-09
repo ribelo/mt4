@@ -7,6 +7,7 @@
 #property link      "email:   huxley.source@gmail.com"
 #include <wrb_analysis.mqh>
 #include <hxl_utils.mqh>
+#include <hanover --- function header (np).mqh>
 
 
 //+-------------------------------------------------------------------------------------------+
@@ -99,18 +100,18 @@ int start() {
     if (counted_bars > 0) {
         counted_bars--;
     }
-    limit = Bars - counted_bars;
+    limit = iBars(symbol, tf) - counted_bars;
     for (i = 1; i < limit; i++) {
         if (draw_wrb == true) {
-            if (_wrb(candle, i, Bars) != 0) {
-                body_wrb_open[i] = Open[i];
-                body_wrb_close[i] = Close[i];
+            if (_wrb(candle, i, iBars(symbol, tf)) != 0) {
+                body_wrb_open[i] = iOpen(symbol, tf, i);
+                body_wrb_close[i] = iClose(symbol, tf, i);
             }
         }
         if (draw_wrb_hg == true) {
-            if (_wrb_hg(candle, i, Bars) != 0) {
-                body_wrb_hg_open[i] = Open[i];
-                body_wrb_hg_close[i] = Close[i];
+            if (_wrb_hg(candle, i, iBars(symbol, tf)) != 0) {
+                body_wrb_hg_open[i] = iOpen(symbol, tf, i);
+                body_wrb_hg_close[i] = iClose(symbol, tf, i);
             }
         }
     }
