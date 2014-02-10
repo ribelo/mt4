@@ -8,6 +8,7 @@
 #include <wrb_analysis.mqh>
 #include <hxl_utils.mqh>
 #include <hanover --- function header (np).mqh>
+#include <hanover --- extensible functions (np).mqh>
 
 
 //+-------------------------------------------------------------------------------------------+
