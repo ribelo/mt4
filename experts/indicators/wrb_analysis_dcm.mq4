@@ -80,18 +80,10 @@ int deinit() {
 //| Custom indicator iteration function                                                       |
 //+-------------------------------------------------------------------------------------------+
 int start() {
-    int i, limit, dcm, last_dcm;
-    int counted_bars = IndicatorCounted();
+    int i, dcm, last_dcm;
     if (!_new_bar(symbol, tf)) {
         return (0);
     }
-    if (iBars(symbol, tf) <= 0) {
-        return (0);
-    }
-    if (counted_bars > 0) {
-        counted_bars--;
-    }
-    limit = iBars(symbol, tf) - counted_bars;
     for(i = iBars(symbol, tf); i >= 4; i--) {
         dcm = _dcm(candle, i, contraction_size, iBars(symbol, tf));
         if(last_dcm == 1) {

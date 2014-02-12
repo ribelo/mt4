@@ -89,17 +89,10 @@ int deinit() {
 //+-------------------------------------------------------------------------------------------+
 int start() {
     int i, limit;
-    int counted_bars = IndicatorCounted();
     if (!_new_bar(symbol, tf)) {
         return (0);
     }
-    if (iBars(symbol, tf) <= 0) {
-        return (0);
-    }
-    if (counted_bars > 0) {
-        counted_bars--;
-    }
-    limit = iBars(symbol, tf) - counted_bars - lenght;
+    limit = iBars(symbol, tf) - lenght;
     for(i = lenght; i < limit; i++) {
         if(_fractal(candle, i, lenght, iBars(symbol, tf)) == 1) {
             shadow_open[i] = Low[i];

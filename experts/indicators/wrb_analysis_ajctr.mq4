@@ -115,21 +115,13 @@ int deinit() {
 //+-------------------------------------------------------------------------------------------+
 int start() {
     int i, j, limit, r[4];
-    int counted_bars = IndicatorCounted();
     double text_price;
     string text_name, time_str;
-    string name;
     if (!_new_bar(symbol, tf)) {
         return (0);
     }
-    if (iBars(symbol, tf) <= 0) {
-        return (0);
-    }
-    if (counted_bars > 0) {
-        counted_bars--;
-    }
-    limit = iBars(symbol, tf) - counted_bars - 3;
-    for (i = limit; i >= 0; i--) {
+    limit = MathMin(iBars(symbol, tf), look_back);
+    for (i = limit; i > 0; i--) {
         if (hammer == true) {
             if (_hammer(candle, i, iBars(symbol, tf), r) != 0) {
                 if (r[3] == 1) {

@@ -124,20 +124,13 @@ int deinit() {
 //+-------------------------------------------------------------------------------------------+
 int start() {
     int i, j, limit, r[4];
-    int counted_bars = IndicatorCounted();
     double text_price;
     string text_name, time_str;
     if (!_new_bar(symbol, tf)) {
         return (0);
     }
-    if (iBars(symbol, tf) <= 0) {
-        return (0);
-    }
-    if (counted_bars > 0) {
-        counted_bars--;
-    }
-    limit = iBars(symbol, tf) - counted_bars;
-    for (i = limit; i >= 0; i--) {
+    limit = iBars(symbol, tf);
+    for (i = iBars(symbol, tf); i >= 0; i--) {
         if (pattern_a == true) {
             if (_conf_a(candle, i, iBars(symbol, tf), r) != 0) {
                 conf_body_open[r[0]] = iOpen(symbol, tf, r[0]);

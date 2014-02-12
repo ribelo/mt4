@@ -117,20 +117,13 @@ int deinit() {
 //| Custom indicator iteration function                                                       |
 //+-------------------------------------------------------------------------------------------+
 int start() {
-    int i, limit, r[4];
-    int counted_bars = IndicatorCounted();
+    int i, j, limit, r[4];
     double text_price;
     string text_name, time_str;
     if (!_new_bar(symbol, tf)) {
         return (0);
     }
-    if (iBars(symbol, tf) <= 0) {
-        return (0);
-    }
-    if (counted_bars > 0) {
-        counted_bars--;
-    }
-    limit = MathMin(iBars(symbol, tf) - counted_bars, look_back);
+    limit = MathMin(iBars(symbol, tf), look_back);
     for (i = 1; i < limit; i++) {
         if (_vtr(main, sister, i, invert_sister,
                      look_for_zone, iBars(symbol, tf),

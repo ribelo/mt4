@@ -91,18 +91,10 @@ int deinit() {
 //+-------------------------------------------------------------------------------------------+
 int start() {
     int i, limit;
-    int counted_bars = IndicatorCounted();
     if (!_new_bar(symbol, tf)) {
         return (0);
     }
-    if (iBars(symbol, tf) <= 0) {
-        return (0);
-    }
-    if (counted_bars > 0) {
-        counted_bars--;
-    }
-    limit = iBars(symbol, tf) - counted_bars;
-    for (i = 1; i < limit; i++) {
+    for (i = 1; i < iBars(symbol, tf); i++) {
         if (draw_wrb == true) {
             if (_wrb(candle, i, iBars(symbol, tf)) != 0) {
                 body_wrb_open[i] = iOpen(symbol, tf, i);

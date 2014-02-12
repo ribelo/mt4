@@ -531,8 +531,25 @@
 			"file": "/home/huxley/Dropbox/code/mql/experts/include/hxl_money_management.mqh",
 			"settings":
 			{
-				"buffer_size": 1267,
+				"buffer_size": 4685,
 				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/huxley/Dropbox/code/Dashboard/client/app/lib/mm.py",
+			"settings":
+			{
+				"buffer_size": 1839,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "def CalculateDeltaLot(stop_pips, max_dd, max_risk, leverage, lot_digits,\n                      min_lot_size, tick_value, account_balance, pips_history):\n    highest_eq = max(account_balance[-5:])\n#     print('balance max: ', highest_eq)\n    dd = sum(x for x in pips_history[-5:] if x < 0)\n#     print('dd: ', dd)\n    delta = dd / 5 if dd > stop_pips else stop_pips / 5\n#     print('delta: ', delta)\n    avg_rr = CalculateAverageRR(pips_history)\n#     print('avg_rr: ', avg_rr)\n    lot_delta = round((max_dd * account_balance[-1] / delta / 100 + max((account_balance[-1] - highest_eq) / delta / 100, 0)\n                 - max((highest_eq - account_balance[-1]) / (avg_rr * delta) / 100, 0)), lot_digits)\n#     print('lot_delta: ', lot_delta)\n    lot_risk = round(min(account_balance[-1] / 1000, account_balance[-1] * max_risk / stop_pips / 10), lot_digits)\n#     print('lot_risk: ', lot_risk)\n    lot_leverage = round(leverage * account_balance[-1] / (400000 + (20 * stop_pips * leverage)), lot_digits)\n#     print('lot_leverage: ', lot_leverage)\n    lot_size = max([min([lot_delta, lot_risk, lot_leverage]), min_lot_size])\n    return lot_delta, lot_risk, lot_leverage, lot_size",
+			"settings":
+			{
+				"buffer_size": 1177,
+				"line_ending": "Unix",
+				"name": "def CalculateDeltaLot(stop_pips, max_dd, max_risk,"
 			}
 		}
 	],
@@ -697,6 +714,20 @@
 	},
 	"file_history":
 	[
+		"/home/huxley/Pictures/Skype/pipsy.txt",
+		"/home/huxley/Downloads/instant-ddsmm/Instant DDSMM/experts/DDSMM-Instant-v1.38.mq4",
+		"/home/huxley/Documents/Gnome for power users.",
+		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_ajctr.mq4",
+		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_apaor.mq4",
+		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_body.mq4",
+		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_confirmation.mq4",
+		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_dcm.mq4",
+		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_fractal_break.mq4",
+		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_fractals.mq4",
+		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_fvb.mq4",
+		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_trailing.mq4",
+		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_vtr.mq4",
+		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_zone.mq4",
 		"/home/huxley/Dropbox/code/mql/experts/include/hxl_utils.mqh",
 		"/home/huxley/Dropbox/code/mql/src/wrb_management.c",
 		"/home/huxley/Dropbox/code/mql/console.log",
@@ -704,21 +735,10 @@
 		"/home/huxley/Dropbox/code/mql/src/wrb_export.c",
 		"/home/huxley/Dropbox/code/mql/src/candle.h",
 		"/home/huxley/Dropbox/code/mql/src/wrb_analysis.h",
-		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_dcm.mq4",
 		"/home/huxley/Dropbox/github/clojure-koans/src/koans/01_equalities.clj",
 		"/home/huxley/Dropbox/code/mql/src/candle.c_back",
-		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_apaor.mq4",
-		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_zone.mq4",
-		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_vtr.mq4",
-		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_fvb.mq4",
-		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_confirmation.mq4",
-		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_fractal_break.mq4",
-		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_fractals.mq4",
-		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_trailing.mq4",
-		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_ajctr.mq4",
 		"/home/huxley/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
 		"/home/huxley/.config/sublime-text-3/Packages/Default/Preferences.sublime-settings",
-		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_body.mq4",
 		"/home/huxley/Dropbox/code/mql/experts/j.a.r.v.i.s.mq4",
 		"/home/huxley/Dropbox/code/mql/src/wrb_confirmation.h",
 		"/home/huxley/Dropbox/code/mql/src/wrb_confirmation.c",
@@ -821,10 +841,7 @@
 		"/home/huxley/Dropbox/trading/MetaTrader Admiral Markets AS/experts/indicators/Ribelo_II_SupDem.mq4",
 		"/home/huxley/Dropbox/trading/MetaTrader Admiral Markets AS/experts/indicators/Ribelo FVB.mq4",
 		"/home/huxley/.config/sublime-text-3/Packages/C++/C++.sublime-settings",
-		"/home/huxley/.zsh_history",
-		"/home/huxley/.zdirs",
-		"/home/huxley/Dropbox/code/c_wrb_analysis/console.txt",
-		"/home/huxley/Dropbox/code/heisenbug/heisenbug/wrb/zone.pyx"
+		"/home/huxley/.zsh_history"
 	],
 	"find":
 	{
@@ -855,6 +872,18 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"Calculate",
+			"CalculateHighestEq",
+			"$D$9",
+			"$D$10",
+			"$D$8",
+			"$D$11",
+			"X23",
+			"max_dd",
+			"L23",
+			"D22",
+			"$D$7",
+			"Q23",
 			"calculatedynamicdeltaswa",
 			"calculate",
 			"high_eq",
@@ -970,19 +999,7 @@
 			"Open[r[0] + j]",
 			"Open[r[1] - 1]",
 			"Open[r[1]]",
-			"Open[r[0] + 1]",
-			"Open[r[0]]",
-			"Time[i]",
-			"High[r[0]]",
-			"Close[r[0]]",
-			"Close[",
-			"Low[r[0]]",
-			"Low",
-			"Open[r[0]]",
-			"Bars",
-			"bars",
-			"Bars",
-			"wrb_zone"
+			"Open[r[0] + 1]"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1128,7 +1145,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -1144,8 +1161,8 @@
 						"selection":
 						[
 							[
-								44136,
-								44136
+								22282,
+								22282
 							]
 						],
 						"settings":
@@ -1154,11 +1171,11 @@
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
-						"translation.x": 75.0,
-						"translation.y": 15309.0,
+						"translation.x": 0.0,
+						"translation.y": 7779.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
@@ -1167,15 +1184,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1267,
+						"buffer_size": 4685,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1267,
-								1267
+								4684,
+								4684
 							]
 						],
 						"settings":
@@ -1184,17 +1201,78 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
+						"translation.y": 1651.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/home/huxley/Dropbox/code/Dashboard/client/app/lib/mm.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1839,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								47,
+								47
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 3,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1177,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								702,
+								702
+							]
+						],
+						"settings":
+						{
+							"auto_name": "def CalculateDeltaLot(stop_pips, max_dd, max_risk,",
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 65.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
 					"type": "text"
 				}
-			]
-		},
-		{
-			"sheets":
-			[
 			]
 		}
 	],
@@ -1226,7 +1304,7 @@
 		"cols":
 		[
 			0.0,
-			0.678517868619,
+			0.795212234034,
 			1.0
 		],
 		"rows":
