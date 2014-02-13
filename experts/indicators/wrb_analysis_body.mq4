@@ -90,10 +90,14 @@ int deinit() {
 //| Custom indicator iteration function                                                       |
 //+-------------------------------------------------------------------------------------------+
 int start() {
-    int i, limit;
+    int i, limit, counted_bars;
+    if(counted_bars > 0) {
+        counted_bars -= 4;
+    }
     if (!_new_bar(symbol, tf)) {
         return (0);
     }
+    limit = MathMin(iBars(symbol, tf) - counted_bars, look_back);
     for (i = 1; i < iBars(symbol, tf); i++) {
         if (draw_wrb == true) {
             if (_wrb(candle, i, iBars(symbol, tf)) != 0) {

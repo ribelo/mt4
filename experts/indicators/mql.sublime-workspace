@@ -4,6 +4,98 @@
 		"selected_items":
 		[
 			[
+				"OrderC",
+				"OrderCommission	double"
+			],
+			[
+				"total",
+				"total_orders"
+			],
+			[
+				"tot",
+				"total_orders"
+			],
+			[
+				"MODE_TIC",
+				"MODE_TICKVALUE	16"
+			],
+			[
+				"mul",
+				"multiplier"
+			],
+			[
+				"Drow",
+				"DrawDownHighToPeak"
+			],
+			[
+				"Hi",
+				"HighestEq"
+			],
+			[
+				"tmp",
+				"tmp_pip"
+			],
+			[
+				"dd",
+				"dd_pip"
+			],
+			[
+				"Order",
+				"OrderProfit	double"
+			],
+			[
+				"OrderT",
+				"OrderTicket	int"
+			],
+			[
+				"firt",
+				"first_name"
+			],
+			[
+				"Gl",
+				"GlobalVariableGet	double"
+			],
+			[
+				"second",
+				"second_name"
+			],
+			[
+				"Global",
+				"GlobalVariableGet	double"
+			],
+			[
+				"Globa",
+				"GlobalVariableGet	double"
+			],
+			[
+				"String",
+				"StringFind	int"
+			],
+			[
+				"firs",
+				"first_name"
+			],
+			[
+				"Str",
+				"StringSubstr	string"
+			],
+			[
+				"Strin",
+				"StringFind	int"
+			],
+			[
+				"Glboa",
+				"GlobalVariableGet	double"
+			],
+			[
+				"aj",
+				"ajctr_prefix"
+			],
+			[
+				"Sting",
+				"StringFind	int"
+			],
+			[
 				"high",
 				"highest_eq"
 			],
@@ -46,10 +138,6 @@
 			[
 				"count",
 				"count_falling(ohlc *candle, size_t start, size_t stop)	int"
-			],
-			[
-				"Global",
-				"GlobalVariableGet	double"
 			],
 			[
 				"Glob",
@@ -196,10 +284,6 @@
 				"ArraySize	int"
 			],
 			[
-				"total",
-				"total_fibo"
-			],
-			[
 				"Obje",
 				"ObjectType	int"
 			],
@@ -218,10 +302,6 @@
 			[
 				"Objec",
 				"ObjectSet	bool"
-			],
-			[
-				"Order",
-				"OrderProfit	double"
 			],
 			[
 				"mult",
@@ -434,86 +514,6 @@
 			[
 				"cont",
 				"contraction_body_size_break(ohlc *candle, size_t v1, size_t v2)	int"
-			],
-			[
-				"con",
-				"contraction_share"
-			],
-			[
-				"len",
-				"lenght_weak"
-			],
-			[
-				"s",
-				"size_t"
-			],
-			[
-				"isWr",
-				"isWrbHG"
-			],
-			[
-				"C",
-				"CFLAGS"
-			],
-			[
-				"totla",
-				"total_price"
-			],
-			[
-				"Draw",
-				"DrawHiddenStopLoss"
-			],
-			[
-				"hid",
-				"hidden_pips"
-			],
-			[
-				"OrderSe",
-				"OrderSelect	bool"
-			],
-			[
-				"tp",
-				"tp_line_name"
-			],
-			[
-				"from",
-				"from_date	statement"
-			],
-			[
-				"look",
-				"look_back"
-			],
-			[
-				"prior",
-				"prior_wrb"
-			],
-			[
-				"pr",
-				"precision"
-			],
-			[
-				"bounce",
-				"bounce_bear"
-			],
-			[
-				"boun",
-				"bounce_bull"
-			],
-			[
-				"clo",
-				"close_c1"
-			],
-			[
-				"clos",
-				"close_zone"
-			],
-			[
-				"close",
-				"close_c1"
-			],
-			[
-				"op",
-				"open_zone"
 			]
 		]
 	},
@@ -523,16 +523,30 @@
 			"file": "/home/huxley/Dropbox/code/mql/experts/j.a.r.v.i.s.mq4",
 			"settings":
 			{
-				"buffer_size": 48357,
+				"buffer_size": 43986,
 				"line_ending": "Windows"
 			}
 		},
 		{
+			"contents": "#property copyright \"Copyright 2014 Huxley\"\n#property link      \"email:   huxley_source@gmail_com\"\n\n\nvoid UpdateBalanceArray(double& balance_array[]) {\n	static int total_history;\n	double curr_balance = 0.0;\n	if (OrdersHistoryTotal() != total_history) {\n		total_history = OrdersHistoryTotal();\n		ArrayResize(balance_array, total_history);\n		if (total_history > 0) {\n			for (int i = 0; i < total_history; i++) {\n			    if (OrderSelect(i, SELECT_BY_POS, MODE_HISTORY)) {\n			        curr_balance += OrderProfit();\n			        curr_balance += OrderCommission();\n			        balance_array[i] = curr_balance;\n			    }\n			}\n		}\n	}\n	if (ArraySize(balance_array) == 0) {\n		ArrayResize(balance_array, 1);\n		balance_array[0] = AccountBalance();\n	}\n}\n\n\ndouble HighestEq(double& balance_array[], int count = 5) {\n	static double highest_eq;\n	static int total_history;\n	if (OrdersHistoryTotal() != total_history) {\n		total_history = OrdersHistoryTotal();\n		if (total_history > 0) {\n			count = MathMin(total_history, count + 1);\n			for (int i = total_history - count - 1; i < total_history - 1; i++) {\n				highest_eq = MathMax(highest_eq, balance_array[i]);\n			}\n		}\n	}\n	if (highest_eq == 0.0) {\n		highest_eq = AccountBalance();\n	}\n	return (highest_eq);\n}\n\n\ndouble DrownDownPercent(double& balance_array[], int count = 5) {\n	double highest_eq = HighestEq(balance_array, count);\n	double diff = highest_eq - balance_array[ArraySize(balance_array) - 1];\n	if (highest_eq > 0) {\n		return (diff / highest_eq);\n	} else {\n		return (0.0);\n	}\n}\n\n\ndouble DrownDownCash(double& balance_array[], int count = 5) {\n	double highest_eq = HighestEq(balance_array, count);\n	return (highest_eq - balance_array[ArraySize(balance_array) - 1]);\n}\n\n\ndouble DrawDownHighToPeak(int count = 5) {\n	static int pip_mult_tab[] = {1, 10, 1, 10, 1, 10, 100, 1000};\n	static double dd_pip;\n	static int total_history;\n	double tmp_pip = 0.0;\n	if (OrdersHistoryTotal() != total_history) {\n		total_history = OrdersHistoryTotal();\n		if (total_history > 0) {\n			count = MathMin(total_history, count);\n			for (int i = total_history - count - 1; i < total_history; i++) {\n				if (OrderSelect(i, SELECT_BY_POS, MODE_HISTORY)) {\n					if (OrderType() == 6 || OrderType() == 7) {\n						count++;\n					}\n					if (OrderProfit() < 0) {\n						int local_digits = MarketInfo(OrderSymbol(), MODE_DIGITS);\n						int local_multiplier = pip_mult_tab[local_digits];\n						tmp_pip += MathAbs(OrderOpenPrice() - OrderClosePrice()) / MarketInfo(OrderSymbol(), MODE_POINT) / local_multiplier;\n					} else {\n						dd_pip = MathMax(dd_pip, tmp_pip);\n						tmp_pip = 0.0;\n					}\n				}\n			}\n		}\n	}\n	dd_pip = MathMax(dd_pip, tmp_pip);\n	return (dd_pip);\n}\n\n\ndouble CalculateRR() {\n    static int pip_mult_tab[] = {1, 10, 1, 10, 1, 10, 100, 1000};\n    static int total_history;\n    static double rr = 1.0;\n    int local_multiplier, local_digits;\n    if (total_history != OrdersHistoryTotal()) {\n        total_history = OrdersHistoryTotal();\n        for (int i = 0; i > total_history; i++) {\n            if (OrderSelect(i, SELECT_BY_POS, MODE_HISTORY)) {\n                if (OrderType() == 6 || OrderType() == 7) {\n                    continue;\n                }\n                local_digits = MarketInfo(OrderSymbol(), MODE_DIGITS);\n                local_multiplier = pip_mult_tab[local_digits];\n                double pips_profit = 0.0;\n                double pips_loss = 0.0;\n                int trades_win = 0;\n                int trades_loss = 0;\n                if (OrderProfit() > 0) {\n                    trades_win++;\n                    pips_profit += MathAbs((OrderClosePrice() -\n                        OrderOpenPrice()) / MarketInfo(OrderSymbol(),\n                        MODE_POINT) / local_multiplier);\n                } else if (OrderProfit() < 0) {\n                    trades_loss++;\n                    pips_loss += MathAbs((OrderClosePrice() -\n                        OrderOpenPrice()) / MarketInfo(OrderSymbol(),\n                        MODE_POINT) / local_multiplier);\n                }\n            }\n        }\n        double average_profit = 0;\n        double average_loss = 0;\n        if (pips_profit > 0 && trades_win > 0) {\n            average_profit = pips_profit / trades_win;\n        }\n        if (pips_loss > 0 && trades_loss > 0) {\n            average_loss = pips_loss / trades_loss;\n        }\n        if (average_loss > 0 && average_profit > 0) {\n            rr = average_loss / average_profit;\n        }\n    }\n    return (rr);\n}\n\n\ndouble DynamicDeltaLot(string symbol, double stop_pip, double max_dd, double max_risk, double& balance_array[]) {\n    static int total_history;\n    static int total_orders;\n    static double dd;\n    static double min_lot_size;\n    static double high_eq;\n    static double curr_balance;\n    static double average_risk_reward;\n    static double lot_size;\n\n    if (total_history != OrdersHistoryTotal() || total_orders != OrdersTotal()) {\n	    total_history = OrdersHistoryTotal();\n	    total_orders = OrdersTotal();\n	    dd = DrawDownHighToPeak();\n	    min_lot_size = MarketInfo(symbol, MODE_MINLOT);\n	    high_eq = HighestEq(balance_array);\n	    curr_balance = balance_array[ArraySize(balance_array) - 1];\n	    Print(\"DDSM curr_balance \", curr_balance);\n	    for (int j = 0; j < ArraySize(balance_array); j++){\n	    	Print(\"balance i \", i,\" \", balance_array[j]);\n	    }\n	    average_risk_reward = CalculateRR();\n\n	    Print(\"DDSM rr \", average_risk_reward);\n	    if (dd > 0.0) {\n	        double delta = dd / 5;\n	    } else {\n	        delta = stop_pip / 5;\n	    }\n	    Print(\"DDSM dd \",dd);\n	    Print(\"DDSM stop_pip \",stop_pip);\n	    Print(\"DDSM delta \",delta);\n	    if (delta > 0) {\n	        double step1 = curr_balance * max_dd / delta / 100 / MarketInfo(symbol, MODE_TICKVALUE);\n	        Print(\"DDSM step1 \", step1);\n	        double step2 = MathMax((curr_balance - high_eq) / delta / 100, 0) / MarketInfo(symbol, MODE_TICKVALUE);\n	        Print(\"DDSM step2 \", step2);\n	        double step3 = MathMax((high_eq - curr_balance) / (average_risk_reward * delta) / 100, 0) / MarketInfo(symbol, MODE_TICKVALUE);\n	        Print(\"DDSM step3 \", step3);\n	        double lot_delta = (max_dd * curr_balance / delta / 100 + MathMax((curr_balance - high_eq) / delta / 100, 0) - MathMax((high_eq - curr_balance) / (average_risk_reward * delta) / 100, 0)) / MarketInfo(symbol, MODE_TICKVALUE);\n	        Print(\"DDSM lot_delta \", lot_delta);\n	        double lot_risk = curr_balance * max_risk / stop_pip / MarketInfo(symbol, MODE_TICKVALUE);\n	        Print(\"DDSM lot_risk \", lot_risk);\n	        double lot_max = AccountFreeMargin() / stop_pip / MarketInfo(symbol, MODE_TICKVALUE);\n	        Print(\"DDSM lot_max \", lot_max);\n	        lot_size = MathMin(MathMin(MathMin(lot_delta, lot_risk), lot_max), MarketInfo(symbol, MODE_MAXLOT));\n	        lot_size = MathFloor(lot_size / MarketInfo(symbol, MODE_LOTSTEP)) * MarketInfo(symbol, MODE_LOTSTEP);\n	        lot_size = MathMax(lot_size, MarketInfo(symbol, MODE_MINLOT));\n	        Print(\"DDSM lot_size \", lot_size);\n	    }\n	}\n    return (lot_size);\n}\n\nbool use_array[] = {0, 0, 0, 0, 0};\n\nif (ajctr) {\n	use_array[0] = true;\n}\nif (apaor) {\n	use_array[1] = true;	\n}",
 			"file": "/home/huxley/Dropbox/code/mql/experts/include/hxl_money_management.mqh",
+			"file_size": 7052,
+			"file_write_time": 130367110788773132,
 			"settings":
 			{
-				"buffer_size": 4685,
+				"buffer_size": 7163,
 				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "//+-------------------------------------------------------------------+\n//|                  Just A Rather Very Intelligent System by Huxley  |\n//|                                         Copyright   2013, Huxley  |\n//+-------------------------------------------------------------------+\n#property copyright \"Copyright 2014, Huxley\"\n\n//+------------------------------------------------------------------+\n//| expert initialization function                                   |\n//+------------------------------------------------------------------+\nextern bool ajctr = false;\nextern bool apaor = false;\nextern bool zone = false;\nextern bool fvb = false;\nextern bool vtr = false;\n\n\n//int tf_array[] = {1, 5, 15, 30, 60, 240, 1440, 10080, 43200};\nbool use_array[] = {0,0,0,0,0};\nstring signal_array[] = {\"hxl_ajctr\", \"hxl_apaor\", \"hxl_wrb_zone\",\n                         \"hxl_fvb\", \"hxl_vtr\"};\nint last_signal = 0;\n\nint init() {\n    if (ajctr) {\n        use_array[0] = true;\n    }\n    if (apaor) {\n        use_array[1] = true;\n    }\n    if (zone) {\n        use_array[2] = true;\n    }\n    if (fvb) {\n        use_array[3] = true;\n    }\n    if (vtr) {\n        use_array[4] = true;\n    }\n\n    return (0);\n}\n\nint deinit() {\n    return (0);\n}\n\n\nbool check_alert() {\n    for (int i = 0; i < GlobalVariablesTotal(); i++) {\n        string first_name = GlobalVariableName(i);\n        if (GlobalVariableGet(first_name) <= last_signal) {\n            continue;\n        }\n        for (int j = 0; j < ArraySize(signal_array); j++) {\n            string first_type = signal_array[j];\n            if (use_array[j] != true) {\n                continue;\n            }\n            if (!StringFind(first_name, signal_array[j])) {\n                continue;\n            }\n            for (int k = 0; k < GlobalVariablesTotal(); k++) {\n                if (i == k) {\n                    continue;\n                }\n                string second_name = GlobalVariableName:*;\n                for (int l = 0; l <ArraySize(signal_array); l++) {\n                    if (signal_array[j] == signal_array[l]) {\n                        continue;\n                    }\n                    string second_type = signal_array[l];\n                    if (use_array[l] != true) {\n                        continue;\n                    }\n                    if (!StringFind(second_name, signal_array[l])) {\n                        continue;\n                    }\n                    if (GlobalVariableGet(first_name) == GlobalVariableGet(second_name)) {\n                        last_signal = GlobalVariableGet(first_name);\n                        return (true);\n                    }\n                }\n            }\n        }\n    }\n}\n\nint start() {\n    static int last_time;\n    if (iTime(Symbol(), PERIOD_M1, 0) > last_time) {\n        last_time = iTime(Symbol(), PERIOD_M1, 0);\n        if (check_alert) {\n            // tutaj sobie napisz alert\n        }\n    }\n}\n",
+			"file": "/home/huxley/Pictures/Skype/WRB_Alert_GlobalVariable.mq4",
+			"file_size": 3008,
+			"file_write_time": 130367137173327755,
+			"settings":
+			{
+				"buffer_size": 2916,
+				"line_ending": "Windows"
 			}
 		},
 		{
@@ -714,20 +728,21 @@
 	},
 	"file_history":
 	[
-		"/home/huxley/Pictures/Skype/pipsy.txt",
-		"/home/huxley/Downloads/instant-ddsmm/Instant DDSMM/experts/DDSMM-Instant-v1.38.mq4",
-		"/home/huxley/Documents/Gnome for power users.",
+		"/home/huxley/Dropbox/code/mql/experts/include/hxl_money_management.mqh",
+		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_fvb.mq4",
+		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_zone.mq4",
+		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_fractal_break.mq4",
+		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_fractals.mq4",
 		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_ajctr.mq4",
-		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_apaor.mq4",
 		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_body.mq4",
 		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_confirmation.mq4",
 		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_dcm.mq4",
-		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_fractal_break.mq4",
-		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_fractals.mq4",
-		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_fvb.mq4",
-		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_trailing.mq4",
 		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_vtr.mq4",
-		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_zone.mq4",
+		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_apaor.mq4",
+		"/home/huxley/Pictures/Skype/pipsy.txt",
+		"/home/huxley/Downloads/instant-ddsmm/Instant DDSMM/experts/DDSMM-Instant-v1.38.mq4",
+		"/home/huxley/Documents/Gnome for power users.",
+		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_trailing.mq4",
 		"/home/huxley/Dropbox/code/mql/experts/include/hxl_utils.mqh",
 		"/home/huxley/Dropbox/code/mql/src/wrb_management.c",
 		"/home/huxley/Dropbox/code/mql/console.log",
@@ -840,8 +855,7 @@
 		"/home/huxley/Dropbox/trading/MetaTrader Admiral Markets AS/experts/samples/DLLSample/ExpertSample.cpp",
 		"/home/huxley/Dropbox/trading/MetaTrader Admiral Markets AS/experts/indicators/Ribelo_II_SupDem.mq4",
 		"/home/huxley/Dropbox/trading/MetaTrader Admiral Markets AS/experts/indicators/Ribelo FVB.mq4",
-		"/home/huxley/.config/sublime-text-3/Packages/C++/C++.sublime-settings",
-		"/home/huxley/.zsh_history"
+		"/home/huxley/.config/sublime-text-3/Packages/C++/C++.sublime-settings"
 	],
 	"find":
 	{
@@ -872,6 +886,24 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"last_bar",
+			"DynamicDeltaLot",
+			"MathAbs(entry_price - exit_price) / point / multiplier",
+			"DynamicDeltaLot",
+			"tickvalue",
+			"DynamicDeltaLot",
+			"CalculateDynamicDeltaLot",
+			"account_balance",
+			"dd",
+			"loss_pip",
+			"k",
+			"j",
+			"first_name",
+			"name",
+			"i",
+			"ajctr",
+			"static",
+			"name",
 			"Calculate",
 			"CalculateHighestEq",
 			"$D$9",
@@ -981,25 +1013,7 @@
 			"Open[r[2]]",
 			"Close[r[2]]",
 			"Close[r[1]]",
-			"Open[r[1]]",
-			"Close[i]",
-			"Open[i]",
-			"Close[r[0] + j]",
-			"Open[r[0] + j]",
-			"Close[r[0]]",
-			"Open[r[0]]",
-			"Time[pA]",
-			"Time[pB]",
-			"], ",
-			"Time[pB],",
-			"Time[pB]",
-			"Time[i]",
-			"Time[r[0] + 1]",
-			"Close[r[0] + j]",
-			"Open[r[0] + j]",
-			"Open[r[1] - 1]",
-			"Open[r[1]]",
-			"Open[r[0] + 1]"
+			"Open[r[1]]"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1145,7 +1159,7 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 2,
 			"sheets":
 			[
 				{
@@ -1154,15 +1168,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 48357,
+						"buffer_size": 43986,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								22282,
-								22282
+								0,
+								0
 							]
 						],
 						"settings":
@@ -1172,10 +1186,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 7779.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
@@ -1184,15 +1198,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4685,
+						"buffer_size": 7163,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4684,
-								4684
+								7052,
+								7052
 							]
 						],
 						"settings":
@@ -1201,14 +1215,50 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1651.0,
+						"translation.y": 2688.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
 					"buffer": 2,
+					"file": "/home/huxley/Pictures/Skype/WRB_Alert_GlobalVariable.mq4",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2916,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2687,
+								2687
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/MetaQuotes (MQL4) Language Package/Syntaxes/MQL4.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 912.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 3,
 					"file": "/home/huxley/Dropbox/code/Dashboard/client/app/lib/mm.py",
 					"semi_transient": false,
 					"settings":
@@ -1234,17 +1284,11 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 3,
 					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 0,
-			"sheets":
-			[
+				},
 				{
-					"buffer": 3,
+					"buffer": 4,
 					"semi_transient": false,
 					"settings":
 					{
@@ -1270,7 +1314,7 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 4,
 					"type": "text"
 				}
 			]
@@ -1304,7 +1348,7 @@
 		"cols":
 		[
 			0.0,
-			0.795212234034,
+			0.965823650034,
 			1.0
 		],
 		"rows":

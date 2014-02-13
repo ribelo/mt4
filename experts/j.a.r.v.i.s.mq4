@@ -286,7 +286,7 @@ void FiboToPending() {
                     desire_rr = ObjectGet(name, OBJPROP_FIRSTLEVEL + 2);
                     zone_size = entry_price - exit_price;
                     desire_price = entry_price + (desire_rr - 1) * zone_size;
-                    send_lot = CalculateDynamicDeltaLot(entry_price, exit_price);
+                    send_lot = DynamicDeltaLot(symbol, MathAbs(entry_price - exit_price), max_dd, max_risk, balance_array);
                     if (_fcmp(_ask(symbol), entry_price) > 0) {
                         type = OP_BUYLIMIT;
                     } else if (_fcmp(_ask(symbol), entry_price) < 0) {
@@ -304,7 +304,7 @@ void FiboToPending() {
                     desire_rr = ObjectGet(name, OBJPROP_FIRSTLEVEL + 2);
                     zone_size = exit_price - entry_price;
                     desire_price = entry_price - (desire_rr - 1) * zone_size;
-                    send_lot = CalculateDynamicDeltaLot(entry_price, exit_price);
+                    send_lot = DynamicDeltaLot(symbol, MathAbs(entry_price - exit_price), max_dd, max_risk, balance_array);
                     if (_fcmp(_bid(symbol), entry_price) < 0) {
                         type = OP_SELLLIMIT;
                     } else if (_fcmp(_bid(symbol), entry_price) > 0) {
@@ -446,77 +446,6 @@ bool IsTradingAllowed() {
     return (true);
 }
 
-double CalculateDynamicDeltaLot(double open_price, double stop_price) {
-    int local_multiplier, local_digits;
-    int total_history = OrdersHistoryTotal();
-    double dd, loss_pip, stop_pip;
-    double min_lot_size = MarketInfo(symbol, MODE_MINLOT);
-    double high_eq = 0.0;
-    double curr_balance = 0.0;
-    double account_balance[];
-
-    stop_pip = MathAbs(open_price - stop_price) / point / multiplier;
-    Print("DDSM total_history", total_history);
-    if (total_history > 0) {
-        int count = MathMax(total_history, 5);
-        ArrayResize(account_balance, total_history);
-        for (int i = total_history - 1; i >= 0; i--) {
-            if (OrderSelect(i, SELECT_BY_POS, MODE_HISTORY)) {
-                curr_balance += OrderProfit();
-                account_balance[i] = curr_balance;
-            }
-        }
-        Print("DDSM count", count);
-        Print("DDSM ", total_history - count - 1);
-        for (i = total_history - count - 1; i < total_history; i++) {
-            high_eq = MathMax(high_eq, account_balance[i]);
-            if (OrderSelect(i, SELECT_BY_POS, MODE_HISTORY)) {
-                if (OrderType() == 6 || OrderType() == 7) {
-                    count++;
-                    continue;
-                }
-                if (OrderProfit() < 0) {
-                    local_digits = MarketInfo(OrderSymbol(), MODE_DIGITS);
-                    local_multiplier = pip_mult_tab[local_digits];
-                    dd += MathAbs(OrderOpenPrice() - OrderClosePrice()) / MarketInfo(OrderSymbol(), MODE_POINT) / local_multiplier;
-                }
-            }
-        }
-    } else {
-        curr_balance = AccountBalance();
-        high_eq = AccountBalance();
-    }
-
-    double average_risk_reward = CalculateRR();
-    Print("DDSM rr ", average_risk_reward);
-    if (dd > stop_pip) {
-        double delta = dd / 5;
-    } else {
-        delta = stop_pip / 5;
-    }
-    Print("dd ",dd);
-    Print("stop_pip ",stop_pip);
-    Print("delta ",delta);
-    if (delta > 0) {
-        double step1 = max_dd * curr_balance / delta / 100;
-        Print("step1 ", step1);
-        double step2 = MathMax((curr_balance - high_eq) / delta / 100, 0);
-        Print("step2 ", step2);
-        double step3 = MathMax((high_eq - curr_balance) / (average_risk_reward * delta) / 100, 0);
-        Print("step3 ", step3);
-        double lot_delta = (max_dd * curr_balance / delta / 100 + MathMax((curr_balance - high_eq) / delta / 100, 0) - MathMax((high_eq - curr_balance) / (average_risk_reward * delta) / 100, 0)) / tickvalue;
-        Print("lot_delta ", lot_delta);
-        double lot_risk = curr_balance * max_risk / stop_pip / tickvalue;
-        Print("lot_risk ", lot_risk);
-        double lot_max = AccountFreeMargin() / stop_pip / tickvalue;
-        Print("lot_max ", lot_max);
-        double lot_size = MathMin(MathMin(MathMin(lot_delta, lot_risk), lot_max), MarketInfo(symbol, MODE_MAXLOT));
-        lot_size = MathFloor(lot_size / MarketInfo(symbol, MODE_LOTSTEP)) * MarketInfo(symbol, MODE_LOTSTEP);
-        lot_size = MathMax(lot_size, MarketInfo(symbol, MODE_MINLOT));
-        Print("lot_size ", lot_size);
-    }
-    return (lot_size);
-}
 
 void GetFibo() {
     double entry_price, stop_price, label_price, temp_pending_pips, temp_break_even;
@@ -653,7 +582,7 @@ void SupplyDemandTrading() {
                                 price = NormalizeDouble(MarketInfo(symbol, MODE_ASK), MarketInfo(symbol, MODE_DIGITS));
                                 stpo_price = exit_price[i] - hidden_pips * point;
                                 take_price = entry_price[i] + (desire_rr[i] - 1) * zone_size[i] + hidden_pips * point;
-                                lot_size = CalculateDynamicDeltaLot(price, exit_price[i]);
+                                lot_size = DynamicDeltaLot(symbol, MathAbs(price - exit_price[i]), max_dd, max_risk, balance_array);
                                 ticket = OrderSendReliableMKT(symbol, type, lot_size, price, slippage, stpo_price, take_price, trade_comment, magic_number, 0, CLR_NONE);
                             }
                             break;
@@ -691,7 +620,7 @@ void SupplyDemandTrading() {
                                 price = _bid(symbol);
                                 stpo_price = exit_price[i] + hidden_pips * point;
                                 take_price = entry_price[i] - (desire_rr[i] - 1) * zone_size[i] - hidden_pips * point;
-                                lot_size = CalculateDynamicDeltaLot(price, exit_price[i]);
+                                lot_size = DynamicDeltaLot(symbol, MathAbs(price - exit_price[i]), max_dd, max_risk, balance_array);
                                 ticket = OrderSendReliableMKT(symbol, type, lot_size, price, slippage, stpo_price, take_price, trade_comment, magic_number, 0, CLR_NONE);
                             }
                             break;
@@ -730,7 +659,7 @@ void SasTrading() {
                     price = _bid(symbol);
                     stop = trigger + hidden_pips * point;
                     take = price - (trigger - price) * 3 - hidden_pips * point;
-                    temp_send_lot = CalculateDynamicDeltaLot(price, trigger);
+                    temp_send_lot = DynamicDeltaLot(symbol, MathAbs(price - trigger), max_dd, max_risk, balance_array);
                     Print("Sell price ", price, " trigger ", trigger, " stop ", stop, " take ", take);
                     while (ticket == 0) {
                         while (temp_send_lot > 0) {
@@ -763,7 +692,7 @@ void SasTrading() {
                     price = _ask(symbol);
                     stop = trigger - hidden_pips * point;
                     take = price + (price - trigger) * 3 +  hidden_pips * point;
-                    temp_send_lot = CalculateDynamicDeltaLot(price, trigger);
+                    temp_send_lot = DynamicDeltaLot(symbol, MathAbs(price - trigger), max_dd, max_risk, balance_array);
                     Print("Buy price ", price, " trigger ", trigger, " stop ", stop, " take ", take);
                     while (ticket == 0) {
                         while (temp_send_lot > 0) {
@@ -812,51 +741,6 @@ void CountOpenTrades() {
         ArrayResize(orders, 0);
     }
     ArrayResize(orders, open_trades);
-}
-
-double CalculateRR() {
-    static int total_history;
-    static double rr = 1.0;
-    int local_multiplier, local_digits;
-    if (total_history != OrdersHistoryTotal()) {
-        total_history = OrdersHistoryTotal();
-        for (int i = 0; i > total_history; i++) {
-            if (OrderSelect(i, SELECT_BY_POS, MODE_HISTORY)) {
-                if (OrderType() == 6 || OrderType() == 7) {
-                    continue;
-                }
-                local_digits = MarketInfo(OrderSymbol(), MODE_DIGITS);
-                local_multiplier = pip_mult_tab[local_digits];
-                double pips_profit = 0.0;
-                double pips_loss = 0.0;
-                int trades_win = 0;
-                int trades_loss = 0;
-                if (OrderProfit() > 0) {
-                    trades_win++;
-                    pips_profit += MathAbs((OrderClosePrice() -
-                        OrderOpenPrice()) / MarketInfo(OrderSymbol(),
-                        MODE_POINT) / local_multiplier);
-                } else if (OrderProfit() < 0) {
-                    trades_loss++;
-                    pips_loss += MathAbs((OrderClosePrice() -
-                        OrderOpenPrice()) / MarketInfo(OrderSymbol(),
-                        MODE_POINT) / local_multiplier);
-                }
-            }
-        }
-        double average_profit = 0;
-        double average_loss = 0;
-        if (pips_profit > 0 && trades_win > 0) {
-            average_profit = pips_profit / trades_win;
-        }
-        if (pips_loss > 0 && trades_loss > 0) {
-            average_loss = pips_loss / trades_loss;
-        }
-        if (average_loss > 0 && average_profit > 0) {
-            rr = average_loss / average_profit;
-        }
-    }
-    return (rr);
 }
 
 
@@ -989,11 +873,14 @@ void DisplayUserFeedback() {
     screen_message = "Money Management:";
     ObjectMakeLabel(StringConcatenate(_name, "_money_management"), screen_message, font_size, font_type, text_color, data_disp_gap_size, temp_offset, 0, 0);
     temp_offset += data_disp_offset;
-    screen_message = StringConcatenate("    Highest EQ: ", DoubleToStr(CalculateHighestEq(balance_array), 0));
+    screen_message = StringConcatenate("    Highest EQ: ", DoubleToStr(HighestEq(balance_array), 0));
     ObjectMakeLabel(StringConcatenate(_name, "_highest_eq"), screen_message, font_size, font_type, text_color, data_disp_gap_size, temp_offset, 0, 0);
     temp_offset += data_disp_offset;
-    screen_message = StringConcatenate("    Drown Down: ", DoubleToStr(CalculateDrownDownPercent(balance_array) * 100, 2),"%");
+    screen_message = StringConcatenate("    Drown Down: ", DoubleToStr(DrawDownHighToPeak(), 0));
     ObjectMakeLabel(StringConcatenate(_name, "_drown_down"), screen_message, font_size, font_type, text_color, data_disp_gap_size, temp_offset, 0, 0);
+    temp_offset += data_disp_offset;
+    screen_message = StringConcatenate("    Max Lot: ", DynamicDeltaLot(symbol, max_stop, max_dd, max_risk, balance_array));
+    ObjectMakeLabel(StringConcatenate(_name, "_max_lot"), screen_message, font_size, font_type, text_color, data_disp_gap_size, temp_offset, 0, 0);
     temp_offset += data_disp_offset;
 
     if (use_trailing_stop) {

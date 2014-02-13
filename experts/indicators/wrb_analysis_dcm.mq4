@@ -84,7 +84,11 @@ int start() {
     if (!_new_bar(symbol, tf)) {
         return (0);
     }
-    for(i = iBars(symbol, tf); i >= 4; i--) {
+    if(counted_bars > 0) {
+        counted_bars -= 64;
+    }
+    limit = MathMin(iBars(symbol, tf) - counted_bars, look_back);
+    for(i = limit; i >= 4; i--) {
         dcm = _dcm(candle, i, contraction_size, iBars(symbol, tf));
         if(last_dcm == 1) {
             dcm_bull[i] = 1;

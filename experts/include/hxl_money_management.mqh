@@ -1,4 +1,4 @@
-#property copyright "Copyright Ã‚Â© 2014 Huxley"
+#property copyright "Copyright 2014 Huxley"
 #property link      "email:   huxley_source@gmail_com"
 
 
@@ -12,113 +12,192 @@ void UpdateBalanceArray(double& balance_array[]) {
 			for (int i = 0; i < total_history; i++) {
 			    if (OrderSelect(i, SELECT_BY_POS, MODE_HISTORY)) {
 			        curr_balance += OrderProfit();
+			        curr_balance += OrderCommission();
 			        balance_array[i] = curr_balance;
-
 			    }
 			}
 		}
 	}
+	if (ArraySize(balance_array) == 0) {
+		ArrayResize(balance_array, 1);
+		balance_array[0] = AccountBalance();
+	}
 }
 
 
-double CalculateHighestEq(double& balance_array[], int count = 5) {
+double HighestEq(double& balance_array[], int count = 5) {
 	static double highest_eq;
 	static int total_history;
 	if (OrdersHistoryTotal() != total_history) {
 		total_history = OrdersHistoryTotal();
 		if (total_history > 0) {
-			count =  MathMin(total_history, count);
-			for (int i = total_history - count - 1; i < total_history; i++) {
+			count = MathMin(total_history, count + 1);
+			for (int i = total_history - count - 1; i < total_history - 1; i++) {
 				highest_eq = MathMax(highest_eq, balance_array[i]);
 			}
 		}
+	}
+	if (highest_eq == 0.0) {
+		highest_eq = AccountBalance();
 	}
 	return (highest_eq);
 }
 
 
-double CalculateDrownDownPercent(double& balance_array[], int count = 5) {
-	double highest_eq = CalculateHighestEq(balance_array, count);
+double DrownDownPercent(double& balance_array[], int count = 5) {
+	double highest_eq = HighestEq(balance_array, count);
 	double diff = highest_eq - balance_array[ArraySize(balance_array) - 1];
-	return diff / highest_eq);
+	if (highest_eq > 0) {
+		return (diff / highest_eq);
+	} else {
+		return (0.0);
+	}
 }
 
 
-double CalculateDrownDownCash(double& balance_array[], int count = 5) {
-	double highest_eq = CalculateHighestEq(balance_array, count);
-	double diff = highest_eq - balance_array[ArraySize(balance_array) - 1];
-	return diff / highest_eq);
+double DrownDownCash(double& balance_array[], int count = 5) {
+	double highest_eq = HighestEq(balance_array, count);
+	return (highest_eq - balance_array[ArraySize(balance_array) - 1]);
 }
 
 
-double CalculateDynamicDeltaLot(double open_price, double stop_price) {
+double DrawDownHighToPeak(int count = 5) {
+	static int pip_mult_tab[] = {1, 10, 1, 10, 1, 10, 100, 1000};
+	static double dd_pip;
+	static int total_history;
+	double tmp_pip = 0.0;
+	if (OrdersHistoryTotal() != total_history) {
+		total_history = OrdersHistoryTotal();
+		if (total_history > 0) {
+			count = MathMin(total_history, count);
+			for (int i = total_history - count - 1; i < total_history; i++) {
+				if (OrderSelect(i, SELECT_BY_POS, MODE_HISTORY)) {
+					if (OrderType() == 6 || OrderType() == 7) {
+						count++;
+					}
+					if (OrderProfit() < 0) {
+						int local_digits = MarketInfo(OrderSymbol(), MODE_DIGITS);
+						int local_multiplier = pip_mult_tab[local_digits];
+						tmp_pip += MathAbs(OrderOpenPrice() - OrderClosePrice()) / MarketInfo(OrderSymbol(), MODE_POINT) / local_multiplier;
+					} else {
+						dd_pip = MathMax(dd_pip, tmp_pip);
+						tmp_pip = 0.0;
+					}
+				}
+			}
+		}
+	}
+	dd_pip = MathMax(dd_pip, tmp_pip);
+	return (dd_pip);
+}
+
+
+double CalculateRR() {
+    static int pip_mult_tab[] = {1, 10, 1, 10, 1, 10, 100, 1000};
+    static int total_history;
+    static double rr = 1.0;
     int local_multiplier, local_digits;
-    int total_history = OrdersHistoryTotal();
-    double dd, loss_pip, stop_pip;
-    double min_lot_size = MarketInfo(symbol, MODE_MINLOT);
-    double high_eq = 0.0;
-    double curr_balance = 0.0;
-    double account_balance[];
-
-    stop_pip = MathAbs(open_price - stop_price) / point / multiplier;
-    Print("DDSM total_history", total_history);
-    if (total_history > 0) {
-        int count = MathMax(total_history, 5);
-        ArrayResize(account_balance, total_history);
-        for (int i = total_history - 1; i >= 0; i--) {
-            if (OrderSelect(i, SELECT_BY_POS, MODE_HISTORY)) {
-                curr_balance += OrderProfit();
-                account_balance[i] = curr_balance;
-            }
-        }
-        Print("DDSM count", count);
-        Print("DDSM ", total_history - count - 1);
-        for (i = total_history - count - 1; i < total_history; i++) {
-            high_eq = MathMax(high_eq, account_balance[i]);
+    if (total_history != OrdersHistoryTotal()) {
+        total_history = OrdersHistoryTotal();
+        for (int i = 0; i > total_history; i++) {
             if (OrderSelect(i, SELECT_BY_POS, MODE_HISTORY)) {
                 if (OrderType() == 6 || OrderType() == 7) {
-                    count++;
                     continue;
                 }
-                if (OrderProfit() < 0) {
-                    local_digits = MarketInfo(OrderSymbol(), MODE_DIGITS);
-                    local_multiplier = pip_mult_tab[local_digits];
-                    dd += MathAbs(OrderOpenPrice() - OrderClosePrice()) / MarketInfo(OrderSymbol(), MODE_POINT) / local_multiplier;
+                local_digits = MarketInfo(OrderSymbol(), MODE_DIGITS);
+                local_multiplier = pip_mult_tab[local_digits];
+                double pips_profit = 0.0;
+                double pips_loss = 0.0;
+                int trades_win = 0;
+                int trades_loss = 0;
+                if (OrderProfit() > 0) {
+                    trades_win++;
+                    pips_profit += MathAbs((OrderClosePrice() -
+                        OrderOpenPrice()) / MarketInfo(OrderSymbol(),
+                        MODE_POINT) / local_multiplier);
+                } else if (OrderProfit() < 0) {
+                    trades_loss++;
+                    pips_loss += MathAbs((OrderClosePrice() -
+                        OrderOpenPrice()) / MarketInfo(OrderSymbol(),
+                        MODE_POINT) / local_multiplier);
                 }
             }
         }
-    } else {
-        curr_balance = AccountBalance();
-        high_eq = AccountBalance();
+        double average_profit = 0;
+        double average_loss = 0;
+        if (pips_profit > 0 && trades_win > 0) {
+            average_profit = pips_profit / trades_win;
+        }
+        if (pips_loss > 0 && trades_loss > 0) {
+            average_loss = pips_loss / trades_loss;
+        }
+        if (average_loss > 0 && average_profit > 0) {
+            rr = average_loss / average_profit;
+        }
     }
+    return (rr);
+}
 
-    double average_risk_reward = CalculateRR();
-    Print("DDSM rr ", average_risk_reward);
-    if (dd > stop_pip) {
-        double delta = dd / 5;
-    } else {
-        delta = stop_pip / 5;
-    }
-    Print("dd ",dd);
-    Print("stop_pip ",stop_pip);
-    Print("delta ",delta);
-    if (delta > 0) {
-        double step1 = max_dd * curr_balance / delta / 100;
-        Print("step1 ", step1);
-        double step2 = MathMax((curr_balance - high_eq) / delta / 100, 0);
-        Print("step2 ", step2);
-        double step3 = MathMax((high_eq - curr_balance) / (average_risk_reward * delta) / 100, 0);
-        Print("step3 ", step3);
-        double lot_delta = (max_dd * curr_balance / delta / 100 + MathMax((curr_balance - high_eq) / delta / 100, 0) - MathMax((high_eq - curr_balance) / (average_risk_reward * delta) / 100, 0)) / tickvalue;
-        Print("lot_delta ", lot_delta);
-        double lot_risk = curr_balance * max_risk / stop_pip / tickvalue;
-        Print("lot_risk ", lot_risk);
-        double lot_max = AccountFreeMargin() / stop_pip / tickvalue;
-        Print("lot_max ", lot_max);
-        double lot_size = MathMin(MathMin(MathMin(lot_delta, lot_risk), lot_max), MarketInfo(symbol, MODE_MAXLOT));
-        lot_size = MathFloor(lot_size / MarketInfo(symbol, MODE_LOTSTEP)) * MarketInfo(symbol, MODE_LOTSTEP);
-        lot_size = MathMax(lot_size, MarketInfo(symbol, MODE_MINLOT));
-        Print("lot_size ", lot_size);
-    }
+
+double DynamicDeltaLot(string symbol, double stop_pip, double max_dd, double max_risk, double& balance_array[]) {
+    static int total_history;
+    static int total_orders;
+    static double dd;
+    static double min_lot_size;
+    static double high_eq;
+    static double curr_balance;
+    static double average_risk_reward;
+    static double lot_size;
+
+    if (total_history != OrdersHistoryTotal() || total_orders != OrdersTotal()) {
+	    total_history = OrdersHistoryTotal();
+	    total_orders = OrdersTotal();
+	    dd = DrawDownHighToPeak();
+	    min_lot_size = MarketInfo(symbol, MODE_MINLOT);
+	    high_eq = HighestEq(balance_array);
+	    curr_balance = balance_array[ArraySize(balance_array) - 1];
+	    Print("DDSM curr_balance ", curr_balance);
+	    for (int j = 0; j < ArraySize(balance_array); j++){
+	    	Print("balance i ", i," ", balance_array[j]);
+	    }
+	    average_risk_reward = CalculateRR();
+
+	    Print("DDSM rr ", average_risk_reward);
+	    if (dd > 0.0) {
+	        double delta = dd / 5;
+	    } else {
+	        delta = stop_pip / 5;
+	    }
+	    Print("DDSM dd ",dd);
+	    Print("DDSM stop_pip ",stop_pip);
+	    Print("DDSM delta ",delta);
+	    if (delta > 0) {
+	        double step1 = curr_balance * max_dd / delta / 100 / MarketInfo(symbol, MODE_TICKVALUE);
+	        Print("DDSM step1 ", step1);
+	        double step2 = MathMax((curr_balance - high_eq) / delta / 100, 0) / MarketInfo(symbol, MODE_TICKVALUE);
+	        Print("DDSM step2 ", step2);
+	        double step3 = MathMax((high_eq - curr_balance) / (average_risk_reward * delta) / 100, 0) / MarketInfo(symbol, MODE_TICKVALUE);
+	        Print("DDSM step3 ", step3);
+	        double lot_delta = (max_dd * curr_balance / delta / 100 + MathMax((curr_balance - high_eq) / delta / 100, 0) - MathMax((high_eq - curr_balance) / (average_risk_reward * delta) / 100, 0)) / MarketInfo(symbol, MODE_TICKVALUE);
+	        Print("DDSM lot_delta ", lot_delta);
+	        double lot_risk = curr_balance * max_risk / stop_pip / MarketInfo(symbol, MODE_TICKVALUE);
+	        Print("DDSM lot_risk ", lot_risk);
+	        double lot_max = AccountFreeMargin() / stop_pip / MarketInfo(symbol, MODE_TICKVALUE);
+	        Print("DDSM lot_max ", lot_max);
+	        lot_size = MathMin(MathMin(MathMin(lot_delta, lot_risk), lot_max), MarketInfo(symbol, MODE_MAXLOT));
+	        lot_size = MathFloor(lot_size / MarketInfo(symbol, MODE_LOTSTEP)) * MarketInfo(symbol, MODE_LOTSTEP);
+	        lot_size = MathMax(lot_size, MarketInfo(symbol, MODE_MINLOT));
+	        Print("DDSM lot_size ", lot_size);
+	    }
+	}
     return (lot_size);
+}
+
+bool use_array[] = {0, 0, 0, 0, 0};
+
+if (ajctr) {
+	use_array[0] = true;
+}
+if (apaor) {
+	use_array[1] = true;
 }

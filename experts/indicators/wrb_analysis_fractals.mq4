@@ -92,7 +92,16 @@ int start() {
     if (!_new_bar(symbol, tf)) {
         return (0);
     }
-    limit = iBars(symbol, tf) - lenght;
+    int i, j, limit, counted_bars, r[4];
+    double text_price;
+    string text_name, time_str;
+    if (!_new_bar(symbol, tf)) {
+        return (0);
+    }
+    if(counted_bars > 0) {
+        counted_bars -= (lenght + 1);
+    }
+    limit = MathMin(iBars(symbol, tf) - counted_bars, look_back);
     for(i = lenght; i < limit; i++) {
         if(_fractal(candle, i, lenght, iBars(symbol, tf)) == 1) {
             shadow_open[i] = Low[i];

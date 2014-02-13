@@ -114,13 +114,16 @@ int deinit() {
 //| Custom indicator iteration function                                                       |
 //+-------------------------------------------------------------------------------------------+
 int start() {
-    int i, j, limit, r[4];
+    int i, j, limit, counted_bars, r[4];
     double text_price;
     string text_name, time_str;
     if (!_new_bar(symbol, tf)) {
         return (0);
     }
-    limit = MathMin(iBars(symbol, tf), look_back);
+    if(counted_bars > 0) {
+        counted_bars -= 32;
+    }
+    limit = MathMin(iBars(symbol, tf) - counted_bars, look_back);
     for (i = limit; i > 0; i--) {
         if (hammer == true) {
             if (_hammer(candle, i, iBars(symbol, tf), r) != 0) {
