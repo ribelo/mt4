@@ -109,7 +109,7 @@ WRBFUNC int __stdcall _filled_by(ohlc *candle, size_t i, size_t n) {
 
 WRBFUNC int __stdcall _unfilled(ohlc *candle, size_t i, size_t j, size_t n) {
     if (n > 0 && i < n) {
-        return unfilled(candle, n - i - 1, j, n);
+        return unfilled(candle, n - i - 1, j);
     }
     return 0;
 }
@@ -336,7 +336,7 @@ WRBFUNC int __stdcall _wrb_zone(ohlc *candle, size_t i, size_t contraction,
 
 WRBFUNC int __stdcall _conf_a(ohlc *candle, size_t i, size_t n, int *arr) {
     if (n > 0 && i < n) {
-        signal r = conf_a(candle, n - i - 1, n);
+        signal r = conf_a(candle, n - i - 1);
         if (r.c1.nr > 0) {
             arr[0] = n - r.c1.nr - 1;;
         }
@@ -352,7 +352,7 @@ WRBFUNC int __stdcall _conf_a(ohlc *candle, size_t i, size_t n, int *arr) {
 
 WRBFUNC int __stdcall _conf_b(ohlc *candle, size_t i, size_t n, int *arr) {
     if (n > 0 && i < n) {
-        signal r = conf_b(candle, n - i - 1, n);
+        signal r = conf_b(candle, n - i - 1);
         if (r.c1.nr > 0) {
             arr[0] = n - r.c1.nr - 1;;
         }
@@ -368,7 +368,7 @@ WRBFUNC int __stdcall _conf_b(ohlc *candle, size_t i, size_t n, int *arr) {
 
 WRBFUNC int __stdcall _conf_c(ohlc *candle, size_t i, size_t n, int *arr) {
     if (n > 0 && i < n) {
-        signal r = conf_c(candle, n - i - 1, n);
+        signal r = conf_c(candle, n - i - 1);
         if (r.c1.nr > 0) {
             arr[0] = n - r.c1.nr - 1;;
         }
@@ -384,7 +384,7 @@ WRBFUNC int __stdcall _conf_c(ohlc *candle, size_t i, size_t n, int *arr) {
 
 WRBFUNC int __stdcall _conf_d(ohlc *candle, size_t i, size_t n, int *arr) {
     if (n > 0 && i < n) {
-        signal r = conf_d(candle, n - i - 1, n);
+        signal r = conf_d(candle, n - i - 1);
         if (r.c1.nr > 0) {
             arr[0] = n - r.c1.nr - 1;;
         }
@@ -400,7 +400,7 @@ WRBFUNC int __stdcall _conf_d(ohlc *candle, size_t i, size_t n, int *arr) {
 
 WRBFUNC int __stdcall _conf_e(ohlc *candle, size_t i, size_t n, int *arr) {
     if (n > 0 && i < n) {
-        signal r = conf_e(candle, n - i - 1, n);
+        signal r = conf_e(candle, n - i - 1);
         if (r.c1.nr > 0) {
             arr[0] = n - r.c1.nr - 1;;
         }
@@ -501,7 +501,7 @@ WRBFUNC int __stdcall _conf_h(ohlc *candle, size_t i, size_t n,
 
 WRBFUNC int __stdcall _hammer(ohlc *candle, size_t i, size_t n, int *arr) {
     if (n > 0 && i < n) {
-        signal r = hammer(candle, n - i - 1, n);
+        signal r = hammer(candle, n - i - 1);
         if (r.c1.nr > 0) {
             arr[0] = n - r.c1.nr - 1;;
         }
@@ -517,7 +517,7 @@ WRBFUNC int __stdcall _hammer(ohlc *candle, size_t i, size_t n, int *arr) {
 
 WRBFUNC int __stdcall _harami(ohlc *candle, size_t i, size_t n, int *arr) {
     if (n > 0 && i < n) {
-        signal r = harami(candle, n - i - 1, n);
+        signal r = harami(candle, n - i - 1);
         if (r.c1.nr > 0) {
             arr[0] = n - r.c1.nr - 1;;
         }
@@ -533,7 +533,7 @@ WRBFUNC int __stdcall _harami(ohlc *candle, size_t i, size_t n, int *arr) {
 
 WRBFUNC int __stdcall _engulfing(ohlc *candle, size_t i, size_t n, int *arr) {
     if (n > 0 && i < n) {
-        signal r = engulfing(candle, n - i - 1, n);
+        signal r = engulfing(candle, n - i - 1);
         if (r.c1.nr > 0) {
             arr[0] = n - r.c1.nr - 1;;
         }

@@ -36,6 +36,7 @@
 //Global External Inputs
 
 extern int look_back = 1024;
+extern int refresh_candles = 64;
 extern bool swing_point_1 = true;
 extern bool swing_point_2 = true;
 extern bool swing_point_3 = true;
@@ -142,7 +143,8 @@ int start() {
         return (0);
     }
     if(counted_bars > 0) {
-        counted_bars -= 64;
+        counted_bars--;
+        counted_bars -= refresh_candles;
     }
     limit = MathMin(iBars(symbol, tf) - counted_bars, look_back);
     for (i = limit; i > 0; i--) {

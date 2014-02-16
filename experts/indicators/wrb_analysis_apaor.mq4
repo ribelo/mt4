@@ -22,6 +22,7 @@
 //Global External Inputs
 
 extern int look_back = 512;
+extern int refresh_candles = 64;
 extern string sister_symbol = "";
 extern bool invert_sister = false;
 extern int pA_length = 10;
@@ -96,7 +97,8 @@ int start() {
         return (0);
     }
     if(counted_bars > 0) {
-        counted_bars -= 128;
+        counted_bars--;
+        counted_bars -= refresh_candles;
     }
     limit = MathMin(iBars(symbol, tf) - counted_bars, look_back);
     for (i = limit; i > pB_length; i--) {

@@ -7,7 +7,7 @@
 #include "wrb_toolbox.h"
 
 
-int deep_shadow_upper(ohlc *candle, size_t i, size_t n) {
+int deep_shadow_upper(ohlc *candle, size_t i) {
     int j = 0, k = 0;
     while (1) {
         j++, k++;
@@ -16,7 +16,7 @@ int deep_shadow_upper(ohlc *candle, size_t i, size_t n) {
                 gsl_fcmp(shadow_upper(candle, i), body_size(candle, i - j), FLT_EPSILON) <= 0) {
             return 0;
         }
-        if (wrb(candle, i - j, n).dir != 0) {
+        if (wrb(candle, i - j, i).dir != 0) {
             k = 0;
             continue;
         }
@@ -28,7 +28,7 @@ int deep_shadow_upper(ohlc *candle, size_t i, size_t n) {
 }
 
 
-int deep_shadow_bottom(ohlc *candle, size_t i, size_t n) {
+int deep_shadow_bottom(ohlc *candle, size_t i) {
     int j = 0, k = 0;
     while (1) {
         j++, k++;
@@ -37,7 +37,7 @@ int deep_shadow_bottom(ohlc *candle, size_t i, size_t n) {
                 gsl_fcmp(shadow_bottom(candle, i), body_size(candle, i - j), FLT_EPSILON) <= 0) {
             return 0;
         }
-        if (wrb(candle, i - j, n).dir != 0) {
+        if (wrb(candle, i - j, i).dir != 0) {
             k = 0;
             continue;
         }
@@ -49,14 +49,14 @@ int deep_shadow_bottom(ohlc *candle, size_t i, size_t n) {
 }
 
 
-int big_body_bull(ohlc *candle, size_t i, size_t n) {
+int big_body_bull(ohlc *candle, size_t i) {
     int j = 0, k = 0;
     while (1) {
         j++, k++;
         if ((int)i - j < 0) {
             return 1;
         }
-        if (wrb(candle, i - j, n).dir != -1) {
+        if (wrb(candle, i - j, i).dir != -1) {
             k = 0;
             continue;
         }
@@ -73,14 +73,14 @@ int big_body_bull(ohlc *candle, size_t i, size_t n) {
 }
 
 
-int big_body_bear(ohlc *candle, size_t i, size_t n) {
+int big_body_bear(ohlc *candle, size_t i) {
     int j = 0, k = 0;
     while (1) {
         j++, k++;
         if ((int)i - j < 0) {
             return 1;
         }
-        if (wrb(candle, i - j, n).dir != 1) {
+        if (wrb(candle, i - j, i).dir != 1) {
             k = 0;
             continue;
         }
@@ -97,7 +97,7 @@ int big_body_bear(ohlc *candle, size_t i, size_t n) {
 }
 
 
-signal hammer(ohlc *candle, size_t i, size_t n) {
+signal hammer(ohlc *candle, size_t i) {
     signal r = {};
     if (dir(candle, i) == 1 &&
             gsl_fcmp(body_size(candle, i),
@@ -106,7 +106,7 @@ signal hammer(ohlc *candle, size_t i, size_t n) {
             gsl_fcmp(shadow_bottom(candle, i),
                      (body_size(candle, i) + shadow_upper(candle, i)),
                      FLT_EPSILON) > 0 &&
-            deep_shadow_bottom(candle, i, n) &&
+            deep_shadow_bottom(candle, i) &&
             gsl_fcmp(candle[i].low,
                      lowest_low(candle, i - 3, i),
                      FLT_EPSILON) < 0 &&
@@ -127,7 +127,7 @@ signal hammer(ohlc *candle, size_t i, size_t n) {
                gsl_fcmp(shadow_upper(candle, i),
                         (body_size(candle, i) + shadow_bottom(candle, i)),
                         FLT_EPSILON) > 0 &&
-               // deep_shadow_upper(candle, i) &&
+               deep_shadow_upper(candle, i) &&
                gsl_fcmp(candle[i].high,
                         highest_high(candle, i - 3, i), FLT_EPSILON) > 0 &&
                gsl_fcmp(lowest_high(candle, i - 3, i),
@@ -147,9 +147,9 @@ signal hammer(ohlc *candle, size_t i, size_t n) {
 }
 
 
-signal harami(ohlc *candle, size_t i, size_t n) {
+signal harami(ohlc *candle, size_t i) {
     signal r = {};
-    if (wrb_hg(candle, i - 2, n).dir == -1 &&
+    if (wrb_hg(candle, i - 2, i).dir == -1 &&
             gsl_fcmp(GSL_MAX_DBL(candle[i - 1].high, candle[i].high),
                      candle[i - 2].open,
                      FLT_EPSILON) < 0 &&
@@ -187,7 +187,7 @@ signal harami(ohlc *candle, size_t i, size_t n) {
         r.c1.dir = 1;
         r.c2.nr = i - 2;
         r.dir = 1;
-    } else if (wrb_hg(candle, i - 2, n).dir == 1 &&
+    } else if (wrb_hg(candle, i - 2, i).dir == 1 &&
                gsl_fcmp(GSL_MIN_DBL(candle[i - 1].low, candle[i].low),
                         candle[i - 2].open,
                         FLT_EPSILON) > 0 &&
@@ -230,14 +230,14 @@ signal harami(ohlc *candle, size_t i, size_t n) {
 }
 
 
-signal engulfing(ohlc *candle, size_t i, size_t n) {
+signal engulfing(ohlc *candle, size_t i) {
     signal r = {};
     if (dir(candle, i) == 1 &&
             dir(candle, i - 2) == -1 &&
             gsl_fcmp(shadow_bottom(candle, i),
                      (body_size(candle, i) + shadow_upper(candle, i)),
                      FLT_EPSILON) > 0 &&
-            deep_shadow_bottom(candle, i - 1, n) == 1  &&
+            deep_shadow_bottom(candle, i - 1) == 1  &&
             gsl_fcmp(candle[i].close,
                      candle[i - 2].open,
                      FLT_EPSILON) > 0 &&
@@ -256,7 +256,7 @@ signal engulfing(ohlc *candle, size_t i, size_t n) {
             gsl_fcmp(candle[i].close,
                      highest_high(candle, i - 3, i),
                      FLT_EPSILON) <= 0 &&
-            big_body_bull(candle, i, n)) {
+            big_body_bull(candle, i)) {
         r.c1.nr = i;
         r.c1.dir = 1;
         r.c2.nr = i - 4;
@@ -266,7 +266,7 @@ signal engulfing(ohlc *candle, size_t i, size_t n) {
                gsl_fcmp(shadow_upper(candle, i),
                         (body_size(candle, i) + shadow_bottom(candle, i)),
                         FLT_EPSILON) > 0 &&
-               deep_shadow_upper(candle, i - 1, n) == 1 &&
+               deep_shadow_upper(candle, i - 1) == 1 &&
                gsl_fcmp(candle[i].close,
                         candle[i - 2].open,
                         FLT_EPSILON) < 0 &&
@@ -285,7 +285,7 @@ signal engulfing(ohlc *candle, size_t i, size_t n) {
                gsl_fcmp(candle[i].close,
                         lowest_low(candle, i - 3, i),
                         FLT_EPSILON) >= 0 &&
-               big_body_bear(candle, i, n)) {
+               big_body_bear(candle, i)) {
         r.c1.nr = i;
         r.c1.dir = -1;
         r.c2.nr = i - 4;
@@ -300,7 +300,7 @@ signal soldiers(ohlc *candle, size_t i, size_t n) {
     signal r = {};
     if (wrb(candle, i, n).dir == 1 && dir(candle, i - 1) == 1) {
         for (j = 2; j < end_loop; j++) {
-            if (wrb_hg(candle, i - j, n).dir == -1 &&
+            if (wrb_hg(candle, i - j, i).dir == -1 &&
                     dir(candle, i - j - 1) == -1 &&
                     gsl_fcmp(highest_high(candle, i - j + 1, i),
                              candle[i - j].open,

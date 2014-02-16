@@ -31,18 +31,19 @@
 //Global External Inputs
 
 extern int look_back = 512;
+extern int refres_candles = 0;
 extern int look_for_zone = 256;
-extern bool draw_zone = true;
+extern bool draw_zone = false;
 extern color bull_fvb = C'255,213,98';
 extern color bear_fvb = C'233,65,103';
 extern color bull_zone = C'252,165,88';
 extern color bear_zone = C'177,83,103';
 extern color text_color = C'56,47,50';
-extern bool make_text = false;
+extern bool make_text = true;
 extern bool send_notification = true;
-extern int label_offset_percent = 1;
+extern int label_offset_percent = 1.25;
 extern int font_size = 8;
-extern string font_name = "Tahoma";
+extern string font_name = "Cantarell";
 extern int bar_width = 1;
 
 //Misc
@@ -121,7 +122,8 @@ int start() {
         return (0);
     }
     if(counted_bars > 0) {
-        counted_bars -= 32;
+        counted_bars--;
+        counted_bars -= refresh_candles;
     }
     limit = MathMin(iBars(symbol, tf) - counted_bars, look_back);
     for (i = 1; i < limit; i++) {

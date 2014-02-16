@@ -23,14 +23,14 @@ signal vtr(ohlc *main, ohlc *sister, size_t i,
                           body_mid_point(sister, i - 1), FLT_EPSILON) > 0)) {
             // Look for zone
             for (j = 3; j < end_loop; j++) {
-                main_z = wrb_zone(main, i - j, 64, n).v1.dir;
-                sister_z = wrb_zone(sister, i - j, 64, n).v1.dir;
+                main_z = wrb_zone(main, i - j, 64, i).v1.dir;
+                sister_z = wrb_zone(sister, i - j, 64, i).v1.dir;
                 if ((main_z == 1 &&
-                        wrb_hg(sister, i - j, n).dir == 1 &&
-                        unfilled(main, i - j, j, n)) ||
+                        wrb_hg(sister, i - j, i).dir == 1 &&
+                        unfilled(main, i - j, j)) ||
                         (sister_z == -1 &&
-                         wrb_hg(main, i - j, n).dir == -1 &&
-                         unfilled(sister, i - j, j, n))) {
+                         wrb_hg(main, i - j, i).dir == -1 &&
+                         unfilled(sister, i - j, j))) {
                     if ((gsl_fcmp(lowest_close(main, i - 3, i - 1),
                                   main[i - j].close, FLT_EPSILON) > 0 ||
                             gsl_fcmp(lowest_close(sister, i - 3, i - 1),
@@ -79,14 +79,14 @@ signal vtr(ohlc *main, ohlc *sister, size_t i,
                           body_mid_point(sister, i - 1), FLT_EPSILON) < 0)) {
             // Look for zone
             for (j = 3; j < end_loop; j++) {
-                main_z = wrb_zone(main, i - j, 64, n).v1.dir;
-                sister_z = wrb_zone(sister, i - j, 64, n).v1.dir;
+                main_z = wrb_zone(main, i - j, 64, i).v1.dir;
+                sister_z = wrb_zone(sister, i - j, 64, i).v1.dir;
                 if ((main_z == -1 &&
-                        wrb_hg(sister, i - j, n).dir == -1 &&
-                        unfilled(main, i - j, j, n)) ||
+                        wrb_hg(sister, i - j, i).dir == -1 &&
+                        unfilled(main, i - j, j)) ||
                         (sister_z == -1 &&
-                         wrb_hg(main, i - j, n).dir == -1 &&
-                         unfilled(sister, i - j, j, n))) {
+                         wrb_hg(main, i - j, i).dir == -1 &&
+                         unfilled(sister, i - j, j))) {
                     if ((gsl_fcmp(highest_close(main, i - 3, i - 1),
                                   main[i - j].close, FLT_EPSILON) < 0 ||
                             gsl_fcmp(highest_close(sister, i - 3, i - 1),
@@ -136,14 +136,14 @@ signal vtr(ohlc *main, ohlc *sister, size_t i,
                           body_mid_point(sister, i - 1), FLT_EPSILON) < 0)) {
             // Look for zone
             for (j = 3; j < end_loop; j++) {
-                main_z = wrb_zone(main, i - j, 64, n).v1.dir;
-                sister_z = wrb_zone(sister, i - j, 64, n).v1.dir;
+                main_z = wrb_zone(main, i - j, 64, i).v1.dir;
+                sister_z = wrb_zone(sister, i - j, 64, i).v1.dir;
                 if ((main_z == 1 &&
-                        wrb_hg(sister, i - j, n).dir == -1 &&
-                        unfilled(main, i - j, j, n)) ||
+                        wrb_hg(sister, i - j, i).dir == -1 &&
+                        unfilled(main, i - j, j)) ||
                         (sister_z == -1 &&
-                         wrb_hg(main, i - j, n).dir == 1 &&
-                         unfilled(sister, i - j, j, n))) {
+                         wrb_hg(main, i - j, i).dir == 1 &&
+                         unfilled(sister, i - j, j))) {
                     if ((gsl_fcmp(lowest_close(main, i - 3, i - 1),
                                   main[i - j].close, FLT_EPSILON) > 0 ||
                             gsl_fcmp(highest_close(sister, i - 3, i - 1),
@@ -192,14 +192,14 @@ signal vtr(ohlc *main, ohlc *sister, size_t i,
                           body_mid_point(sister, i - 1), FLT_EPSILON) > 0)) {
             // Look for zone
             for (j = 3; j < end_loop; j++) {
-                main_z = wrb_zone(main, i - j, 64, n).v1.dir;
-                sister_z = wrb_zone(sister, i - j, 64, n).v1.dir;
+                main_z = wrb_zone(main, i - j, 64, i).v1.dir;
+                sister_z = wrb_zone(sister, i - j, 64, i).v1.dir;
                 if ((main_z == -1 &&
-                        wrb_hg(sister, i - j, n).dir == 1 &&
-                        unfilled(main, i - j, j, n)) ||
+                        wrb_hg(sister, i - j, i).dir == 1 &&
+                        unfilled(main, i - j, j)) ||
                         (sister_z == 1 &&
-                         wrb_hg(main, i - j, n).dir == -1 &&
-                         unfilled(sister, i - j, j, n))) {
+                         wrb_hg(main, i - j, i).dir == -1 &&
+                         unfilled(sister, i - j, j))) {
                     if ((gsl_fcmp(highest_close(main, i - 3, i - 1),
                                   main[i - j].close, FLT_EPSILON) < 0 ||
                             gsl_fcmp(lowest_close(sister, i - 3, i - 1),

@@ -50,7 +50,7 @@ extern bool make_text = false;
 extern bool send_notification = false;
 extern int label_offset_percent = 1;
 extern int font_size = 8;
-extern string font_name = "Tahoma";
+extern string font_name = "Cantarell";
 extern int bar_width = 1;
 
 //Misc

@@ -11,15 +11,15 @@ signal fvb(ohlc *candle, size_t i, size_t look_back, size_t n) {
     signal r = {};
     size_t j, end_loop = fmin(i, look_back);
     zone z;
-    if (dir(candle, i) == 1 && wrb(candle, i - 1, n).dir == -1 &&
+    if (dir(candle, i) == 1 && wrb(candle, i - 1, i).dir == -1 &&
             gsl_fcmp(candle[i].close,
                      body_mid_point(candle, i - 1),
                      FLT_EPSILON) > 0) {
         for (j = 3; j < end_loop; j++) {
-            z = wrb_zone(candle, i - j, 64, n);
+            z = wrb_zone(candle, i - j, 64, i);
             if (z.v1.dir == 1 &&
                     zone_size(&z.v1) > body_size(candle, i - 1) &&
-                    unfilled(candle, i - j, j - 1, n) &&
+                    unfilled(candle, i - j, j) &&
                     zone_bounce(candle, i, &z) == 1) {
                 r.c1.nr = i;
                 r.c2.nr = i - 1;
@@ -28,15 +28,15 @@ signal fvb(ohlc *candle, size_t i, size_t look_back, size_t n) {
                 break;
             }
         }
-    } else if (dir(candle, i) == -1 && wrb(candle, i - 1, n).dir == 1 &&
+    } else if (dir(candle, i) == -1 && wrb(candle, i - 1, i).dir == 1 &&
                gsl_fcmp(candle[i].close,
                         body_mid_point(candle, i - 1),
                         FLT_EPSILON) < 0) {
         for (j = 3; j < end_loop; j++) {
-            z = wrb_zone(candle, i - j, 64, n);
+            z = wrb_zone(candle, i - j, 64, i);
             if (z.v1.dir < 0 &&
                     zone_size(&z.v1) > body_size(candle, i - 1) &&
-                    unfilled(candle, i - j, j - 1, n) &&
+                    unfilled(candle, i - j, j) &&
                     zone_bounce(candle, i, &z) == -1) {
                 r.c1.nr = i;
                 r.c2.nr = i - 1;

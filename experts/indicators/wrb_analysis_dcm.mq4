@@ -27,6 +27,7 @@
 
 //Global External Inputs
 extern int contraction_size = 64;
+extern int refres_candles = 64;
 extern color bull_color = C'205,138,108';
 extern color bear_color = C'151,125,130';
 extern int bar_width = 2;
@@ -85,7 +86,8 @@ int start() {
         return (0);
     }
     if(counted_bars > 0) {
-        counted_bars -= 64;
+        counted_bars--;
+        counted_bars -= refresh_candles;
     }
     limit = MathMin(iBars(symbol, tf) - counted_bars, look_back);
     for(i = limit; i >= 4; i--) {

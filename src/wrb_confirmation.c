@@ -1,15 +1,15 @@
 
 #include "wrb_confirmation.h"
 
-inline signal conf_a(ohlc *candle, size_t i, size_t n);
+inline signal conf_a(ohlc *candle, size_t i);
 
-inline signal conf_b(ohlc *candle, size_t i, size_t n);
+inline signal conf_b(ohlc *candle, size_t i);
 
-inline signal conf_c(ohlc *candle, size_t i, size_t n);
+inline signal conf_c(ohlc *candle, size_t i);
 
-inline signal conf_d(ohlc *candle, size_t i, size_t n);
+inline signal conf_d(ohlc *candle, size_t i);
 
-inline signal conf_e(ohlc *candle, size_t i, size_t n);
+inline signal conf_e(ohlc *candle, size_t i);
 
 // inline signal conf_f(ohlc *candle, size_t i);
 

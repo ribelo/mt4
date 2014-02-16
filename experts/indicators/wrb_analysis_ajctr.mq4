@@ -30,6 +30,8 @@
 
 //Global External Inputs
 
+extern int look_back = 512;
+extern int refresh_candles = 0;
 extern bool hammer = true;
 extern bool harami = true;
 extern bool engulfing = true;
@@ -43,7 +45,7 @@ extern bool make_text = false;
 extern bool send_notification = true;
 extern int label_offset_percent = 1;
 extern int font_size = 8;
-extern string font_name = "Tahoma";
+extern string font_name = "Cantarell";
 extern int bar_width = 1;
 
 //Misc
@@ -121,7 +123,8 @@ int start() {
         return (0);
     }
     if(counted_bars > 0) {
-        counted_bars -= 32;
+        counted_bars--;
+        counted_bars -= refresh_candles;
     }
     limit = MathMin(iBars(symbol, tf) - counted_bars, look_back);
     for (i = limit; i > 0; i--) {
