@@ -131,7 +131,7 @@ signal vtr(ohlc *main, ohlc *sister, size_t i,
                 gsl_fcmp(main[i].close,
                          body_mid_point(main, i - 1), FLT_EPSILON) > 0) ||
                 (dir(sister, i) == -1 && dir(main, i) == 1 &&
-                 dir(sister, i - 1) == -1 &&
+                 dir(sister, i - 1) == 1 &&
                  gsl_fcmp(sister[i].close,
                           body_mid_point(sister, i - 1), FLT_EPSILON) < 0)) {
             // Look for zone
@@ -187,7 +187,7 @@ signal vtr(ohlc *main, ohlc *sister, size_t i,
                 gsl_fcmp(main[i].close,
                          body_mid_point(main, i - 1), FLT_EPSILON) < 0) ||
                 (dir(sister, i) == 1 && dir(main, i) == -1 &&
-                 dir(sister, i - 1) == 1 &&
+                 dir(sister, i - 1) == -1 &&
                  gsl_fcmp(sister[i].close,
                           body_mid_point(sister, i - 1), FLT_EPSILON) > 0)) {
             // Look for zone
