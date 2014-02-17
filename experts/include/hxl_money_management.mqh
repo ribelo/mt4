@@ -7,13 +7,17 @@ void UpdateBalanceArray(double& balance_array[]) {
 	double curr_balance = 0.0;
 	if (OrdersHistoryTotal() != total_history) {
 		total_history = OrdersHistoryTotal();
-		ArrayResize(balance_array, total_history);
+		ArrayResize(balance_array, 1);
 		if (total_history > 0) {
 			for (int i = 0; i < total_history; i++) {
 			    if (OrderSelect(i, SELECT_BY_POS, MODE_HISTORY)) {
-			        curr_balance += OrderProfit();
-			        curr_balance += OrderCommission();
-			        balance_array[i] = curr_balance;
+                    if (OrderProfit() + OrderCommission() != 0.0) {
+                        curr_balance += OrderProfit();
+    			        curr_balance += OrderCommission();
+                        curr_balance += OrderSwap();
+                        ArrayResize(balance_array, ArraySize(balance_array) + 1);
+                        balance_array[i] = curr_balance;
+                    }
 			    }
 			}
 		}
@@ -29,11 +33,11 @@ double HighestEq(double& balance_array[], int count = 5) {
 	static double highest_eq;
 	static int total_history;
 	if (OrdersHistoryTotal() != total_history) {
-		total_history = OrdersHistoryTotal();
+        total_history = OrdersHistoryTotal();
 		if (total_history > 0) {
 			count = MathMin(total_history, count + 1);
 			for (int i = total_history - count - 1; i < total_history - 1; i++) {
-				highest_eq = MathMax(highest_eq, balance_array[i]);
+                highest_eq = MathMax(highest_eq, balance_array[i]);
 			}
 		}
 	}
@@ -156,21 +160,15 @@ double DynamicDeltaLot(string symbol, double stop_pip, double max_dd, double max
 	    min_lot_size = MarketInfo(symbol, MODE_MINLOT);
 	    high_eq = HighestEq(balance_array);
 	    curr_balance = balance_array[ArraySize(balance_array) - 1];
-	    Print("DDSM curr_balance ", curr_balance);
 	    for (int j = 0; j < ArraySize(balance_array); j++){
-	    	Print("balance i ", i," ", balance_array[j]);
 	    }
 	    average_risk_reward = CalculateRR();
 
-	    Print("DDSM rr ", average_risk_reward);
 	    if (dd > 0.0) {
 	        double delta = dd / 5;
 	    } else {
 	        delta = stop_pip / 5;
 	    }
-	    Print("DDSM dd ",dd);
-	    Print("DDSM stop_pip ",stop_pip);
-	    Print("DDSM delta ",delta);
 	    if (delta > 0) {
 	        double step1 = curr_balance * max_dd / delta / 100 / MarketInfo(symbol, MODE_TICKVALUE);
 	        Print("DDSM step1 ", step1);
@@ -191,13 +189,4 @@ double DynamicDeltaLot(string symbol, double stop_pip, double max_dd, double max
 	    }
 	}
     return (lot_size);
-}
-
-bool use_array[] = {0, 0, 0, 0, 0};
-
-if (ajctr) {
-	use_array[0] = true;
-}
-if (apaor) {
-	use_array[1] = true;
 }

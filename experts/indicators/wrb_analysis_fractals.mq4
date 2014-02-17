@@ -29,7 +29,7 @@
 #property indicator_width5 1
 #property indicator_width6 1
 
-#define  i_name "hxl_frctl"
+#define  _name "hxl_frctl"
 #define  short_name "Huxley Fractals"
 
 //Global External Inputs

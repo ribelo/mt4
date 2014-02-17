@@ -25,7 +25,7 @@
 #property indicator_width4 1
 
 
-#define  i_name "hxl_ajctr"
+#define  _name "hxl_ajctr"
 #define  short_name "Huxley WRB AJCTR"
 
 //Global External Inputs
@@ -70,7 +70,7 @@ int init() {
     point = MarketInfo(symbol, MODE_POINT) * multiplier;
     spread = MarketInfo(symbol, MODE_SPREAD) * multiplier;
     tickvalue = MarketInfo(symbol, MODE_TICKVALUE) * multiplier;
-    global_name = StringLower(i_name + "_" + ReduceCcy(symbol) + "_" + TFToStr(tf));
+    global_name = StringLower(_name + "_" + ReduceCcy(symbol) + "_" + TFToStr(tf));
     if (multiplier > 1) {
         pip_description = " points";
     }
@@ -101,11 +101,8 @@ int init() {
 int deinit() {
     for (int i = ObjectsTotal(OBJ_TEXT) - 1; i >= 0; i--) {
         string name = ObjectName(i);
-        int length = StringLen(i_name);
-        if (StringSubstr(name, 0, length) == i_name) {
-            ObjectDelete(name);
-        }
-        if (StringSubstr(name, 0, length) == i_name) {
+        int length = StringLen(_name);
+        if (StringFind(name, _name) != -1) {
             ObjectDelete(name);
         }
     }
@@ -122,6 +119,7 @@ int start() {
     if (!_new_bar(symbol, tf)) {
         return (0);
     }
+    counted_bars = IndicatorCounted();
     if(counted_bars > 0) {
         counted_bars--;
         counted_bars -= refresh_candles;
@@ -140,7 +138,7 @@ int start() {
                 if (make_text == true) {
                     time_str = StringConcatenate(TimeToStr(iTime(symbol, tf, i), TIME_DATE), "_",
                                                  TimeToStr(iTime(symbol, tf, i), TIME_MINUTES));
-                    text_name = StringConcatenate(i_name, "_", time_str);
+                    text_name = StringConcatenate(_name, "_", time_str);
                     if (r[3] == 1) {
                         text_price = iLow(symbol, tf, iLowest(symbol, tf, MODE_LOW, 3, i)) - ((iHigh(symbol, tf, iHighest(symbol, tf, MODE_HIGH, 3, i)) - iLow(symbol, tf, iLowest(symbol, tf, MODE_LOW, 3, i))) / 2) * label_offset_percent;
                         make_text(text_name, "HAM", iTime(symbol, tf, r[0] + 1), text_price, font_size, text_color) ;
@@ -174,7 +172,7 @@ int start() {
                 if (make_text == true) {
                     time_str = StringConcatenate(TimeToStr(iTime(symbol, tf, i), TIME_DATE), "_",
                                                  TimeToStr(iTime(symbol, tf, i), TIME_MINUTES));
-                    text_name = StringConcatenate(i_name, "_", time_str);
+                    text_name = StringConcatenate(_name, "_", time_str);
                     if (r[3] == 1) {
                         text_price = iLow(symbol, tf, iLowest(symbol, tf, MODE_LOW, 3, i)) - ((iHigh(symbol, tf, iHighest(symbol, tf, MODE_HIGH, 3, i)) - iLow(symbol, tf, iLowest(symbol, tf, MODE_LOW, 3, i))) / 2) * label_offset_percent;
                         make_text(text_name, "HAR", iTime(symbol, tf, r[0] + 1), text_price, font_size, text_color) ;
@@ -208,7 +206,7 @@ int start() {
                 if (make_text == true) {
                     time_str = StringConcatenate(TimeToStr(iTime(symbol, tf, i), TIME_DATE), "_",
                                                  TimeToStr(iTime(symbol, tf, i), TIME_MINUTES));
-                    text_name = StringConcatenate(i_name, "_", time_str);
+                    text_name = StringConcatenate(_name, "_", time_str);
                     if (r[3] == 1) {
                         text_price = iLow(symbol, tf, iLowest(symbol, tf, MODE_LOW, 3, i)) - ((iHigh(symbol, tf, iHighest(symbol, tf, MODE_HIGH, 3, i)) - iLow(symbol, tf, iLowest(symbol, tf, MODE_LOW, 3, i))) / 2) * label_offset_percent;
                         make_text(text_name, "ENG", iTime(symbol, tf, r[0] + 1), text_price, font_size, text_color) ;
@@ -248,7 +246,7 @@ int start() {
                 if (make_text == true) {
                     time_str = StringConcatenate(TimeToStr(iTime(symbol, tf, i), TIME_DATE), "_",
                                                  TimeToStr(iTime(symbol, tf, i), TIME_MINUTES));
-                    text_name = StringConcatenate(i_name, "_", time_str);
+                    text_name = StringConcatenate(_name, "_", time_str);
                     if (r[3] == 1) {
                         text_price = iLow(symbol, tf, iLowest(symbol, tf, MODE_LOW, 3, i)) - ((iHigh(symbol, tf, iHighest(symbol, tf, MODE_HIGH, 3, i)) - iLow(symbol, tf, iLowest(symbol, tf, MODE_LOW, 3, i))) / 2) * label_offset_percent;
                         make_text(text_name, "SOL", iTime(symbol, tf, r[0] + 1), text_price, font_size, text_color) ;

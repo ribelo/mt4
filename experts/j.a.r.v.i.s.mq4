@@ -1,6 +1,6 @@
 //+-------------------------------------------------------------------+
 //|                  Just A Rather Very Intelligent System by Huxley  |
-//|                                         Copyright   2013, Huxley  |
+//|                                         Copyright   2014, Huxley  |
 //+-------------------------------------------------------------------+
 #property copyright "Copyright 2014, Huxley"
 #include <wrb_analysis.mqh>
@@ -9,6 +9,8 @@
 #include <gsl_math.mqh>
 #include <LibGMT.mqh>
 #include <LibOrderReliable4.mqh>
+#include <hanover --- function header (np).mqh>
+#include <hanover --- extensible functions (np).mqh>
 #define _name "j.a.r.v.i.s"
 
 
@@ -135,7 +137,7 @@ int deinit() {
     if (ObjectsTotal() > 0) {
         for (int i = ObjectsTotal() - 1; i >= 0; i--) {
             string name = ObjectName(i);
-            if (StringSubstr(name, 0, 4) == _name || StringSubstr(name, 1, 4) == _name) {
+            if (StringFind(name, _name) != -1) {
                 ObjectDelete(name);
             }
         }
@@ -848,8 +850,8 @@ void DisplayUserFeedback() {
         return;
     }
     temp_offset = 30;
-    string screen_message = StringConcatenate("Supply&Demand semi-auto trading robot by Huxley on ", symbol);
-    ObjectMakeLabel(StringConcatenate(_name, "ea_name"), screen_message, font_size * 1.2, "Cantarell Bold", supply_color, data_disp_gap_size, temp_offset, 0, 0);
+    string screen_message = StringUpper(_name + "   " + symbol + "   " + TFToStr(main_timeframe));
+    ObjectMakeLabel(StringConcatenate(_name, "_ea_name"), screen_message, font_size * 1.2, "Cantarell Bold", supply_color, data_disp_gap_size, temp_offset, 0, 0);
     temp_offset += 2 * data_disp_offset;
     double i;
     int m, s, k;
@@ -884,6 +886,7 @@ void DisplayUserFeedback() {
     temp_offset += data_disp_offset;
 
     if (use_trailing_stop) {
+        temp_offset += data_disp_offset;
         screen_message = "Trailing Stop:";
         ObjectMakeLabel(StringConcatenate(_name, "_trailing_stop_message"), screen_message, font_size, font_type, text_color, data_disp_gap_size, temp_offset, 0, 0);
         temp_offset += data_disp_offset;

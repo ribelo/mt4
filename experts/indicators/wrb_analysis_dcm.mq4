@@ -22,12 +22,13 @@
 #property indicator_color1  C'205,138,108'
 #property indicator_color2  C'151,125,130'
 
-#define  i_name "hxl_dcm"
+#define  _name "hxl_dcm"
 #define  short_name "Huxley DCM"
 
 //Global External Inputs
+extern int look_back = 2048;
 extern int contraction_size = 64;
-extern int refres_candles = 64;
+extern int refresh_candles = 64;
 extern color bull_color = C'205,138,108';
 extern color bear_color = C'151,125,130';
 extern int bar_width = 2;
@@ -81,10 +82,11 @@ int deinit() {
 //| Custom indicator iteration function                                                       |
 //+-------------------------------------------------------------------------------------------+
 int start() {
-    int i, dcm, last_dcm;
+    int i, dcm, last_dcm, counted_bars;
     if (!_new_bar(symbol, tf)) {
         return (0);
     }
+    counted_bars = IndicatorCounted();
     if(counted_bars > 0) {
         counted_bars--;
         counted_bars -= refresh_candles;

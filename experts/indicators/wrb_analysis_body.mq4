@@ -25,15 +25,16 @@
 #property indicator_width3 1
 #property indicator_width4 1
 
-#define  i_name "hxl_wrb"
+#define  _name "hxl_wrb"
 #define  short_name "Huxley WRB Body"
 
 //Global External Inputs
 
+extern int   look_back = 2048;
 extern bool  draw_wrb = true;
+extern bool  draw_wrb_hg = true;
 extern color bull_wrb_body = C'245,146,86';
 extern color bear_wrb_body = C'126,59,73';
-extern bool  draw_wrb_hg = true;
 extern color bull_wrb_hg_body = C'252,165,88';
 extern color bear_wrb_hg_body = C'177,83,103';
 extern int bar_width = 1;
@@ -91,11 +92,12 @@ int deinit() {
 //+-------------------------------------------------------------------------------------------+
 int start() {
     int i, limit, counted_bars;
-    if(counted_bars > 0) {
-        counted_bars -= 4;
-    }
     if (!_new_bar(symbol, tf)) {
         return (0);
+    }
+    counted_bars = IndicatorCounted();
+    if(counted_bars > 0) {
+        counted_bars--;
     }
     limit = MathMin(iBars(symbol, tf) - counted_bars, look_back);
     for (i = 1; i < iBars(symbol, tf); i++) {

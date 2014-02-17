@@ -22,7 +22,7 @@
 #property indicator_width3 1
 #property indicator_width4 1
 
-#define  i_name "hxl_wrb"
+#define  _name "hxl_wrb"
 #define  short_name "Huxley WRB Body"
 
 //Global External Inputs

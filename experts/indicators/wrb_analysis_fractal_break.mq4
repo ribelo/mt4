@@ -22,7 +22,7 @@
 #property indicator_width2 1
 
 
-#define  i_name "hxl_frctl_brk"
+#define  _name "hxl_frctl_brk"
 #define  short_name "Huxley Fractal Break"
 
 //Global External Inputs

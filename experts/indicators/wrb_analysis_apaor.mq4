@@ -16,7 +16,7 @@
 //+-------------------------------------------------------------------------------------------+
 #property indicator_chart_window
 
-#define  i_name "hxl_apaor"
+#define  _name "hxl_apaor"
 #define  short_name "Huxley APAOR"
 
 //Global External Inputs
@@ -55,7 +55,7 @@ int init() {
     point = MarketInfo(symbol, MODE_POINT) * multiplier;
     spread = MarketInfo(symbol, MODE_SPREAD) * multiplier;
     tickvalue = MarketInfo(symbol, MODE_TICKVALUE) * multiplier;
-    global_name = StringLower(i_name + "_" + ReduceCcy(symbol) + "_" + TFToStr(tf));
+    global_name = StringLower(_name + "_" + ReduceCcy(symbol) + "_" + TFToStr(tf));
     if (multiplier > 1) {
         pip_description = " points";
     }
@@ -75,11 +75,8 @@ int init() {
 int deinit() {
     for (int i = ObjectsTotal() - 1; i >= 0; i--) {
         string name = ObjectName(i);
-        int length = StringLen(i_name);
-        if (StringSubstr(name, 0, length) == i_name) {
-            ObjectDelete(name);
-        }
-        if (StringSubstr(name, 0, length) == i_name) {
+        int length = StringLen(_name);
+        if (StringFind(name, _name) != -1) {
             ObjectDelete(name);
         }
     }
@@ -96,6 +93,7 @@ int start() {
     if (!_new_bar(symbol, tf)) {
         return (0);
     }
+    counted_bars = IndicatorCounted();
     if(counted_bars > 0) {
         counted_bars--;
         counted_bars -= refresh_candles;
@@ -126,7 +124,7 @@ void draw_line(int pB, int pA, int dir) {
     color line_color;
     string time_str = StringConcatenate(TimeToStr(iTime(symbol, tf, pB), TIME_DATE), "_",
                                         TimeToStr(iTime(symbol, tf, pB), TIME_MINUTES));
-    string line_name = StringConcatenate(i_name, "_apaor_line_", time_str);
+    string line_name = StringConcatenate(_name, "_apaor_line_", time_str);
     if (dir == 1) {
         pA_price = Low[pA];
         pB_price = Low[pB];
