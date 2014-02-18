@@ -39,23 +39,17 @@ signal vtr(ohlc *main, ohlc *sister, size_t i,
                          unfilled(sister, i - j, j))) {
                     if (zone_divergence(main, sister, &main_conf, &sister_conf,
                                         &main_z, &sister_z, &invert)) {
-                        r.c1.nr = i;
-                        r.c2.nr = i - 1;
+                        r.c1.nr = main_conf.c1.nr;
+                        r.c2.nr = main_conf.c2.nr;
                         r.zone.v1.nr = i - j;
-                        r.dir = 1;
+                        r.dir = main_conf.dir;
                         break;
                     }
                 }
             }
         }
-        if ((dir(main, i) == -1 && dir(sister, i) == -1 &&
-                dir(main, i - 1) == 1 &&
-                gsl_fcmp(main[i].close,
-                         body_mid_point(main, i - 1), FLT_EPSILON) < 0) ||
-                (dir(sister, i) == -1 && dir(main, i) == -1 &&
-                 dir(sister, i - 1) == 1 &&
-                 gsl_fcmp(sister[i].close,
-                          body_mid_point(sister, i - 1), FLT_EPSILON) < 0)) {
+        if (dir(main, i) == -1 && dir(sister, i) == -1 &&
+                (main_conf.dir == -1 || sister_conf.dir == -1)) {
             // Look for zone
             for (j = 3; j < end_loop; j++) {
                 main_z = wrb_zone(main, i - j, 64, i);
@@ -68,24 +62,18 @@ signal vtr(ohlc *main, ohlc *sister, size_t i,
                          unfilled(sister, i - j, j))) {
                     if (zone_divergence(main, sister, &main_conf, &sister_conf,
                                         &main_z, &sister_z, &invert)) {
-                        r.c1.nr = i;
-                        r.c2.nr = i - 1;
+                        r.c1.nr = main_conf.c1.nr;
+                        r.c2.nr = main_conf.c2.nr;
                         r.zone.v1.nr = i - j;
-                        r.dir = -1;
+                        r.dir = main_conf.dir;
                         break;
                     }
                 }
             }
         }
     } else {
-        if ((dir(main, i) == 1 && dir(sister, i) == -1 &&
-                dir(main, i - 1) == -1 &&
-                gsl_fcmp(main[i].close,
-                         body_mid_point(main, i - 1), FLT_EPSILON) > 0) ||
-                (dir(sister, i) == -1 && dir(main, i) == 1 &&
-                 dir(sister, i - 1) == 1 &&
-                 gsl_fcmp(sister[i].close,
-                          body_mid_point(sister, i - 1), FLT_EPSILON) < 0)) {
+        if (dir(main, i) == 1 && dir(sister, i) == -1 &&
+                (main_conf.dir == 1 || sister_conf.dir == -1)) {
             // Look for zone
             for (j = 3; j < end_loop; j++) {
                 main_z = wrb_zone(main, i - j, 64, i);
@@ -98,23 +86,17 @@ signal vtr(ohlc *main, ohlc *sister, size_t i,
                          unfilled(sister, i - j, j))) {
                     if (zone_divergence(main, sister, &main_conf, &sister_conf,
                                         &main_z, &sister_z, &invert)) {
-                        r.c1.nr = i;
-                        r.c2.nr = i - 1;
+                        r.c1.nr = main_conf.c1.nr;
+                        r.c2.nr = main_conf.c2.nr;
                         r.zone.v1.nr = i - j;
-                        r.dir = 1;
+                        r.dir = main_conf.dir;
                         break;
                     }
                 }
             }
         }
-        if ((dir(main, i) == -1 && dir(sister, i) == 1 &&
-                dir(main, i - 1) == 1 &&
-                gsl_fcmp(main[i].close,
-                         body_mid_point(main, i - 1), FLT_EPSILON) < 0) ||
-                (dir(sister, i) == 1 && dir(main, i) == -1 &&
-                 dir(sister, i - 1) == -1 &&
-                 gsl_fcmp(sister[i].close,
-                          body_mid_point(sister, i - 1), FLT_EPSILON) > 0)) {
+        if (dir(main, i) == -1 && dir(sister, i) == 1 &&
+                (main_conf.dir == -1 || sister_conf.dir == 1)) {
             // Look for zone
             for (j = 3; j < end_loop; j++) {
                 main_z = wrb_zone(main, i - j, 64, i);
@@ -127,10 +109,10 @@ signal vtr(ohlc *main, ohlc *sister, size_t i,
                          unfilled(sister, i - j, j))) {
                     if (zone_divergence(main, sister, &main_conf, &sister_conf,
                                         &main_z, &sister_z, &invert)) {
-                        r.c1.nr = i;
-                        r.c2.nr = i - 1;
+                        r.c1.nr = main_conf.c1.nr;
+                        r.c2.nr = main_conf.c2.nr;
                         r.zone.v1.nr = i - j;
-                        r.dir = -1;
+                        r.dir = main_conf.dir;
                         break;
                     }
                 }
