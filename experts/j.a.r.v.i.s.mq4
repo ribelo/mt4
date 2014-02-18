@@ -26,8 +26,8 @@ extern double  pending_pips = 5;
 
 extern string  tmm = "----Trade management module----";
 extern double  max_stop = 30.0;
-extern double  max_dd = 0.3;
-extern double  max_risk = 0.05;
+extern double  max_dd = 0.2;
+extern double  max_risk = 0.04;
 extern int     slippage = 3;
 extern bool    use_trailing_stop = true;
 extern bool    hg_only = true;
@@ -386,20 +386,26 @@ double Resistance() {
 }
 
 void TrailingStop() {
+    double support, resistance, sl_price;
+    string sl_name;
     for (int i = open_trades - 1; i >= 0; i--) {
         int ticket = orders[i][0];
         if (OrderSelect(ticket, SELECT_BY_TICKET, MODE_TRADES)) {
             if (OrderSymbol() == symbol) {
                 if (OrderMagicNumber() == magic_number) {
+                    support = Support();
+                    resistance = Resistance();
+                    sl_name = StringConcatenate(ticket, "_sl_line");
+                    sl_price = NormalizeDouble(ObjectGet(sl_name, OBJPROP_PRICE1), digits);
                     if (OrderType() == OP_BUY) {
-                        if (_fcmp(OrderStopLoss(), Support()) < 0 && Support() != 0.0) {
-                            ObjectMove(ticket + "_sl_line", 0, iTime(symbol, tf, 0), Support());
-                            Print("Order " + ticket + " trailing stop move sl line to ", Support());
+                        if (_fcmp(sl_price, support) < 0 && support != 0.0) {
+                            ObjectMove(sl_name, 0, iTime(symbol, tf, 0), support);
+                            Print("Order " + ticket + " trailing stop move sl line to ", support);
                         }
                     } else if (OrderType() == OP_SELL) {
-                        if (_fcmp(OrderStopLoss(), Resistance()) > 0 && Resistance() != 0.0) {
-                            ObjectMove(ticket + "_sl_line", 0, iTime(symbol, tf, 0), Resistance());
-                            Print("Order " + ticket + " trailing stop move sl line to ", Resistance());
+                        if (_fcmp(sl_price, resistance) > 0 && resistance != 0.0) {
+                            ObjectMove(sl_name, 0, iTime(symbol, tf, 0), resistance);
+                            Print("Order " + ticket + " trailing stop move sl line to ", resistance);
                         }
                     }
                 }
@@ -875,18 +881,20 @@ void DisplayUserFeedback() {
     screen_message = "Money Management:";
     ObjectMakeLabel(StringConcatenate(_name, "_money_management"), screen_message, font_size, font_type, text_color, data_disp_gap_size, temp_offset, 0, 0);
     temp_offset += data_disp_offset;
-    screen_message = StringConcatenate("    Highest EQ: ", DoubleToStr(HighestEq(balance_array), 0));
-    ObjectMakeLabel(StringConcatenate(_name, "_highest_eq"), screen_message, font_size, font_type, text_color, data_disp_gap_size, temp_offset, 0, 0);
+    screen_message = StringConcatenate("    Risk Reward: ", DoubleToStr(RiskReward(), 2));
+    ObjectMakeLabel(StringConcatenate(_name, "_risk_reward"), screen_message, font_size, font_type, text_color, data_disp_gap_size, temp_offset, 0, 0);
+    temp_offset += data_disp_offset;
+    screen_message = StringConcatenate("    Profitability: ", DoubleToStr(Profitability(), 2));
+    ObjectMakeLabel(StringConcatenate(_name, "_profitability"), screen_message, font_size, font_type, text_color, data_disp_gap_size, temp_offset, 0, 0);
     temp_offset += data_disp_offset;
     screen_message = StringConcatenate("    Drown Down: ", DoubleToStr(DrawDownHighToPeak(), 0));
     ObjectMakeLabel(StringConcatenate(_name, "_drown_down"), screen_message, font_size, font_type, text_color, data_disp_gap_size, temp_offset, 0, 0);
     temp_offset += data_disp_offset;
     screen_message = StringConcatenate("    Max Lot: ", DynamicDeltaLot(symbol, max_stop, max_dd, max_risk, balance_array));
     ObjectMakeLabel(StringConcatenate(_name, "_max_lot"), screen_message, font_size, font_type, text_color, data_disp_gap_size, temp_offset, 0, 0);
-    temp_offset += data_disp_offset;
+    temp_offset += data_disp_offset * 2;
 
     if (use_trailing_stop) {
-        temp_offset += data_disp_offset;
         screen_message = "Trailing Stop:";
         ObjectMakeLabel(StringConcatenate(_name, "_trailing_stop_message"), screen_message, font_size, font_type, text_color, data_disp_gap_size, temp_offset, 0, 0);
         temp_offset += data_disp_offset;

@@ -267,54 +267,188 @@ static inline int contraction_retrace(ohlc *candle, size_t c1,
 }
 
 
-static inline int zone_bounce(ohlc *candle, size_t i, zone *z) {
-    if (dir(candle, i) == 1) {
-        if ((gsl_fcmp(candle[i - 1].close,
+static inline int zone_denial(ohlc *candle, signal *sig, zone *z) {
+    if (sig->dir == 1) {
+        if ((gsl_fcmp(candle[sig->c2.nr].close,
                       z->v1.close,
                       FLT_EPSILON) <= 0 &&
-                gsl_fcmp(candle[i - 1].close,
+                gsl_fcmp(candle[sig->c2.nr].close,
                          z->v1.open,
                          FLT_EPSILON) > 0 &&
-                gsl_fcmp(candle[i].close,
+                gsl_fcmp(candle[sig->c1.nr].close,
                          z->v1.close,
                          FLT_EPSILON) > 0 &&
-                gsl_fcmp(lowest_close(candle, i - 4, i - 1),
+                gsl_fcmp(lowest_close(candle, sig->c2.nr - 3, sig->c2.nr),
                          z->v1.close,
                          FLT_EPSILON) > 0) ||
-                (gsl_fcmp(candle[i - 1].close,
+                (gsl_fcmp(candle[sig->c2.nr].close,
                           z->v1.open,
                           FLT_EPSILON) < 0 &&
-                 gsl_fcmp(candle[i].close,
+                 gsl_fcmp(candle[sig->c1.nr].close,
                           z->v1.open,
                           FLT_EPSILON) >= 0 &&
-                 gsl_fcmp(lowest_close(candle, i - 4, i - 1),
+                 gsl_fcmp(lowest_close(candle, sig->c2.nr - 3, sig->c2.nr),
                           z->v1.open,
                           FLT_EPSILON) > 0)) {
             return 1;
         }
-    } else if (dir(candle, i) == -1) {
-        if ((gsl_fcmp(candle[i - 1].close,
+    } else if (sig->dir == -1) {
+        if ((gsl_fcmp(candle[sig->c2.nr].close,
                       z->v1.close,
                       FLT_EPSILON) >= 0 &&
-                gsl_fcmp(candle[i - 1].close,
+                gsl_fcmp(candle[sig->c2.nr].close,
                          z->v1.open,
                          FLT_EPSILON) < 0 &&
-                gsl_fcmp(candle[i].close,
+                gsl_fcmp(candle[sig->c1.nr].close,
                          z->v1.close,
                          FLT_EPSILON) < 0 &&
-                gsl_fcmp(highest_close(candle, i - 4, i - 1),
+                gsl_fcmp(highest_close(candle, sig->c2.nr - 3, sig->c2.nr),
                          z->v1.close,
                          FLT_EPSILON) < 0) ||
-                (gsl_fcmp(candle[i - 1].close,
+                (gsl_fcmp(candle[sig->c2.nr].close,
                           z->v1.open,
                           FLT_EPSILON) > 0 &&
-                 gsl_fcmp(candle[i].close,
+                 gsl_fcmp(candle[sig->c1.nr].close,
                           z->v1.open,
                           FLT_EPSILON) <= 0 &&
-                 gsl_fcmp(highest_close(candle, i - 4, i - 1),
+                 gsl_fcmp(highest_close(candle, sig->c2.nr - 3, sig->c2.nr),
                           z->v1.open,
                           FLT_EPSILON) < 0)) {
             return -1;
+        }
+    }
+    return 0;
+}
+
+
+static inline int zone_divergence(ohlc *main, ohlc *sister,
+                                  signal *main_sig, signal *sister_sig,
+                                  zone *main_z, zone *sister_z, int *invert) {
+    if (!invert) {
+        if ((gsl_fcmp(lowest_close(main, main_sig->c2.nr - 3, main_sig->c2.nr),
+                      main_z->v1.close, FLT_EPSILON) > 0 ||
+                gsl_fcmp(lowest_close(sister, sister_sig->c2.nr - 3, sister_sig->c2.nr),
+                         sister_z->v1.close, FLT_EPSILON) > 0) &&
+                ((gsl_fcmp(main_sig->c2.close,
+                           main_z->v1.close, FLT_EPSILON) <= 0 &&
+                  gsl_fcmp(main_sig->c2.close,
+                           main_z->v1.open, FLT_EPSILON) > 0 &&
+                  gsl_fcmp(main_sig->c1.close,
+                           main_z->v1.close, FLT_EPSILON) > 0 &&
+                  ((gsl_fcmp(sister_sig->c2.close,
+                             sister_z->v1.open, FLT_EPSILON) < 0 &&
+                    gsl_fcmp(sister_sig->c1.close,
+                             sister_z->v1.open, FLT_EPSILON) >= 0) ||
+                   (gsl_fcmp(sister_sig->c2.close,
+                             sister_z->v1.close, FLT_EPSILON) > 0))) ||
+                 (gsl_fcmp(sister_sig->c2.close,
+                           sister_z->v1.close, FLT_EPSILON) <= 0 &&
+                  gsl_fcmp(sister_sig->c2.close,
+                           sister_z->v1.open, FLT_EPSILON) > 0 &&
+                  gsl_fcmp(sister_sig->c1.close,
+                           sister_z->v1.close, FLT_EPSILON) > 0 &&
+                  ((gsl_fcmp(main_sig->c2.close,
+                             main_z->v1.open, FLT_EPSILON) < 0 &&
+                    gsl_fcmp(main_sig->c1.close,
+                             main_z->v1.open, FLT_EPSILON) >= 0) ||
+                   (gsl_fcmp(main_sig->c2.close,
+                             main_z->v1.close,
+                             FLT_EPSILON) > 0))))) {
+            return 1;
+        }
+        if ((gsl_fcmp(highest_close(main, main_sig->c2.nr - 3, main_sig->c2.nr),
+                      main_z->v1.close, FLT_EPSILON) < 0 ||
+                gsl_fcmp(highest_close(sister, sister_sig->c2.nr - 3, sister_sig->c2.nr),
+                         sister_z->v1.close, FLT_EPSILON) < 0) &&
+                ((gsl_fcmp(main_sig->c2.close,
+                           main_z->v1.close, FLT_EPSILON) >= 0 &&
+                  gsl_fcmp(main_sig->c2.close,
+                           main_z->v1.open, FLT_EPSILON) < 0 &&
+                  gsl_fcmp(main_sig->c1.close,
+                           main_z->v1.close, FLT_EPSILON) < 0 &&
+                  ((gsl_fcmp(sister_sig->c2.close,
+                             sister_z->v1.open, FLT_EPSILON) > 0 &&
+                    gsl_fcmp(sister_sig->c1.close,
+                             sister_z->v1.open, FLT_EPSILON) <= 0) ||
+                   (gsl_fcmp(sister_sig->c2.close,
+                             sister_z->v1.close, FLT_EPSILON) < 0))) ||
+                 (gsl_fcmp(sister_sig->c2.close,
+                           sister_z->v1.close, FLT_EPSILON) >= 0 &&
+                  gsl_fcmp(sister_sig->c2.close,
+                           sister_z->v1.open, FLT_EPSILON) < 0 &&
+                  gsl_fcmp(sister_sig->c1.close,
+                           sister_z->v1.close, FLT_EPSILON) < 0 &&
+                  ((gsl_fcmp(main_sig->c2.close,
+                             main_z->v1.open, FLT_EPSILON) > 0 &&
+                    gsl_fcmp(main_sig->c1.close,
+                             main_z->v1.open, FLT_EPSILON) <= 0) ||
+                   (gsl_fcmp(main_sig->c2.close,
+                             main_z->v1.close,
+                             FLT_EPSILON) < 0))))) {
+            return 1;
+        }
+    } else {
+        if ((gsl_fcmp(lowest_close(main, main_sig->c2.nr - 3, main_sig->c2.nr),
+                      main_z->v1.close, FLT_EPSILON) > 0 ||
+                gsl_fcmp(highest_close(sister, sister_sig->c2.nr - 3, sister_sig->c2.nr),
+                         sister_z->v1.close, FLT_EPSILON) < 0) &&
+                ((gsl_fcmp(main_sig->c2.close,
+                           main_z->v1.close, FLT_EPSILON) <= 0 &&
+                  gsl_fcmp(main_sig->c2.close,
+                           main_z->v1.open, FLT_EPSILON) > 0 &&
+                  gsl_fcmp(main_sig->c1.close,
+                           main_z->v1.close, FLT_EPSILON) > 0 &&
+                  ((gsl_fcmp(sister_sig->c2.close,
+                             sister_z->v1.open, FLT_EPSILON) > 0 &&
+                    gsl_fcmp(sister_sig->c1.close,
+                             sister_z->v1.open, FLT_EPSILON) <= 0) ||
+                   (gsl_fcmp(sister_sig->c2.close,
+                             sister_z->v1.close, FLT_EPSILON) < 0))) ||
+                 (gsl_fcmp(sister_sig->c2.close,
+                           sister_z->v1.close, FLT_EPSILON) >= 0 &&
+                  gsl_fcmp(sister_sig->c2.close,
+                           sister_z->v1.open, FLT_EPSILON) < 0 &&
+                  gsl_fcmp(sister_sig->c1.close,
+                           sister_z->v1.close, FLT_EPSILON) < 0 &&
+                  ((gsl_fcmp(main_sig->c2.close,
+                             main_z->v1.open, FLT_EPSILON) < 0 &&
+                    gsl_fcmp(main_sig->c1.close,
+                             main_z->v1.open, FLT_EPSILON) >= 0) ||
+                   (gsl_fcmp(main_sig->c2.close,
+                             main_z->v1.close,
+                             FLT_EPSILON) > 0))))) {
+            return 1;
+        }
+        if ((gsl_fcmp(highest_close(main, main_sig->c2.nr - 3, main_sig->c2.nr),
+                      main_z->v1.close, FLT_EPSILON) < 0 ||
+                gsl_fcmp(lowest_close(sister, sister_sig->c2.nr - 3, sister_sig->c2.nr),
+                         sister_z->v1.close, FLT_EPSILON) > 0) &&
+                ((gsl_fcmp(main_sig->c2.close,
+                           main_z->v1.close, FLT_EPSILON) >= 0 &&
+                  gsl_fcmp(main_sig->c2.close,
+                           main_z->v1.open, FLT_EPSILON) < 0 &&
+                  gsl_fcmp(main_sig->c1.close,
+                           main_z->v1.close, FLT_EPSILON) < 0 &&
+                  ((gsl_fcmp(sister_sig->c2.close,
+                             sister_z->v1.open, FLT_EPSILON) < 0 &&
+                    gsl_fcmp(sister_sig->c1.close,
+                             sister_z->v1.open, FLT_EPSILON) >= 0) ||
+                   (gsl_fcmp(sister_sig->c2.close,
+                             sister_z->v1.close, FLT_EPSILON) > 0))) ||
+                 (gsl_fcmp(sister_sig->c2.close,
+                           sister_z->v1.close, FLT_EPSILON) <= 0 &&
+                  gsl_fcmp(sister_sig->c2.close,
+                           sister_z->v1.open, FLT_EPSILON) > 0 &&
+                  gsl_fcmp(sister_sig->c1.close,
+                           sister_z->v1.close, FLT_EPSILON) > 0 &&
+                  ((gsl_fcmp(main_sig->c2.close,
+                             main_z->v1.open, FLT_EPSILON) > 0 &&
+                    gsl_fcmp(main_sig->c1.close,
+                             main_z->v1.open, FLT_EPSILON) <= 0) ||
+                   (gsl_fcmp(main_sig->c2.close,
+                             main_z->v1.close,
+                             FLT_EPSILON) < 0))))) {
+            return 1;
         }
     }
     return 0;

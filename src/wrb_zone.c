@@ -497,16 +497,16 @@ zone wrb_zone(ohlc *candle, size_t i, size_t contraction, size_t n) {
     if (!r.v1.dir) {
         r = reaction_zone(candle, i, contraction, n);
     }
-    signal c = conf_h(candle, i, contraction, n);
-    if (c.dir != 0) {
-        r.v1.dir = c.c1.dir;
-        r.v1.open = c.c1.open;
-        r.v1.close = c.c1.close;
-        r.v1.nr = c.c1.nr;
-        r.v2.dir = c.c1.dir;
-        r.v2.open = c.c2.open;
-        r.v2.close = c.c2.close;
-        r.v2.nr = c.c2.nr;
-    }
+    // signal c = conf_h(candle, i, contraction, n);
+    // if (c.dir != 0) {
+    //     r.v1.dir = c.c1.dir;
+    //     r.v1.open = c.c1.open;
+    //     r.v1.close = c.c1.close;
+    //     r.v1.nr = c.c1.nr;
+    //     r.v2.dir = c.c1.dir;
+    //     r.v2.open = c.c2.open;
+    //     r.v2.close = c.c2.close;
+    //     r.v2.nr = c.c2.nr;
+    // }
     return r;
 }

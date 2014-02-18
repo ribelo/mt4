@@ -194,6 +194,39 @@ static inline int fractal_break(ohlc *candle, size_t i, size_t l,
 }
 
 
+static inline signal fade_volatility(ohlc *candle, size_t i) {
+    signal r = {};
+    if (i > 1 && wrb(candle, i - 1, i).dir == -1 &&
+            gsl_fcmp(candle[i].close,
+                     body_mid_point(candle, i - 1),
+                     FLT_EPSILON) > 0) {
+        r.c1.nr = i;
+        r.c1.dir = 1;
+        r.c1.open = candle[i].open;
+        r.c1.close = candle[i].close;
+        r.c2.nr = i - 1;
+        r.c2.dir = -1;
+        r.c2.open = candle[i - 1].open;
+        r.c2.close = candle[i - 1].close;
+        r.dir = 1;
+    } else if (i > 1 && wrb(candle, i - 1, i).dir == 1 &&
+            gsl_fcmp(candle[i].close,
+                     body_mid_point(candle, i - 1),
+                     FLT_EPSILON) < 0) {
+        r.c1.nr = i;
+        r.c1.dir = -1;
+        r.c1.open = candle[i].open;
+        r.c1.close = candle[i].close;
+        r.c2.nr = i - 1;
+        r.c2.dir = 1;
+        r.c2.open = candle[i - 1].open;
+        r.c2.close = candle[i - 1].close;
+        r.dir = -1;
+    }
+    return r;
+}
+
+
 static inline int dcm(ohlc *candle, size_t i, size_t look_back, size_t n) {
     size_t j, end_loop = fmin(fmin(i, n - i), look_back);
     if (i < n - 3) {

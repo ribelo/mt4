@@ -25,4 +25,6 @@ inline int fractal(ohlc *candle, size_t i, size_t n, size_t l);
 
 inline int fractal_break(ohlc *candle, size_t i, size_t l, size_t look_back, size_t n);
 
+inline int fade(ohlc *candle, size_t i);
+
 inline int dcm(ohlc *candle, size_t i, size_t look_back, size_t n);

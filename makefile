@@ -14,7 +14,7 @@ ALL: ./experts/libraries/wrb_analysis.dll \
 	./experts/libraries/wrb_analysis.dll \
 	./src/wrb_export.c ./src/wrb_zone.c ./src/wrb_ajctr.c \
 	./src/wrb_management.c ./src/wrb_apaor.c ./src/wrb_fvb.c \
-	./src/wrb_vtr.c  \
+	./src/wrb_vtr.c ./src/wrb_confirmation.c \
 	./wrb_analysis.def $(GSL)
 
 ./experts/libraries/gsl_math.dll: ./src/gsl_math.o

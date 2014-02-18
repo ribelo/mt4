@@ -48,23 +48,6 @@ double HighestEq(double& balance_array[], int count = 5) {
 }
 
 
-double DrownDownPercent(double& balance_array[], int count = 5) {
-	double highest_eq = HighestEq(balance_array, count);
-	double diff = highest_eq - balance_array[ArraySize(balance_array) - 1];
-	if (highest_eq > 0) {
-		return (diff / highest_eq);
-	} else {
-		return (0.0);
-	}
-}
-
-
-double DrownDownCash(double& balance_array[], int count = 5) {
-	double highest_eq = HighestEq(balance_array, count);
-	return (highest_eq - balance_array[ArraySize(balance_array) - 1]);
-}
-
-
 double DrawDownHighToPeak(int count = 5) {
 	static int pip_mult_tab[] = {1, 10, 1, 10, 1, 10, 100, 1000};
 	static double dd_pip;
@@ -96,7 +79,7 @@ double DrawDownHighToPeak(int count = 5) {
 }
 
 
-double CalculateRR() {
+double RiskReward() {
     static int pip_mult_tab[] = {1, 10, 1, 10, 1, 10, 100, 1000};
     static int total_history;
     static double rr = 1.0;
@@ -143,6 +126,38 @@ double CalculateRR() {
 }
 
 
+double Profitability() {
+    static int pip_mult_tab[] = {1, 10, 1, 10, 1, 10, 100, 1000};
+    static int total_history;
+    static double profitability = 0.0;
+    int local_multiplier, local_digits;
+    if (total_history != OrdersHistoryTotal()) {
+        total_history = OrdersHistoryTotal();
+        for (int i = 0; i > total_history; i++) {
+            if (OrderSelect(i, SELECT_BY_POS, MODE_HISTORY)) {
+                if (OrderType() == 6 || OrderType() == 7) {
+                    continue;
+                }
+                local_digits = MarketInfo(OrderSymbol(), MODE_DIGITS);
+                local_multiplier = pip_mult_tab[local_digits];
+                int trades_win = 0;
+                int trades_loss = 0;
+                if (OrderProfit() > 0) {
+                    trades_win++;
+                } else if (OrderProfit() < 0) {
+                    trades_loss++;
+                }
+            }
+        }
+
+        if (average_loss > 0 && average_profit > 0) {
+            profitability = trades_win / (trades_win + trades_loss);
+        }
+    }
+    return (profitability);
+}
+
+
 double DynamicDeltaLot(string symbol, double stop_pip, double max_dd, double max_risk, double& balance_array[]) {
     static int total_history;
     static int total_orders;
@@ -162,7 +177,7 @@ double DynamicDeltaLot(string symbol, double stop_pip, double max_dd, double max
 	    curr_balance = balance_array[ArraySize(balance_array) - 1];
 	    for (int j = 0; j < ArraySize(balance_array); j++){
 	    }
-	    average_risk_reward = CalculateRR();
+	    average_risk_reward = RiskReward();
 
 	    if (dd > 0.0) {
 	        double delta = dd / 5;

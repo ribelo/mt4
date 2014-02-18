@@ -15,15 +15,19 @@
 //| Indicator Global Inputs                                                                   |
 //+-------------------------------------------------------------------------------------------+
 #property indicator_chart_window
-#property indicator_buffers 4
-#property indicator_color1 C'255,213,98'
-#property indicator_color2 C'233,65,103'
+#property indicator_buffers 6
+#property indicator_color1 C'205,138,108'
+#property indicator_color2 C'151,125,130'
 #property indicator_color3 C'252,165,88'
 #property indicator_color4 C'177,83,103'
+#property indicator_color5 C'255,213,98'
+#property indicator_color6 C'233,65,103'
 #property indicator_width1 1
 #property indicator_width2 1
 #property indicator_width3 1
 #property indicator_width4 1
+#property indicator_width5 1
+#property indicator_width6 1
 
 #define  _name "hxl_vtr"
 #define  short_name "Huxley VTR"
@@ -38,12 +42,14 @@ extern bool invert_sister = 0;
 extern bool draw_zone = false;
 extern color bull_vtr = C'255,213,98';
 extern color bear_vtr = C'233,65,103';
+extern color contraction_bull_body = C'205,138,108';
+extern color contraction_bear_body = C'151,125,130';
 extern color bull_zone = C'252,165,88';
 extern color bear_zone = C'177,83,103';
 extern color text_color = C'56,47,50';
 extern bool make_text = true;
 extern bool send_notification = true;
-extern int label_offset_percent = 1;
+extern double label_offset_percent = 1.0;
 extern int font_size = 8;
 extern string font_name = "Cantarell";
 extern int bar_width = 1;
@@ -57,6 +63,7 @@ double tickvalue, point;
 string pip_description = " pips";
 
 double body_vtr_open[], body_vtr_close[];
+double contraction_body_open[], contraction_body_close[];
 double body_zone_open[], body_zone_close[];
 
 double last_vtr;
@@ -78,18 +85,24 @@ int init() {
     ArrayCopyRates(main, symbol, tf);
     ArrayCopyRates(sister, sister_symbol, tf);
     IndicatorShortName(short_name);
-    SetIndexBuffer(0, body_vtr_close);
-    SetIndexStyle(0, DRAW_HISTOGRAM, 0, bar_width, bull_vtr);
-    SetIndexLabel(0, "VTR");
-    SetIndexBuffer(1, body_vtr_open);
-    SetIndexStyle(1, DRAW_HISTOGRAM, 0, bar_width, bear_vtr);
-    SetIndexLabel(1, "VTR");
+    SetIndexBuffer(0, contraction_body_close);
+    SetIndexStyle(0, DRAW_HISTOGRAM, 0, bar_width, contraction_bull_body);
+    SetIndexLabel(0, "VTR Contraction");
+    SetIndexBuffer(1, contraction_body_open);
+    SetIndexStyle(1, DRAW_HISTOGRAM, 0, bar_width, contraction_bear_body);
+    SetIndexLabel(1, "VTR Contraction");
     SetIndexBuffer(2, body_zone_close);
     SetIndexStyle(2, DRAW_HISTOGRAM, 0, bar_width, bull_zone);
-    SetIndexLabel(2, "ZONE");
+    SetIndexLabel(2, "VTR Zone");
     SetIndexBuffer(3, body_zone_open);
     SetIndexStyle(3, DRAW_HISTOGRAM, 0, bar_width, bear_zone);
-    SetIndexLabel(3, "ZONE");
+    SetIndexLabel(3, "VTR Zone");
+    SetIndexBuffer(4, body_vtr_close);
+    SetIndexStyle(4, DRAW_HISTOGRAM, 0, bar_width, bull_vtr);
+    SetIndexLabel(4, "VTR");
+    SetIndexBuffer(5, body_vtr_open);
+    SetIndexStyle(5, DRAW_HISTOGRAM, 0, bar_width, bear_vtr);
+    SetIndexLabel(5, "VTR");
 
     if (!GlobalVariableCheck(global_name)) {
         GlobalVariableSet(global_name, 0);
@@ -135,6 +148,10 @@ int start() {
             body_vtr_close[r[0]] = iClose(symbol, tf, r[0]);
             body_vtr_open[r[1]] = iOpen(symbol, tf, r[1]);
             body_vtr_close[r[1]] = iClose(symbol, tf, r[1]);
+            for (j = 1; j < r[1] - r[0]; j++) {
+                contraction_body_open[r[0] + j] = iOpen(symbol, tf, r[0] + j);
+                contraction_body_close[r[0] + j] = iClose(symbol, tf, r[0] + j);
+            }
             if (draw_zone == true) {
                 body_zone_open[r[2]] = iOpen(symbol, tf, r[2]);
                 body_zone_close[r[2]] = iClose(symbol, tf, r[2]);

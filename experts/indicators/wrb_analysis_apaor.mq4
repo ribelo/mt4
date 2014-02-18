@@ -30,7 +30,7 @@ extern int pB_length = 3;
 extern color bull_divergence = C'255,213,98';
 extern color bear_divergence = C'233,65,103';
 extern bool send_notification = true;
-extern int label_offset_percent = 1;
+extern double label_offset_percent = 1.0;
 extern int line_width = 1;
 
 //Misc

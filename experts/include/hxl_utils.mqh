@@ -78,6 +78,57 @@ bool _new_bar(string symbol, int timeframe) {
 	}
 }
 
+
+int _lower_timeframe(int timeframe, bool skip_m30 = true) {
+	if (timeframe == 1) {
+		return (1);
+	} else if (timeframe == 5) {
+		return (1);
+	} else if (timeframe == 15) {
+		return (5);
+	} else if (timeframe == 30) {
+		return (15);
+	} else if (timeframe == 60 && !skip_m30) {
+		return (30);
+	} else if (timeframe == 60 && skip_m30) {
+		return (15);
+	} else if (timeframe == 240) {
+		return (60);
+	} else if (timeframe == 1440) {
+		return (240);
+	} else if (timeframe == 10080) {
+		return (1440);
+	} else if (timeframe == 43200) {
+		return (10080);
+	}
+}
+
+
+int _higher_timeframe(int timeframe, bool skip_m30 = true) {
+	if (timeframe == 1) {
+		return (5);
+	} else if (timeframe == 5) {
+		return (15);
+	} else if (timeframe == 15 && !skip_m30) {
+		return (30);
+	} else if (timeframe == 15 && skip_m30) {
+		return (60);
+	} else if (timeframe == 30) {
+		return (60);
+	} else if (timeframe == 60) {
+		return (240);
+	} else if (timeframe == 240) {
+		return (1440);
+	} else if (timeframe == 1440) {
+		return (10080);
+	} else if (timeframe == 10080) {
+		return (43200);
+	} else if (timeframe == 43200) {
+		return (43200);
+	}
+}
+
+
 void make_text(string name, string text, int time, double price, int font_size, color font_color) {
    if (ObjectFind (name) == -1) {
       ObjectCreate(name, OBJ_TEXT, 0, time, price);

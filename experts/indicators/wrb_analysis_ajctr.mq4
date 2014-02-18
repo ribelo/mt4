@@ -15,8 +15,8 @@
 //+-------------------------------------------------------------------------------------------+
 #property indicator_chart_window
 #property indicator_buffers 4
-#property indicator_color1 C'255,213,98'
-#property indicator_color2 C'233,65,103'
+#property indicator_color1 C'205,138,108'
+#property indicator_color2 C'151,125,130'
 #property indicator_color3 C'252,165,88'
 #property indicator_color4 C'177,83,103'
 #property indicator_width1 1
@@ -43,7 +43,7 @@ extern color contraction_bear_body = C'151,125,130';
 extern color text_color = C'56,47,50';
 extern bool make_text = false;
 extern bool send_notification = true;
-extern int label_offset_percent = 1;
+extern double label_offset_percent = 1.0;
 extern int font_size = 8;
 extern string font_name = "Cantarell";
 extern int bar_width = 1;

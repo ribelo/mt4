@@ -3,6 +3,8 @@
 #include "gsl/gsl_math.h"
 #include "wrb_struct.h"
 #include "candle.h"
+#include "wrb_analysis.h"
+#include "wrb_confirmation.h"
 #include "wrb_toolbox.h"
 #include "wrb_zone.h"
 
@@ -11,37 +13,35 @@ signal fvb(ohlc *candle, size_t i, size_t look_back, size_t n) {
     signal r = {};
     size_t j, end_loop = fmin(i, look_back);
     zone z;
-    if (dir(candle, i) == 1 && wrb(candle, i - 1, i).dir == -1 &&
-            gsl_fcmp(candle[i].close,
-                     body_mid_point(candle, i - 1),
-                     FLT_EPSILON) > 0) {
+    signal conf = fade_volatility(candle, i);
+    if (!conf.dir) {
+        conf = conf_h2(candle, i, 16, n);
+    }
+    if (conf.dir == 1) {
         for (j = 3; j < end_loop; j++) {
             z = wrb_zone(candle, i - j, 64, i);
             if (z.v1.dir == 1 &&
-                    zone_size(&z.v1) > body_size(candle, i - 1) &&
+                    zone_size(&z.v1) > body_size(candle, conf.c2.nr) &&
                     unfilled(candle, i - j, j) &&
-                    zone_bounce(candle, i, &z) == 1) {
-                r.c1.nr = i;
-                r.c2.nr = i - 1;
+                    zone_denial(candle, &conf, &z) == 1) {
+                r.c1.nr = conf.c1.nr;
+                r.c2.nr = conf.c2.nr;
                 r.zone.v1.nr = i - j;
-                r.dir = 1;
+                r.dir = conf.dir;
                 break;
             }
         }
-    } else if (dir(candle, i) == -1 && wrb(candle, i - 1, i).dir == 1 &&
-               gsl_fcmp(candle[i].close,
-                        body_mid_point(candle, i - 1),
-                        FLT_EPSILON) < 0) {
+    } else if (conf.dir == -1) {
         for (j = 3; j < end_loop; j++) {
             z = wrb_zone(candle, i - j, 64, i);
             if (z.v1.dir < 0 &&
-                    zone_size(&z.v1) > body_size(candle, i - 1) &&
+                    zone_size(&z.v1) > body_size(candle, conf.c2.nr) &&
                     unfilled(candle, i - j, j) &&
-                    zone_bounce(candle, i, &z) == -1) {
-                r.c1.nr = i;
-                r.c2.nr = i - 1;
+                    zone_denial(candle, &conf, &z) == -1) {
+                r.c1.nr = conf.c1.nr;
+                r.c2.nr = conf.c2.nr;
                 r.zone.v1.nr = i - j;
-                r.dir = -1;
+                r.dir = conf.dir;
                 break;
             }
         }
