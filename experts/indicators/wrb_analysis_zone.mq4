@@ -121,8 +121,7 @@ int init() {
 int deinit() {
     for (int i = ObjectsTotal() - 1; i >= 0; i--) {
         string name = ObjectName(i);
-        int length = StringLen(_name);
-        if (StringFind(name, _name)) {
+        if (StringFind(name, _name) != -1) {
             ObjectDelete(name);
         }
     }
