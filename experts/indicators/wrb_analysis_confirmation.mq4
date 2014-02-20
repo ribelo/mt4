@@ -32,7 +32,7 @@
 //Global External Inputs
 
 extern int look_back = 512;
-extern int contraction_size = 64;
+extern int contraction_size = 16;
 extern int refresh_candles = 32;
 extern bool pattern_a = true;
 extern bool pattern_b = true;

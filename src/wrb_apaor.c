@@ -53,7 +53,7 @@ static inline int get_prior_low_fractal(ohlc *candle, size_t i, size_t l) {
             return i - j;
         }
     }
-    return -1;
+    return 0;
 }
 
 
@@ -63,7 +63,7 @@ static inline int get_prior_high_fractal(ohlc *candle, size_t i, size_t l) {
             return i - j;
         }
     }
-    return -1;
+    return 0;
 }
 
 
@@ -92,7 +92,7 @@ static inline int broke_line(ohlc *candle, line l, size_t start,
 
 
 signal apaor(ohlc *main, ohlc *sister, size_t i, size_t pa_l,
-                  size_t pb_l, int invert, size_t look_back, size_t n) {
+             size_t pb_l, int invert, size_t look_back, size_t n) {
     signal r = {};
     point m_pb, m_pa, s_pb, s_pa;
     line m_apaor_line, s_apaor_line;
@@ -242,4 +242,102 @@ signal apaor(ohlc *main, ohlc *sister, size_t i, size_t pa_l,
         }
     }
     return r;
+}
+
+
+int div_bull(ohlc *main, ohlc *sister, size_t i, size_t pa_l,
+             int invert, size_t look_back, size_t n) {
+    point m_pb, m_pa, s_pb, s_pa;
+    line m_apaor_line, s_apaor_line;
+    if (!invert) {
+        m_pb.x = i;
+        m_pb.y = main[m_pb.x].low;
+        m_pa.x = get_prior_low_fractal(main, m_pb.x, pa_l);
+        m_pa.y = main[m_pa.x].low;
+        s_pb.x = i;
+        s_pb.y = sister[s_pb.x].low;
+        s_pa.x = get_prior_low_fractal(sister, s_pb.x, pa_l);
+        s_pa.y = sister[s_pa.x].low;
+        m_apaor_line = get_line(m_pb, m_pa);
+        s_apaor_line = get_line(s_pb, s_pa);
+        if (fabs(m_pa.x - s_pa.x) <= 1 &&
+            !broke_line(main, m_apaor_line, m_pa.x + 1, m_pb.x, 1) &&
+            !broke_line(sister, s_apaor_line, s_pa.x + 1, s_pb.x, 1) &&
+            ((gsl_fcmp(m_pa.y, m_pb.y, FLT_EPSILON) > 0 &&
+              gsl_fcmp(s_pa.y, s_pb.y, FLT_EPSILON) < 0) ||
+             (gsl_fcmp(m_pa.y, m_pb.y, FLT_EPSILON) < 0 &&
+              gsl_fcmp(s_pa.y, s_pb.y, FLT_EPSILON) > 0))) {
+            return 1;
+        }
+    } else {
+        m_pb.x = i;
+        m_pb.y = main[m_pb.x].low;
+        m_pa.x = get_prior_low_fractal(main, m_pb.x, pa_l);
+        m_pa.y = main[m_pa.x].low;
+        s_pb.x = i;
+        s_pb.y = sister[s_pb.x].high;
+        s_pa.x = get_prior_high_fractal(sister, s_pb.x, pa_l);
+        s_pa.y = sister[s_pa.x].high;
+        m_apaor_line = get_line(m_pb, m_pa);
+        s_apaor_line = get_line(s_pb, s_pa);
+        if (fabs(m_pa.x - s_pa.x) <= 1 &&
+            !broke_line(main, m_apaor_line, m_pa.x + 1, m_pb.x, 1) &&
+            !broke_line(sister, s_apaor_line, s_pa.x + 1, s_pb.x, -1) &&
+            ((gsl_fcmp(m_pa.y, m_pb.y, FLT_EPSILON) > 0 &&
+              gsl_fcmp(s_pa.y, s_pb.y, FLT_EPSILON) > 0) ||
+             (gsl_fcmp(m_pa.y, m_pb.y, FLT_EPSILON) < 0 &&
+              gsl_fcmp(s_pa.y, s_pb.y, FLT_EPSILON) < 0))) {
+            return 1;
+        }
+    }
+    return 0;
+}
+
+
+int div_bear(ohlc *main, ohlc *sister, size_t i, size_t pa_l,
+             int invert, size_t look_back, size_t n) {
+    point m_pb, m_pa, s_pb, s_pa;
+    line m_apaor_line, s_apaor_line;
+    if (!invert) {
+        m_pb.x = i;
+        m_pb.y = main[m_pb.x].high;
+        m_pa.x = get_prior_high_fractal(main, m_pb.x, pa_l);
+        m_pa.y = main[m_pa.x].high;
+        s_pb.x = i;
+        s_pb.y = sister[s_pb.x].high;
+        s_pa.x = get_prior_high_fractal(sister, s_pb.x, pa_l);
+        s_pa.y = sister[s_pa.x].high;
+        m_apaor_line = get_line(m_pb, m_pa);
+        s_apaor_line = get_line(s_pb, s_pa);
+        if (fabs(m_pa.x - s_pa.x) <= 1 &&
+            !broke_line(main, m_apaor_line, m_pa.x + 1, m_pb.x, -1) &&
+            !broke_line(sister, s_apaor_line, s_pa.x + 1, s_pb.x, -1) &&
+            ((gsl_fcmp(m_pa.y, m_pb.y, FLT_EPSILON) > 0 &&
+              gsl_fcmp(s_pa.y, s_pb.y, FLT_EPSILON) < 0) ||
+             (gsl_fcmp(m_pa.y, m_pb.y, FLT_EPSILON) < 0 &&
+              gsl_fcmp(s_pa.y, s_pb.y, FLT_EPSILON) > 0))) {
+            return -1;
+        }
+    } else {
+        m_pb.x = i;
+        m_pb.y = main[m_pb.x].high;
+        m_pa.x = get_prior_high_fractal(main, m_pb.x, pa_l);
+        m_pa.y = main[m_pa.x].high;
+        s_pb.x = i;
+        s_pb.y = sister[s_pb.x].low;
+        s_pa.x = get_prior_low_fractal(sister, s_pb.x, pa_l);
+        s_pa.y = sister[s_pa.x].low;
+        m_apaor_line = get_line(m_pb, m_pa);
+        s_apaor_line = get_line(s_pb, s_pa);
+        if (fabs(m_pa.x - s_pa.x) <= 1 &&
+            !broke_line(main, m_apaor_line, m_pa.x + 1, m_pb.x, -1) &&
+            !broke_line(sister, s_apaor_line, s_pa.x + 1, s_pb.x, 1) &&
+            ((gsl_fcmp(m_pa.y, m_pb.y, FLT_EPSILON) > 0 &&
+              gsl_fcmp(s_pa.y, s_pb.y, FLT_EPSILON) > 0) ||
+             (gsl_fcmp(m_pa.y, m_pb.y, FLT_EPSILON) < 0 &&
+              gsl_fcmp(s_pa.y, s_pb.y, FLT_EPSILON) < 0))) {
+            return -1;
+        }
+    }
+    return 0;
 }
