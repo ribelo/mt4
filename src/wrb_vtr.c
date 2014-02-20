@@ -27,9 +27,9 @@ signal vtr(ohlc *main, ohlc *sister, size_t i,
                 (main_conf.dir == 1 || sister_conf.dir == 1)) {
             // Look for zone
             for (j = 3; j < end_loop; j++) {
-                main_z = wrb_zone(main, i - j, 64, i);
+                main_z = wrb_zone(main, i - j, 16, i);
                 main_hg.v1 = wrb_hg(main, i - j, i);
-                sister_z = wrb_zone(sister, i - j, 64, i);
+                sister_z = wrb_zone(sister, i - j, 16, i);
                 sister_hg.v1 = wrb_hg(sister, i - j, i);
                 if ((main_z.v1.dir == 1 &&
                         sister_hg.v1.dir == 1 &&
@@ -52,8 +52,8 @@ signal vtr(ohlc *main, ohlc *sister, size_t i,
                 (main_conf.dir == -1 || sister_conf.dir == -1)) {
             // Look for zone
             for (j = 3; j < end_loop; j++) {
-                main_z = wrb_zone(main, i - j, 64, i);
-                sister_z = wrb_zone(sister, i - j, 64, i);
+                main_z = wrb_zone(main, i - j, 16, i);
+                sister_z = wrb_zone(sister, i - j, 16, i);
                 if ((main_z.v1.dir == -1 &&
                         wrb_hg(sister, i - j, i).dir == -1 &&
                         unfilled(main, i - j, j)) ||
@@ -76,8 +76,8 @@ signal vtr(ohlc *main, ohlc *sister, size_t i,
                 (main_conf.dir == 1 || sister_conf.dir == -1)) {
             // Look for zone
             for (j = 3; j < end_loop; j++) {
-                main_z = wrb_zone(main, i - j, 64, i);
-                sister_z = wrb_zone(sister, i - j, 64, i);
+                main_z = wrb_zone(main, i - j, 16, i);
+                sister_z = wrb_zone(sister, i - j, 16, i);
                 if ((main_z.v1.dir == 1 &&
                         wrb_hg(sister, i - j, i).dir == -1 &&
                         unfilled(main, i - j, j)) ||
@@ -99,8 +99,8 @@ signal vtr(ohlc *main, ohlc *sister, size_t i,
                 (main_conf.dir == -1 || sister_conf.dir == 1)) {
             // Look for zone
             for (j = 3; j < end_loop; j++) {
-                main_z = wrb_zone(main, i - j, 64, i);
-                sister_z = wrb_zone(sister, i - j, 64, i);
+                main_z = wrb_zone(main, i - j, 16, i);
+                sister_z = wrb_zone(sister, i - j, 16, i);
                 if ((main_z.v1.dir == -1 &&
                         wrb_hg(sister, i - j, i).dir == 1 &&
                         unfilled(main, i - j, j)) ||

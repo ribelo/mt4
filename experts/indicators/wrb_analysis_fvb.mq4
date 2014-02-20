@@ -36,7 +36,7 @@
 
 extern int look_back = 512;
 extern int refresh_candles = 0;
-extern int look_for_zone = 256;
+extern int look_for_zone = 128;
 extern bool draw_zone = false;
 extern color bull_fvb = C'255,213,98';
 extern color bear_fvb = C'233,65,103';
@@ -114,7 +114,6 @@ int init() {
 int deinit() {
     for (int i = ObjectsTotal(OBJ_TEXT) - 1; i >= 0; i--) {
         string name = ObjectName(i);
-        int length = StringLen(_name);
         if (StringFind(name, _name) != -1) {
             ObjectDelete(name);
         }

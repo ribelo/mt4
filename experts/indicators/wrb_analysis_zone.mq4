@@ -36,7 +36,7 @@
 //Global External Inputs
 
 extern int look_back = 1024;
-extern int refresh_candles = 64;
+extern int refresh_candles = 16;
 extern bool swing_point_1 = true;
 extern bool swing_point_2 = true;
 extern bool swing_point_3 = true;
@@ -50,14 +50,15 @@ extern color zone_bull_body = C'252,165,88';
 extern color zone_bear_body = C'177,83,103';
 extern color contraction_bull_body = C'205,138,108';
 extern color contraction_bear_body = C'151,125,130';
-extern color text_color = C'56,47,50';
 extern color line_color = C'111,116,125';
+extern color text_color = C'56,47,50';
 extern bool make_text = false;
 extern bool draw_zone = true;
+extern bool draw_filled = false;
 extern bool send_notification = false;
 extern double label_offset_percent = 1.5;
 extern int font_size = 8;
-extern string font_name = "Tahoma";
+extern string font_name = "Cantarell";
 extern int bar_width = 1;
 extern int line_width = 1;
 
@@ -445,7 +446,9 @@ void validate_zone(double &zone_open[], double &zone_close[]) {
                         break;
                     }
                 }
-                draw_zone(i, end_bar, zone_open[i], zone_close[i]);
+                if (draw_filled || end_bar == 0) {
+                    draw_zone(i, end_bar, zone_open[i], zone_close[i]);
+                }
             } else if (zone_close[i] < zone_open[i]) {
                 for (j = i - 1; j >=0; j--) {
                     if (iHigh(symbol, tf, j) >= zone_open[i]) {
@@ -453,7 +456,9 @@ void validate_zone(double &zone_open[], double &zone_close[]) {
                         break;
                     }
                 }
-                draw_zone(i, end_bar, zone_open[i], zone_close[i]);
+                if (draw_filled || end_bar == 0) {
+                    draw_zone(i, end_bar, zone_open[i], zone_close[i]);
+                }
             }
         }
     }
@@ -466,7 +471,7 @@ void draw_zone(int begin, int end, double open, double close) {
     string open_line_name = StringConcatenate(_name, "_open_line_", time_str);
     string close_line_name = StringConcatenate(_name, "_close_line_", time_str);
 
-    if (begin - end > 12 && begin - end < 512) {
+    if (begin - end > 16 && begin - end < 128) {
         if (ObjectFind(open_line_name) == -1) {
             ObjectCreate(open_line_name, OBJ_TREND, 0, Time[begin], open, Time[end], open);
             ObjectSet(open_line_name, OBJPROP_COLOR, line_color);

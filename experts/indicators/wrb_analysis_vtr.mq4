@@ -36,7 +36,7 @@
 
 extern int look_back = 512;
 extern int refresh_candles = 0;
-extern int look_for_zone = 256;
+extern int look_for_zone = 128;
 extern string sister_symbol = "";
 extern bool invert_sister = 0;
 extern bool draw_zone = false;

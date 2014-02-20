@@ -232,28 +232,28 @@ static inline int dcm(ohlc *candle, size_t i, size_t look_back, size_t n) {
     if (i < n - 3) {
         if (wrb_hg(candle, i, n).dir == 1) {
             for (j = 1; j < end_loop; j++) {
-                if (wrb_hg(candle, i - j, n).dir == -1 &&
-                        gsl_fcmp(candle[i].close,
+                if (wrb_hg(candle, i - j, n).dir == -1) {
+                    if (gsl_fcmp(candle[i].close,
                                  candle[i - j].open,
                                  FLT_EPSILON) > 0 &&
-                        gsl_fcmp(candle[i].open,
-                                 lowest_low(candle, i + 1, i + 4),
-                                 FLT_EPSILON) < 0 &&
-                        count_rising(candle, i + 1, i + 4) >= 2) {
-                    return 1;
+                            unfilled(candle, i, 3)) {
+                        return 1;
+                    } else {
+                        break;
+                    }
                 }
             }
         } else if (wrb_hg(candle, i, n).dir == -1) {
             for (j = 1; j < end_loop; j++) {
-                if (wrb_hg(candle, i - j, n).dir == 1 &&
-                        gsl_fcmp(candle[i].close,
+                if (wrb_hg(candle, i - j, n).dir == 1) {
+                        if (gsl_fcmp(candle[i].close,
                                  candle[i - j].open,
                                  FLT_EPSILON) < 0 &&
-                        gsl_fcmp(candle[i].open,
-                                 highest_high(candle, i + 1, i + 4),
-                                 FLT_EPSILON) > 0 &&
-                        count_falling(candle, i + 1, i + 4) >= 2) {
-                    return -1;
+                            unfilled(candle, i, 3)) {
+                        return -1;
+                    }  else {
+                        break;
+                    }
                 }
             }
         }
