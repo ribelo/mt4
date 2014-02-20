@@ -230,8 +230,10 @@ void DragDropLine() {
                                 OrderModifyReliable(ticket, OrderOpenPrice(), new_stop, new_take, 0, CLR_NONE);
                             }
                         } else {
-                            Print("Order " + ticket + " sl does not exist, so I create a new one");
-                            DrawHiddenStopLoss(ticket, old_stop + hidden_pips * point);
+                            if (_fcmp(old_stop, 0.0) > 0) {
+                                Print("Order " + ticket + " sl does not exist, so I create a new one");
+                                DrawHiddenStopLoss(ticket, old_stop + hidden_pips * point);
+                            }
                         }
                         if (ObjectFind(ticket + "_tp_line") != -1) {
                             if (_fcmp(old_take, new_take) != 0) {
@@ -240,8 +242,10 @@ void DragDropLine() {
                                 OrderModifyReliable(ticket, OrderOpenPrice(), new_stop, new_take, 0, CLR_NONE);
                             }
                         } else {
-                            Print("Order " + ticket + " tp does not exist, so I create a new one");
-                            DrawHiddenTakeProfit(ticket, old_take - hidden_pips * Point);
+                            if (_fcmp(old_take, 0.0) > 0) {
+                                Print("Order " + ticket + " tp does not exist, so I create a new one");
+                                DrawHiddenTakeProfit(ticket, old_take - hidden_pips * Point);
+                            }
                         }
                     } else if (OrderType() == OP_SELL) {
                         new_stop = NormalizeDouble(ObjectGet(ticket + "_sl_line", OBJPROP_PRICE1) + hidden_pips * point, digits);
@@ -253,8 +257,10 @@ void DragDropLine() {
                                 OrderModifyReliable(ticket, OrderOpenPrice(), new_stop, new_take, 0, CLR_NONE);
                             }
                         } else {
-                            Print("Order " + ticket + " sl does not exist, so I create a new one");
-                            DrawHiddenStopLoss(ticket, old_stop - hidden_pips * point);
+                            if (_fcmp(old_stop, 0.0) > 0) {
+                                Print("Order " + ticket + " sl does not exist, so I create a new one");
+                                DrawHiddenStopLoss(ticket, old_stop - hidden_pips * point);
+                            }
                         }
                         if (ObjectFind(ticket + "_tp_line") != -1) {
                             if (_fcmp(old_take, new_take) != 0) {
@@ -263,8 +269,10 @@ void DragDropLine() {
                                 OrderModifyReliable(ticket, OrderOpenPrice(), new_stop, new_take, 0, CLR_NONE);
                             }
                         } else {
-                            Print("Order " + ticket + " tp does not exist, so I create a new one");
-                            DrawHiddenTakeProfit(ticket, old_take + hidden_pips * Point);
+                            if (_fcmp(old_take, 0.0) > 0) {
+                                Print("Order " + ticket + " tp does not exist, so I create a new one");
+                                DrawHiddenTakeProfit(ticket, old_take + hidden_pips * Point);
+                            }
                         }
                     }
                 }
@@ -328,37 +336,46 @@ void FiboToPending() {
 void PendingToFibo() {
     double entry_price, exit_price, desire_price, desire_rr, zone_size, send_lot;
     int type, ticket;
-    int total_orders = OrdersTotal();
-    if (total_orders > 0) {
+    static int total_orders;
+    if (total_orders != OrdersTotal()) {
+        total_orders = OrdersTotal();
         for (int i = total_orders - 1; i >=0; i--) {
             OrderSelect(i, MODE_TRADES);
             type = OrderType();
             ticket = OrderTicket();
-            string name = "Fibo" + ticket;
+            string name = "Fibo " + ticket;
             if (type == OP_BUYLIMIT || type == OP_BUYSTOP) {
                 entry_price = OrderOpenPrice();
                 exit_price = OrderStopLoss();
                 desire_price = OrderTakeProfit();
                 desire_rr = (desire_price - entry_price) / (entry_price - exit_price);
-                ObjectCreate(name, OBJ_FIBO, 0, iTime(symbol, tf, 10), entry_price, iTime(symbol, tf, 0), exit_price);
-                ObjectSet(name, OBJPROP_FIBOLEVELS, 3);
-                ObjectSet(name, OBJPROP_FIRSTLEVEL, 0);
-                ObjectSet(name, OBJPROP_FIRSTLEVEL + 1, 1);
-                ObjectSet(name, OBJPROP_FIRSTLEVEL + 2, desire_rr + 1);
-                ObjectSet(name, OBJPROP_COLOR, demand_color);
-                OrderDeleteReliable(ticket);
+                Print("aaaa ",ticket," ",exit_price, " ",desire_price);
+                if (exit_price > 0 && desire_price > 0) {
+                    ObjectCreate(name, OBJ_FIBO, 0, iTime(symbol, tf, 10),
+                                 entry_price, iTime(symbol, tf, 0), exit_price);
+                    ObjectSet(name, OBJPROP_FIBOLEVELS, 3);
+                    ObjectSet(name, OBJPROP_FIRSTLEVEL, 0);
+                    ObjectSet(name, OBJPROP_FIRSTLEVEL + 1, 1);
+                    ObjectSet(name, OBJPROP_FIRSTLEVEL + 2, desire_rr + 1);
+                    ObjectSet(name, OBJPROP_COLOR, demand_color);
+                    OrderDeleteReliable(ticket);
+                }
             } else if (type == OP_SELLLIMIT || type == OP_SELLSTOP) {
                 entry_price = OrderOpenPrice();
                 exit_price = OrderStopLoss();
                 desire_price = OrderTakeProfit();
                 desire_rr = (entry_price - desire_price) / (exit_price - entry_price);
-                ObjectCreate(name, OBJ_FIBO, 0, iTime(symbol, tf, 10), entry_price, iTime(symbol, tf, 0), exit_price);
-                ObjectSet(name, OBJPROP_FIBOLEVELS, 3);
-                ObjectSet(name, OBJPROP_FIRSTLEVEL, 0);
-                ObjectSet(name, OBJPROP_FIRSTLEVEL + 1, 1);
-                ObjectSet(name, OBJPROP_FIRSTLEVEL + 2, desire_rr + 1);
-                ObjectSet(name, OBJPROP_COLOR, supply_color);
-                OrderDeleteReliable(ticket);
+                Print("aaaa ",ticket," ",exit_price, " ",desire_price);
+                if (exit_price > 0 && desire_price > 0) {
+                    ObjectCreate(name, OBJ_FIBO, 0, iTime(symbol, tf, 10),
+                                 entry_price, iTime(symbol, tf, 0), exit_price);
+                    ObjectSet(name, OBJPROP_FIBOLEVELS, 3);
+                    ObjectSet(name, OBJPROP_FIRSTLEVEL, 0);
+                    ObjectSet(name, OBJPROP_FIRSTLEVEL + 1, 1);
+                    ObjectSet(name, OBJPROP_FIRSTLEVEL + 2, desire_rr + 1);
+                    ObjectSet(name, OBJPROP_COLOR, supply_color);
+                    OrderDeleteReliable(ticket);
+                }
             }
         }
     }
@@ -420,22 +437,37 @@ void LookForTradeClosure() {
         if (OrderSelect(ticket, SELECT_BY_TICKET, MODE_TRADES)) {
             if (OrderSymbol() == symbol) {
                 if (OrderMagicNumber() == magic_number) {
-                    double take = NormalizeDouble(ObjectGet(ticket + "_tp_line", OBJPROP_PRICE1), digits);
-                    double stop = NormalizeDouble(ObjectGet(ticket + "_sl_line", OBJPROP_PRICE1), digits);
+                    double take = NormalizeDouble(ObjectGet(ticket + "_tp_line",
+                                                  OBJPROP_PRICE1), digits);
+                    double stop = NormalizeDouble(ObjectGet(ticket + "_sl_line",
+                                                  OBJPROP_PRICE1), digits);
                     if (OrderType() == OP_BUY) {
                         if (_ask(symbol) >= take && take > 0) {
-                            OrderCloseReliable(ticket, OrderLots(), OrderClosePrice(), 1000, CLR_NONE);
+                            OrderCloseReliable(ticket, OrderLots(),
+                                               OrderClosePrice(), 1000, CLR_NONE);
+                            SendNotification(ticket + " order close at tp with profit " +
+                                             DoubleToStr(OrderProfit() + OrderCommission() +
+                                             OrderSwap()));
                         }
                         if (_bid(symbol) <= stop && stop > 0) {
                             OrderCloseReliable(ticket, OrderLots(), OrderClosePrice(), 1000, CLR_NONE);
+                            SendNotification(ticket + " order close at sl with profit " +
+                                             DoubleToStr(OrderProfit() + OrderCommission() +
+                                             OrderSwap()));
                         }
                     }
                     if (OrderType() == OP_SELL) {
                         if (_bid(symbol) <= take && take > 0) {
                             OrderCloseReliable(ticket, OrderLots(), OrderClosePrice(), 1000, CLR_NONE);
+                            SendNotification(ticket + " order close at tp with profit " +
+                                             DoubleToStr(OrderProfit() + OrderCommission() +
+                                             OrderSwap()));
                         }
                         if (_ask(symbol) >= stop && stop > 0) {
                             OrderCloseReliable(ticket, OrderLots(), OrderClosePrice(), 1000, CLR_NONE);
+                            SendNotification(ticket + " order close at sl with profit " +
+                                             DoubleToStr(OrderProfit() + OrderCommission() +
+                                             OrderSwap()));
                         }
                     }
                 }
@@ -927,6 +959,7 @@ int start() {
     UpdateBalanceArray(balance_array);
     CountOpenTrades();
     LookForTradeClosure();
+    PendingToFibo();
     TrailingStop();
     DragDropLine();
     GetFibo();
