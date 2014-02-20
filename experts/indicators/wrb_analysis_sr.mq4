@@ -107,30 +107,22 @@ int deinit() {
 //| Custom indicator iteration function                                                       |
 //+-------------------------------------------------------------------------------------------+
 int start() {
-    static int last_time;
-    if (_new_bar(symbol, tf_lower)) {
+    if (_new_bar(symbol, 1)) {
         support_price_lower = _support(candle_lower, 1, hg_only, use_fractal,
                                  fractal_length, iBars(symbol, tf_lower));
 
         resistance_price_lower = _resistance(candle_lower, 1, hg_only, use_fractal,
                                        fractal_length, iBars(symbol, tf_lower));
-    }
-    if (_new_bar(symbol, tf_main)) {
         support_price_main = _support(candle_main, 1, hg_only, use_fractal,
                                  fractal_length, iBars(symbol, tf_main));
         resistance_price_main = _resistance(candle_main, 1, hg_only, use_fractal,
                                        fractal_length, iBars(symbol, tf_main));
 
-    }
-    if (_new_bar(symbol, tf_higher)) {
         support_price_higher = _support(candle_higher, 1, hg_only, use_fractal,
                                  fractal_length, iBars(symbol, tf_higher));
         resistance_price_higher = _resistance(candle_higher, 1, hg_only, use_fractal,
                                        fractal_length, iBars(symbol, tf_higher));
 
-    }
-    if (last_time != iTime(symbol, Period(), 0)) {
-        last_time = iTime(symbol, Period(), 0);
         if (ObjectFind(support_name_lower) == -1) {
             ObjectCreate(support_name_lower, OBJ_TREND, 0, iTime(symbol, tf_main, 0), support_price_lower, iTime(symbol, tf_main, 0) + 5 * Period() * 60, support_price_lower);
             ObjectSet(support_name_lower, OBJPROP_COLOR, support_lower);
