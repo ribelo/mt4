@@ -17,7 +17,7 @@
 	int       _wrb_hg(double rates[][6], int, int);
 	double    _support(double rates[][6], int, int, int, int, int);
 	double    _resistance(double rates[][6], int, int, int, int, int);
-	int       _dcm(double rates[][6], int, int, int);
+	int       _dcm(double rates[][6], int, int);
 	int       _swing_point_1(double rates[][6], int, int, int, int& r[]);
 	int       _swing_point_2(double rates[][6], int, int, int, int& r[]);
 	int       _swing_point_3(double rates[][6], int, int, int& r[]);

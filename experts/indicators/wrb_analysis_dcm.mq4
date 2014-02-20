@@ -26,8 +26,8 @@
 #define  short_name "Huxley DCM"
 
 //Global External Inputs
+extern int timeframe = 0;
 extern int look_back = 1024;
-extern int contraction_size = 16;
 extern color bull_color = C'205,138,108';
 extern color bear_color = C'151,125,130';
 extern int bar_width = 2;
@@ -49,7 +49,11 @@ int last_dcm;
 //+-------------------------------------------------------------------------------------------+
 int init() {
     symbol = Symbol();
-    tf = Period();
+    if (timeframe == 0) {
+        tf = Period();
+    } else {
+        tf = timeframe;
+    }
     digits = MarketInfo(symbol, MODE_DIGITS);
     multiplier = pip_mult_tab[digits];
     point = MarketInfo(symbol, MODE_POINT) * multiplier;
@@ -87,7 +91,7 @@ int start() {
     }
     limit = MathMin(iBars(symbol, tf), look_back);
     for(i = limit; i >= 4; i--) {
-        dcm = _dcm(candle, i, contraction_size, iBars(symbol, tf));
+        dcm = _dcm(candle, bar_convert(i, Period(), tf), iBars(symbol, tf));
         if(last_dcm == 1) {
             dcm_bull[i] = 1;
         } else if(last_dcm == -1) {
@@ -98,6 +102,11 @@ int start() {
         }
     }
     return (0);
+}
+
+
+int bar_convert(int i, int from_tf, int to_tf, string ccy=symbol)   {
+  return(iBarShift(ccy, to_tf, iTime(ccy, from_tf, i)));
 }
 //+-------------------------------------------------------------------------------------------+
 //|Custom indicator end                                                                       |

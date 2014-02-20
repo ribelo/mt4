@@ -227,11 +227,11 @@ static inline signal fade_volatility(ohlc *candle, size_t i) {
 }
 
 
-static inline int dcm(ohlc *candle, size_t i, size_t look_back, size_t n) {
-    size_t j, end_loop = fmin(fmin(i, n - i), look_back);
+static inline int dcm(ohlc *candle, size_t i, size_t n) {
+    size_t j;
     if (i < n - 3) {
         if (wrb_hg(candle, i, n).dir == 1) {
-            for (j = 1; j < end_loop; j++) {
+            for (j = 1; j < i; j++) {
                 if (wrb_hg(candle, i - j, n).dir == -1) {
                     if (gsl_fcmp(candle[i].close,
                                  candle[i - j].open,
@@ -244,7 +244,7 @@ static inline int dcm(ohlc *candle, size_t i, size_t look_back, size_t n) {
                 }
             }
         } else if (wrb_hg(candle, i, n).dir == -1) {
-            for (j = 1; j < end_loop; j++) {
+            for (j = 1; j < i; j++) {
                 if (wrb_hg(candle, i - j, n).dir == 1) {
                         if (gsl_fcmp(candle[i].close,
                                  candle[i - j].open,

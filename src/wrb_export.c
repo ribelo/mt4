@@ -171,10 +171,9 @@ WRBFUNC double __stdcall _resistance(ohlc *candle, size_t i, int hg_only,
 }
 
 
-WRBFUNC int __stdcall _dcm(ohlc *candle, size_t i,
-                           size_t look_back, size_t n) {
+WRBFUNC int __stdcall _dcm(ohlc *candle, size_t i, size_t n) {
     if (n > 0 && i < n) {
-        return dcm(candle, n - i - 1, look_back, n);
+        return dcm(candle, n - i - 1, n);
     }
     return 0;
 }
