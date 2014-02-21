@@ -33,10 +33,12 @@ signal vtr(ohlc *main, ohlc *sister, size_t i,
                 sister_hg.v1 = wrb_hg(sister, i - j, i);
                 if ((main_z.v1.dir == 1 &&
                         sister_hg.v1.dir == 1 &&
-                        unfilled(main, i - j, j)) ||
+                        unfilled(main, i - j, j) &&
+                        zone_size(&main_z.v1) > body_size(main, main_conf.c2.nr)) ||
                         (sister_z.v1.dir == -1 &&
                          main_hg.v1.dir == -1 &&
-                         unfilled(sister, i - j, j))) {
+                         unfilled(sister, i - j, j) &&
+                         zone_size(&sister_z.v1) > body_size(sister, sister_conf.c2.nr))) {
                     if (zone_divergence(main, sister, &main_conf, &sister_conf,
                                         &main_z, &sister_z, &invert)) {
                         r.c1.nr = main_conf.c1.nr;
@@ -56,10 +58,12 @@ signal vtr(ohlc *main, ohlc *sister, size_t i,
                 sister_z = wrb_zone(sister, i - j, 16, i);
                 if ((main_z.v1.dir == -1 &&
                         wrb_hg(sister, i - j, i).dir == -1 &&
-                        unfilled(main, i - j, j)) ||
+                        unfilled(main, i - j, j) &&
+                        zone_size(&main_z.v1) > body_size(main, main_conf.c2.nr)) ||
                         (sister_z.v1.dir == -1 &&
                          wrb_hg(main, i - j, i).dir == -1 &&
-                         unfilled(sister, i - j, j))) {
+                         unfilled(sister, i - j, j) &&
+                         zone_size(&sister_z.v1) > body_size(sister, sister_conf.c2.nr))) {
                     if (zone_divergence(main, sister, &main_conf, &sister_conf,
                                         &main_z, &sister_z, &invert)) {
                         r.c1.nr = main_conf.c1.nr;
@@ -80,10 +84,12 @@ signal vtr(ohlc *main, ohlc *sister, size_t i,
                 sister_z = wrb_zone(sister, i - j, 16, i);
                 if ((main_z.v1.dir == 1 &&
                         wrb_hg(sister, i - j, i).dir == -1 &&
-                        unfilled(main, i - j, j)) ||
+                        unfilled(main, i - j, j) &&
+                        zone_size(&main_z.v1) > body_size(main, main_conf.c2.nr)) ||
                         (sister_z.v1.dir == -1 &&
                          wrb_hg(main, i - j, i).dir == 1 &&
-                         unfilled(sister, i - j, j))) {
+                         unfilled(sister, i - j, j) &&
+                         zone_size(&sister_z.v1) > body_size(sister, sister_conf.c2.nr))) {
                     if (zone_divergence(main, sister, &main_conf, &sister_conf,
                                         &main_z, &sister_z, &invert)) {
                         r.c1.nr = main_conf.c1.nr;
@@ -103,10 +109,12 @@ signal vtr(ohlc *main, ohlc *sister, size_t i,
                 sister_z = wrb_zone(sister, i - j, 16, i);
                 if ((main_z.v1.dir == -1 &&
                         wrb_hg(sister, i - j, i).dir == 1 &&
-                        unfilled(main, i - j, j)) ||
+                        unfilled(main, i - j, j) &&
+                        zone_size(&main_z.v1) > body_size(main, main_conf.c2.nr)) ||
                         (sister_z.v1.dir == 1 &&
                          wrb_hg(main, i - j, i).dir == -1 &&
-                         unfilled(sister, i - j, j))) {
+                         unfilled(sister, i - j, j) &&
+                         zone_size(&sister_z.v1) > body_size(sister, sister_conf.c2.nr))) {
                     if (zone_divergence(main, sister, &main_conf, &sister_conf,
                                         &main_z, &sister_z, &invert)) {
                         r.c1.nr = main_conf.c1.nr;
