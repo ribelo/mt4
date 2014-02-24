@@ -146,14 +146,3 @@ void make_label(string name, string text, int font_size, color font_color, int c
     ObjectSet(name, OBJPROP_BACK, back);
     ObjectSetText(name, text, font_size, font_type, font_color);
 }
-
-void ObjectMakeLabel ( string name, string text, int font.size, string font, color font.color, int x, int y, int window ) {
-   if ( ObjectFind ( name ) == -1 ) {
-      ObjectCreate ( name, OBJ_LABEL, window, 0, 0 );
-   }
-   ObjectSet ( name, OBJPROP_CORNER, 1 );
-   ObjectSet ( name, OBJPROP_XDISTANCE, x );
-   ObjectSet ( name, OBJPROP_YDISTANCE, y );
-   ObjectSet ( name, OBJPROP_BACK, false );
-   ObjectSetText ( name, text, font.size, font, font.color );
-}

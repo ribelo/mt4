@@ -187,7 +187,7 @@ int start() {
         counted_bars--;
     }
     limit = MathMin(iBars(symbol, tf) - counted_bars, look_back);
-    for (i = limit; i > 0; i--) {
+    for (i = 0; i < limit; i++) {
         bull_climax[i] = 0.0;
         bear_climax[i] = 0.0;
         rising_bull[i] = 0.0;

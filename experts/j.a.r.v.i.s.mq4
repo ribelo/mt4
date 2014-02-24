@@ -349,7 +349,6 @@ void PendingToFibo() {
                 exit_price = OrderStopLoss();
                 desire_price = OrderTakeProfit();
                 desire_rr = (desire_price - entry_price) / (entry_price - exit_price);
-                Print("aaaa ",ticket," ",exit_price, " ",desire_price);
                 if (exit_price > 0 && desire_price > 0) {
                     ObjectCreate(name, OBJ_FIBO, 0, iTime(symbol, tf, 10),
                                  entry_price, iTime(symbol, tf, 0), exit_price);
@@ -365,7 +364,6 @@ void PendingToFibo() {
                 exit_price = OrderStopLoss();
                 desire_price = OrderTakeProfit();
                 desire_rr = (entry_price - desire_price) / (exit_price - entry_price);
-                Print("aaaa ",ticket," ",exit_price, " ",desire_price);
                 if (exit_price > 0 && desire_price > 0) {
                     ObjectCreate(name, OBJ_FIBO, 0, iTime(symbol, tf, 10),
                                  entry_price, iTime(symbol, tf, 0), exit_price);
@@ -447,13 +445,13 @@ void LookForTradeClosure() {
                                                OrderClosePrice(), 1000, CLR_NONE);
                             SendNotification(ticket + " order close at tp with profit " +
                                              DoubleToStr(OrderProfit() + OrderCommission() +
-                                             OrderSwap()));
+                                             OrderSwap(), 2));
                         }
                         if (_bid(symbol) <= stop && stop > 0) {
                             OrderCloseReliable(ticket, OrderLots(), OrderClosePrice(), 1000, CLR_NONE);
                             SendNotification(ticket + " order close at sl with profit " +
                                              DoubleToStr(OrderProfit() + OrderCommission() +
-                                             OrderSwap()));
+                                             OrderSwap(), 2));
                         }
                     }
                     if (OrderType() == OP_SELL) {
@@ -461,13 +459,13 @@ void LookForTradeClosure() {
                             OrderCloseReliable(ticket, OrderLots(), OrderClosePrice(), 1000, CLR_NONE);
                             SendNotification(ticket + " order close at tp with profit " +
                                              DoubleToStr(OrderProfit() + OrderCommission() +
-                                             OrderSwap()));
+                                             OrderSwap(), 2));
                         }
                         if (_ask(symbol) >= stop && stop > 0) {
                             OrderCloseReliable(ticket, OrderLots(), OrderClosePrice(), 1000, CLR_NONE);
                             SendNotification(ticket + " order close at sl with profit " +
                                              DoubleToStr(OrderProfit() + OrderCommission() +
-                                             OrderSwap()));
+                                             OrderSwap(), 2));
                         }
                     }
                 }
@@ -907,9 +905,6 @@ void DisplayUserFeedback() {
         ObjectMakeLabel(StringConcatenate(_name, "_trade_comment_message"), screen_message, font_size, font_type, text_color, data_disp_gap_size, temp_offset, 0, 0);
         temp_offset += data_disp_offset;
     }
-    screen_message = StringConcatenate("Max spreed = ", max_spreed, ": Spread = ", MarketInfo(symbol, MODE_SPREAD));
-    ObjectMakeLabel(StringConcatenate(_name, "_spreed_message"), screen_message, font_size, font_type, text_color, data_disp_gap_size, temp_offset, 0, 0);
-    temp_offset += data_disp_offset * 2;
     screen_message = "Money Management:";
     ObjectMakeLabel(StringConcatenate(_name, "_money_management"), screen_message, font_size, font_type, text_color, data_disp_gap_size, temp_offset, 0, 0);
     temp_offset += data_disp_offset;
@@ -926,17 +921,6 @@ void DisplayUserFeedback() {
     ObjectMakeLabel(StringConcatenate(_name, "_max_lot"), screen_message, font_size, font_type, text_color, data_disp_gap_size, temp_offset, 0, 0);
     temp_offset += data_disp_offset * 2;
 
-    if (use_trailing_stop) {
-        screen_message = "Trailing Stop:";
-        ObjectMakeLabel(StringConcatenate(_name, "_trailing_stop_message"), screen_message, font_size, font_type, text_color, data_disp_gap_size, temp_offset, 0, 0);
-        temp_offset += data_disp_offset;
-        screen_message = StringConcatenate("    Support: ", DoubleToStr(Support(), digits));
-        ObjectMakeLabel(StringConcatenate(_name, "_trailing_support_message"), screen_message, font_size, font_type, text_color, data_disp_gap_size, temp_offset, 0, 0);
-        temp_offset += data_disp_offset;
-        screen_message = StringConcatenate("    Resistance: ", DoubleToStr(Resistance(), digits));
-        ObjectMakeLabel(StringConcatenate(_name, "_trailing_resistance_message"), screen_message, font_size, font_type, text_color, data_disp_gap_size, temp_offset, 0, 0);
-        temp_offset += data_disp_offset;
-    }
     //Running total of trades
     if (use_label_box) {
         //if ( ObjectFind ( "[[LabelBorder]]" ) == -1 ) {
@@ -947,9 +931,9 @@ void DisplayUserFeedback() {
         for (int cc = count - 1; cc >= 0; cc--) {
             string name = StringConcatenate("[", _name, "label_box", cc, "]");
             if (ObjectFind(name) == -1) {
-                ObjectMakeLabel(name, "ggggggggg", 34, "Webdings", label_box, data_disp_gap_size - (data_disp_gap_size / 2), temp_offset, 0, 0);
+                ObjectMakeLabel(name, "ggggg", 30, "Webdings", label_box, data_disp_gap_size - (data_disp_gap_size / 2), temp_offset, 0, 0);
             }
-            temp_offset += 45;
+            temp_offset += 40;
         }
     }
 }

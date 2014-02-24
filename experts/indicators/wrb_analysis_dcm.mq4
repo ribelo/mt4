@@ -63,7 +63,7 @@ int init() {
         pip_description = " points";
     }
     ArrayCopyRates(candle, symbol, tf);
-    IndicatorShortName(short_name);
+    IndicatorShortName(short_name + " " + TFToStr(tf));
     SetIndexBuffer(0, dcm_bull);
     SetIndexStyle(0, DRAW_HISTOGRAM, 0, bar_width, bull_color);
     SetIndexLabel(0, "Bull DCM");
