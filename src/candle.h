@@ -97,13 +97,13 @@ static inline int broke_bars(ohlc *candle, size_t i, size_t j) {
 	int k;
 	int candle_dir = dir(candle, i);
 	if (candle_dir == 1) {
-		for (k = 1; k <  GSL_MIN_INT(i, j); k++) {
+		for (k = 1; k < GSL_MIN_INT(i, j); k++) {
 			if (gsl_fcmp(candle[i - k].high, candle[i].close, FLT_EPSILON) > 0) {
 				return 0;
 			}
 		}
 	} else if (candle_dir == -1) {
-		for (k = 1; k <  GSL_MIN_INT(i, j); k++) {
+		for (k = 1; k < GSL_MIN_INT(i, j); k++) {
 			if (gsl_fcmp(candle[i - k].low, candle[i].close, FLT_EPSILON) < 0) {
 				return 0;
 			}

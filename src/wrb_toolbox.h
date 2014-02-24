@@ -453,3 +453,5 @@ static inline int zone_divergence(ohlc *main, ohlc *sister,
     }
     return 0;
 }
+
+
