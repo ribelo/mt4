@@ -5,16 +5,14 @@
 #include "candle.h"
 
 
-static inline body wrb(ohlc *candle, size_t i, size_t n) {
+static inline body wrb(ohlc *candle, size_t i) {
     body r = {};
-    if (i < n) {
-        if (broke_body_size(candle, i, 3) &&
-                broke_bars(candle, i, 3)) {
-            if (dir(candle, i) == 1) {
-                r.dir = 1;
-            } else if (dir(candle, i) == -1) {
-                r.dir = -1;
-            }
+    if (broke_body_size(candle, i, 3) &&
+            broke_bars(candle, i, 3)) {
+        if (dir(candle, i) == 1) {
+            r.dir = 1;
+        } else if (dir(candle, i) == -1) {
+            r.dir = -1;
         }
     }
     return r;
@@ -24,7 +22,7 @@ static inline body wrb(ohlc *candle, size_t i, size_t n) {
 static inline int any_wrb(ohlc *candle, int start, int stop, int n) {
     size_t i;
     for (i = start; i < stop; i++) {
-        if (wrb(candle, i, n).dir != 0) {
+        if (wrb(candle, i).dir != 0) {
             return 1;
         }
     }
@@ -35,7 +33,7 @@ static inline int any_wrb(ohlc *candle, int start, int stop, int n) {
 static inline int any_wrb_bull(ohlc *candle, int start, int stop, int n) {
     size_t i;
     for (i = start; i < stop; i++) {
-        if (wrb(candle, i, n).dir == 1) {
+        if (wrb(candle, i).dir == 1) {
             return 1;
         }
     }
@@ -46,7 +44,7 @@ static inline int any_wrb_bull(ohlc *candle, int start, int stop, int n) {
 static inline int any_wrb_bear(ohlc *candle, int start, int stop, int n) {
     size_t i;
     for (i = start; i < stop; i++) {
-        if (wrb(candle, i, n).dir == -1) {
+        if (wrb(candle, i).dir == -1) {
             return 1;
         }
     }
@@ -57,7 +55,7 @@ static inline int any_wrb_bear(ohlc *candle, int start, int stop, int n) {
 static inline body wrb_hg(ohlc *candle, size_t i, size_t n) {
     body r = {};
     if (i < n) {
-        body _wrb = wrb(candle, i, n);
+        body _wrb = wrb(candle, i);
         double _gap = gap(candle, i);
         if (_wrb.dir == 1 &&
                 gap > 0) {
@@ -196,7 +194,7 @@ static inline int fractal_break(ohlc *candle, size_t i, size_t l,
 
 static inline signal fade_volatility(ohlc *candle, size_t i) {
     signal r = {};
-    if (i > 1 && wrb(candle, i - 1, i).dir == -1 &&
+    if (i > 1 && wrb(candle, i - 1).dir == -1 &&
             gsl_fcmp(candle[i].close,
                      body_mid_point(candle, i - 1),
                      FLT_EPSILON) > 0) {
@@ -209,7 +207,7 @@ static inline signal fade_volatility(ohlc *candle, size_t i) {
         r.c2.open = candle[i - 1].open;
         r.c2.close = candle[i - 1].close;
         r.dir = 1;
-    } else if (i > 1 && wrb(candle, i - 1, i).dir == 1 &&
+    } else if (i > 1 && wrb(candle, i - 1).dir == 1 &&
             gsl_fcmp(candle[i].close,
                      body_mid_point(candle, i - 1),
                      FLT_EPSILON) < 0) {

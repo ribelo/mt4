@@ -45,7 +45,7 @@ extern bool strong_continuation_2 = true;
 extern bool strong_continuation_3 = false;
 extern bool strong_continuation_4 = false;
 extern bool reaction_zone = true;
-extern int contraction_size = 64;
+extern int contraction_size = 16;
 extern color zone_bull_body = C'252,165,88';
 extern color zone_bear_body = C'177,83,103';
 extern color contraction_bull_body = C'205,138,108';
@@ -55,6 +55,7 @@ extern color text_color = C'56,47,50';
 extern bool make_text = false;
 extern bool draw_zone = true;
 extern bool draw_filled = false;
+extern int draw_old = 128;
 extern bool send_notification = false;
 extern double label_offset_percent = 1.5;
 extern int font_size = 8;
@@ -471,7 +472,7 @@ void draw_zone(int begin, int end, double open, double close) {
     string open_line_name = StringConcatenate(_name, "_open_line_", time_str);
     string close_line_name = StringConcatenate(_name, "_close_line_", time_str);
 
-    if (begin - end > 16 && begin - end < 128) {
+    if (begin - end > 16 && begin - end < draw_old) {
         if (ObjectFind(open_line_name) == -1) {
             ObjectCreate(open_line_name, OBJ_TREND, 0, Time[begin], open, Time[end], open);
             ObjectSet(open_line_name, OBJPROP_COLOR, line_color);

@@ -139,7 +139,7 @@ WRBFUNC int __stdcall _fractal_break(ohlc *candle, size_t i, size_t l,
 
 WRBFUNC int __stdcall _wrb(ohlc *candle, size_t i, size_t n) {
     if (n > 0 && i < n) {
-        return wrb(candle, n - i - 1, n).dir;
+        return wrb(candle, n - i - 1).dir;
     }
     return 0;
 }
