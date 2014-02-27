@@ -29,6 +29,7 @@ extern double  max_dd = 0.2;
 extern double  max_risk = 0.04;
 extern int     slippage = 3;
 extern bool    use_trailing_stop = true;
+extern double  move_to_be_at_rr = 1.0;
 extern bool    hg_only = true;
 extern bool    use_fractal = true;
 extern int     fractal_length = 5;
@@ -400,7 +401,7 @@ double Resistance() {
 }
 
 void TrailingStop() {
-    double support, resistance, sl_price;
+    double support, resistance, old_sl_price, new_sl_price, be_trigger, commission_pip;
     string sl_name;
     for (int i = open_trades - 1; i >= 0; i--) {
         int ticket = orders[i][0];
@@ -410,16 +411,29 @@ void TrailingStop() {
                     support = Support();
                     resistance = Resistance();
                     sl_name = StringConcatenate(ticket, "_sl_line");
-                    sl_price = NormalizeDouble(ObjectGet(sl_name, OBJPROP_PRICE1), digits);
+                    old_sl_price = NormalizeDouble(ObjectGet(sl_name, OBJPROP_PRICE1), digits);
+                    commission_pip = MathAbs(OrderCommission() + OrderSwap()) / MarketInfo(symbol, MODE_TICKVALUE) * OrderLots();
                     if (OrderType() == OP_BUY) {
-                        if (_fcmp(sl_price, support) < 0 && support != 0.0) {
-                            ObjectMove(sl_name, 0, iTime(symbol, tf, 0), support);
-                            Print("Order " + ticket + " trailing stop move sl line to ", support);
+                        if (old_sl_price < OrderOpenPrice() && move_to_be_at_rr > 0) {
+                            be_trigger = OrderOpenPrice() + commission_pip + (OrderOpenPrice() - old_sl_price) * move_to_be_at_rr;
+                            new_sl_price = MathMax(be_trigger, support);
+                        } else {
+                            new_sl_price = support;
+                        }
+                        if (_fcmp(old_sl_price, support) < 0 && new_sl_price != 0.0) {
+                            ObjectMove(sl_name, 0, iTime(symbol, tf, 0), new_sl_price);
+                            Print("Order " + ticket + " trailing stop move sl line to ", new_sl_price);
                         }
                     } else if (OrderType() == OP_SELL) {
-                        if (_fcmp(sl_price, resistance) > 0 && resistance != 0.0) {
-                            ObjectMove(sl_name, 0, iTime(symbol, tf, 0), resistance);
-                            Print("Order " + ticket + " trailing stop move sl line to ", resistance);
+                        if (old_sl_price > OrderOpenPrice() && move_to_be_at_rr > 0) {
+                            be_trigger = OrderOpenPrice() - commission_pip - (old_sl_price - OrderOpenPrice()) * move_to_be_at_rr;
+                            new_sl_price = MathMin(be_trigger, resistance);
+                        } else {
+                            new_sl_price = resistance;
+                        }
+                        if (_fcmp(old_sl_price, new_sl_price) > 0 && new_sl_price != 0.0) {
+                            ObjectMove(sl_name, 0, iTime(symbol, tf, 0), new_sl_price);
+                            Print("Order " + ticket + " trailing stop move sl line to ", new_sl_price);
                         }
                     }
                 }
