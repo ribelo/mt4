@@ -105,8 +105,8 @@ int start() {
 }
 
 
-int bar_convert(int i, int from_tf, int to_tf, string ccy=symbol)   {
-  return(iBarShift(ccy, to_tf, iTime(ccy, from_tf, i)));
+int bar_convert(int i, int from_tf, int to_tf)   {
+  return(iBarShift(symbol, to_tf, iTime(symbol, from_tf, i)));
 }
 //+-------------------------------------------------------------------------------------------+
 //|Custom indicator end                                                                       |

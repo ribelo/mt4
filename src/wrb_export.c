@@ -546,20 +546,20 @@ WRBFUNC int __stdcall _engulfing(ohlc *candle, size_t i, size_t n, int *arr) {
 }
 
 
-WRBFUNC int __stdcall _soldiers(ohlc *candle, size_t i, size_t n, int *arr) {
-    if (n > 0 && i < n) {
-        signal r = soldiers(candle, n - i - 1, n);
-        if (r.c1.nr > 0) {
-            arr[0] = n - r.c1.nr - 1;;
-        }
-        if (r.c2.nr > 0) {
-            arr[1] = n - r.c2.nr - 1;
-        }
-        arr[3] = r.dir;
-        return r.dir;
-    }
-    return 0;
-}
+// WRBFUNC int __stdcall _soldiers(ohlc *candle, size_t i, size_t n, int *arr) {
+//     if (n > 0 && i < n) {
+//         signal r = soldiers(candle, n - i - 1, n);
+//         if (r.c1.nr > 0) {
+//             arr[0] = n - r.c1.nr - 1;;
+//         }
+//         if (r.c2.nr > 0) {
+//             arr[1] = n - r.c2.nr - 1;
+//         }
+//         arr[3] = r.dir;
+//         return r.dir;
+//     }
+//     return 0;
+// }
 
 
 WRBFUNC int __stdcall _apaor(ohlc *main, ohlc *sister, size_t i,

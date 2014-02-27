@@ -15,13 +15,12 @@
 
 
 extern string  gen = "----general inputs----";
-extern int     main_timeframe = 60;
+extern int     main_timeframe = 0;
 extern int     magic_number = 0;
 extern string  trade_comment = "";
 extern bool    criminal_is_ecn = true;
-extern double  max_spreed = 5;
-extern int     hidden_pips = 3;
-extern double  buffer_size = 1.0;
+extern double  max_spreed = 2;
+extern int     hidden_pips = 5;
 extern double  pending_pips = 5;
 
 extern string  tmm = "----Trade management module----";
@@ -603,12 +602,14 @@ void SupplyDemandTrading() {
                                 _fcmp(_bid(symbol), exit_price[i]) >= 0 &&
                                 freeze[i] == 0) {
                             freeze[i] = 1;
+                            SendNotification("Price enter demand zone " + name);
                         }
                         if (_fcmp(_bid(symbol), exit_price[i]) <= 0 && freeze[i] == 1) {
                             ObjectSet(name, OBJPROP_COLOR, pointless_color);
                             ObjectSet(name, OBJPROP_LEVELCOLOR, pointless_color);
                             ObjectSet(name, OBJPROP_LEVELWIDTH, 2);
                             ObjectSet(name, OBJPROP_FIBOLEVELS, 2);
+                            SendNotification("Price broke through demand zone " + name);
                             continue;
                         }
                         if (_fcmp(_ask(symbol), entry_price[i] + pending_pips * point) >= 0 && freeze[i] == 1) {
@@ -622,6 +623,7 @@ void SupplyDemandTrading() {
                                 take_price = entry_price[i] + (desire_rr[i] - 1) * zone_size[i] + hidden_pips * point;
                                 lot_size = DynamicDeltaLot(symbol, MathAbs(price - exit_price[i]), max_dd, max_risk, balance_array);
                                 ticket = OrderSendReliableMKT(symbol, type, lot_size, price, slippage, stpo_price, take_price, trade_comment, magic_number, 0, CLR_NONE);
+                                SendNotification("Demand zone fired buy order " + name);
                             }
                             break;
                         }
@@ -641,12 +643,14 @@ void SupplyDemandTrading() {
                                 _fcmp(_bid(symbol), exit_price[i]) >= 0 &&
                                 freeze[i] == 0) {
                             freeze[i] = 1;
+                            SendNotification("Price enter supply zone " + name);
                         }
                         if (_fcmp(_ask(symbol), exit_price[i]) >= 0 && freeze[i] == 1) {
                             ObjectSet(name, OBJPROP_COLOR, pointless_color);
                             ObjectSet(name, OBJPROP_LEVELCOLOR, pointless_color);
                             ObjectSet(name, OBJPROP_LEVELWIDTH, 2);
                             ObjectSet(name, OBJPROP_FIBOLEVELS, 2);
+                            SendNotification("Price broke through supply zone " + name);
                             continue;
                         }
                         if (_fcmp(_bid(symbol), entry_price[i] - pending_pips * point) <= 0 && freeze[i] == 1) {
@@ -660,6 +664,7 @@ void SupplyDemandTrading() {
                                 take_price = entry_price[i] - (desire_rr[i] - 1) * zone_size[i] - hidden_pips * point;
                                 lot_size = DynamicDeltaLot(symbol, MathAbs(price - exit_price[i]), max_dd, max_risk, balance_array);
                                 ticket = OrderSendReliableMKT(symbol, type, lot_size, price, slippage, stpo_price, take_price, trade_comment, magic_number, 0, CLR_NONE);
+                                SendNotification("Supply zone fired sell order " + name);
                             }
                             break;
                         }

@@ -55,9 +55,9 @@ extern color text_color = C'56,47,50';
 extern bool make_text = false;
 extern bool draw_zone = true;
 extern bool draw_filled = false;
-extern int draw_old = 128;
-extern bool send_notification = false;
-extern double label_offset_percent = 1.5;
+extern int draw_old = 512;
+extern bool send_notification = true;
+extern double label_offset_percent = 2;
 extern int font_size = 8;
 extern string font_name = "Cantarell";
 extern int bar_width = 1;
@@ -472,7 +472,7 @@ void draw_zone(int begin, int end, double open, double close) {
     string open_line_name = StringConcatenate(_name, "_open_line_", time_str);
     string close_line_name = StringConcatenate(_name, "_close_line_", time_str);
 
-    if (begin - end > 16 && begin - end < draw_old) {
+    if (begin - end > 3 && begin - end < draw_old) {
         if (ObjectFind(open_line_name) == -1) {
             ObjectCreate(open_line_name, OBJ_TREND, 0, Time[begin], open, Time[end], open);
             ObjectSet(open_line_name, OBJPROP_COLOR, line_color);

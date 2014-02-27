@@ -40,7 +40,7 @@
 	int		  _hammer(double rates[][6], int, int, int& r[]);
 	int		  _harami(double rates[][6], int, int, int& r[]);
 	int		  _engulfing(double rates[][6], int, int, int& r[]);
-	int		  _soldiers(double rates[][6], int, int, int& r[]);
+//	int		  _soldiers(double rates[][6], int, int, int& r[]);
 	int       _apaor(double main[][6], double sister[][6], int, int, int, int, int, int, int, int& arr[]);
 	int       _div_insta(double main[][6], double sister[][6], int, int, int, int, int, int);
 	int       _fvb(double rates[][6], int, int, int, int& arr[]);

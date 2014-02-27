@@ -301,141 +301,141 @@ signal engulfing(ohlc *candle, size_t i) {
 }
 
 
-signal soldiers(ohlc *candle, size_t i, size_t n) {
-    size_t j, end_loop = GSL_MIN(i, 16);
-    signal r = {};
-    if (wrb(candle, i).dir == 1 && dir(candle, i - 1) == 1) {
-        // printf("bull i %d\n", i);
-        for (j = 3; j < end_loop; j++) {
-            // printf("    i - j %d\n", i - j);
-            // printf("    A %d\n", wrb_hg(candle, i - j, i).dir == -1);
-            // printf("    B %d\n", dir(candle, i - j + 1) == -1);
-            // printf("    C %d\n", unfilled(candle, i - j, j));
-            // printf("    D %d\n", gsl_fcmp(candle[i - j + 1].close,
-            //                  candle[i - j].close,
-            //                  FLT_EPSILON) > 0);
-            // printf("    E %d\n", gsl_fcmp(body_mid_point(candle, i),
-            //                  lowest_body(candle, i - j - 3, i - j),
-            //                  FLT_EPSILON) <= 0);
-            // printf("    F %d\n", gsl_fcmp(GSL_MIN_DBL(candle[i - j].low, candle[i - j + 1].low),
-            //                  lowest_body(candle, i - j + 2, i),
-            //                  FLT_EPSILON) < 0);
-            // printf("    G %d\n", gsl_fcmp(GSL_MIN_DBL(shadow_bottom(candle, i - j),
-            //                              shadow_bottom(candle, i - j + 1)),
-            //                  biggest_body(candle, i - j + 2, i),
-            //                  FLT_EPSILON) > 0);
-            // printf("    H %d\n", gsl_fcmp(highest_body(candle, i - j + 1, i),
-            //                  body_mid_point(candle, i - j),
-            //                  FLT_EPSILON) <= 0);
-            // printf("    I %d\n", gsl_fcmp(lowest_low(candle, i - j + 2, i),
-            //                  GSL_MAX_DBL(candle[i - j].close,
-            //                              candle[i - j + 1].close),
-            //                  FLT_EPSILON) < 0);
-            // printf("    J %d\n", gsl_fcmp(body_size(candle, i),
-            //                  biggest_shadow_upper(candle, i - j + 1, i),
-            //                  FLT_EPSILON) > 0);
-            // printf("    K %d\n", gsl_fcmp(candle[i].close,
-            //                  candle[i - 1].close,
-            //                  FLT_EPSILON) > 0 );
-            // printf("    L %d\n", gsl_fcmp(highest_body(candle, i - j + 1, i),
-            //                  body_mid_point(candle, i),
-            //                  FLT_EPSILON) <= 0);
-            // printf("    M %d\n", gsl_fcmp(candle[i].open,
-            //                  body_mid_point(candle, i - j),
-            //                  FLT_EPSILON) < 0);
-            // printf("    N %d\n", gsl_fcmp(shadow_upper(candle, i),
-            //                  shadow_bottom(candle, i),
-            //                  FLT_EPSILON) < 0);
-            if (wrb_hg(candle, i - j, i).dir == -1 &&
-                    dir(candle, i - j + 1) == -1 &&
-                    unfilled(candle, i - j, j) &&
-                    gsl_fcmp(candle[i - j + 1].close,
-                             candle[i - j].close,
-                             FLT_EPSILON) > 0 &&
-                    gsl_fcmp(body_mid_point(candle, i),
-                             lowest_body(candle, i - j - 3, i - j),
-                             FLT_EPSILON) <= 0 &&
-                    gsl_fcmp(GSL_MIN_DBL(candle[i - j].low, candle[i - j + 1].low),
-                             lowest_body(candle, i - j + 2, i),
-                             FLT_EPSILON) < 0 &&
-                    gsl_fcmp(GSL_MIN_DBL(shadow_bottom(candle, i - j),
-                                         shadow_bottom(candle, i - j + 1)),
-                             biggest_body(candle, i - j + 2, i),
-                             FLT_EPSILON) > 0 &&
-                    gsl_fcmp(highest_body(candle, i - j + 1, i),
-                             body_mid_point(candle, i - j),
-                             FLT_EPSILON) <= 0 &&
-                    gsl_fcmp(lowest_low(candle, i - j + 2, i),
-                             GSL_MAX_DBL(candle[i - j].close,
-                                         candle[i - j + 1].close),
-                             FLT_EPSILON) < 0 &&
-                    gsl_fcmp(body_size(candle, i),
-                             biggest_shadow_upper(candle, i - j + 1, i),
-                             FLT_EPSILON) > 0 &&
-                    gsl_fcmp(candle[i].close,
-                             candle[i - 1].close,
-                             FLT_EPSILON) > 0 &&
-                    gsl_fcmp(highest_body(candle, i - j + 1, i),
-                             body_mid_point(candle, i),
-                             FLT_EPSILON) <= 0 &&
-                    gsl_fcmp(candle[i].open,
-                             body_mid_point(candle, i - j),
-                             FLT_EPSILON) < 0 &&
-                    gsl_fcmp(shadow_upper(candle, i),
-                             shadow_bottom(candle, i),
-                             FLT_EPSILON) < 0) {
-                r.c1.nr = i;
-                r.c1.dir = 1;
-                r.c2.nr = i - j;
-                r.dir = 1;
-            }
-        }
-    } else if (wrb(candle, i).dir == -1 && dir(candle, i - 1) == -1) {
-        for (j = 3; j < end_loop; j++) {
-            if (wrb_hg(candle, i - j, i).dir == 1 &&
-                    dir(candle, i - j + 1) == 1 &&
-                    unfilled(candle, i - j, j) &&
-                    gsl_fcmp(candle[i - j + 1].close,
-                             candle[i - j].close,
-                             FLT_EPSILON) < 0 &&
-                    gsl_fcmp(body_mid_point(candle, i),
-                             highest_body(candle, i - j - 3, i - j),
-                             FLT_EPSILON) >= 0 &&
-                    gsl_fcmp(GSL_MIN_DBL(candle[i - j].low, candle[i - j + 1].low),
-                             highest_body(candle, i - j + 2, i),
-                             FLT_EPSILON) > 0 &&
-                    gsl_fcmp(GSL_MIN_DBL(shadow_upper(candle, i - j),
-                                         shadow_upper(candle, i - j + 1)),
-                             biggest_body(candle, i - j + 2, i),
-                             FLT_EPSILON) > 0 &&
-                    gsl_fcmp(lowest_body(candle, i - j + 1, i),
-                             body_mid_point(candle, i - j),
-                             FLT_EPSILON) >= 0 &&
-                    gsl_fcmp(highest_high(candle, i - j + 2, i),
-                             GSL_MAX_DBL(candle[i - j].close,
-                                         candle[i - j + 1].close),
-                             FLT_EPSILON) > 0 &&
-                    gsl_fcmp(body_size(candle, i),
-                             biggest_shadow_bottom(candle, i - j + 1, i),
-                             FLT_EPSILON) > 0 &&
-                    gsl_fcmp(candle[i].close,
-                             candle[i - 1].close,
-                             FLT_EPSILON) > 0 &&
-                    gsl_fcmp(lowest_body(candle, i - j + 1, i),
-                             body_mid_point(candle, i),
-                             FLT_EPSILON) >= 0 &&
-                    gsl_fcmp(candle[i].open,
-                             body_mid_point(candle, i - j),
-                             FLT_EPSILON) > 0 &&
-                    gsl_fcmp(shadow_bottom(candle, i),
-                             shadow_upper(candle, i),
-                             FLT_EPSILON) < 0) {
-                r.c1.nr = i;
-                r.c1.dir = 1;
-                r.c2.nr = i - j;
-                r.dir = -1;
-            }
-        }
-    }
-    return r;
-}
+// signal soldiers(ohlc *candle, size_t i, size_t n) {
+//     size_t j, end_loop = GSL_MIN(i, 16);
+//     signal r = {};
+//     if (wrb(candle, i).dir == 1 && dir(candle, i - 1) == 1) {
+//         // printf("bull i %d\n", i);
+//         for (j = 3; j < end_loop; j++) {
+//             // printf("    i - j %d\n", i - j);
+//             // printf("    A %d\n", wrb_hg(candle, i - j, i).dir == -1);
+//             // printf("    B %d\n", dir(candle, i - j + 1) == -1);
+//             // printf("    C %d\n", unfilled(candle, i - j, j));
+//             // printf("    D %d\n", gsl_fcmp(candle[i - j + 1].close,
+//             //                  candle[i - j].close,
+//             //                  FLT_EPSILON) > 0);
+//             // printf("    E %d\n", gsl_fcmp(body_mid_point(candle, i),
+//             //                  lowest_body(candle, i - j - 3, i - j),
+//             //                  FLT_EPSILON) <= 0);
+//             // printf("    F %d\n", gsl_fcmp(GSL_MIN_DBL(candle[i - j].low, candle[i - j + 1].low),
+//             //                  lowest_body(candle, i - j + 2, i),
+//             //                  FLT_EPSILON) < 0);
+//             // printf("    G %d\n", gsl_fcmp(GSL_MIN_DBL(shadow_bottom(candle, i - j),
+//             //                              shadow_bottom(candle, i - j + 1)),
+//             //                  biggest_body(candle, i - j + 2, i),
+//             //                  FLT_EPSILON) > 0);
+//             // printf("    H %d\n", gsl_fcmp(highest_body(candle, i - j + 1, i),
+//             //                  body_mid_point(candle, i - j),
+//             //                  FLT_EPSILON) <= 0);
+//             // printf("    I %d\n", gsl_fcmp(lowest_low(candle, i - j + 2, i),
+//             //                  GSL_MAX_DBL(candle[i - j].close,
+//             //                              candle[i - j + 1].close),
+//             //                  FLT_EPSILON) < 0);
+//             // printf("    J %d\n", gsl_fcmp(body_size(candle, i),
+//             //                  biggest_shadow_upper(candle, i - j + 1, i),
+//             //                  FLT_EPSILON) > 0);
+//             // printf("    K %d\n", gsl_fcmp(candle[i].close,
+//             //                  candle[i - 1].close,
+//             //                  FLT_EPSILON) > 0 );
+//             // printf("    L %d\n", gsl_fcmp(highest_body(candle, i - j + 1, i),
+//             //                  body_mid_point(candle, i),
+//             //                  FLT_EPSILON) <= 0);
+//             // printf("    M %d\n", gsl_fcmp(candle[i].open,
+//             //                  body_mid_point(candle, i - j),
+//             //                  FLT_EPSILON) < 0);
+//             // printf("    N %d\n", gsl_fcmp(shadow_upper(candle, i),
+//             //                  shadow_bottom(candle, i),
+//             //                  FLT_EPSILON) < 0);
+//             if (wrb_hg(candle, i - j, i).dir == -1 &&
+//                     dir(candle, i - j + 1) == -1 &&
+//                     unfilled(candle, i - j, j) &&
+//                     gsl_fcmp(candle[i - j + 1].close,
+//                              candle[i - j].close,
+//                              FLT_EPSILON) > 0 &&
+//                     gsl_fcmp(body_mid_point(candle, i),
+//                              lowest_body(candle, i - j - 3, i - j),
+//                              FLT_EPSILON) <= 0 &&
+//                     gsl_fcmp(GSL_MIN_DBL(candle[i - j].low, candle[i - j + 1].low),
+//                              lowest_body(candle, i - j + 2, i),
+//                              FLT_EPSILON) < 0 &&
+//                     gsl_fcmp(GSL_MIN_DBL(shadow_bottom(candle, i - j),
+//                                          shadow_bottom(candle, i - j + 1)),
+//                              biggest_body(candle, i - j + 2, i),
+//                              FLT_EPSILON) > 0 &&
+//                     gsl_fcmp(highest_body(candle, i - j + 1, i),
+//                              body_mid_point(candle, i - j),
+//                              FLT_EPSILON) <= 0 &&
+//                     gsl_fcmp(lowest_low(candle, i - j + 2, i),
+//                              GSL_MAX_DBL(candle[i - j].close,
+//                                          candle[i - j + 1].close),
+//                              FLT_EPSILON) < 0 &&
+//                     gsl_fcmp(body_size(candle, i),
+//                              biggest_shadow_upper(candle, i - j + 1, i),
+//                              FLT_EPSILON) > 0 &&
+//                     gsl_fcmp(candle[i].close,
+//                              candle[i - 1].close,
+//                              FLT_EPSILON) > 0 &&
+//                     gsl_fcmp(highest_body(candle, i - j + 1, i),
+//                              body_mid_point(candle, i),
+//                              FLT_EPSILON) <= 0 &&
+//                     gsl_fcmp(candle[i].open,
+//                              body_mid_point(candle, i - j),
+//                              FLT_EPSILON) < 0 &&
+//                     gsl_fcmp(shadow_upper(candle, i),
+//                              shadow_bottom(candle, i),
+//                              FLT_EPSILON) < 0) {
+//                 r.c1.nr = i;
+//                 r.c1.dir = 1;
+//                 r.c2.nr = i - j;
+//                 r.dir = 1;
+//             }
+//         }
+//     } else if (wrb(candle, i).dir == -1 && dir(candle, i - 1) == -1) {
+//         for (j = 3; j < end_loop; j++) {
+//             if (wrb_hg(candle, i - j, i).dir == 1 &&
+//                     dir(candle, i - j + 1) == 1 &&
+//                     unfilled(candle, i - j, j) &&
+//                     gsl_fcmp(candle[i - j + 1].close,
+//                              candle[i - j].close,
+//                              FLT_EPSILON) < 0 &&
+//                     gsl_fcmp(body_mid_point(candle, i),
+//                              highest_body(candle, i - j - 3, i - j),
+//                              FLT_EPSILON) >= 0 &&
+//                     gsl_fcmp(GSL_MIN_DBL(candle[i - j].low, candle[i - j + 1].low),
+//                              highest_body(candle, i - j + 2, i),
+//                              FLT_EPSILON) > 0 &&
+//                     gsl_fcmp(GSL_MIN_DBL(shadow_upper(candle, i - j),
+//                                          shadow_upper(candle, i - j + 1)),
+//                              biggest_body(candle, i - j + 2, i),
+//                              FLT_EPSILON) > 0 &&
+//                     gsl_fcmp(lowest_body(candle, i - j + 1, i),
+//                              body_mid_point(candle, i - j),
+//                              FLT_EPSILON) >= 0 &&
+//                     gsl_fcmp(highest_high(candle, i - j + 2, i),
+//                              GSL_MAX_DBL(candle[i - j].close,
+//                                          candle[i - j + 1].close),
+//                              FLT_EPSILON) > 0 &&
+//                     gsl_fcmp(body_size(candle, i),
+//                              biggest_shadow_bottom(candle, i - j + 1, i),
+//                              FLT_EPSILON) > 0 &&
+//                     gsl_fcmp(candle[i].close,
+//                              candle[i - 1].close,
+//                              FLT_EPSILON) > 0 &&
+//                     gsl_fcmp(lowest_body(candle, i - j + 1, i),
+//                              body_mid_point(candle, i),
+//                              FLT_EPSILON) >= 0 &&
+//                     gsl_fcmp(candle[i].open,
+//                              body_mid_point(candle, i - j),
+//                              FLT_EPSILON) > 0 &&
+//                     gsl_fcmp(shadow_bottom(candle, i),
+//                              shadow_upper(candle, i),
+//                              FLT_EPSILON) < 0) {
+//                 r.c1.nr = i;
+//                 r.c1.dir = 1;
+//                 r.c2.nr = i - j;
+//                 r.dir = -1;
+//             }
+//         }
+//     }
+//     return r;
+// }

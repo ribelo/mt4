@@ -21,9 +21,9 @@
 
 //Global External Inputs
 
-extern int   tf_higher = 240;
-extern int   tf_main = 60;
-extern int   tf_lower = 15;
+extern int   tf_higher = 0;
+extern int   tf_main = 0;
+extern int   tf_lower = 0;
 extern bool  hg_only = true;
 extern bool  use_fractal = true;
 extern int   fractal_length = 5;

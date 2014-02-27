@@ -35,7 +35,7 @@ extern int refresh_candles = 0;
 extern bool hammer = true;
 extern bool harami = true;
 extern bool engulfing = true;
-extern bool soldiers = true;
+//extern bool soldiers = true;
 extern color ajctr_bull_body = C'252,165,88';
 extern color ajctr_bear_body = C'177,83,103';
 extern color contraction_bull_body = C'205,138,108';
@@ -228,47 +228,46 @@ int start() {
                 continue;
             }
         }
-        if (soldiers == true) {
-            static int last_soldiers = 0;
-            if (_soldiers(candle, i, iBars(symbol, tf), r) != 0) {
-                ajctr_body_open[r[0]] = iOpen(symbol, tf, r[0]);
-                ajctr_body_close[r[0]] = iClose(symbol, tf, r[0]);
-                ajctr_body_open[r[0] + 1] = iOpen(symbol, tf, r[0] + 1);
-                ajctr_body_close[r[0] + 1] = iClose(symbol, tf, r[0] + 1);
-                ajctr_body_open[r[1]] = iOpen(symbol, tf, r[1]);
-                ajctr_body_close[r[1]] = iClose(symbol, tf, r[1]);
-                ajctr_body_open[r[1] - 1] = iOpen(symbol, tf, r[1] - 1);
-                ajctr_body_close[r[1] - 1] = iClose(symbol, tf, r[1] - 1);
-                for (j = 2; j <= r[1] - r[0] - 2; j++) {
-                    contraction_body_open[r[0] + j] = iOpen(symbol, tf, r[0] + j);
-                    contraction_body_close[r[0] + j] = iClose(symbol, tf, r[0] + j);
-                }
-                if (make_text == true) {
-                    time_str = StringConcatenate(TimeToStr(iTime(symbol, tf, i), TIME_DATE), "_",
-                                                 TimeToStr(iTime(symbol, tf, i), TIME_MINUTES));
-                    text_name = StringConcatenate(_name, "_", time_str);
-                    if (r[3] == 1) {
-                        text_price = iLow(symbol, tf, iLowest(symbol, tf, MODE_LOW, 3, i)) - ((iHigh(symbol, tf, iHighest(symbol, tf, MODE_HIGH, 3, i)) - iLow(symbol, tf, iLowest(symbol, tf, MODE_LOW, 3, i))) / 2) * label_offset_percent;
-                        make_text(text_name, "SOL", iTime(symbol, tf, r[0] + 1), text_price, font_size, text_color) ;
-                    } else if (r[3] == -1) {
-                        text_price = iHigh(symbol, tf, iHighest(symbol, tf, MODE_HIGH, 3, i)) + ((iHigh(symbol, tf, iHighest(symbol, tf, MODE_HIGH, 3, i)) - iLow(symbol, tf, iLowest(symbol, tf, MODE_LOW, 3, i))) / 2) * label_offset_percent;
-                        make_text(text_name, "SOL", iTime(symbol, tf, r[0] + 1), text_price,  font_size, text_color) ;
-                    }
-                }
-                if (send_notification == true) {
-                    if (iTime(symbol, tf, r[0]) > GlobalVariableGet(global_name)) {
-                        GlobalVariableSet(global_name, iTime(symbol, tf, r[0]));
-                        if (r[3] == 1) {
-                            SendNotification(ReduceCcy(symbol)  + " " + TFToStr(tf) + " Bull Soldiers at " + TimeToStr(iTime(symbol, tf, i)));
-                        } else if (r[3] == -1) {
-                            SendNotification(ReduceCcy(symbol)  + " " + TFToStr(tf) + " Bear Soldiers at " + TimeToStr(iTime(symbol, tf, i)));
-                        }
-                    }
-                }
-                continue;
-            }
-        }
-
+        // if (soldiers == true) {
+        //     static int last_soldiers = 0;
+        //     if (_soldiers(candle, i, iBars(symbol, tf), r) != 0) {
+        //         ajctr_body_open[r[0]] = iOpen(symbol, tf, r[0]);
+        //         ajctr_body_close[r[0]] = iClose(symbol, tf, r[0]);
+        //         ajctr_body_open[r[0] + 1] = iOpen(symbol, tf, r[0] + 1);
+        //         ajctr_body_close[r[0] + 1] = iClose(symbol, tf, r[0] + 1);
+        //         ajctr_body_open[r[1]] = iOpen(symbol, tf, r[1]);
+        //         ajctr_body_close[r[1]] = iClose(symbol, tf, r[1]);
+        //         ajctr_body_open[r[1] - 1] = iOpen(symbol, tf, r[1] - 1);
+        //         ajctr_body_close[r[1] - 1] = iClose(symbol, tf, r[1] - 1);
+        //         for (j = 2; j <= r[1] - r[0] - 2; j++) {
+        //             contraction_body_open[r[0] + j] = iOpen(symbol, tf, r[0] + j);
+        //             contraction_body_close[r[0] + j] = iClose(symbol, tf, r[0] + j);
+        //         }
+        //         if (make_text == true) {
+        //             time_str = StringConcatenate(TimeToStr(iTime(symbol, tf, i), TIME_DATE), "_",
+        //                                          TimeToStr(iTime(symbol, tf, i), TIME_MINUTES));
+        //             text_name = StringConcatenate(_name, "_", time_str);
+        //             if (r[3] == 1) {
+        //                 text_price = iLow(symbol, tf, iLowest(symbol, tf, MODE_LOW, 3, i)) - ((iHigh(symbol, tf, iHighest(symbol, tf, MODE_HIGH, 3, i)) - iLow(symbol, tf, iLowest(symbol, tf, MODE_LOW, 3, i))) / 2) * label_offset_percent;
+        //                 make_text(text_name, "SOL", iTime(symbol, tf, r[0] + 1), text_price, font_size, text_color) ;
+        //             } else if (r[3] == -1) {
+        //                 text_price = iHigh(symbol, tf, iHighest(symbol, tf, MODE_HIGH, 3, i)) + ((iHigh(symbol, tf, iHighest(symbol, tf, MODE_HIGH, 3, i)) - iLow(symbol, tf, iLowest(symbol, tf, MODE_LOW, 3, i))) / 2) * label_offset_percent;
+        //                 make_text(text_name, "SOL", iTime(symbol, tf, r[0] + 1), text_price,  font_size, text_color) ;
+        //             }
+        //         }
+        //         if (send_notification == true) {
+        //             if (iTime(symbol, tf, r[0]) > GlobalVariableGet(global_name)) {
+        //                 GlobalVariableSet(global_name, iTime(symbol, tf, r[0]));
+        //                 if (r[3] == 1) {
+        //                     SendNotification(ReduceCcy(symbol)  + " " + TFToStr(tf) + " Bull Soldiers at " + TimeToStr(iTime(symbol, tf, i)));
+        //                 } else if (r[3] == -1) {
+        //                     SendNotification(ReduceCcy(symbol)  + " " + TFToStr(tf) + " Bear Soldiers at " + TimeToStr(iTime(symbol, tf, i)));
+        //                 }
+        //             }
+        //         }
+        //         continue;
+        //     }
+        // }
     }
     return (0);
 }
