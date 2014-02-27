@@ -11,6 +11,7 @@
 #include "wrb_confirmation.h"
 #include "wrb_ajctr.h"
 #include "wrb_apaor.h"
+#include "wrb_vsa.h"
 #include "wrb_fvb.h"
 #include "wrb_vtr.h"
 //---
@@ -609,48 +610,18 @@ WRBFUNC int __stdcall _apaor(ohlc *main, ohlc *sister, size_t i,
 }
 
 
-WRBFUNC int __stdcall _div_insta(ohlc *main, ohlc *sister, size_t i,
-                                 size_t pa_l, int invert,
-                                 size_t look_back, size_t main_bars,
-                                 size_t sister_bars) {
-    size_t n = GSL_MIN(main_bars, sister_bars);
+WRBFUNC int __stdcall _vsa(ohlc *candle, size_t i, size_t look_for_zone,
+                           size_t n, int *arr) {
     if (n > 0 && i < n) {
-        ohlc tmp_arr[n];
-        int j;
-        if (i > n) {
-            return 0;
+        signal r = vsa(candle, n - i - 1, look_for_zone, n);
+        if (r.c1.nr > 0) {
+            arr[0] = n - r.c1.nr - 1;;
         }
-        if (main_bars > sister_bars) {
-            for (j = 0; j < n; j++) {
-                tmp_arr[n - j - 1].timestamp = main[main_bars - j - 1].timestamp;
-                tmp_arr[n - j - 1].open = main[main_bars - j - 1].open;
-                tmp_arr[n - j - 1].high = main[main_bars - j - 1].high;
-                tmp_arr[n - j - 1].low = main[main_bars - j - 1].low;
-                tmp_arr[n - j - 1].close = main[main_bars - j - 1].close;
-                tmp_arr[n - j - 1].volume = main[main_bars - j - 1].volume;
-            }
-            main = tmp_arr;
-        } else if (main_bars < sister_bars) {
-            for (j = 0; j < n; j++) {
-                tmp_arr[n - j - 1].timestamp = sister[sister_bars - j - 1].timestamp;
-                tmp_arr[n - j - 1].open = sister[sister_bars - j - 1].open;
-                tmp_arr[n - j - 1].high = sister[sister_bars - j - 1].high;
-                tmp_arr[n - j - 1].low = sister[sister_bars - j - 1].low;
-                tmp_arr[n - j - 1].close = sister[sister_bars - j - 1].close;
-                tmp_arr[n - j - 1].volume = sister[sister_bars - j - 1].volume;
-            }
-            sister = tmp_arr;
+        if (r.zone.v1.nr > 0) {
+            arr[2] = n - r.zone.v1.nr - 1;
         }
-        int r_bull = div_bull(main, sister, i, pa_l, invert, look_back, n);
-        int r_bear = div_bear(main, sister, i, pa_l, invert, look_back, n);
-        if (r_bull && !r_bear) {
-            printf("r_bull! %d\n", n - i - 1);
-            return 1;
-        }
-        if (!r_bull && r_bear) {
-            printf("r_bear! %d\n", n - i - 1);
-            return -1;
-        }
+        arr[3] = r.dir;
+        return r.dir;
     }
     return 0;
 }

@@ -49,12 +49,22 @@ static inline int count_falling(ohlc *candle, size_t start, size_t stop) {
 
 
 static inline double body_size(ohlc *candle, size_t i) {
-	return fabs(roundp(candle[i].close - candle[i].open, 5));
+	return fabs(candle[i].close - candle[i].open);
+}
+
+
+static inline double bar_size(ohlc *candle, size_t i) {
+	return candle[i].high - candle[i].low;
 }
 
 
 static inline double body_mid_point(ohlc *candle, size_t i) {
-	return roundp((candle[i].close + candle[i].open) * 0.5, 5);
+	return (candle[i].close + candle[i].open) * 0.5;
+}
+
+
+static inline double bar_mid_point(ohlc *candle, size_t i) {
+	return (candle[i].high + candle[i].low) * 0.5;
 }
 
 
@@ -138,12 +148,12 @@ static inline int bars_broken_by_body(ohlc *candle, size_t i) {
 
 
 static inline double shadow_upper(ohlc *candle, size_t i) {
-	return roundp(candle[i].high - GSL_MAX_DBL(candle[i].open, candle[i].close), 5);
+	return candle[i].high - GSL_MAX_DBL(candle[i].open, candle[i].close);
 }
 
 
 static inline double shadow_bottom(ohlc *candle, size_t i) {
-	return roundp(GSL_MIN_DBL(candle[i].open, candle[i].close) - candle[i].low, 5);
+	return GSL_MIN_DBL(candle[i].open, candle[i].close) - candle[i].low;
 }
 
 

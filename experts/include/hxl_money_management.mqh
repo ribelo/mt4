@@ -196,6 +196,7 @@ double DynamicDeltaLot(string symbol, double stop_pip, double max_dd,
             // Print("DDSM step3 ", step3);
             double lot_delta = (max_dd * curr_balance / delta / 100 + MathMax((curr_balance - high_eq) / delta / 100, 0) - MathMax((high_eq - curr_balance) / (average_risk_reward * delta) / 100, 0)) / MarketInfo(symbol, MODE_TICKVALUE);
             // Print("DDSM lot_delta ", lot_delta);
+            //
             double lot_risk = curr_balance * max_risk / stop_pip / MarketInfo(symbol, MODE_TICKVALUE);
             // Print("DDSM lot_risk ", lot_risk);
             double lot_max = AccountFreeMargin() / stop_pip / MarketInfo(symbol, MODE_TICKVALUE);

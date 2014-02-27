@@ -25,3 +25,7 @@ zone strong_continuation_4(ohlc *candle, size_t i, size_t contraction, size_t n)
 zone reaction_zone(ohlc *candle, size_t i, size_t n, size_t look_forward);
 
 zone wrb_zone(ohlc *candle, size_t i, size_t contraction, size_t n);
+
+zone inside_zone(ohlc *candle, size_t i, size_t contraction,
+                 size_t look_for_zone, size_t n);
+

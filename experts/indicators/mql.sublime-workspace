@@ -4,6 +4,58 @@
 		"selected_items":
 		[
 			[
+				"ins",
+				"inside_zone(ohlc *candle, size_t i, size_t contraction, size_t look_for_zone, size_t n)	int"
+			],
+			[
+				"wrb_",
+				"wrb_zone(ohlc *candle, size_t i, size_t contraction, size_t n)	zone"
+			],
+			[
+				"bar",
+				"bar_size(ohlc *candle, size_t i)	double"
+			],
+			[
+				"mvoe",
+				"move_to_be_at_rr"
+			],
+			[
+				"OrderCo",
+				"OrderCommission	double"
+			],
+			[
+				"new",
+				"new_sl_price"
+			],
+			[
+				"move",
+				"move_to_be_at_rr"
+			],
+			[
+				"olsd",
+				"old_sl_price"
+			],
+			[
+				"OrderOpen",
+				"OrderOpenPrice"
+			],
+			[
+				"Order",
+				"OrderProfit	double"
+			],
+			[
+				"old",
+				"old_sl_price"
+			],
+			[
+				"be",
+				"be_trigger"
+			],
+			[
+				"OrderOp",
+				"OrderOpenPrice"
+			],
+			[
 				"send",
 				"SendNotification"
 			],
@@ -54,10 +106,6 @@
 			[
 				"tota",
 				"total_orders"
-			],
-			[
-				"old",
-				"old_stop"
 			],
 			[
 				"zone",
@@ -154,10 +202,6 @@
 			[
 				"dd",
 				"dd_pip"
-			],
-			[
-				"Order",
-				"OrderProfit	double"
 			],
 			[
 				"OrderT",
@@ -470,50 +514,6 @@
 			[
 				"any",
 				"any_wrb_hg_bull(ohlc *candle, int start, int stop, int n)	int"
-			],
-			[
-				"lowest",
-				"lowest_low(ohlc *candle, size_t start, size_t stop)	double"
-			],
-			[
-				"lowesrt",
-				"lowest_low(ohlc *candle, size_t start, size_t stop)	double"
-			],
-			[
-				"shadow",
-				"shadow_bottom(ohlc *candle, int i)	double"
-			],
-			[
-				"sh",
-				"shadow_bottom(ohlc *candle, int i)	double"
-			],
-			[
-				"shado",
-				"shadow_bottom(ohlc *candle, int i)	double"
-			],
-			[
-				"hamer",
-				"hammer_line_bear(ohlc *candle, size_t i)	int"
-			],
-			[
-				"hamme",
-				"hammer_line_bear(ohlc *candle, size_t i)	int"
-			],
-			[
-				"lowes",
-				"lowest_low(ohlc *candle, size_t start, size_t stop)	double"
-			],
-			[
-				"bod",
-				"body_mid_point(ohlc *candle, int i)	double"
-			],
-			[
-				"deep",
-				"deep_shadow_bottom(ohlc *candle, size_t i, size_t n)	int"
-			],
-			[
-				"iBars",
-				"iBars	int"
 			]
 		]
 	},
@@ -523,39 +523,39 @@
 			"file": "/home/huxley/Dropbox/code/mql/experts/j.a.r.v.i.s.mq4",
 			"settings":
 			{
-				"buffer_size": 45702,
+				"buffer_size": 46762,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "wrb_analysis_dcm.mq4",
+			"file": "/home/huxley/Dropbox/code/mql/src/wrb_vsa.c",
 			"settings":
 			{
-				"buffer_size": 4377,
-				"line_ending": "Windows"
+				"buffer_size": 16402,
+				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "wrb_analysis_sr.mq4",
+			"file": "/home/huxley/Dropbox/code/mql/src/wrb_vsa.h",
 			"settings":
 			{
-				"buffer_size": 12898,
-				"line_ending": "Windows"
+				"buffer_size": 526,
+				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "wrb_analysis_zone.mq4",
+			"file": "/home/huxley/Dropbox/code/mql/src/wrb_fvb.c",
 			"settings":
 			{
-				"buffer_size": 28127,
-				"line_ending": "Windows"
+				"buffer_size": 1673,
+				"line_ending": "Unix"
 			}
 		},
 		{
 			"file": "/home/huxley/Dropbox/code/mql/src/wrb_export.c",
 			"settings":
 			{
-				"buffer_size": 20420,
+				"buffer_size": 18946,
 				"line_ending": "Unix"
 			}
 		},
@@ -572,6 +572,14 @@
 			"settings":
 			{
 				"buffer_size": 18252,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "\n\nNoDemand28:=If(H>ref(H,-1) and L>=ref(L,-1) and (H-L)<=ref((H-L),-1) and C=H and\nC<>O and C>ref(C,+1) and H>=ref(H,+1) and V=ref(V,-1) and V=ref(V,-2),1,0);\n\nNoSupply28:=If(L<ref(L,-1) and H<=ref(H,-1) and (H-L)<=ref((H-L),-1) and C=L and C<>O\nand C<ref(C,+1) and L<=ref(L,+1) and V=ref(V,-1) and V=ref(V,-2),1,0);\n\n\n\nNoDemand29:=If(H>ref(H,-1) and L>=ref(L,-1) and (H-L)<=ref((H-L),-1) and C=((H-\n33L)*0.5)+L and C<>O and C>ref(C,+1) and H>=ref(H,+1) and V=ref(V,-1) and V=ref(V,-\n2),1,0);\n\nNoSupply29:=If(L<ref(L,-1) and H<=ref(H,-1) and (H-L)<=ref((H-L),-1) and C=((H-\nL)*0.5)+L and C<>O and C<ref(C,+1) and L<=ref(L,+1) and V=ref(V,-1) and V=ref(V,-\n2),1,0);\n\n\n\nNoDemand30:=If(H>ref(H,-1) and L>=ref(L,-1) and (H-L)<=ref((H-L),-1) and C=L and\nC<>O and C>ref(C,+1) and H>=ref(H,+1) and V=ref(V,-1) and V=ref(V,-2),1,0);\n\nNoSupply30:=If(L<ref(L,-1) and H<=ref(H,-1) and (H-L)<=ref((H-L),-1) and C=H and\nC<>O and C<ref(C,+1) and L<=ref(L,+1) and V=ref(V,-1) and V=ref(V,-2),1,0);",
+			"settings":
+			{
+				"buffer_size": 982,
 				"line_ending": "Unix"
 			}
 		}
@@ -737,14 +745,21 @@
 	},
 	"file_history":
 	[
+		"/home/huxley/Dropbox/code/mql/src/wrb_vsa.h",
+		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_zone.mq4",
+		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_sr.mq4",
+		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_dcm.mq4",
+		"/home/huxley/Dropbox/code/mql/experts/include/hxl_money_management.mqh",
+		"/home/huxley/Dropbox/code/mql/src/candle.h",
+		"/home/huxley/Dropbox/code/mql/src/wrb_zone.c",
+		"/home/huxley/Dropbox/code/mql/src/wrb_zone.h",
+		"/home/huxley/Dropbox/code/mql/src/wrb_ajctr.c",
 		"/home/huxley/.config/sublime-text-3/Packages/Default/Default (Linux).sublime-keymap",
 		"/home/huxley/Dropbox/code/mql/wrb_analysis.def",
 		"/home/huxley/Dropbox/code/mql/src/wrb_export.c",
 		"/home/huxley/Dropbox/code/mql/src/wrb_management.c",
-		"/home/huxley/Dropbox/code/mql/src/wrb_ajctr.c",
 		"/home/huxley/Dropbox/code/mql/experts/include/wrb_analysis.mqh",
 		"/home/huxley/Dropbox/code/mql/console.log",
-		"/home/huxley/Dropbox/code/mql/src/wrb_zone.c",
 		"/home/huxley/Dropbox/code/mql/src/wrb_vtr.c",
 		"/home/huxley/Dropbox/code/mql/src/wrb_toolbox.h",
 		"/home/huxley/Dropbox/code/mql/src/wrb_fvb.c",
@@ -752,22 +767,16 @@
 		"/home/huxley/Dropbox/code/mql/src/wrb_apaor.c",
 		"/home/huxley/Dropbox/code/mql/src/wrb_analysis.h",
 		"/home/huxley/Dropbox/code/mql/src/wrb_analysis.c",
-		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_zone.mq4",
 		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_fvb.mq4",
-		"/home/huxley/Dropbox/code/mql/src/candle.h",
-		"/home/huxley/Dropbox/code/mql/src/wrb_zone.h",
 		"/home/huxley/Dropbox/code/mql/experts/include/hanover --- extensible functions (np).mqh",
 		"/home/huxley/Dropbox/trading/MetaTrader Admiral Markets AS/experts/indicators/Ribelo FVB.mq4",
 		"/home/huxley/Dropbox/code/mql/experts/indicators/huxley_volume.mq4",
 		"/home/huxley/Dropbox/code/mql/experts/include/hxl_utils.mqh",
-		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_sr.mq4",
 		"/home/huxley/Dropbox/trading/MetaTrader Admiral Markets AS/experts/indicators/AllAverages_v2.3.mq4",
-		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_dcm.mq4",
 		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_body.mq4",
 		"/home/huxley/Dropbox/trading/BReTRADER ECN/experts/indicators/10.2 TmaSlope v.1.4B 4.30.7.mq4",
 		"/tmp/4TFStochBars.mq4",
 		"/tmp/@MTF_Stochastic.mq4",
-		"/home/huxley/Dropbox/code/mql/experts/include/hxl_money_management.mqh",
 		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_vtr.mq4",
 		"/home/huxley/Games/SteamApps/common/Europa Universalis IV/mod/dummy.txt",
 		"/home/huxley/.cache/.fr-h7ang6/Default (Linux).sublime-keymap",
@@ -863,8 +872,7 @@
 		"/home/huxley/Dropbox/code/c_wrb_analysis/src/wrb_fvb.c",
 		"/home/huxley/Dropbox/code/c_wrb_analysis/src/wrb_ajctr.c",
 		"/home/huxley/Dropbox/code/c_wrb_analysis/src/wrb_zone.c",
-		"/home/huxley/Dropbox/code/c_wrb_analysis/src/wrb_fvb.h",
-		"/home/huxley/Dropbox/code/c_wrb_analysis/src/wrb_vtr.h"
+		"/home/huxley/Dropbox/code/c_wrb_analysis/src/wrb_fvb.h"
 	],
 	"find":
 	{
@@ -895,6 +903,108 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"candle[i].volume == candle[i - 2].volume",
+			"candle[i].volume == candle[i - 1].volume",
+			"candle[i].close != candle[i].open",
+			"candle[i].volume <= candle[i - 2].volume",
+			"candle[i].volume <= candle[i - 1].volume",
+			"candle[i].low <= candle[i + 2].low",
+			"candle[i].close < candle[i + 2].close",
+			"candle[i].close <= candle[i - 1].close",
+			"candle[i].high >= candle[i + 2].high",
+			"candle[i].close > candle[i + 2].close",
+			"candle[i].close == candle[i + 1].close",
+			"candle[i].close >= candle[i - 1].close",
+			"candle[i].close == candle[i - 1].close ",
+			"bar_size(candle, i) > bar_size(candle, i - 1)",
+			"candle[i].close == bar_mid_point(candle, i)",
+			"candle[i].close == candle[i].low",
+			"candle[i].close == candle[i].high",
+			"candle[i].close == candle[i].open",
+			"candle[i].low <= candle[i + 1].low",
+			"candle[i].close < candle[i + 1].close",
+			"candle[i].high <= candle[i - 1].high",
+			"candle[i].low < candle[i - 1].low",
+			"candle[i].volume < candle[i - 2].volume",
+			"candle[i].volume < candle[i - 1].volume",
+			"candle[i].high >= candle[i + 1].high",
+			"candle[i].close > candle[i + 1].close",
+			"candle[i].low < candle[i - 1].low",
+			"candle[i].volume < candle[i - 2].volume",
+			"candle[i].volume < candle[i - 1].volume",
+			"candle[i].high >= candle[i + 1].high",
+			"candle[i].close > candle[i + 1].close",
+			"bar_size(candle, i) <= bar_size(candle, i - 1)",
+			"candle[i].low >= candle[i - 1].low",
+			"candle[i].high > candle[i - 1].high",
+			"fcmp",
+			"signal v",
+			"signal",
+			"r.dir == 0",
+			"r = vsa",
+			"inside_zone",
+			"high",
+			"low",
+			"candle[i].high > candle[i - 1].high &&\n            candle[i].low >= candle[i - 1].low &&\n            bar_size(candle, i) <= bar_size(candle, i - 1)",
+			"high",
+			"low",
+			"high",
+			"candle[i].high > candle[i - 1].high &&\n            candle[i].low >= candle[i - 1].low &&\n            (candle[i].close == candle[i].open ||",
+			"candle[i].high > candle[i - 1].high &&\n            candle[i].low >= candle[i - 1].low &&\n            bar_size(candle, i) <= bar_size(candle, i - 1) &&",
+			"candle[i].close == candle[i].open &&",
+			"candle[i].high > candle[i - 1].high &&\n            candle[i].low >= candle[i - 1].low &&\n            bar_size(candle, i) <= bar_size(candle, i - 1) &&",
+			"(candle[i].high > candle[i - 1].high &&\n            candle[i].low >= candle[i - 1].low &&\n            candle[i].close == candle[i].open &&",
+			"candle[i].close == candle[i].open &&",
+			"candle[i].high > candle[i - 1].high &&\n            candle[i].low >= candle[i - 1].low &&\n            bar_size(candle, i) <= bar_size(candle, i - 1) &&",
+			"candle[i].high > candle[i - 1].high &&\n            candle[i].low >= candle[i - 1].low &&\n            candle[i].close == candle[i].open &&",
+			"candle[i].close == candle[i].open &&",
+			"candle[i].high > candle[i - 1].high &&\n            candle[i].low >= candle[i - 1].low &&\n            bar_size(candle, i) <= bar_size(candle, i - 1) &&\n            candle[i].close >= candle[i - 1].close &&",
+			"candle[i].high > candle[i - 1].high &&\n            candle[i].low >= candle[i - 1].low &&\n            bar_size(candle, i) <= bar_size(candle, i - 1) &&",
+			"candle[i].close == candle[i - 1].close &&\n            bar_size(candle, i) > bar_size(candle, i - 1) &&\n            candle[i].close == candle[i].high &&",
+			"candle[i].close == candle[i - 1].close &&\n            bar_size(candle, i) > bar_size(candle, i - 1) &&\n            candle[i].close == candle[i].open &&",
+			"candle[i].close == candle[i].open &&",
+			"candle[i].close > candle[i - 1].close &&\n            bar_size(candle, i) > bar_size(candle, i - 1) &&\n            candle[i].close == candle[i].open &&",
+			"candle[i].close > candle[i - 1].close &&\n            bar_size(candle, i) > bar_size(candle, i - 1) &&\n            candle[i].close > candle[i + 1].close &&",
+			"||",
+			"candle[i].high > candle[i - 1].high &&\n            candle[i].low >= candle[i - 1].low &&\n            bar_size(candle, i) > bar_size(candle, i - 1) &&",
+			"candle[i].close > candle[i - 1].close &&\n            bar_size(candle, i) > bar_size(candle, i - 1) &&",
+			"candle[i].high > candle[i - 1].high &&\n            candle[i].low >= candle[i - 1].low &&\n            bar_size(candle, i) > bar_size(candle, i - 1) &&\n            candle[i].close == candle[i - 1].low &&",
+			"candle[i].high > candle[i - 1].high &&\n            candle[i].low >= candle[i - 1].low &&\n            bar_size(candle, i) > bar_size(candle, i - 1) &&\n            candle[i].close == bar_mid_point(candle, i - 1) &&",
+			"candle[i].high > candle[i - 1].high &&\n            candle[i].low >= candle[i - 1].low &&\n",
+			"candle[i].high > candle[i - 1].high &&\n            candle[i].low >= candle[i - 1].low &&\n            bar_size(candle, i) > bar_size(candle, i - 1) &&\n            candle[i].close == candle[i].high &&",
+			"candle[i].high > candle[i - 1].high &&\n            candle[i].low >= candle[i - 1].low &&\n            bar_size(candle, i) > bar_size(candle, i - 1) &&\n            candle[i].close == candle[i].open &&",
+			"candle[i].high > candle[i - 1].high &&\n            candle[i].low >= candle[i - 1].low &&\n            bar_size(candle, i) <= bar_size(candle, i - 1) &&",
+			"candle[i].high > candle[i - 1].high &&\n            candle[i].low >= candle[i - 1].low &&\n            bar_size(candle, i) <= bar_size(candle, i - 1) &&\n            candle[i].close > candle[i + 1].close &&",
+			"candle[i].high > candle[i - 1].high &&\n            candle[i].low >= candle[i - 1].low &&\n            bar_size(candle, i) <= bar_size(candle, i - 1) &&\n            candle[i].close > candle[i + 1].close &&\n            candle[i].high >= candle[i + 1].high",
+			"candle[i].high > candle[i - 1].high &&\n            candle[i].low >= candle[i - 1].low &&\n            bar_size(candle, i) <= bar_size(candle, i - 1) &&",
+			"candle[i].high > candle[i - 1].high &&\n            candle[i].low >= candle[i - 1].low &&\n            bar_size(candle, i) <= bar_size(candle, i - 1)",
+			"open",
+			"high",
+			"candle[i].volume < candle[i - 1].volume",
+			"bar_mid_point(candle, i)",
+			"high",
+			"bar_mid_point(candle, i)",
+			"open",
+			"low",
+			"high",
+			"if (i < 2 && i > n - 2) {",
+			"NoDeman",
+			"NoDemand",
+			":=",
+			"NoDemand11:=",
+			"bar_mid_point(candle, i)",
+			"high",
+			"low",
+			"high",
+			"bar_mid_point(candle, i - 1)",
+			"+2",
+			"high",
+			"round",
+			", 5)",
+			"roundp",
+			"resistance",
+			"support",
+			"sl_price",
 			"ccy",
 			"command",
 			"ctrl+d",
@@ -920,109 +1030,7 @@
 			"    C 1\n    D 1\n    E 1\n    F 1",
 			"    C 1\n    D 1\n    E 1\n    F 1\n    G 1\n    H 1",
 			"    C 1\n    D 1\n    E 1\n    F 1",
-			"    C 1\n    D 1\n    E 1",
-			"    C 1\n    D 1",
-			"	A 1\n    B 1\n    C 0\n    D 0\n    E 0\n    F 0\n    G 0\n    H 0\n    I 0",
-			"	A 1\n    B 1\n    C 1\n    D 0\n    E 0\n    F 0\n    G 0\n    H 0\n    I 0",
-			"	A 1\n    B 1\n    C 1\n    D 0\n    E 1\n    F 0\n    G 0\n    H 0\n    I 0",
-			"	A 1\n    B 1\n    C 1\n    D 0\n    E 1\n    F 1\n    G 0\n    H 0\n    I 0",
-			"	A 1\n    B 1\n    C 1\n    D 0\n    E 1\n    F 1\n    G 1\n    H 0\n    I 0",
-			"	A 1\n    B 1\n    C 1\n    D 0\n    E 1\n    F 1\n    G 1\n    H 1\n    I 0",
-			"	A 1\n    B 1\n    C 1\n    D 0\n    E 1\n    F 1\n    G 1\n    H 1\n    I 1",
-			"	A 1\n    B 1\n    C 1\n    D 0\n    E 1\n    F 1\n    G 1\n    H 1\n    I 0",
-			"	A 1\n    B 1\n    C 1\n    D 0\n    E 1\n    F 0\n    G 1\n    H 1\n    I 0",
-			"D 1",
-			"    A 1\n    B 1\n    C 1\n    D 1",
-			"    A 1\n    B 1\n    C 1\n    D 0",
-			"    A 1\n    B 1\n    C 1\n    D 1",
-			"    A 1\n    B 1\n    C 1",
-			"A 1\n    B 1",
-			"A 1\n    B 1\n    C 1\n    D 1\n    E 1\n    F 1\n    G 1\n    H 1\n    I 1",
-			"A 1\n    B 1\n    C 1\n    D 1\n    E 1\n    F 1\n    G 1\n    H 1\n    I 0",
-			"I 1",
-			"%d",
-			"wrb(candle, i - j, n)",
-			"wrb",
-			"wrb(candle, i - j, i)",
-			"wrb(candle, i - 1, i)",
-			"wrb(candle, i - 2, i)",
-			"wrb(candle, i - 1, i)",
-			"wrb(candle, i, n)",
-			"wrb(candle, i - j, i)",
-			"wrb(candle, i - j, n)",
-			"wrb(candle, i - j, i)",
-			"wrb(candle, i - 1, i)",
-			"wrb(candle, i, n)",
-			"wrb_hg(candle, i",
-			"(wrb_hg(candle, i, ",
-			"wrb(candle, i - j, n)",
-			"r.dir = sister_conf.dir;",
-			"r.dir = main_conf.dir;",
-			"r.c1.nr = sister_conf.c1.nr;",
-			"r.c1.nr = main_conf.c1.nr;",
-			"main",
-			"sister",
-			"main",
-			"main_conf.dir",
-			"zone_size(&sister_z.v1) > body_size(sister, sister_conf.c1.nr)",
-			"zone_size(&sister_z.v1) > body_size(sister, sister_conf.c2.nr)",
-			"zone_size(&main_hg.v1) > body_size(main, main_conf.c1.nr)",
-			"zone_size(&main_hg.v1) > body_size(main, main_conf.c2.nr)",
-			"zone_size(&sister_hg.v1) > body_size(sister, sister_conf.c1.nr)",
-			"zone_size(&sister_hg.v1) > body_size(sister, sister_conf.c2.nr)",
-			"zone_size(&main_z.v1) > body_size(main, main_conf.c1.nr)",
-			"zone_size(&main_z.v1) > body_size(main, main_conf.c1.nr))",
-			"zone_size(&main_z.v1) > body_size(main, main_conf.c1.nr)",
-			"zone_size(&main_z.v1) > body_size(main, main_conf.c2.nr)",
-			"sister_hg",
-			"main_z",
-			"main",
-			"body_size(sister, sister_z.v1.nr)",
-			"body_size(main, main_z.v1.nr)",
-			"fade",
-			"main",
-			"printf",
-			"i, i - j",
-			"body_size(sister, sister_z.v1.nr), body_size(sister, sister_conf.c2.nr));",
-			"body_size(main, main_z.v1.nr), body_size(main, main_conf.c2.nr));",
-			"r.zone.v1.nr = main_hg.v1.nr;",
-			"r.zone.v1.nr = main_z.v1.nr;",
-			"r.zone.v1.nr = main_hg.v1.nr;",
-			"zone_size(&sister_z.v1)",
-			"zone_size(&main_z.v1)",
-			"print",
-			"\"i %d zone %d zone size %f c1 size %f, bool %d\"",
-			"bool",
-			"main",
-			"r.c1.nr = main_conf.c1.nr;",
-			"zone_size(&sister_z.v1) > body_size(sister, sister_conf.c2.nr)",
-			"zone_size(&main_z.v1) > body_size(main, main_conf.c2.nr)",
-			"i - k -",
-			" &&\n                         zone_size(&sister_z.v1) > body_size(sister, sister_conf.c2.nr)",
-			" &&\n                        zone_size(&main_z.v1) > body_size(main, main_conf.c1.nr)",
-			"zone_size(&main_z.v1) > body_size(main, main_conf.c1.nr)",
-			"offset, 1, 1",
-			"offset, 1",
-			"offset, 0",
-			"offset",
-			"10, text_color",
-			"last_type",
-			"global_multiplier",
-			".",
-			"i_name",
-			"timeframe",
-			"get",
-			"GetStats",
-			"font_color",
-			"[A-Z]\\.[A-Z]",
-			"last_fvb",
-			"[A-Z]\\.[A-Z]",
-			"main",
-			"ObjectMakeLabel",
-			"look_back",
-			"ccy",
-			"ToTF",
-			"_"
+			"    C 1\n    D 1\n    E 1"
 		],
 		"highlight": false,
 		"in_selection": false,
@@ -1030,6 +1038,40 @@
 		"regex": false,
 		"replace_history":
 		[
+			"gsl_fcmp(candle[i].volume, candle[i - 2].volume, FLT_EPSILON) == 0",
+			"gsl_fcmp(candle[i].volume, candle[i - 1].volume, FLT_EPSILON) == 0",
+			"gsl_fcmp(candle[i].close, candle[i].open, FLT_EPSILON) != 0",
+			"gsl_fcmp(candle[i].volume, candle[i - 2].volume, FLT_EPSILON) <= 0",
+			"gsl_fcmp(candle[i].volume, candle[i - 1].volume, FLT_EPSILON) <= 0",
+			"gsl_fcmp(candle[i].low, candle[i + 2].low, FLT_EPSILON) <= 0",
+			"gsl_fcmp(candle[i].close < candle[i + 2].close, FLT_EPSILON) < 0",
+			"gsl_fcmp(candle[i].close, candle[i - 1].close, FLT_EPSILON) <= 0",
+			"gsl_fcmp(candle[i].high, candle[i + 2].high, FLT_EPSILON) >= 0",
+			"gsl_fcmp(candle[i].close, candle[i + 2].close, FLT_EPSILON) > 0",
+			"gsl_fcmp(candle[i].close, candle[i + 1].close, FLT_EPSILON) == 0",
+			"gsl_fcmp(candle[i].close, candle[i - 1].close, FLT_EPSILON) >= 0",
+			"gsl_fcmp(candle[i].close, candle[i - 1].close , FLT_EPSILON) == 0",
+			"gsl_fcmp(bar_size(candle, i), bar_size(candle, i - 1), FLT_EPSILON) > 0",
+			"gsl_fcmp(candle[i].close, bar_mid_point(candle, i), FLT_EPSILON) == 0",
+			"gsl_fcmp(candle[i].close, candle[i].low, FLT_EPSILON) == 0",
+			"gsl_fcmp(candle[i].close, candle[i].high, FLT_EPSILON) == 0",
+			"gsl_fcmp(candle[i].close, candle[i].open, FLT_EPSILON) == 0",
+			"gsl_fcmp(candle[i].low, candle[i + 1].low, FLT_EPSILON) <= 0",
+			"gsl_fcmp(candle[i].close, candle[i + 1].close, FLT_EPSILON) < 0",
+			"gsl_fcmp(candle[i].high, candle[i - 1].high, FLT_EPSILON) <= 0",
+			"gsl_fcmp(candle[i].low, candle[i - 1].low, FLT_EPSILON) < 0",
+			"gsl_fcmp(candle[i].volume, candle[i - 2].volume, FLT_EPSILON) < 0",
+			"gsl_fcmp(candle[i].volume, candle[i - 1].volume, FLT_EPSILON) < 0",
+			"gsl_fcmp(candle[i].high, candle[i + 1].high, FLT_EPSILON) >= 0",
+			"gsl_fcmp(candle[i].close, candle[i + 1].close, FLT_EPSILON) > 0",
+			"gsl_fcmp(candle[i].low < candle[i - 1].low, FLT_EPSILON) < 0",
+			"gsl_fcmp(candle[i].volume < candle[i - 2].volume, FLT_EPSILON) < 0",
+			"gsl_fcmp(candle[i].volume candle[i - 1].volume, FLT_EPSILON) < 0",
+			"gsl_fcmp(candle[i].high candle[i + 1].high, FLT_EPSILON) >= 0",
+			"gsl_fcmp(candle[i].close candle[i + 1].close, FLT_EPSILON) > 0",
+			"gsl_fcmp(bar_size(candle, i), bar_size(candle, i - 1), FLT_EPSILON) <= 0",
+			"gsl_fcmp(candle[i].low, candle[i - 1].low, FLT_EPSILON) >= 0",
+			"gsl_fcmp(candle[i].high, candle[i - 1].high, FLT_EPSILON) > 0",
 			"[A-Z]\\_[A-Z]",
 			"_name",
 			"iOpen(symbol, tf, r[2])",
@@ -1123,41 +1165,7 @@
 			"_args",
 			"symbol",
 			"TIMEFRAMES",
-			"CURRENCY_PAIRS",
-			").min()",
-			").max()",
-			"from app.tool import deepthroat as dt",
-			"app.config",
-			"config",
-			"server",
-			"config",
-			"QUANTUM_LOOK_BACK",
-			"QUANTUM_CONTRACTION",
-			"CONTRACTION",
-			"from server.tool import deepthroat as dt",
-			"'",
-			"low[i] + (high[i] - low[i])*.8",
-			"low[i] + (high[i] - low[i])*.2",
-			"low[i] + (high[i] - low[i])*.1",
-			"low[i] + (high[i] - low[i])*.9",
-			" low[i] + (high[i] - low[i])*.1",
-			"(high[i] - low[i])*.3 + low[i]",
-			"(high[i] - low[i])*.1 + low[i]",
-			"(high[i] - low[i])*.8 + low[i]",
-			"(high[i] - low[i])*.2 + low[i]",
-			"(high[i] - low[i])*.9 + low[i]",
-			"):",
-			"bar_mid_point[i]",
-			"wrb[i]",
-			"[i-2]",
-			"[i-1]",
-			"volume_average[i]",
-			"volume[i]",
-			"volume",
-			"bar_size[i]",
-			"",
-			"bar_size[i]",
-			""
+			"CURRENCY_PAIRS"
 		],
 		"reverse": false,
 		"show_context": true,
@@ -1168,7 +1176,7 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 4,
 			"sheets":
 			[
 				{
@@ -1177,15 +1185,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 45702,
+						"buffer_size": 46762,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								30038,
-								30038
+								18893,
+								18893
 							]
 						],
 						"settings":
@@ -1194,33 +1202,91 @@
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
-						"translation.x": 136.0,
-						"translation.y": 9770.0,
+						"translation.x": 0.0,
+						"translation.y": 6170.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
+					"stack_index": 7,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "wrb_analysis_dcm.mq4",
+					"file": "/home/huxley/Dropbox/code/mql/src/wrb_vsa.c",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4377,
+						"buffer_size": 16402,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4023,
-								4023
+								10595,
+								10595
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/MetaQuotes (MQL4) Language Package/Syntaxes/MQL4.tmLanguage",
+							"syntax": "Packages/C Improved/C Improved.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "/home/huxley/Dropbox/code/mql/src/wrb_vsa.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 526,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C Improved/C Improved.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "/home/huxley/Dropbox/code/mql/src/wrb_fvb.c",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 1673,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C Improved/C Improved.tmLanguage",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
@@ -1232,80 +1298,20 @@
 					"type": "text"
 				},
 				{
-					"buffer": 2,
-					"file": "wrb_analysis_sr.mq4",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 12898,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1247,
-								1247
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/MetaQuotes (MQL4) Language Package/Syntaxes/MQL4.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "wrb_analysis_zone.mq4",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 28127,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2809,
-								2809
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/MetaQuotes (MQL4) Language Package/Syntaxes/MQL4.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 487.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
 					"buffer": 4,
 					"file": "/home/huxley/Dropbox/code/mql/src/wrb_export.c",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 20420,
+						"buffer_size": 18946,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								13653,
-								13653
+								469,
+								469
 							]
 						],
 						"settings":
@@ -1315,10 +1321,10 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 8342.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
@@ -1348,30 +1354,30 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 8,
 					"type": "text"
 				}
 			]
 		},
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
-					"buffer": 6,
-					"file": "/home/huxley/Dropbox/code/mql/src/wrb_ajctr.c",
+					"buffer": 1,
+					"file": "/home/huxley/Dropbox/code/mql/src/wrb_vsa.c",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 18252,
+						"buffer_size": 16402,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								15540,
-								15540
+								15040,
+								15040
 							]
 						],
 						"settings":
@@ -1381,7 +1387,65 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 4833.0,
+						"translation.y": 4255.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "/home/huxley/Dropbox/code/mql/src/wrb_ajctr.c",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 18252,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								92,
+								92
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C Improved/C Improved.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 982,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"auto_name": "",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 6,
@@ -1418,7 +1482,7 @@
 		"cols":
 		[
 			0.0,
-			0.5,
+			0.437158469945,
 			1.0
 		],
 		"rows":
@@ -1430,7 +1494,7 @@
 	"menu_visible": true,
 	"output.clang":
 	{
-		"height": 90.0
+		"height": 97.0
 	},
 	"output.exec":
 	{

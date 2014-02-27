@@ -133,7 +133,7 @@ int init() {
 int deinit() {
     //----
     Comment("");
-    FiboToPending();
+    //FiboToPending();
     if (ObjectsTotal() > 0) {
         for (int i = ObjectsTotal() - 1; i >= 0; i--) {
             string name = ObjectName(i);
