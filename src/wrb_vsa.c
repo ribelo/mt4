@@ -500,46 +500,120 @@ signal effort_e(ohlc *candle, size_t i, size_t n) {
 }
 
 
-signal vsa(ohlc *candle, size_t i, size_t look_for_zone, size_t n) {
+signal vsa(ohlc *candle, size_t i, size_t look_for_zone, int nd_ns, int effort, size_t n) {
     signal r = {};
-    if (r.dir == 0) {
-        r = sd_a(candle, i, n);
+    if (nd_ns) {
+        if (r.dir == 0) {
+            r = sd_a(candle, i, n);
+        }
+        if (r.dir == 0) {
+            r = sd_b(candle, i, n);
+        }
+        if (r.dir == 0) {
+            r = sd_c(candle, i, n);
+        }
+        if (r.dir == 0) {
+            r = sd_d(candle, i, n);
+        }
+        if (r.dir == 0) {
+            r = sd_e(candle, i, n);
+        }
+        if (r.dir == 0) {
+            r = sd_f(candle, i, n);
+        }
+        if (r.dir == 0) {
+            r = sd_g(candle, i, n);
+        }
+        if (r.dir == 0) {
+            r = sd_h(candle, i, n);
+        }
     }
-    if (r.dir == 0) {
-        r = sd_b(candle, i, n);
-    }
-    if (r.dir == 0) {
-        r = sd_c(candle, i, n);
-    }
-    if (r.dir == 0) {
-        r = sd_d(candle, i, n);
-    }
-    if (r.dir == 0) {
-        r = sd_e(candle, i, n);
-    }
-    if (r.dir == 0) {
-        r = sd_f(candle, i, n);
-    }
-    if (r.dir == 0) {
-        r = sd_g(candle, i, n);
-    }
-    if (r.dir == 0) {
-        r = sd_h(candle, i, n);
-    }
-    if (r.dir == 0) {
-        r = effort_a(candle, i, n);
-    }
-    if (r.dir == 0) {
-        r = effort_b(candle, i, n);
-    }
-    if (r.dir == 0) {
-        r = effort_c(candle, i, n);
-    }
-    if (r.dir == 0) {
-        r = effort_d(candle, i, n);
-    }
-    if (r.dir == 0) {
-        r = effort_e(candle, i, n);
+    if (effort) {
+        if (r.dir == 0) {
+            r = effort_a(candle, i, n);
+        }
+        if (r.dir == 0) {
+            r = effort_b(candle, i, n);
+        }
+        if (r.dir == 0) {
+            r = effort_c(candle, i, n);
+        }
+        if (r.dir == 0) {
+            r = effort_d(candle, i, n);
+        }
+        if (r.dir == 0) {
+            r = effort_e(candle, i, n);
+        }
     }
     return r;
 }
+
+
+// signal vsa(ohlc *candle, size_t i, size_t look_for_zone, size_t n) {
+//     signal r = {}, tmp = {};
+//     zone inside_z = inside_zone(candle, i, 16, look_for_zone, n);
+//     if (r.dir == 0) {
+//         tmp = sd_a(candle, i, n);
+//         if (tmp.dir == inside_z.v1.dir) {
+//             r = tmp;
+//         }
+//     }
+//     if (r.dir == 0) {
+//         tmp = sd_a(candle, i, n);
+//         if (tmp.dir == inside_z.v1.dir) {
+//             r = tmp;
+//         }
+//     }
+//     if (r.dir == 0) {
+//         tmp = sd_a(candle, i, n);
+//         if (tmp.dir == inside_z.v1.dir) {
+//             r = tmp;
+//         }
+//     }
+//     if (r.dir == 0) {
+//         tmp = sd_a(candle, i, n);
+//         if (tmp.dir == inside_z.v1.dir) {
+//             r = tmp;
+//         }
+//     }
+//     if (r.dir == 0) {
+//         tmp = sd_a(candle, i, n);
+//         if (tmp.dir == inside_z.v1.dir) {
+//             r = tmp;
+//         }
+//     }
+//     if (r.dir == 0) {
+//         tmp = sd_a(candle, i, n);
+//         if (tmp.dir == inside_z.v1.dir) {
+//             r = tmp;
+//         }
+//     }
+//     if (r.dir == 0) {
+//         tmp = sd_a(candle, i, n);
+//         if (tmp.dir == inside_z.v1.dir) {
+//             r = tmp;
+//         }
+//     }
+//     if (r.dir == 0) {
+//         tmp = sd_a(candle, i, n);
+//         if (tmp.dir == inside_z.v1.dir) {
+//             r = tmp;
+//         }
+//     }
+//     if (r.dir == 0) {
+//         r = effort_a(candle, i, n);
+//     }
+//     if (r.dir == 0) {
+//         r = effort_b(candle, i, n);
+//     }
+//     if (r.dir == 0) {
+//         r = effort_c(candle, i, n);
+//     }
+//     if (r.dir == 0) {
+//         r = effort_d(candle, i, n);
+//     }
+//     if (r.dir == 0) {
+//         r = effort_e(candle, i, n);
+//     }
+//     return r;
+// }

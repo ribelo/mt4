@@ -611,9 +611,9 @@ WRBFUNC int __stdcall _apaor(ohlc *main, ohlc *sister, size_t i,
 
 
 WRBFUNC int __stdcall _vsa(ohlc *candle, size_t i, size_t look_for_zone,
-                           size_t n, int *arr) {
+                           int nd_ns, int effort, size_t n, int *arr) {
     if (n > 0 && i < n) {
-        signal r = vsa(candle, n - i - 1, look_for_zone, n);
+        signal r = vsa(candle, n - i - 1, look_for_zone, nd_ns, effort, n);
         if (r.c1.nr > 0) {
             arr[0] = n - r.c1.nr - 1;;
         }

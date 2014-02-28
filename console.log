@@ -1318,7 +1318,6 @@ Copyright 2001-2013, MetaQuotes Software Corp.
 1;39;;;Function "_bid" is not referenced and will be removed from exp-file
 1;39;;;Function "_lower_timeframe" is not referenced and will be removed from exp-file
 1;39;;;Function "_higher_timeframe" is not referenced and will be removed from exp-file
-1;39;;;Function "make_text" is not referenced and will be removed from exp-file
 1;39;;;Function "make_label" is not referenced and will be removed from exp-file
 1;39;;;Function "ifint" is not referenced and will be removed from exp-file
 1;39;;;Function "ifnum" is not referenced and will be removed from exp-file
@@ -1414,7 +1413,7 @@ Copyright 2001-2013, MetaQuotes Software Corp.
 1;39;;;Function "iRegr" is not referenced and will be removed from exp-file
 1;39;;;Function "d" is not referenced and will be removed from exp-file
 1;39;;;Function "dd" is not referenced and will be removed from exp-file
-Exp file "Z:\home\huxley\Dropbox\trading\BReTRADER ECN\experts\indicators\wrb_analysis_vsa.ex4" produced - 0 error(s), 100 warning(s)
+Exp file "Z:\home\huxley\Dropbox\trading\BReTRADER ECN\experts\indicators\wrb_analysis_vsa.ex4" produced - 0 error(s), 99 warning(s)
 MetaQuotes Language 4 compiler build 509 (24 Jun 2013)
 Copyright 2001-2013, MetaQuotes Software Corp.
 
