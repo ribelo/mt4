@@ -501,7 +501,7 @@ bool IsTradingAllowed() {
 
 
 void GetFibo() {
-    double entry_price, stop_price, label_price, temp_pending_pips, temp_break_even;
+    double entry_price, stop_price, desire_rr, label_price, temp_pending_pips, temp_break_even;
     double lot_size, posible_profit, zone_size;
     string label_name, text_color;
     datetime start_time, end_time, label_time;
@@ -513,6 +513,7 @@ void GetFibo() {
                 if (ObjectGet(name, OBJPROP_COLOR) != pointless_color) {
                     entry_price = ObjectGet(name, OBJPROP_PRICE1);
                     stop_price = ObjectGet(name, OBJPROP_PRICE2);
+                    desire_rr = ObjectGet(name, OBJPROP_FIRSTLEVEL + 2);
                     start_time = ObjectGet(name, OBJPROP_TIME1);
                     end_time = ObjectGet(name, OBJPROP_TIME2);
                     if (MathAbs(entry_price - stop_price) > max_stop * point && max_stop != 0) {
@@ -521,14 +522,14 @@ void GetFibo() {
                         ObjectSet(name, OBJPROP_LEVELCOLOR, pointless_color);
                         continue;
                     }
-                    if (_fcmp(entry_price, stop_price) > 0) {
+                    if (_fcmp(entry_price, stop_price) > 0 && desire_rr > 0) {
                         zone_size = MathAbs(entry_price - stop_price) / point / multiplier;
                         lot_size = DynamicDeltaLot(symbol, zone_size, max_dd, max_risk, balance_array);
                         Print("lot_size ", lot_size);
                         ObjectSet(name, OBJPROP_COLOR, demand_color);
                         ObjectSet(name, OBJPROP_LEVELCOLOR, demand_color);
                         ObjectSet(name, OBJPROP_LEVELWIDTH, fibo_width);
-                        ObjectSet(name, OBJPROP_FIBOLEVELS, 3);
+                        //ObjectSet(name, OBJPROP_FIBOLEVELS, 3);
                         ObjectSetFiboDescription(name, 0, "Size = " +
                                                  DoubleToStr(zone_size, 2) +
                                                  "            Sl = %$");
@@ -537,13 +538,13 @@ void GetFibo() {
                                                  "        Entry = %$ ");
                         ObjectSetFiboDescription(name, 2, "TP = %$");
                     }
-                    if (_fcmp(entry_price, stop_price) < 0) {
+                    if (_fcmp(entry_price, stop_price) < 0 && desire_rr > 0) {
                         zone_size = MathAbs(entry_price - stop_price) / point / multiplier;
                         lot_size = DynamicDeltaLot(symbol, zone_size, max_dd, max_risk, balance_array);
                         ObjectSet(name, OBJPROP_COLOR, supply_color);
                         ObjectSet(name, OBJPROP_LEVELCOLOR, supply_color);
                         ObjectSet(name, OBJPROP_LEVELWIDTH, fibo_width);
-                        ObjectSet(name, OBJPROP_FIBOLEVELS, 3);
+                        //ObjectSet(name, OBJPROP_FIBOLEVELS, 3);
                         ObjectSetFiboDescription(name, 0, "Size = " +
                                                  DoubleToStr(zone_size, 2) +
                                                  "            Sl = %$");
