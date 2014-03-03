@@ -29,7 +29,6 @@ extern double  max_dd = 0.2;
 extern double  max_risk = 0.04;
 extern int     slippage = 3;
 extern bool    use_trailing_stop = true;
-extern double  move_to_be_at_rr = 1.0;
 extern bool    hg_only = true;
 extern bool    use_fractal = true;
 extern int     fractal_length = 5;
@@ -421,24 +420,22 @@ void TrailingStop() {
                     old_sl_price = NormalizeDouble(ObjectGet(sl_name, OBJPROP_PRICE1), digits);
                     commission_pip = MathAbs(OrderCommission() + OrderSwap()) / MarketInfo(symbol, MODE_TICKVALUE) * OrderLots();
                     if (OrderType() == OP_BUY) {
-                        be_trigger = OrderOpenPrice() + (OrderOpenPrice() - old_sl_price) * move_to_be_at_rr;
-                        new_sl_price = support;
+                        be_trigger = OrderOpenPrice() + (OrderOpenPrice() - old_sl_price);
                         if (_bid(symbol) > be_trigger) {
-                            new_sl_price = MathMax(OrderOpenPrice() + commission_pip, new_sl_price);
-                        }
-                        if (_fcmp(old_sl_price, new_sl_price) < 0 && new_sl_price != 0.0) {
-                            ObjectMove(sl_name, 0, iTime(symbol, tf, 0), new_sl_price);
-                            Print("Order " + ticket + " trailing stop move sl line to ", new_sl_price);
+                            new_sl_price = MathMax(OrderOpenPrice() + commission_pip, support);
+                            if (_fcmp(old_sl_price, new_sl_price) < 0 && new_sl_price != 0.0) {
+                                ObjectMove(sl_name, 0, iTime(symbol, tf, 0), new_sl_price);
+                                Print("Order " + ticket + " trailing stop move sl line to ", new_sl_price);
+                            }
                         }
                     } else if (OrderType() == OP_SELL) {
-                        be_trigger = OrderOpenPrice() - (old_sl_price - OrderOpenPrice()) * move_to_be_at_rr;
-                        new_sl_price = resistance;
+                        be_trigger = OrderOpenPrice() - (old_sl_price - OrderOpenPrice());
                         if (_ask(symbol) < be_trigger) {
-                            new_sl_price = MathMax(OrderOpenPrice() - commission_pip, new_sl_price);
-                        }
-                        if (_fcmp(old_sl_price, new_sl_price) > 0 && new_sl_price != 0.0) {
-                            ObjectMove(sl_name, 0, iTime(symbol, tf, 0), new_sl_price);
-                            Print("Order " + ticket + " trailing stop move sl line to ", new_sl_price);
+                            new_sl_price = MathMax(OrderOpenPrice() - commission_pip, resistance);
+                            if (_fcmp(old_sl_price, new_sl_price) > 0 && new_sl_price != 0.0) {
+                                ObjectMove(sl_name, 0, iTime(symbol, tf, 0), new_sl_price);
+                                Print("Order " + ticket + " trailing stop move sl line to ", new_sl_price);
+                            }
                         }
                     }
                 }
