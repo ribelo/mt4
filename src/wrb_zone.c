@@ -518,7 +518,7 @@ zone inside_zone(ohlc *candle, size_t i, size_t contraction,
     for (j = 3; j < end_loop; j++) {
         z = wrb_zone(candle, i - j, contraction, i);
         if (z.v1.dir == 1 &&
-                unfilled(candle, i - j, j) &&
+                unfilled(candle, i - j, j, n) &&
                 ((gsl_fcmp(candle[i].low, z.v1.close, FLT_EPSILON) <= 0 &&
                   gsl_fcmp(candle[i].low, z.v1.open, FLT_EPSILON) >= 0) ||
                  (gsl_fcmp(candle[i].high, z.v1.open, FLT_EPSILON) >= 0 &&
@@ -526,7 +526,7 @@ zone inside_zone(ohlc *candle, size_t i, size_t contraction,
             return z;
         }
         if (z.v1.dir == -1 &&
-                unfilled(candle, i - j, j) &&
+                unfilled(candle, i - j, j, n) &&
                 ((gsl_fcmp(candle[i].low, z.v1.open, FLT_EPSILON) <= 0 &&
                   gsl_fcmp(candle[i].low, z.v1.close, FLT_EPSILON) >= 0) ||
                  (gsl_fcmp(candle[i].high, z.v1.close, FLT_EPSILON) >= 0 &&

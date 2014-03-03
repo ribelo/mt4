@@ -36,7 +36,7 @@ extern color bear_wrb_hg_body = C'177,83,103';
 extern int bar_width = 1;
 
 //Misc
-double ohlc[][6];
+double candle[][6];
 int pip_mult_tab[]={1,10,1,10,1,10,100,1000};
 string symbol;
 int tf, digits, multiplier, spread;
@@ -58,20 +58,7 @@ int init() {
     if (multiplier > 1) {
         pip_description = " points";
     }
-
-
-    int orders_history_total = OrdersHistoryTotal();
-    if (orders_history_total > 0) {
-        int count = _imax(orders_history_total, 5);
-        for (int i = orders_history_total - 1; i >= 0; i--) {
-            if (OrderSelect(i, SELECT_BY_POS, MODE_HISTORY)) {
-                Print("i: "i," ticket: ", OrderTicket());
-            }
-        }
-    }
-
-
-
+    ArrayCopyRates(candle, symbol, tf);
     return (0);
 }
 
@@ -86,7 +73,9 @@ int deinit() {
 //| Custom indicator iteration function                                                       |
 //+-------------------------------------------------------------------------------------------+
 int start() {
-    return (0);
+    for (int i = 0; i < iBars(symbol, tf); i++) {
+        _unfiled(candle, i, i + 10, iBars(symbol, tf));
+    }
 }
 //+-------------------------------------------------------------------------------------------+
 //|Custom indicator end                                                                       |

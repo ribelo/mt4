@@ -23,7 +23,7 @@ signal fvb(ohlc *candle, size_t i, size_t look_back, size_t n) {
             if (z.v1.dir == 1 &&
                     zone_size(&z.v1) > body_size(candle, conf.c2.nr) &&
                     zone_size(&z.v1) > body_size(candle, conf.c1.nr) &&
-                    unfilled(candle, i - j, j) &&
+                    unfilled(candle, i - j, j, n) &&
                     zone_denial(candle, &conf, &z) == 1) {
                 r.c1.nr = conf.c1.nr;
                 r.c2.nr = conf.c2.nr;
@@ -38,7 +38,7 @@ signal fvb(ohlc *candle, size_t i, size_t look_back, size_t n) {
             if (z.v1.dir < 0 &&
                     zone_size(&z.v1) > body_size(candle, conf.c2.nr) &&
                     zone_size(&z.v1) > body_size(candle, conf.c1.nr) &&
-                    unfilled(candle, i - j, j) &&
+                    unfilled(candle, i - j, j, n) &&
                     zone_denial(candle, &conf, &z) == -1) {
                 r.c1.nr = conf.c1.nr;
                 r.c2.nr = conf.c2.nr;

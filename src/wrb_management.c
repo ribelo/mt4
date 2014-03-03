@@ -11,12 +11,12 @@ double support(ohlc *candle, size_t i, int hg_only, int use_fractal,
     for (size_t j = 1; j < i; j++) {
         if (!hg_only && last_wrb == GSL_NEGINF) {
             if (wrb(candle, i - j).dir == 1 &&
-                    unfilled(candle, i - j, j)) {
+                    unfilled(candle, i - j, j, n)) {
                 last_wrb = candle[i - j].open;
             }
         } else if (hg_only && last_wrb == GSL_NEGINF) {
             if (wrb_hg(candle, i - j, i).dir == 1 &&
-                    unfilled(candle, i - j, j)) {
+                    unfilled(candle, i - j, j, n)) {
                 last_wrb = candle[i - j].open;
             }
         }
@@ -39,12 +39,12 @@ double resistance(ohlc *candle, size_t i, int hg_only, int use_fractal,
     for (size_t j = 1; j < i; j++) {
         if (!hg_only && last_wrb == GSL_POSINF) {
             if (wrb(candle, i - j).dir == -1 &&
-                    unfilled(candle, i - j, j)) {
+                    unfilled(candle, i - j, j, n)) {
                 last_wrb = candle[i - j].open;
             }
         } else if (hg_only && last_wrb == GSL_POSINF) {
             if (wrb_hg(candle, i - j, n).dir == -1 &&
-                    unfilled(candle, i - j, j)) {
+                    unfilled(candle, i - j, j, n)) {
                 last_wrb = candle[i - j].open;
             }
         }

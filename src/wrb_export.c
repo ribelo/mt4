@@ -110,7 +110,7 @@ WRBFUNC int __stdcall _filled_by(ohlc *candle, size_t i, size_t n) {
 
 WRBFUNC int __stdcall _unfilled(ohlc *candle, size_t i, size_t j, size_t n) {
     if (n > 0 && i < n) {
-        return unfilled(candle, n - i - 1, j);
+        return unfilled(candle, n - i - 1, j, n);
     }
     return 0;
 }

@@ -234,7 +234,7 @@ static inline int dcm(ohlc *candle, size_t i, size_t n) {
                     if (gsl_fcmp(candle[i].close,
                                  candle[i - j].open,
                                  FLT_EPSILON) > 0 &&
-                            unfilled(candle, i, 3)) {
+                            unfilled(candle, i, 3, n)) {
                         return 1;
                     } else {
                         break;
@@ -247,7 +247,7 @@ static inline int dcm(ohlc *candle, size_t i, size_t n) {
                         if (gsl_fcmp(candle[i].close,
                                  candle[i - j].open,
                                  FLT_EPSILON) < 0 &&
-                            unfilled(candle, i, 3)) {
+                            unfilled(candle, i, 3, n)) {
                         return -1;
                     }  else {
                         break;

@@ -25,7 +25,7 @@
 #property indicator_width2  2
 #property indicator_width3  2
 
-#define  _name "wrb_vsa."
+#define  _name "wrb_vsa"
 #define  short_name "WRB VSA"
 
 //Global External Inputs
@@ -40,7 +40,7 @@ extern color bear_vsa = C'233,65,103';
 extern color text_color = C'56,47,50';
 extern bool make_text = true;
 extern bool send_notification = true;
-extern double label_offset_percent = 1.5;
+extern double label_offset_percent = 3;
 extern int font_size = 8;
 extern string font_name = "Cantarell";
 extern int bar_width = 2;
@@ -112,7 +112,7 @@ int start() {
     }
     limit = MathMin(iBars(symbol, tf) - counted_bars, look_back);
     for (i = 1; i < limit; i++) {
-        normal[i] = iVolume(symbol, tf, 0);
+        normal[i] = iVolume(symbol, tf, i);
         if (_vsa(candle, i, look_for_zone, nd_ns, effort, iBars(symbol, tf), r) != 0) {
             if (r[3] == 1) {
                 vsa_bull[r[0]] = iVolume(symbol, tf, r[0]);
@@ -148,4 +148,3 @@ int start() {
 //+-------------------------------------------------------------------------------------------+
 //|Custom indicator end                                                                       |
 //+-------------------------------------------------------------------------------------------+
-

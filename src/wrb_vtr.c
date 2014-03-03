@@ -34,7 +34,7 @@ signal vtr(ohlc *main, ohlc *sister, size_t i,
                                         &main_z, &sister_hg, &invert)) {
                     if (main_z.v1.dir == 1 &&
                             sister_hg.v1.dir == 1 &&
-                            unfilled(main, i - j, j)) {
+                            unfilled(main, i - j, j, n)) {
                         if (main_conf.dir == 1 &&
                                 gsl_fcmp(zone_size(&main_z.v1),
                                          body_size(main, main_conf.c2.nr),
@@ -62,7 +62,7 @@ signal vtr(ohlc *main, ohlc *sister, size_t i,
                         }
                     } else if (sister_z.v1.dir == 1 &&
                             main_hg.v1.dir == 1 &&
-                            unfilled(sister, i - j, j)) {
+                            unfilled(sister, i - j, j, n)) {
                         if (main_conf.dir == 1 &&
                                 gsl_fcmp(zone_size(&main_hg.v1),
                                          body_size(main, main_conf.c2.nr),
@@ -104,7 +104,7 @@ signal vtr(ohlc *main, ohlc *sister, size_t i,
                                     &main_z, &sister_hg, &invert)) {
                     if (main_z.v1.dir == -1 &&
                             wrb_hg(sister, i - j, i).dir == -1 &&
-                            unfilled(main, i - j, j)) {
+                            unfilled(main, i - j, j, n)) {
                         if (main_conf.dir == -1 &&
                                 gsl_fcmp(zone_size(&main_z.v1),
                                          body_size(main, main_conf.c2.nr),
@@ -132,7 +132,7 @@ signal vtr(ohlc *main, ohlc *sister, size_t i,
                         }
                     } else if (sister_z.v1.dir == -1 &&
                             wrb_hg(main, i - j, i).dir == -1 &&
-                            unfilled(sister, i - j, j)) {
+                            unfilled(sister, i - j, j, n)) {
                         if (main_conf.dir == -1 &&
                                 gsl_fcmp(zone_size(&main_hg.v1),
                                          body_size(main, main_conf.c2.nr),
@@ -175,7 +175,7 @@ signal vtr(ohlc *main, ohlc *sister, size_t i,
                                         &main_z, &sister_hg, &invert)) {
                     if (main_z.v1.dir == 1 &&
                             wrb_hg(sister, i - j, i).dir == -1 &&
-                            unfilled(main, i - j, j)) {
+                            unfilled(main, i - j, j, n)) {
                         if (main_conf.dir == 1 &&
                                 gsl_fcmp(zone_size(&main_z.v1),
                                          body_size(main, main_conf.c2.nr),
@@ -203,7 +203,7 @@ signal vtr(ohlc *main, ohlc *sister, size_t i,
                         }
                     } else if (sister_z.v1.dir == -1 &&
                             wrb_hg(main, i - j, i).dir == 1 &&
-                            unfilled(sister, i - j, j)) {
+                            unfilled(sister, i - j, j, n)) {
                         if (main_conf.dir == 1 &&
                                 gsl_fcmp(zone_size(&main_hg.v1),
                                          body_size(main, main_conf.c2.nr),
@@ -244,7 +244,7 @@ signal vtr(ohlc *main, ohlc *sister, size_t i,
                                         &main_z, &sister_hg, &invert)) {
                     if (main_z.v1.dir == -1 &&
                             wrb_hg(sister, i - j, i).dir == 1 &&
-                            unfilled(main, i - j, j)) {
+                            unfilled(main, i - j, j, n)) {
                         if (main_conf.dir == -1 &&
                                 gsl_fcmp(zone_size(&main_z.v1),
                                          body_size(main, main_conf.c2.nr),
@@ -272,7 +272,7 @@ signal vtr(ohlc *main, ohlc *sister, size_t i,
                         }
                     } else if (sister_z.v1.dir == 1 &&
                             wrb_hg(main, i - j, i).dir == -1 &&
-                            unfilled(sister, i - j, j)) {
+                            unfilled(sister, i - j, j, n)) {
                         if (main_conf.dir == -1 &&
                                 gsl_fcmp(zone_size(&main_hg.v1),
                                          body_size(main, main_conf.c2.nr),

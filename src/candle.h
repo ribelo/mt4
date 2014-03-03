@@ -157,17 +157,18 @@ static inline double shadow_bottom(ohlc *candle, size_t i) {
 }
 
 
-static inline int unfilled(ohlc *candle, size_t i, size_t j) {
-	int k;
+static inline int unfilled(ohlc *candle, size_t i, size_t j, size_t n) {
+	ssize_t k;
+	size_t end_loop = GSL_MIN_INT(j, n - i);
 	int candle_dir = dir(candle, i);
 	if (candle_dir == 1) {
-		for (k = 1; k < j; k++) {
+		for (k = 1; k < end_loop; k++) {
 			if (gsl_fcmp(candle[i + k].low, candle[i].open, FLT_EPSILON) < 0) {
 				return 0;
 			}
 		}
 	} else if (candle_dir == -1) {
-		for (k = 1; k < j; k++) {
+		for (k = 1; k < end_loop; k++) {
 			if (gsl_fcmp(candle[i + k].high, candle[i].open, FLT_EPSILON) > 0) {
 				return 0;
 			}
