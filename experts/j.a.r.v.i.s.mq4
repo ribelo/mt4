@@ -513,7 +513,7 @@ void GetFibo() {
                 if (ObjectGet(name, OBJPROP_COLOR) != pointless_color) {
                     entry_price = ObjectGet(name, OBJPROP_PRICE1);
                     stop_price = ObjectGet(name, OBJPROP_PRICE2);
-                    desire_rr = ObjectGet(name, OBJPROP_FIRSTLEVEL + 2);
+                    desire_rr = ObjectGet(name, OBJPROP_FIRSTLEVEL + 2) - 1;
                     start_time = ObjectGet(name, OBJPROP_TIME1);
                     end_time = ObjectGet(name, OBJPROP_TIME2);
                     if (MathAbs(entry_price - stop_price) > max_stop * point && max_stop != 0) {
@@ -525,18 +525,18 @@ void GetFibo() {
                     if (_fcmp(entry_price, stop_price) > 0 && desire_rr > 0) {
                         zone_size = MathAbs(entry_price - stop_price) / point / multiplier;
                         lot_size = DynamicDeltaLot(symbol, zone_size, max_dd, max_risk, balance_array);
-                        Print("lot_size ", lot_size);
                         ObjectSet(name, OBJPROP_COLOR, demand_color);
                         ObjectSet(name, OBJPROP_LEVELCOLOR, demand_color);
                         ObjectSet(name, OBJPROP_LEVELWIDTH, fibo_width);
-                        //ObjectSet(name, OBJPROP_FIBOLEVELS, 3);
                         ObjectSetFiboDescription(name, 0, "Size = " +
                                                  DoubleToStr(zone_size, 2) +
-                                                 "            Sl = %$");
+                                                 StrToStr(" SL = %$ ", "R20"));
                         ObjectSetFiboDescription(name, 1, "Lot = " +
                                                  DoubleToStr(lot_size, 2) +
-                                                 "        Entry = %$ ");
-                        ObjectSetFiboDescription(name, 2, "TP = %$");
+                                                 StrToStr("Entry = %$ ", "R20"));
+                        ObjectSetFiboDescription(name, 2, "Size = " +
+                                                 DoubleToStr(zone_size * desire_rr, 2) +
+                                                 StrToStr(" TP = %$ ", "R20"));
                     }
                     if (_fcmp(entry_price, stop_price) < 0 && desire_rr > 0) {
                         zone_size = MathAbs(entry_price - stop_price) / point / multiplier;
@@ -544,14 +544,15 @@ void GetFibo() {
                         ObjectSet(name, OBJPROP_COLOR, supply_color);
                         ObjectSet(name, OBJPROP_LEVELCOLOR, supply_color);
                         ObjectSet(name, OBJPROP_LEVELWIDTH, fibo_width);
-                        //ObjectSet(name, OBJPROP_FIBOLEVELS, 3);
                         ObjectSetFiboDescription(name, 0, "Size = " +
                                                  DoubleToStr(zone_size, 2) +
-                                                 "            Sl = %$");
+                                                 StrToStr(" SL = %$ ", "R20"));
                         ObjectSetFiboDescription(name, 1, "Lot = " +
                                                  DoubleToStr(lot_size, 2) +
-                                                 "        Entry = %$ ");
-                        ObjectSetFiboDescription(name, 2, "TP = %$");
+                                                 StrToStr("Entry = %$ ", "R20"));
+                        ObjectSetFiboDescription(name, 2, "Size = " +
+                                                 DoubleToStr(zone_size * desire_rr, 2) +
+                                                 StrToStr(" TP = %$ ", "R20"));
                     }
                 }
             }
