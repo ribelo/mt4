@@ -228,11 +228,13 @@ void DragDropLine() {
                                 Print("Order " + ticket + " sl ", old_stop, " trigger has been moved to ", new_stop, " so i move sl line");
                                 Print("Order " + ticket + " old_stop ", old_stop," new_stop ", new_stop, " fcmp ", _fcmp(old_stop, new_stop));
                                 OrderModifyReliable(ticket, OrderOpenPrice(), new_stop, new_take, 0, CLR_NONE);
+                                continue;
                             }
                         } else {
                             if (_fcmp(old_stop, 0.0) > 0) {
                                 Print("Order " + ticket + " sl does not exist, so I create a new one");
                                 DrawHiddenStopLoss(ticket, old_stop + hidden_pips * point);
+                                continue;
                             }
                         }
                         if (ObjectFind(ticket + "_tp_line") != -1) {
@@ -240,11 +242,13 @@ void DragDropLine() {
                                 Print("Order " + ticket + " tp trigger has been moved so i move tp line");
                                 Print("Order " + ticket + " old_take ", old_take," new_take ", new_take, " fcmp ", _fcmp(old_take, new_take));
                                 OrderModifyReliable(ticket, OrderOpenPrice(), new_stop, new_take, 0, CLR_NONE);
+                                continue;
                             }
                         } else {
                             if (_fcmp(old_take, 0.0) > 0) {
                                 Print("Order " + ticket + " tp does not exist, so I create a new one");
                                 DrawHiddenTakeProfit(ticket, old_take - hidden_pips * Point);
+                                continue;
                             }
                         }
                     } else if (OrderType() == OP_SELL) {
@@ -255,11 +259,13 @@ void DragDropLine() {
                                 Print("Order " + ticket + " sl trigger has been moved so i move sl line");
                                 Print("Order " + ticket + " old_stop ", old_stop," new_stop ", new_stop, " fcmp ", _fcmp(old_stop, new_stop));
                                 OrderModifyReliable(ticket, OrderOpenPrice(), new_stop, new_take, 0, CLR_NONE);
+                                continue;
                             }
                         } else {
                             if (_fcmp(old_stop, 0.0) > 0) {
                                 Print("Order " + ticket + " sl does not exist, so I create a new one");
                                 DrawHiddenStopLoss(ticket, old_stop - hidden_pips * point);
+                                continue;
                             }
                         }
                         if (ObjectFind(ticket + "_tp_line") != -1) {
@@ -267,11 +273,13 @@ void DragDropLine() {
                                 Print("Order " + ticket + " tp trigger has been moved so i move tp line");
                                 Print("Order " + ticket + " old_take ", old_take," new_take ", new_take, " fcmp ", _fcmp(old_take, new_take));
                                 OrderModifyReliable(ticket, OrderOpenPrice(), new_stop, new_take, 0, CLR_NONE);
+                                continue;
                             }
                         } else {
                             if (_fcmp(old_take, 0.0) > 0) {
                                 Print("Order " + ticket + " tp does not exist, so I create a new one");
                                 DrawHiddenTakeProfit(ticket, old_take + hidden_pips * Point);
+                                continue;
                             }
                         }
                     }
@@ -414,22 +422,20 @@ void TrailingStop() {
                     old_sl_price = NormalizeDouble(ObjectGet(sl_name, OBJPROP_PRICE1), digits);
                     commission_pip = MathAbs(OrderCommission() + OrderSwap()) / MarketInfo(symbol, MODE_TICKVALUE) * OrderLots();
                     if (OrderType() == OP_BUY) {
-                        if (old_sl_price < OrderOpenPrice() && move_to_be_at_rr > 0) {
-                            be_trigger = OrderOpenPrice() + commission_pip + (OrderOpenPrice() - old_sl_price) * move_to_be_at_rr;
-                            new_sl_price = MathMax(be_trigger, support);
-                        } else {
-                            new_sl_price = support;
+                        be_trigger = OrderOpenPrice() + (OrderOpenPrice() - old_sl_price) * move_to_be_at_rr;
+                        new_sl_price = support;
+                        if (_bid(symbol) > be_trigger) {
+                            new_sl_price = MathMax(OrderOpenPrice() + commission_pip, new_sl_price);
                         }
-                        if (_fcmp(old_sl_price, support) < 0 && new_sl_price != 0.0) {
+                        if (_fcmp(old_sl_price, new_sl_price) < 0 && new_sl_price != 0.0) {
                             ObjectMove(sl_name, 0, iTime(symbol, tf, 0), new_sl_price);
                             Print("Order " + ticket + " trailing stop move sl line to ", new_sl_price);
                         }
                     } else if (OrderType() == OP_SELL) {
-                        if (old_sl_price > OrderOpenPrice() && move_to_be_at_rr > 0) {
-                            be_trigger = OrderOpenPrice() - commission_pip - (old_sl_price - OrderOpenPrice()) * move_to_be_at_rr;
-                            new_sl_price = MathMin(be_trigger, resistance);
-                        } else {
-                            new_sl_price = resistance;
+                        be_trigger = OrderOpenPrice() - (old_sl_price - OrderOpenPrice()) * move_to_be_at_rr;
+                        new_sl_price = resistance;
+                        if (_ask(symbol) < be_trigger) {
+                            new_sl_price = MathMax(OrderOpenPrice() - commission_pip, new_sl_price);
                         }
                         if (_fcmp(old_sl_price, new_sl_price) > 0 && new_sl_price != 0.0) {
                             ObjectMove(sl_name, 0, iTime(symbol, tf, 0), new_sl_price);
