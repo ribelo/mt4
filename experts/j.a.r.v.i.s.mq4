@@ -43,7 +43,6 @@ extern color   supply_color = C'177,83,103';
 extern color   demand_color = C'251,167,71';
 extern color   pointless_color = White;
 extern int     fibo_width = 1;
-extern bool    show_info = true;
 
 extern string  lab = "----Label---";
 extern bool    use_label_box = true;
@@ -506,9 +505,9 @@ bool IsTradingAllowed() {
 
 void GetFibo() {
     double entry_price, stop_price, label_price, temp_pending_pips, temp_break_even;
+    double lot_size, posible_profit, zone_size;
+    string label_name, text_color;
     datetime start_time, end_time, label_time;
-    string label_name, text_color, zone_size;
-    string decsript;
     int total_objects = ObjectsTotal();
     if (total_objects > 0) {
         for (int i = 0; i < total_objects; i++) {
@@ -526,56 +525,35 @@ void GetFibo() {
                         continue;
                     }
                     if (_fcmp(entry_price, stop_price) > 0) {
+                        zone_size = MathAbs(entry_price - stop_price) / point / multiplier;
+                        lot_size = DynamicDeltaLot(symbol, zone_size, max_dd, max_risk, balance_array);
+                        Print("lot_size ", lot_size);
                         ObjectSet(name, OBJPROP_COLOR, demand_color);
                         ObjectSet(name, OBJPROP_LEVELCOLOR, demand_color);
                         ObjectSet(name, OBJPROP_LEVELWIDTH, fibo_width);
                         ObjectSet(name, OBJPROP_FIBOLEVELS, 3);
-                        ObjectSetFiboDescription(name, 0, "Sl = %$");
-                        ObjectSetFiboDescription(name, 1, "Entry = %$");
+                        ObjectSetFiboDescription(name, 0, "Size = " +
+                                                 DoubleToStr(zone_size, 2) +
+                                                 "            Sl = %$");
+                        ObjectSetFiboDescription(name, 1, "Lot = " +
+                                                 DoubleToStr(lot_size, 2) +
+                                                 "        Entry = %$ ");
                         ObjectSetFiboDescription(name, 2, "TP = %$");
-                        if (show_info) {
-                            label_name = StringConcatenate(name, "_label");
-                            label_price = stop_price - (entry_price - stop_price) * 0.25;
-                            zone_size = DoubleToStr(MathAbs(entry_price - stop_price) / point / multiplier, 1);
-                            decsript = StringConcatenate("demand | zone_size: ", zone_size, " pips");
-                            if (ObjectFind(label_name) == -1) {
-                                ObjectCreate(label_name, OBJ_TEXT, 0, iTime(symbol, tf, 0), label_price);
-                            }
-                            ObjectSetText(label_name, text_color, info_text_size, font_type, demand_color);
-                            ObjectSet(label_name, OBJPROP_PRICE1, label_price);
-                            ObjectSet(label_name, OBJPROP_TIME1, iTime(symbol, tf, 0));
-                        }
                     }
                     if (_fcmp(entry_price, stop_price) < 0) {
+                        zone_size = MathAbs(entry_price - stop_price) / point / multiplier;
+                        lot_size = DynamicDeltaLot(symbol, zone_size, max_dd, max_risk, balance_array);
                         ObjectSet(name, OBJPROP_COLOR, supply_color);
                         ObjectSet(name, OBJPROP_LEVELCOLOR, supply_color);
                         ObjectSet(name, OBJPROP_LEVELWIDTH, fibo_width);
                         ObjectSet(name, OBJPROP_FIBOLEVELS, 3);
-                        ObjectSetFiboDescription(name, 0, "Sl = %$");
-                        ObjectSetFiboDescription(name, 1, "Entry = %$");
+                        ObjectSetFiboDescription(name, 0, "Size = " +
+                                                 DoubleToStr(zone_size, 2) +
+                                                 "            Sl = %$");
+                        ObjectSetFiboDescription(name, 1, "Lot = " +
+                                                 DoubleToStr(lot_size, 2) +
+                                                 "        Entry = %$ ");
                         ObjectSetFiboDescription(name, 2, "TP = %$");
-                        if (show_info) {
-                            label_name = StringConcatenate(name, "_label");
-                            label_price = stop_price - (entry_price - stop_price) * 0.5;
-                            zone_size = DoubleToStr(MathAbs(entry_price - stop_price) / point / multiplier, 1);
-                            text_color = StringConcatenate("supply | zone_size: ", zone_size, " pips");
-                            if (ObjectFind(label_name) == -1) {
-                                ObjectCreate(label_name, OBJ_TEXT, 0, iTime(symbol, tf, 0), label_price);
-                            }
-                            ObjectSetText(label_name, text_color, info_text_size, font_type, supply_color);
-                            ObjectSet(label_name, OBJPROP_PRICE1, label_price);
-                            ObjectSet(label_name, OBJPROP_TIME1, iTime(symbol, tf, 0));
-                        }
-                    }
-                }
-            } else if (ObjectType(name) == OBJ_TEXT) {
-                int name_len = StringLen(name);
-                string short_name = StringSubstr(name, 0, name_len - 6);
-                if (StringSubstr(name, 0, 4) == "Fibo") {
-                    if (ObjectFind(short_name) == -1) {
-                        ObjectDelete(name);
-                    } else if (ObjectGet(short_name, OBJPROP_COLOR) == pointless_color) {
-                        ObjectDelete(name);
                     }
                 }
             }
