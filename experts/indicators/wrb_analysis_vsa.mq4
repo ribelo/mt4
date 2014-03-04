@@ -31,7 +31,6 @@
 //Global External Inputs
 
 extern int look_back = 1024;
-extern int refresh_candles = 0;
 extern int look_for_zone = 128;
 extern bool nd_ns = true;
 extern bool effort = false;
@@ -108,7 +107,6 @@ int start() {
     counted_bars = IndicatorCounted();
     if(counted_bars > 0) {
         counted_bars--;
-        counted_bars -= refresh_candles;
     }
     limit = MathMin(iBars(symbol, tf) - counted_bars, look_back);
     for (i = 1; i < limit; i++) {

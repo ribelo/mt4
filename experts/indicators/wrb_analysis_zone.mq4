@@ -38,6 +38,7 @@
 
 extern int look_back = 1024;
 extern int refresh_candles = 16;
+extern int contraction_size = 16;
 extern bool swing_point_1 = true;
 extern bool swing_point_2 = true;
 extern bool swing_point_3 = true;
@@ -46,7 +47,6 @@ extern bool strong_continuation_2 = true;
 extern bool strong_continuation_3 = false;
 extern bool strong_continuation_4 = false;
 extern bool reaction_zone = true;
-extern int contraction_size = 16;
 extern color zone_bull_body = C'252,165,88';
 extern color zone_bear_body = C'177,83,103';
 extern color contraction_bull_body = C'205,138,108';

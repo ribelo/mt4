@@ -4,16 +4,36 @@
 		"selected_items":
 		[
 			[
+				"insi",
+				"inside_bull	zone"
+			],
+			[
+				"desi",
+				"desire_rr"
+			],
+			[
+				"lot",
+				"lot_size"
+			],
+			[
+				"MODE_LOT",
+				"MODE_LOTSTEP	24"
+			],
+			[
+				"ArraC",
+				"ArrayCopyRates	int"
+			],
+			[
+				"B",
+				"Bars	int"
+			],
+			[
 				"DRAW",
 				"DRAW_NONE	12"
 			],
 			[
 				"nor",
 				"normal"
-			],
-			[
-				"insi",
-				"inside_zone(ohlc *candle, size_t i, size_t contraction, size_t look_for_zone, size_t n)	zone"
 			],
 			[
 				"wr",
@@ -344,10 +364,6 @@
 				"demand_color"
 			],
 			[
-				"desi",
-				"desire_price"
-			],
-			[
 				"OrderClo",
 				"OrderCloseReliable"
 			],
@@ -498,72 +514,109 @@
 			[
 				"gls_pow",
 				"gsl_pow_3(const double x)	double"
-			],
-			[
-				"bull",
-				"bull_apaor"
-			],
-			[
-				"leng",
-				"fractal_length"
-			],
-			[
-				"s_",
-				"s_pA	double"
-			],
-			[
-				"FTL",
-				"FLT_EPSILON	macro"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
+			"file": "hxl_test.mq4",
+			"settings":
+			{
+				"buffer_size": 3629,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "[SideBarGit@SublimeText] \n[master e8cd7c9] Unfilled() fix\n 15 files changed, 122 insertions(+), 1782 deletions(-)\n rewrite console.log (100%)\n rewrite experts/libraries/wrb_analysis.dll (72%)",
+			"settings":
+			{
+				"buffer_size": 191,
+				"line_ending": "Unix",
+				"name": "[SideBarGit@SublimeText]",
+				"scratch": true
+			}
+		},
+		{
+			"contents": "[SideBarGit@SublimeText] \nwarning: push.default is unset; its implicit value is changing in\nGit 2.0 from 'matching' to 'simple'. To squelch this message\nand maintain the current behavior after the default changes, use:\n\n  git config --global push.default matching\n\nTo squelch this message and adopt the new behavior now, use:\n\n  git config --global push.default simple\n\nWhen push.default is set to 'matching', git will push local branches\nto the remote branches that already exist with the same name.\n\nIn Git 2.0, Git will default to the more conservative 'simple'\nbehavior, which only pushes the current branch to the corresponding\nremote branch that 'git pull' uses to update the current branch.\n\nSee 'git help config' and search for 'push.default' for further information.\n(the 'simple' mode was introduced in Git 1.7.11. Use the similar mode\n'current' instead of 'simple' if you sometimes use older versions of Git)\n\nTo https://huxley_source@bitbucket.org/huxley_source/mt4.git\n   d4e0b77..e8cd7c9  master -> master",
+			"settings":
+			{
+				"buffer_size": 1019,
+				"line_ending": "Unix",
+				"name": "[SideBarGit@SublimeText]",
+				"scratch": true
+			}
+		},
+		{
+			"file": "/home/huxley/Dropbox/code/mql/experts/j.a.r.v.i.s.mq4",
+			"settings":
+			{
+				"buffer_size": 45197,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/home/huxley/Dropbox/code/mql/experts/include/hxl_money_management.mqh",
+			"settings":
+			{
+				"buffer_size": 8286,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/huxley/Dropbox/code/mql/src/wrb_fvb.c",
+			"settings":
+			{
+				"buffer_size": 1679,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/huxley/Dropbox/code/mql/src/wrb_management.c",
+			"settings":
+			{
+				"buffer_size": 2231,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/huxley/Dropbox/code/mql/src/wrb_toolbox.h",
+			"settings":
+			{
+				"buffer_size": 19083,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/huxley/Dropbox/code/mql/src/wrb_vtr.c",
+			"settings":
+			{
+				"buffer_size": 15710,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/huxley/Dropbox/code/mql/src/wrb_zone.c",
+			"settings":
+			{
+				"buffer_size": 22391,
+				"line_ending": "Unix"
+			}
+		},
+		{
 			"file": "/home/huxley/Dropbox/code/mql/src/wrb_vsa.c",
 			"settings":
 			{
-				"buffer_size": 28898,
+				"buffer_size": 30042,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "/home/huxley/Dropbox/code/mql/src/wrb_vsa.h",
+			"file": "/home/huxley/Dropbox/code/mql/experts/include/hanover --- extensible functions (np).mqh",
 			"settings":
 			{
-				"buffer_size": 778,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/home/huxley/Dropbox/code/mql/experts/include/wrb_analysis.mqh",
-			"settings":
-			{
-				"buffer_size": 2847,
+				"buffer_size": 117034,
 				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/home/huxley/Dropbox/code/mql/src/wrb_export.c",
-			"settings":
-			{
-				"buffer_size": 18927,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "wrb_analysis_vsa.mq4",
-			"settings":
-			{
-				"buffer_size": 6738,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"settings":
-			{
-				"buffer_size": 0,
-				"line_ending": "Unix"
 			}
 		}
 	],
@@ -728,20 +781,33 @@
 	},
 	"file_history":
 	[
+		"/home/huxley/Dropbox/code/mql/src/wrb_confirmation.c",
+		"/home/huxley/Dropbox/code/mql/src/candle.h",
+		"/home/huxley/Dropbox/code/mql/src/deepthroat.h",
+		"/home/huxley/Dropbox/code/mql/src/wrb_export.c",
+		"/home/huxley/Dropbox/code/mql/src/wrb_toolbox.h",
+		"/home/huxley/Dropbox/code/mql/src/wrb_analysis.h",
+		"/home/huxley/Dropbox/code/mql/src/wrb_vsa.c",
+		"/home/huxley/Dropbox/code/mql/src/wrb_vsa.h",
+		"/home/huxley/Dropbox/code/mql/experts/include/wrb_analysis.mqh",
+		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_vsa.mq4",
+		"/home/huxley/Dropbox/code/heisenbug/heisenbug/quantum/analysis.pyx",
+		"/home/huxley/Dropbox/code/Dashboard/server/candle.h",
+		"/home/huxley/Dropbox/code/Dashboard/server/candle.c",
+		"/home/huxley/Dropbox/code/heisenbug/heisenbug/pa/candle.pyx",
+		"/home/huxley/Dropbox/code/mql/src/ccandle.pyx",
+		"/home/huxley/Dropbox/code/Dashboard/server/candle.pxd",
+		"/home/huxley/Dropbox/code/mql/src/candle.pxd",
+		"/home/huxley/Dropbox/code/mql/src/wrb_struct.h",
 		"/home/huxley/Dropbox/code/mql/console.log",
 		"/home/huxley/Dropbox/trading/MetaTrader Admiral Markets AS/experts/indicators/Ribelo VSA Pattern.mq4",
-		"/home/huxley/Dropbox/code/mql/src/wrb_export.c",
 		"/home/huxley/Dropbox/code/mql/src/wrb_zone.c",
 		"/home/huxley/Dropbox/code/mql/src/wrb_fvb.c",
-		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_vsa.mq4",
 		"/home/huxley/Dropbox/code/mql/experts/indicators/huxley_volume.mq4",
 		"/home/huxley/Downloads/nial_fuller/Nial Fuller - password.txt",
 		"/home/huxley/Dropbox/code/mql/experts/j.a.r.v.i.s.mq4",
-		"/home/huxley/Dropbox/code/mql/src/wrb_vsa.h",
-		"/home/huxley/Dropbox/code/mql/experts/include/wrb_analysis.mqh",
 		"/home/huxley/Dropbox/code/mql/wrb_analysis.def",
 		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_ajctr.mq4",
-		"/home/huxley/Dropbox/code/mql/src/wrb_vsa.c",
 		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_vsa.mq4",
 		"/home/huxley/Dropbox/code/mql/makefile",
 		"/home/huxley/Dropbox/code/mql/src/wrb_zone.h",
@@ -750,14 +816,10 @@
 		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_sr.mq4",
 		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_dcm.mq4",
 		"/home/huxley/Dropbox/code/mql/experts/include/hxl_money_management.mqh",
-		"/home/huxley/Dropbox/code/mql/src/candle.h",
 		"/home/huxley/Dropbox/code/mql/src/wrb_ajctr.c",
 		"/home/huxley/.config/sublime-text-3/Packages/Default/Default (Linux).sublime-keymap",
 		"/home/huxley/Dropbox/code/mql/src/wrb_management.c",
-		"/home/huxley/Dropbox/code/mql/src/wrb_toolbox.h",
-		"/home/huxley/Dropbox/code/mql/src/wrb_confirmation.c",
 		"/home/huxley/Dropbox/code/mql/src/wrb_apaor.c",
-		"/home/huxley/Dropbox/code/mql/src/wrb_analysis.h",
 		"/home/huxley/Dropbox/code/mql/src/wrb_analysis.c",
 		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_fvb.mq4",
 		"/home/huxley/Dropbox/code/mql/experts/include/hanover --- extensible functions (np).mqh",
@@ -817,7 +879,6 @@
 		"/tmp/gsl_math-1.c",
 		"/home/huxley/Dropbox/code/mql/gsl_math.def",
 		"/tmp/gsl_math.c",
-		"/home/huxley/Dropbox/code/mql/src/deepthroat.h",
 		"/home/huxley/Dropbox/code/mql/experts/include/gsl_math.mqh",
 		"/home/huxley/Dropbox/trading/MetaTrader Admiral Markets AS/experts/indicators/Ribelo DDSM.mq4",
 		"/home/huxley/Dropbox/trading/MetaTrader Admiral Markets AS/experts/mini supply&emand semi-auto trading robot by Ribelo.mq4",
@@ -847,19 +908,11 @@
 		"/home/huxley/Dropbox/code/c_wrb_analysis/experts/indicators/wrb_analysis_confirmation.mq4",
 		"/home/huxley/Dropbox/code/c_wrb_analysis/experts/indicators/wrb_analysis_dcm.mq4",
 		"/home/huxley/Dropbox/code/c_wrb_analysis/experts/indicators/wrb_analysis_fractal_break.mq4",
-		"/home/huxley/Dropbox/code/c_wrb_analysis/experts/indicators/wrb_analysis_divergence.mq4",
-		"/home/huxley/Dropbox/code/c_wrb_analysis/src/wrb_divergence.c",
-		"/home/huxley/Dropbox/code/c_wrb_analysis/src/candle.h",
-		"/home/huxley/Dropbox/code/c_wrb_analysis/src/candle.c",
-		"/home/huxley/Dropbox/code/c_wrb_analysis/src/wrb_divergence.h",
-		"/home/huxley/Dropbox/code/c_wrb_analysis/src/wrb_struct.h",
-		"/home/huxley/.config/sublime-text-3/Packages/SublimeClang/SublimeClang.sublime-settings",
-		"/home/huxley/Dropbox/code/c_wrb_analysis/conole.log",
-		"/home/huxley/Dropbox/code/c_wrb_analysis/console.log"
+		"/home/huxley/Dropbox/code/c_wrb_analysis/experts/indicators/wrb_analysis_divergence.mq4"
 	],
 	"find":
 	{
-		"height": 38.0
+		"height": 50.0
 	},
 	"find_in_files":
 	{
@@ -886,6 +939,43 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"inside_bear.v1.dir == 1",
+			"inside_bull",
+			"if (tmp.dir == inside_z.v1.dir) {\n            r = tmp;\n        }",
+			"return (0)",
+			"StrToStr",
+			"orders",
+			"OrderSymbol",
+			"OrderS",
+			"orders",
+			"OrderS",
+			"orders",
+			"open_trades",
+			" * move_to_be_at_rr",
+			"demand",
+			"lot_di",
+			"DynamicDeltaLot",
+			"_ask",
+			"_ASK",
+			"_ask",
+			"TrailingStop",
+			"unfilled(candle, i - j, j) &&",
+			"unfilled(sister, i - j, j)) {",
+			"unfilled(main, i - j, j)) {",
+			"unfilled(candle, i - j, j)) {",
+			"unfilled(candle, i - j, j) &&",
+			"unfilled(candle, i - j, j)) {",
+			"j",
+			"unfill",
+			"brok",
+			"end_b",
+			"unfill",
+			"unfil",
+			"ufiled",
+			"unfill",
+			"open",
+			"close",
+			"unfilled",
 			"_vsa",
 			"effort",
 			"30",
@@ -976,44 +1066,7 @@
 			"low",
 			"high",
 			"candle[i].high > candle[i - 1].high &&\n            candle[i].low >= candle[i - 1].low &&\n            (candle[i].close == candle[i].open ||",
-			"candle[i].high > candle[i - 1].high &&\n            candle[i].low >= candle[i - 1].low &&\n            bar_size(candle, i) <= bar_size(candle, i - 1) &&",
-			"candle[i].close == candle[i].open &&",
-			"candle[i].high > candle[i - 1].high &&\n            candle[i].low >= candle[i - 1].low &&\n            bar_size(candle, i) <= bar_size(candle, i - 1) &&",
-			"(candle[i].high > candle[i - 1].high &&\n            candle[i].low >= candle[i - 1].low &&\n            candle[i].close == candle[i].open &&",
-			"candle[i].close == candle[i].open &&",
-			"candle[i].high > candle[i - 1].high &&\n            candle[i].low >= candle[i - 1].low &&\n            bar_size(candle, i) <= bar_size(candle, i - 1) &&",
-			"candle[i].high > candle[i - 1].high &&\n            candle[i].low >= candle[i - 1].low &&\n            candle[i].close == candle[i].open &&",
-			"candle[i].close == candle[i].open &&",
-			"candle[i].high > candle[i - 1].high &&\n            candle[i].low >= candle[i - 1].low &&\n            bar_size(candle, i) <= bar_size(candle, i - 1) &&\n            candle[i].close >= candle[i - 1].close &&",
-			"candle[i].high > candle[i - 1].high &&\n            candle[i].low >= candle[i - 1].low &&\n            bar_size(candle, i) <= bar_size(candle, i - 1) &&",
-			"candle[i].close == candle[i - 1].close &&\n            bar_size(candle, i) > bar_size(candle, i - 1) &&\n            candle[i].close == candle[i].high &&",
-			"candle[i].close == candle[i - 1].close &&\n            bar_size(candle, i) > bar_size(candle, i - 1) &&\n            candle[i].close == candle[i].open &&",
-			"candle[i].close == candle[i].open &&",
-			"candle[i].close > candle[i - 1].close &&\n            bar_size(candle, i) > bar_size(candle, i - 1) &&\n            candle[i].close == candle[i].open &&",
-			"candle[i].close > candle[i - 1].close &&\n            bar_size(candle, i) > bar_size(candle, i - 1) &&\n            candle[i].close > candle[i + 1].close &&",
-			"||",
-			"candle[i].high > candle[i - 1].high &&\n            candle[i].low >= candle[i - 1].low &&\n            bar_size(candle, i) > bar_size(candle, i - 1) &&",
-			"candle[i].close > candle[i - 1].close &&\n            bar_size(candle, i) > bar_size(candle, i - 1) &&",
-			"candle[i].high > candle[i - 1].high &&\n            candle[i].low >= candle[i - 1].low &&\n            bar_size(candle, i) > bar_size(candle, i - 1) &&\n            candle[i].close == candle[i - 1].low &&",
-			"candle[i].high > candle[i - 1].high &&\n            candle[i].low >= candle[i - 1].low &&\n            bar_size(candle, i) > bar_size(candle, i - 1) &&\n            candle[i].close == bar_mid_point(candle, i - 1) &&",
-			"candle[i].high > candle[i - 1].high &&\n            candle[i].low >= candle[i - 1].low &&\n",
-			"candle[i].high > candle[i - 1].high &&\n            candle[i].low >= candle[i - 1].low &&\n            bar_size(candle, i) > bar_size(candle, i - 1) &&\n            candle[i].close == candle[i].high &&",
-			"candle[i].high > candle[i - 1].high &&\n            candle[i].low >= candle[i - 1].low &&\n            bar_size(candle, i) > bar_size(candle, i - 1) &&\n            candle[i].close == candle[i].open &&",
-			"candle[i].high > candle[i - 1].high &&\n            candle[i].low >= candle[i - 1].low &&\n            bar_size(candle, i) <= bar_size(candle, i - 1) &&",
-			"candle[i].high > candle[i - 1].high &&\n            candle[i].low >= candle[i - 1].low &&\n            bar_size(candle, i) <= bar_size(candle, i - 1) &&\n            candle[i].close > candle[i + 1].close &&",
-			"candle[i].high > candle[i - 1].high &&\n            candle[i].low >= candle[i - 1].low &&\n            bar_size(candle, i) <= bar_size(candle, i - 1) &&\n            candle[i].close > candle[i + 1].close &&\n            candle[i].high >= candle[i + 1].high",
-			"candle[i].high > candle[i - 1].high &&\n            candle[i].low >= candle[i - 1].low &&\n            bar_size(candle, i) <= bar_size(candle, i - 1) &&",
-			"candle[i].high > candle[i - 1].high &&\n            candle[i].low >= candle[i - 1].low &&\n            bar_size(candle, i) <= bar_size(candle, i - 1)",
-			"open",
-			"high",
-			"candle[i].volume < candle[i - 1].volume",
-			"bar_mid_point(candle, i)",
-			"high",
-			"bar_mid_point(candle, i)",
-			"open",
-			"low",
-			"high",
-			"if (i < 2 && i > n - 2) {"
+			"candle[i].high > candle[i - 1].high &&\n            candle[i].low >= candle[i - 1].low &&\n            bar_size(candle, i) <= bar_size(candle, i - 1) &&"
 		],
 		"highlight": false,
 		"in_selection": false,
@@ -1159,141 +1212,24 @@
 	"groups":
 	[
 		{
-			"selected": 5,
+			"selected": 10,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "/home/huxley/Dropbox/code/mql/src/wrb_vsa.c",
+					"file": "hxl_test.mq4",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 28898,
+						"buffer_size": 3629,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								27095,
-								27095
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C Improved/C Improved.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 7968.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "/home/huxley/Dropbox/code/mql/src/wrb_vsa.h",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 778,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								765,
-								765
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C Improved/C Improved.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "/home/huxley/Dropbox/code/mql/experts/include/wrb_analysis.mqh",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2847,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2671,
-								2671
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "/home/huxley/Dropbox/code/mql/src/wrb_export.c",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 18927,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								16199,
-								16199
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C Improved/C Improved.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 9360.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "wrb_analysis_vsa.mq4",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 6738,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								6738,
-								6738
+								3629,
+								3629
 							]
 						],
 						"settings":
@@ -1302,19 +1238,19 @@
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
-						"translation.x": 0.0,
-						"translation.y": 1511.0,
+						"translation.x": 66.0,
+						"translation.y": 192.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 8,
 					"type": "text"
 				},
 				{
-					"buffer": 5,
+					"buffer": 1,
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 0,
+						"buffer_size": 191,
 						"regions":
 						{
 						},
@@ -1327,10 +1263,309 @@
 						],
 						"settings":
 						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
+							"auto_name": "[SideBarGit@SublimeText]",
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"word_wrap": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1019,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"auto_name": "[SideBarGit@SublimeText]",
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"word_wrap": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "/home/huxley/Dropbox/code/mql/experts/j.a.r.v.i.s.mq4",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 45197,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								45197,
+								45197
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/MetaQuotes (MQL4) Language Package/Syntaxes/MQL4.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 9904.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "/home/huxley/Dropbox/code/mql/experts/include/hxl_money_management.mqh",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 8286,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								6801,
+								6801
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2496.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "/home/huxley/Dropbox/code/mql/src/wrb_fvb.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1679,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								792,
+								792
+							],
+							[
+								1397,
+								1397
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C Improved/C Improved.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 11,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "/home/huxley/Dropbox/code/mql/src/wrb_management.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2231,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								445,
+								445
+							],
+							[
+								668,
+								668
+							],
+							[
+								1511,
+								1511
+							],
+							[
+								1735,
+								1735
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C Improved/C Improved.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 10,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "/home/huxley/Dropbox/code/mql/src/wrb_toolbox.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 19083,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								721,
+								721
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C Improved/C Improved.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "/home/huxley/Dropbox/code/mql/src/wrb_vtr.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 15710,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2904,
+								2904
+							],
+							[
+								6674,
+								6674
+							],
+							[
+								10458,
+								10458
+							],
+							[
+								14225,
+								14225
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C Improved/C Improved.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 592.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "/home/huxley/Dropbox/code/mql/src/wrb_zone.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 22391,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								22160,
+								22160
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C Improved/C Improved.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 8119.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 10,
+					"file": "/home/huxley/Dropbox/code/mql/src/wrb_vsa.c",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 30042,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								27494,
+								27494
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C Improved/C Improved.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 8668.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -1339,8 +1574,39 @@
 			]
 		},
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 11,
+					"file": "/home/huxley/Dropbox/code/mql/experts/include/hanover --- extensible functions (np).mqh",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 117034,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								11179,
+								11179
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -1372,7 +1638,7 @@
 		"cols":
 		[
 			0.0,
-			0.571038251366,
+			0.686475409836,
 			1.0
 		],
 		"rows":

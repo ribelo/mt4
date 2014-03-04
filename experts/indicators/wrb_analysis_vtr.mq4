@@ -35,7 +35,6 @@
 //Global External Inputs
 
 extern int look_back = 512;
-extern int refresh_candles = 0;
 extern int look_for_zone = 128;
 extern string sister_symbol = "";
 extern bool invert_sister = 0;
@@ -137,7 +136,6 @@ int start() {
     counted_bars = IndicatorCounted();
     if(counted_bars > 0) {
         counted_bars--;
-        counted_bars -= refresh_candles;
     }
     limit = MathMin(iBars(symbol, tf) - counted_bars, look_back);
     for (i = 1; i < limit; i++) {

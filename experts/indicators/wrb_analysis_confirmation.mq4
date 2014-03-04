@@ -33,7 +33,7 @@
 
 extern int look_back = 512;
 extern int contraction_size = 16;
-extern int refresh_candles = 32;
+extern int refresh_candles = 16;
 extern bool pattern_a = true;
 extern bool pattern_b = true;
 extern bool pattern_c = true;

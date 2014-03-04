@@ -621,8 +621,13 @@ void SupplyDemandTrading() {
                                 lot_size = DynamicDeltaLot(symbol, MathAbs(price - exit_price[i]), max_dd, max_risk, balance_array);
                                 ticket = OrderSendReliableMKT(symbol, type, lot_size, price, slippage, stpo_price, take_price, trade_comment, magic_number, 0, CLR_NONE);
                                 SendNotification("Demand zone fired buy order " + name);
+                                if (ticket != 0) {
+                                    ObjectDelete(name);
+                                    DrawHiddenTakeProfit(ticket, entry_price[i] + (desire_rr[i] - 1) * zone_size[i]);
+                                    DrawHiddenStopLoss(ticket, exit_price[i]);
+                                }
+                                continue;
                             }
-                            break;
                         }
                     }
                 } else if (ObjectGet(name, OBJPROP_COLOR) == supply_color) {
@@ -662,8 +667,13 @@ void SupplyDemandTrading() {
                                 lot_size = DynamicDeltaLot(symbol, MathAbs(price - exit_price[i]), max_dd, max_risk, balance_array);
                                 ticket = OrderSendReliableMKT(symbol, type, lot_size, price, slippage, stpo_price, take_price, trade_comment, magic_number, 0, CLR_NONE);
                                 SendNotification("Supply zone fired sell order " + name);
+                                if (ticket != 0) {
+                                    ObjectDelete(name);
+                                    DrawHiddenTakeProfit(ticket, entry_price[i] - (desire_rr[i] - 1) * zone_size[i]);
+                                    DrawHiddenStopLoss(ticket, exit_price[i]);
+                                }
+                                continue;
                             }
-                            break;
                         }
                     }
                 }
@@ -699,25 +709,12 @@ void SasTrading() {
                     price = _bid(symbol);
                     stop = trigger + hidden_pips * point;
                     take = price - (trigger - price) * 3 - hidden_pips * point;
-                    temp_send_lot = DynamicDeltaLot(symbol, MathAbs(price - trigger), max_dd, max_risk, balance_array);
+                    send_lot = DynamicDeltaLot(symbol, MathAbs(price - trigger), max_dd, max_risk, balance_array);
                     Print("Sell price ", price, " trigger ", trigger, " stop ", stop, " take ", take);
-                    while (ticket == 0) {
-                        while (temp_send_lot > 0) {
-                            if (temp_send_lot > MarketInfo(symbol, MODE_MAXLOT)) {
-                                send_lot = MarketInfo(symbol, MODE_MAXLOT);
-                                temp_send_lot -= MarketInfo(symbol, MODE_MAXLOT);
-                            } else {
-                                send_lot = temp_send_lot;
-                                temp_send_lot = 0;
-                            }
-                            if (ticket == 0) {
-                                ticket = OrderSendReliableMKT(symbol, type, send_lot, price, slippage, stop, take, trade_comment, temp_magic_number, 0, CLR_NONE);
-                            }
-                        }
-                    }
+                    ticket = OrderSendReliableMKT(symbol, type, send_lot, price, slippage, stop, take, trade_comment, temp_magic_number, 0, CLR_NONE);
                     if (ticket != 0) {
                         ObjectDelete(name);
-                        DrawHiddenTakeProfit(ticket, take + hidden_pips * point);
+                        DrawHiddenTakeProfit(ticket, price - (trigger - price) * 3);
                         DrawHiddenStopLoss(ticket, trigger);
                     }
                 }
@@ -732,25 +729,12 @@ void SasTrading() {
                     price = _ask(symbol);
                     stop = trigger - hidden_pips * point;
                     take = price + (price - trigger) * 3 +  hidden_pips * point;
-                    temp_send_lot = DynamicDeltaLot(symbol, MathAbs(price - trigger), max_dd, max_risk, balance_array);
+                    send_lot = DynamicDeltaLot(symbol, MathAbs(price - trigger), max_dd, max_risk, balance_array);
                     Print("Buy price ", price, " trigger ", trigger, " stop ", stop, " take ", take);
-                    while (ticket == 0) {
-                        while (temp_send_lot > 0) {
-                            if (temp_send_lot > MarketInfo(symbol, MODE_MAXLOT)) {
-                                send_lot = MarketInfo(symbol, MODE_MAXLOT);
-                                temp_send_lot -= MarketInfo(symbol, MODE_MAXLOT);
-                            } else {
-                                send_lot = temp_send_lot;
-                                temp_send_lot = 0;
-                            }
-                            if (ticket == 0) {
-                                ticket = OrderSendReliableMKT(symbol, type, send_lot, price, slippage, stop, take, trade_comment, temp_magic_number, 0, CLR_NONE);
-                            }
-                        }
-                    }
+                    ticket = OrderSendReliableMKT(symbol, type, send_lot, price, slippage, stop, take, trade_comment, temp_magic_number, 0, CLR_NONE);
                     if (ticket != 0) {
                         ObjectDelete(name);
-                        DrawHiddenTakeProfit(ticket, take - hidden_pips * point);
+                        DrawHiddenTakeProfit(ticket, price + (price - trigger) * 3);
                         DrawHiddenStopLoss(ticket, trigger);
                     }
                 }
@@ -944,10 +928,10 @@ int start() {
     //----
     UpdateBalanceArray(balance_array);
     CountOpenTrades();
-    LookForTradeClosure();
-    PendingToFibo();
-    TrailingStop();
     DragDropLine();
+    TrailingStop();
+    LookForTradeClosure();
+    //PendingToFibo();
     GetFibo();
     if (IsTradeAllowed()) {
         SupplyDemandTrading();
