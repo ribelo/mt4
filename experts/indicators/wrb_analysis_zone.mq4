@@ -5,6 +5,7 @@
 //+-------------------------------------------------------------------------------------------+
 #property copyright "Copyright © 2014 Huxley"
 #property link      "email:   huxley.source@gmail.com"
+#include <gsl_math.mqh>
 #include <wrb_analysis.mqh>
 #include <hxl_utils.mqh>
 #include <hanover --- function header (np).mqh>
@@ -50,13 +51,14 @@ extern color zone_bull_body = C'252,165,88';
 extern color zone_bear_body = C'177,83,103';
 extern color contraction_bull_body = C'205,138,108';
 extern color contraction_bear_body = C'151,125,130';
-extern color line_color = C'111,116,125';
+extern color zone_color = C'111,116,125';
+extern color zone_hg_color = C'147,141,125';
 extern color text_color = C'56,47,50';
 extern bool make_text = false;
 extern bool draw_zone = true;
 extern bool draw_filled = false;
 extern int draw_old = 512;
-extern bool send_notification = true;
+extern bool send_notification = false;
 extern double label_offset_percent = 2;
 extern int font_size = 8;
 extern string font_name = "Cantarell";
@@ -466,39 +468,96 @@ void validate_zone(double &zone_open[], double &zone_close[]) {
 }
 
 
-void draw_zone(int begin, int end, double open, double close) {
+void draw_zone(int begin, int end, double zone_open, double zone_close) {
     string time_str = StringConcatenate(TimeToStr(Time[begin], TIME_DATE), "_",
                                         TimeToStr(Time[begin], TIME_MINUTES));
-    string open_line_name = StringConcatenate(_name, "_open_line_", time_str);
-    string close_line_name = StringConcatenate(_name, "_close_line_", time_str);
-
+    string open_zone_name = StringConcatenate(_name, "_open_zone_line_", time_str);
+    string close_zone_name = StringConcatenate(_name, "_close_zone_line_", time_str);
+    string open_hg_name = StringConcatenate(_name, "_open_hg_line_", time_str);
+    string close_hg_name = StringConcatenate(_name, "_close_hg_line_", time_str);
+    double hg_open = 0.0, hg_close = 0.0;
+    int hg_open_begin = 0, hg_close_begin = 0;
     if (begin - end > 3 && begin - end < draw_old) {
-        if (ObjectFind(open_line_name) == -1) {
-            ObjectCreate(open_line_name, OBJ_TREND, 0, Time[begin], open, Time[end], open);
-            ObjectSet(open_line_name, OBJPROP_COLOR, line_color);
-            ObjectSet(open_line_name, OBJPROP_STYLE, STYLE_SOLID);
-            ObjectSet(open_line_name, OBJPROP_WIDTH, line_width);
-            ObjectSet(open_line_name, OBJPROP_RAY, false);
-            ObjectSet(open_line_name, OBJPROP_BACK, true);
-        } else {
-            ObjectSet(open_line_name, OBJPROP_TIME2, Time[end]);
+        if (zone_close > zone_open &&
+                !_fcmp(zone_open, iOpen(symbol, tf, begin)) &&
+                !_fcmp(zone_close, iClose(symbol, tf, begin))) {
+            if (iHigh(symbol, tf, begin + 1) > zone_open) {
+                hg_open = iHigh(symbol, tf, begin + 1);
+                hg_open_begin = begin + 1;
+            }
+            if (iLow(symbol, tf, begin - 1) < zone_close) {
+                hg_close = iLow(symbol, tf, begin - 1);
+                hg_close_begin = begin - 1;
+            }
+        } else if (zone_close < zone_open &&
+                !_fcmp(zone_open, iOpen(symbol, tf, begin)) &&
+                !_fcmp(zone_close, iClose(symbol, tf, begin))) {
+            if (iLow(symbol, tf, begin + 1) < zone_open) {
+                hg_open = iLow(symbol, tf, begin + 1);
+                hg_open_begin = begin + 1;
+            }
+            if (iHigh(symbol, tf, begin - 1) > zone_close) {
+                hg_close = iHigh(symbol, tf, begin - 1);
+                hg_close_begin = begin - 1;
+            }
         }
-        if (ObjectFind(close_line_name) == -1) {
-            ObjectCreate(close_line_name, OBJ_TREND, 0, Time[begin], close, Time[end], close);
-            ObjectSet(close_line_name, OBJPROP_COLOR, line_color);
-            ObjectSet(close_line_name, OBJPROP_STYLE, STYLE_SOLID);
-            ObjectSet(close_line_name, OBJPROP_WIDTH, line_width);
-            ObjectSet(close_line_name, OBJPROP_RAY, false);
-            ObjectSet(close_line_name, OBJPROP_BACK, true);
+        if (ObjectFind(open_zone_name) == -1) {
+            ObjectCreate(open_zone_name, OBJ_TREND, 0, Time[begin], zone_open, Time[end], zone_open);
+            ObjectSet(open_zone_name, OBJPROP_COLOR, zone_color);
+            ObjectSet(open_zone_name, OBJPROP_COLOR, zone_color);
+            ObjectSet(open_zone_name, OBJPROP_STYLE, STYLE_SOLID);
+            ObjectSet(open_zone_name, OBJPROP_WIDTH, line_width);
+            ObjectSet(open_zone_name, OBJPROP_RAY, false);
+            ObjectSet(open_zone_name, OBJPROP_BACK, true);
         } else {
-            ObjectSet(close_line_name, OBJPROP_TIME2, Time[end]);
+            ObjectSet(open_zone_name, OBJPROP_TIME2, Time[end]);
+        }
+        if (ObjectFind(close_zone_name) == -1) {
+            ObjectCreate(close_zone_name, OBJ_TREND, 0, Time[begin], zone_close, Time[end], zone_close);
+            ObjectSet(close_zone_name, OBJPROP_COLOR, zone_color);
+            ObjectSet(close_zone_name, OBJPROP_COLOR, zone_color);
+            ObjectSet(close_zone_name, OBJPROP_STYLE, STYLE_SOLID);
+            ObjectSet(close_zone_name, OBJPROP_WIDTH, line_width);
+            ObjectSet(close_zone_name, OBJPROP_RAY, false);
+            ObjectSet(close_zone_name, OBJPROP_BACK, true);
+        } else {
+            ObjectSet(close_zone_name, OBJPROP_TIME2, Time[end]);
+        }
+
+        if (ObjectFind(open_hg_name) == -1 && hg_open > 0.0) {
+            ObjectCreate(open_hg_name, OBJ_TREND, 0, Time[hg_open_begin], hg_open, Time[end], hg_open);
+            ObjectSet(open_hg_name, OBJPROP_COLOR, zone_hg_color);
+            ObjectSet(open_hg_name, OBJPROP_COLOR, zone_hg_color);
+            ObjectSet(open_hg_name, OBJPROP_STYLE, STYLE_SOLID);
+            ObjectSet(open_hg_name, OBJPROP_WIDTH, line_width);
+            ObjectSet(open_hg_name, OBJPROP_RAY, false);
+            ObjectSet(open_hg_name, OBJPROP_BACK, true);
+        } else {
+            ObjectSet(open_zone_name, OBJPROP_TIME2, Time[end]);
+        }
+        if (ObjectFind(close_hg_name) == -1) {
+            ObjectCreate(close_hg_name, OBJ_TREND, 0, Time[hg_close_begin], hg_close, Time[end], hg_close);
+            ObjectSet(close_hg_name, OBJPROP_COLOR, zone_hg_color);
+            ObjectSet(close_hg_name, OBJPROP_COLOR, zone_hg_color);
+            ObjectSet(close_hg_name, OBJPROP_STYLE, STYLE_SOLID);
+            ObjectSet(close_hg_name, OBJPROP_WIDTH, line_width);
+            ObjectSet(close_hg_name, OBJPROP_RAY, false);
+            ObjectSet(close_hg_name, OBJPROP_BACK, true);
+        } else {
+            ObjectSet(close_hg_name, OBJPROP_TIME2, Time[end]);
         }
     } else {
-        if (ObjectFind(open_line_name) == 1) {
-            ObjectDelete(open_line_name);
+        if (ObjectFind(open_zone_name) == 1) {
+            ObjectDelete(open_zone_name);
         }
-        if (ObjectFind(close_line_name) == 1) {
-            ObjectDelete(close_line_name);
+        if (ObjectFind(close_zone_name) == 1) {
+            ObjectDelete(close_zone_name);
+        }
+        if (ObjectFind(open_hg_name) == 1) {
+            ObjectDelete(open_hg_name);
+        }
+        if (ObjectFind(close_hg_name) == 1) {
+            ObjectDelete(close_hg_name);
         }
     }
 }
