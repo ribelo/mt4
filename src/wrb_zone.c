@@ -546,3 +546,16 @@ zone inside_bear_zone(ohlc *candle, size_t i, size_t contraction,
     }
     return z;
 }
+
+
+zone inside_zone(ohlc *candle, size_t i, size_t contraction,
+                  size_t look_for_zone, size_t n) {
+    zone z = {};
+    if (!z.v1.dir) {
+        z = inside_bull_zone(candle, i, contraction, look_for_zone, n);
+    }
+    if (!z.v1.dir) {
+        z = inside_bear_zone(candle, i, contraction, look_for_zone, n);
+    }
+    return z;
+}
