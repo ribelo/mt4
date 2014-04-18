@@ -7,8 +7,6 @@
 #property link      "email:   huxley.source@gmail.com"
 #include <wrb_analysis.mqh>
 #include <hxl_utils.mqh>
-#include <hanover --- function header (np).mqh>
-#include <hanover --- extensible functions (np).mqh>
 
 
 //+-------------------------------------------------------------------------------------------+
@@ -40,7 +38,7 @@ extern color bear_wrb_hg_body = C'177,83,103';
 extern int bar_width = 1;
 
 //Misc
-double candle[][6];
+MqlRates candle[];
 int pip_mult_tab[]={1,10,1,10,1,10,100,1000};
 string symbol;
 int tf, digits, multiplier, spread;
@@ -51,7 +49,7 @@ double body_wrb_open[], body_wrb_close[], body_wrb_hg_open[], body_wrb_hg_close[
 //+-------------------------------------------------------------------------------------------+
 //| Custom indicator initialization function                                                  |
 //+-------------------------------------------------------------------------------------------+
-int init() {
+int OnInit() {
     symbol = Symbol();
     tf = Period();
     digits = MarketInfo(symbol, MODE_DIGITS);
@@ -83,34 +81,44 @@ int init() {
 //+-------------------------------------------------------------------------------------------+
 //| Custom indicator deinitialization function                                                |
 //+-------------------------------------------------------------------------------------------+
-int deinit() {
+int OnDeinit() {
     return (0);
 }
 
 //+-------------------------------------------------------------------------------------------+
 //| Custom indicator iteration function                                                       |
 //+-------------------------------------------------------------------------------------------+
-int start() {
+int OnCalculate (const int rates_total,      // size of input time series
+                 const int prev_calculated,  // bars handled in previous call
+                 const datetime& time[],     // Time
+                 const double& open[],       // Open
+                 const double& high[],       // High
+                 const double& low[],        // Low
+                 const double& close[],      // Close
+                 const long& tick_volume[],  // Tick Volume
+                 const long& volume[],       // Real Volume
+                 const int& spread[]) {      // Spread
+
     int i, limit, counted_bars;
-    if (!_new_bar(symbol, tf)) {
+    if (!new_bar(symbol, tf)) {
         return (0);
     }
-    counted_bars = IndicatorCounted();
+    counted_bars = prev_calculated;
     if(counted_bars > 0) {
         counted_bars--;
     }
-    limit = MathMin(iBars(symbol, tf) - counted_bars, look_back);
-    for (i = 1; i < iBars(symbol, tf); i++) {
+    limit = MathMin(rates_total - counted_bars, look_back);
+    for (i = 1; i < rates_total; i++) {
         if (draw_wrb == true) {
-            if (_wrb(candle, i, iBars(symbol, tf)) != 0) {
-                body_wrb_open[i] = iOpen(symbol, tf, i);
-                body_wrb_close[i] = iClose(symbol, tf, i);
+            if (_wrb(candle, i, rates_total) != 0) {
+                body_wrb_open[i] = open[i];
+                body_wrb_close[i] = close[i];
             }
         }
         if (draw_wrb_hg == true) {
-            if (_wrb_hg(candle, i, iBars(symbol, tf)) != 0) {
-                body_wrb_hg_open[i] = iOpen(symbol, tf, i);
-                body_wrb_hg_close[i] = iClose(symbol, tf, i);
+            if (_wrb_hg(candle, i, rates_total) != 0) {
+                body_wrb_hg_open[i] = open[i];
+                body_wrb_hg_close[i] = close[i];
             }
         }
     }

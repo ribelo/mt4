@@ -10,7 +10,7 @@ double _bid(string symbol) {
 }
 
 
-bool _new_bar(string symbol, int timeframe) {
+bool new_bar(string symbol, int timeframe) {
     static datetime symbol_time[9];
     if (timeframe == 1) {
         if (iTime(symbol, timeframe, 0) != symbol_time[0]) {

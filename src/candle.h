@@ -183,13 +183,13 @@ static inline int filled_by(ohlc *candle, size_t i, int n) {
 	int candle_dir = dir(candle, i);
 	if (candle_dir == 1) {
 		for (j = 1; j < n - i; j++) {
-			if (gsl_fcmp(candle[i + j].low, candle[i].open, FLT_EPSILON) < 0) {
+			if (gsl_fcmp(candle[i + j].low, candle[i].open, FLT_EPSILON) <= 0) {
 				return i + j;
 			}
 		}
 	} else if (candle_dir == -1) {
 		for (j = 1; j < n - i; j++) {
-			if (gsl_fcmp(candle[i + j].high, candle[i].open, FLT_EPSILON) > 0) {
+			if (gsl_fcmp(candle[i + j].high, candle[i].open, FLT_EPSILON) >= 0) {
 				return i + j;
 
 			}

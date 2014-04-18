@@ -139,6 +139,11 @@ WRBFUNC int __stdcall _fractal_break(ohlc *candle, size_t i, size_t l,
 
 
 WRBFUNC int __stdcall _wrb(ohlc *candle, size_t i, size_t n) {
+    printf("i %d n%d close %f\n", i, n, candle[i].close);
+    printf("i %d n%d open %f\n", i, n, candle[i].open);
+    printf("i %d n%d time %d\n", i, n, candle[i].timestamp);
+    printf("i %d n%d volume %d\n", i, n, candle[i].volume);
+    printf("i %d n%d rvolume %d\n", i, n, candle[i].rvolume);
     if (n > 0 && i < n) {
         return wrb(candle, n - i - 1).dir;
     }

@@ -6,20 +6,20 @@ GSL=-lgsl -lgslcblas -lm
 CFLAGS=-Wall -O3 --std=gnu99 -ffast-math -funroll-loops -march=x86-64
 LFLAGS=-Wl,--enable-stdcall-fixup
 
-ALL: ./experts/libraries/wrb_analysis.dll \
-	 ./experts/libraries/gsl_math.dll
+ALL: ./MQL4/Libraries/wrb_analysis.dll \
+	 ./MQL4/Libraries/gsl_math.dll
 
-./experts/libraries/wrb_analysis.dll: ./src/wrb_export.o ./wrb_analysis.def
+./MQL4/Libraries/wrb_analysis.dll: ./src/wrb_export.o ./wrb_analysis.def
 	$(CC) $(LFLAGS) $(LINK) $(INCLUDE) -shared -static $(CFLAGS) -o \
-	./experts/libraries/wrb_analysis.dll \
+	./MQL4/Libraries/wrb_analysis.dll \
 	./src/wrb_export.c ./src/wrb_zone.c ./src/wrb_ajctr.c \
 	./src/wrb_management.c ./src/wrb_apaor.c ./src/wrb_vsa.c \
 	./src/wrb_fvb.c ./src/wrb_vtr.c ./src/wrb_confirmation.c \
 	./wrb_analysis.def $(GSL)
 
-./experts/libraries/gsl_math.dll: ./src/gsl_math.o
+./MQL4/Libraries/gsl_math.dll: ./src/gsl_math.o
 	$(CC) $(LFLAGS) $(LINK) $(INCLUDE) -shared -static $(CFLAGS) -o \
-	./experts/libraries/gsl_math.dll \
+	./MQL4/Libraries/gsl_math.dll \
 	./src/gsl_math.c ./gsl_math.def $(GSL)
 
 # ./src/gsl_math.o: ./src/gsl_math.c

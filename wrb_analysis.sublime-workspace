@@ -681,6 +681,8 @@
 	},
 	"file_history":
 	[
+		"/home/huxley/Dropbox/code/mql/MQL4/Indicators/wrb_analysis_body.mq4",
+		"/home/huxley/Dropbox/code/mql/MQL4/Indicators/wrb_analysis_zone.mq4",
 		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_confirmation.mq4",
 		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_fractal_break.mq4",
 		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_zone.mq4",
@@ -806,9 +808,7 @@
 		"/etc/yaourtrc",
 		"/home/huxley/Dropbox/code/c_wrb_analysis/experts/indicators/wrb_analysis_swing_point_1.mq4",
 		"/home/huxley/Dropbox/code/c_wrb_analysis/experts/include/wrb_total.mqh",
-		"/home/huxley/Dropbox/code/c_wrb_analysis/experts/indicators/Ribelo Fractals.mq4",
-		"/home/huxley/Dropbox/code/c_wrb_analysis/experts/indicators/Ribelo Fractal Break.mq4",
-		"/home/huxley/Dropbox/code/c_wrb_analysis/experts/indicators/Ribelo DCM.mq4"
+		"/home/huxley/Dropbox/code/c_wrb_analysis/experts/indicators/Ribelo Fractals.mq4"
 	],
 	"find":
 	{
@@ -1195,7 +1195,7 @@
 		[
 			[
 				"",
-				"~/Dropbox/code/Dashboard/server/app/server.sublime-project"
+				"~/Dropbox/code/mql/experts/indicators/mql.sublime-workspace"
 			]
 		],
 		"width": 380.0

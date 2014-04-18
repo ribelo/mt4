@@ -317,9 +317,12 @@ zone strong_continuation_3(ohlc *candle, size_t i, size_t contraction, size_t n)
     if (wrb_hg(candle, i, n).dir == 1) {
         for (j = 4; j < end_loop; j++) {
             if (wrb(candle, i - j).dir == 1 &&
-                    gsl_fcmp(body_mid_point(candle, i - j),
+                    (gsl_fcmp(body_mid_point(candle, i),
+                             highest_close(candle, i - 3, i),
+                             FLT_EPSILON) > 0 ||
+                     gsl_fcmp(body_mid_point(candle, i - j),
                              highest_close(candle, i - j - 3, i - j),
-                             FLT_EPSILON) > 0 &&
+                             FLT_EPSILON) > 0) &&
                     contraction_share(candle, i, i - j) &&
                     broke_bars(candle, i, j) &&
                     contraction_body_size_break(candle, i, i - j)) {
@@ -337,9 +340,12 @@ zone strong_continuation_3(ohlc *candle, size_t i, size_t contraction, size_t n)
     } else if (wrb_hg(candle, i, n).dir == -1) {
         for (j = 4; j < end_loop; j++) {
             if (wrb(candle, i - j).dir == -1 &&
-                    gsl_fcmp(body_mid_point(candle, i - j),
+                    (gsl_fcmp(body_mid_point(candle, i),
+                             lowest_close(candle, i - 3, i),
+                             FLT_EPSILON) < 0 ||
+                     gsl_fcmp(body_mid_point(candle, i - j),
                              lowest_close(candle, i - j - 3, i - j),
-                             FLT_EPSILON) < 0 &&
+                             FLT_EPSILON) < 0) &&
                     contraction_share(candle, i, i - j) &&
                     broke_bars(candle, i, j) &&
                     contraction_body_size_break(candle, i, i - j)) {
@@ -365,9 +371,6 @@ zone strong_continuation_4(ohlc *candle, size_t i, size_t contraction, size_t n)
     if (wrb_hg(candle, i, n).dir == 1) {
         for (j = 4; j < end_loop; j++) {
             if (wrb(candle, i - j).dir == 1 &&
-                    gsl_fcmp(body_size(candle, i),
-                             body_size(candle, i - j),
-                             FLT_EPSILON) > 0 &&
                     gsl_fcmp(candle[i].close,
                              candle[i - j].close,
                              FLT_EPSILON) > 0 &&
@@ -391,9 +394,6 @@ zone strong_continuation_4(ohlc *candle, size_t i, size_t contraction, size_t n)
     } else if (wrb_hg(candle, i, n).dir == -1) {
         for (j = 4; j < end_loop; j++) {
             if (wrb(candle, i - j).dir == -1 &&
-                    gsl_fcmp(body_size(candle, i),
-                             body_size(candle, i - j),
-                             FLT_EPSILON) > 0 &&
                     gsl_fcmp(candle[i].close,
                              candle[i - j].close,
                              FLT_EPSILON) < 0 &&
@@ -429,7 +429,7 @@ zone reaction_zone(ohlc *candle, size_t i, size_t look_forward, size_t n) {
                 break;
             }
             if (gsl_fcmp(candle[i + j].low,
-                         lowest_low(candle, i + j, i + j),
+                         lowest_low(candle, i + 1, i + j),
                          FLT_EPSILON) <= 0 &&
                     gsl_fcmp(candle[i - 1].high,
                              candle[i + j].low,
@@ -450,12 +450,14 @@ zone reaction_zone(ohlc *candle, size_t i, size_t look_forward, size_t n) {
             if (gsl_fcmp(candle[i + j].high, candle[i].open, FLT_EPSILON) >= 0) {
                 break;
             }
-            if (gsl_fcmp(candle[i + j].high, highest_high(candle, i + j, i + j),
+            if (gsl_fcmp(candle[i + j].high,
+                         highest_high(candle, i + 1, i + j),
                          FLT_EPSILON) >= 0 &&
                     gsl_fcmp(candle[i - 1].low,
                              candle[i + j].high,
                              FLT_EPSILON) > 0 &&
-                    gsl_fcmp(candle[i + 1].high, candle[i + j].high,
+                    gsl_fcmp(candle[i + 1].high,
+                             candle[i + j].high,
                              FLT_EPSILON) < 0 &&
                     fractal_high(candle, i + j, 10, n)) {
                 r.v1.dir = -1;

@@ -62,7 +62,7 @@ static inline int prior_bear_wrb_hg(ohlc *candle, size_t i, size_t n) {
 
 static inline int fill_prior_wrb_hg(ohlc *candle, int i,
                                     int prior_wrb, size_t n) {
-    if (unfilled(candle, prior_wrb, i - prior_wrb, n) ||
+    if (unfilled(candle, prior_wrb, i - prior_wrb, n) &&
             filled_by(candle, prior_wrb, n) <= filled_by(candle, i, n)
         ) {
         return 1;
@@ -288,7 +288,7 @@ static inline int zone_denial(ohlc *candle, signal *sig, zone *z) {
                           z->v1.open,
                           FLT_EPSILON) >= 0 &&
                  gsl_fcmp(lowest_close(candle, sig->c2.nr - 3, sig->c2.nr),
-                          z->v1.open,
+                          z->v1.close,
                           FLT_EPSILON) > 0)) {
             return 1;
         }
@@ -312,7 +312,7 @@ static inline int zone_denial(ohlc *candle, signal *sig, zone *z) {
                           z->v1.open,
                           FLT_EPSILON) <= 0 &&
                  gsl_fcmp(highest_close(candle, sig->c2.nr - 3, sig->c2.nr),
-                          z->v1.open,
+                          z->v1.close,
                           FLT_EPSILON) < 0)) {
             return -1;
         }

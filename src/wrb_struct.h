@@ -1,13 +1,17 @@
 #pragma once
 
+#include <inttypes.h>
+
 #pragma pack(push,1)
 typedef struct{
-	unsigned int timestamp;
+	uint64_t timestamp;
 	double open;
-	double low;
 	double high;
+	double low;
 	double close;
-	double volume;
+	uint64_t volume;
+    int spread;
+    uint64_t rvolume;;
 } ohlc;
 #pragma pack(pop)
 
