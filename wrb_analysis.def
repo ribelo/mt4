@@ -1,24 +1,18 @@
 LIBRARY wrb_analysis
 
 EXPORTS
-	_Time
-	_Open
-	_High
-	_Low
-	_Close
+    _time
+	_test_int
+	_test_int_array
+	_test_ohlc
+	_test_ohlc_array
 	_dir
+	_consecutive_dir
 	_body_size
-	_gap
-	_body_size_break
-	_bars_broken_by_body
-	_filled_by
-	_unfilled
-	_fractal
-	_fractal_break
+	_broke_body_size
+	_broke_bars
 	_wrb
 	_wrb_hg
-	_support
-	_resistance
 	_dcm
 	_swing_point_1
 	_swing_point_2
@@ -42,7 +36,4 @@ EXPORTS
 	_harami
 	_engulfing
 	_wrb_zone
-	_apaor
-	_vsa
 	_fvb
-	_vtr

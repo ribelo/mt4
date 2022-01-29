@@ -4,14 +4,12 @@
 
 #pragma pack(push,1)
 typedef struct{
-	uint64_t timestamp;
+	unsigned int timestamp;
 	double open;
 	double high;
 	double low;
 	double close;
-	uint64_t volume;
-    int spread;
-    uint64_t rvolume;;
+	unsigned int volume;
 } ohlc;
 #pragma pack(pop)
 

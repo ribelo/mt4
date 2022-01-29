@@ -16,12 +16,24 @@ static inline int consecutive_dir(ohlc *candle, size_t i) {
 	int j, cc = 1;
 	int candle_dir = dir(candle, i);
 	for (j = 1; j < i; j++) {
+		printf("i %d j %d\n", i, j);
+		printf("i time %d\n", candle[i].timestamp);
+		printf("i dir %d\n", dir(candle, i - j));
+		printf("i-j time %d\n", candle[i - j].timestamp);
+		printf("i-j dir %d\n", dir(candle, i - j));
+		printf("cons_dir dir %d\n", dir(candle, i - j));
+		printf("\n");
 		if (dir(candle, i - j) == candle_dir) {
 			cc++;
 		} else {
 			break;
 		}
 	}
+	printf("\n");
+	printf("result %d\n", cc);
+	printf("\n");
+	printf("\n");
+	printf("\n");
 	return cc;
 }
 

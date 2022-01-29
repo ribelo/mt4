@@ -681,6 +681,14 @@
 	},
 	"file_history":
 	[
+		"/home/huxley/Dropbox/code/om-tut/project.clj",
+		"/home/huxley/Dropbox/code/heisenbug-app/src-cljs/react/react.js",
+		"/home/huxley/Downloads/xmen.first.class.(2011).pol.1cd.(4859264) /X-Men.First.Class.2011.1080p.BrRip.x264.YIFY+HI.txt",
+		"/home/huxley/Dropbox/code/heisenbug-app/src-cljs/react/externs/react.js",
+		"/home/huxley/Dropbox/code/heisenbug-app/src-cljs/react/react.min.js",
+		"/home/huxley/Downloads/react-0.10.0/build/react.js",
+		"/home/huxley/Dropbox/code/om-tut/out/goog/base.js",
+		"/home/huxley/Downloads/xmen.first.class.(2011).pol.1cd.(4859264)/X-Men.First.Class.2011.1080p.BrRip.x264.YIFY+HI.txt",
 		"/home/huxley/Dropbox/code/mql/MQL4/Indicators/wrb_analysis_body.mq4",
 		"/home/huxley/Dropbox/code/mql/MQL4/Indicators/wrb_analysis_zone.mq4",
 		"/home/huxley/Dropbox/code/mql/experts/indicators/wrb_analysis_confirmation.mq4",
@@ -800,15 +808,7 @@
 		"/home/huxley/Dropbox/trading/BReTRADER ECN/experts/samples/DLLSample/ExpertSample.cpp",
 		"/home/huxley/.config/sublime-text-3/Packages/User/candle_c.sublime-snippet",
 		"/home/huxley/.config/sublime-text-3/Packages/User/candle_open.sublime-snippet",
-		"/home/huxley/Dropbox/trading/BReTRADER ECN/console.txt",
-		"/home/huxley/Dropbox/trading/BReTRADER ECN/experts/samples/ExportFunctions.mq4",
-		"/home/huxley/Dropbox/trading/BReTRADER ECN/experts/samples/include/sampledll.mqh",
-		"/home/huxley/.config/sublime-text-3/Packages/User/SublimeLinter.sublime-settings",
-		"/home/huxley/.config/sublime-text-3/Packages/SublimeLinter/SublimeLinter.sublime-settings",
-		"/etc/yaourtrc",
-		"/home/huxley/Dropbox/code/c_wrb_analysis/experts/indicators/wrb_analysis_swing_point_1.mq4",
-		"/home/huxley/Dropbox/code/c_wrb_analysis/experts/include/wrb_total.mqh",
-		"/home/huxley/Dropbox/code/c_wrb_analysis/experts/indicators/Ribelo Fractals.mq4"
+		"/home/huxley/Dropbox/trading/BReTRADER ECN/console.txt"
 	],
 	"find":
 	{
@@ -1144,7 +1144,7 @@
 		"cols":
 		[
 			0.0,
-			0.649253731343,
+			0.579375848032,
 			1.0
 		],
 		"rows":
@@ -1195,7 +1195,7 @@
 		[
 			[
 				"",
-				"~/Dropbox/code/mql/experts/indicators/mql.sublime-workspace"
+				"~/Dropbox/code/Dashboard/angular/untitled.sublime-project"
 			]
 		],
 		"width": 380.0
